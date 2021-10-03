@@ -1,38 +1,82 @@
+html{
+  background: rgb(32, 38, 45);
+}
+ul ,h2,h1,h3,h4,h5,p,a{
+  list-style: none;
+  margin: 0;
+  text-decoration: none;
+}
+.logo{
+  width: 40%;
+  margin: 20px auto;
+}
+/* linear-gradient(to right bottom, rgb(0, 127, 255), rgb(0, 89, 178) 120%); */
 .App {
-  text-align: center;
-}
+  width: 90%;
+  padding: 30px;
+  position: relative; /* 추후 박스 하단에 추가 버튼을 위치시키기 위한 설정 */
+  background:rgb(0, 30, 60);
+  border-radius: 16px;
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.04);
+  
+  margin: 0 auto; /* 페이지 중앙에 나타나도록 설정 */
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  margin-top: 96px;
+  margin-bottom: 32px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+}
+
+.menu-links{
+  margin: 20px auto;
+  width: 80%;
+  border-radius: 10px;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  display: flex;
+  border: 0.15em solid gray;
+  padding: 10px 10px;
 }
 
-.App-link {
-  color: #61dafb;
+.menu-link{
+  font-weight: bold;
+  width: 10.1vw;
+  text-align: center;
+  margin: 4px 10px;
+  font-size: 1.3vw;
+  border: 1px solid darkgray;
+  padding: 5px;
+  border-radius: 10px;
+}
+.content-img{
+  max-width: 178px;
+  border-radius: 20px;
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.664);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.menu-link-list{
+    overflow-x: scroll;
+    max-width:95%,
 }
+
+/* width */
+::-webkit-scrollbar {
+  height: 3px;
+  border-radius: 30px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  width: 10px; left:-100px;
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: royalblue;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
