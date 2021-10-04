@@ -1,23 +1,20 @@
-import { Grid } from '@mui/material';
-import './App.css';
-import ContentCard from './components/ContentCard';
-import MenuBar from './components/MenuBar';
-import  Typography  from '@mui/material/Typography';
-import Links from './components/Links';
-import { BrowserRouter } from 'react-router-dom';
-import ContentList from './components/ContentList';
+import 'react-quill/dist/quill.snow.css';
+import './App.scss';
+import { BrowserRouter, Route } from 'react-router-dom';
+import Header from './components/Header';
+import Detail from './pages/Detail';
+import Home from './pages/Home';
+import TextEditor from './components/TextEditor';
 
 function App() {
   return (
-    <BrowserRouter>
-      <>
+    <BrowserRouter className="App">
         <div className="App">
-        <MenuBar/>
-            <img className="logo" src="logo_transparent.png" alt="logo"  />
-            <Links/>
-          <ContentList/>
+          <Header/>
+          <TextEditor/>
+          <Route path="/content" component={Detail}/>
+          <Route path="/" exact component={Home}/>
         </div>
-      </>
     </BrowserRouter>
   );
 }

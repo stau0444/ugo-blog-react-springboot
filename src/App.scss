@@ -1,0 +1,136 @@
+html{
+  background: rgb(32, 38, 45);
+  margin: 0 auto;
+}
+ul ,h2,h1,h3,h4,h5,p,a,div{
+  list-style: none;
+  margin: 0;
+  text-decoration: none;
+}
+.logo{
+  width: 40%;
+  margin:auto;
+}
+
+/* linear-gradient(to right bottom, rgb(0, 127, 255), rgb(0, 89, 178) 120%); */
+.App {
+  width: 90%;
+  padding: 0 20px 20px 20px;
+  position: relative; /* 추후 박스 하단에 추가 버튼을 위치시키기 위한 설정 */
+  background:rgb(57, 66, 75);
+  border-radius: 16px;
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.04);
+  
+  margin: 0 auto; /* 페이지 중앙에 나타나도록 설정 */
+
+  margin-top: 96px;
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+}
+
+// 카테고리 메뉴 ul
+.menu-links{
+  margin: 20px auto;
+  width: 80%;
+  border-bottom: 2px solid rgba(0, 51, 128, 0.747);
+  border-radius: 2px;
+  justify-content: center;
+  display: flex;
+  padding: 10px 10px;
+}
+
+
+// 카테고리 메뉴 리스트 
+.menu-link-list{
+    overflow-x: scroll;
+    max-width:95%,
+}
+
+
+// 카테고리 메뉴 리스트 스크롤 
+/* width */
+::-webkit-scrollbar {
+  height: 3px;
+  border-radius: 30px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: royalblue;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+
+// 콘텐츠 카드 hover 효과
+.content-card {
+  display: block;
+  top: 0px;
+  background-color: #f2f8f9;
+  border-radius: 4px;
+  margin:auto;
+  overflow: hidden;
+  border: 1px solid #f2f8f9;
+  
+  .content-img{
+    max-width: 178px;
+    border-radius: 20px;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.664);
+  }
+  
+  .go-corner {
+    opacity: 0.7;
+  }
+
+  &:hover {
+    border: 1px solid #00838d;
+    box-shadow: 0px 0px 999px 999px rgba(239, 252, 244, 0.247);
+    z-index: 500;
+  }
+}
+
+.content-card :hover {
+  .go-corner {
+    transition: opactiy 0.3s linear;
+    opacity: 1;
+  }
+}
+
+
+.code-block{
+  background-color: coral;
+  &>*{
+  }
+  &>pre{
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 1.5vw;
+    color: white;
+    max-width: 500px;
+    overflow-x: scroll;
+    border-radius: 4px;
+    background-color: #23241F;
+  }
+  
+}
+
+.quill{
+  background-color: bisque;
+  border-radius: 20px;
+  border: 0;
+}
+
+.ql-container.ql-snow , .ql-toolbar.ql-snow{
+  border: 0px;
+}

@@ -1,6 +1,16 @@
 import { Chip, createTheme, Stack } from '@mui/material';
 import {ThemeProvider, styled } from '@mui/material/styles';
-
+const linkList = [
+    'JAVA',
+    "JAVASCRIPT",
+    "REACT",
+    "JPA",
+    "SPRING",
+    "SPRING-SEC",
+    "AWS",
+    "WEB",
+    "VUE.JS"
+]
 const theme = createTheme({
     palette:{
         danger:{
@@ -34,16 +44,9 @@ export default function Links() {
                 justifyContent="flex-start"
                 alignItems="flex-end"
                 >
-                    <ColorLink size="small" label="JAVA"/>
-                    <ColorLink size="small" label="JAVASCRIPT"/>
-                    <ColorLink size="small" label="REACT"/>
-                    <ColorLink size="small" label="JPA"/>
-                    <ColorLink size="small" label="SPRING"/>
-                    <ColorLink size="small" label="SPRING-SEC"/>
-                    <ColorLink size="small" label="AWS"/>
-                    <ColorLink size="small" label="WEB"/>
-                    <ColorLink size="small" label="WEB"/>
-                    <ColorLink size="small" label="WEB"/>
+                    {linkList.map((link,index)=>
+                        <ColorLink key={index} size="small" label={link}/>
+                    )}
                 </Stack>
             </ul>
       </ThemeProvider>

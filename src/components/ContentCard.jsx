@@ -4,56 +4,67 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Chip, Grid, Stack } from '@mui/material';
 import Divider from '@mui/material/Divider';
+import { Link } from 'react-router-dom';
 
-
-export default function ContentCard() {
+export default function ContentCard({content}) {
   return (
     <Button sx={{borderRadius:"20px" , width :"100%"}}>
-      <Card component="App" 
-            sx={{ 
-              borderRadius:"20px",
-              color:'white' ,
-              minWidth: 285 ,
-              margin:'5px auto' ,
-              background:'linear-gradient(to right bottom, rgb(0, 127, 255), rgb(0, 89, 178) 120%);',
-              }} >
-        <CardContent>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Typography variant="h5" component="div" sx={{fontWeight:'bold',margin:'0 0 10px 0'}}>
-                자바란 무엇인가?
-              </Typography>
-              <Divider color="white" />
+      <Link to={'/content/'+JSON.stringify(content.id)}>
+        <Card className="content-card"
+              component="App" 
+              sx={{ 
+                borderRadius:"20px",
+                color:'white' ,
+                minWidth: 275 ,
+                margin:'5px auto' ,
+                padding:0,
+                background:'linear-gradient(to right bottom, rgb(0, 127, 255), rgb(0, 89, 178) 120%);',
+                  "&>div:hover":{
+                    background: 'linear-gradient(to right bottom, rgba(255, 0, 55, 0.295), rgb(0, 89, 178) 120%);'
+                  }
+                }} >
+          <CardContent sx={{padding:'20px 0'}}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <Typography 
+                  variant="h5" 
+                  component="div" 
+                  sx={{fontWeight:'bold',margin:'0 0 10px 0'
+                  }}
+                >
+                  {content.title}
+                </Typography>
+                <Divider color="white" />
+              </Grid>
+              <Grid item sm={4} xs={12}>
+                  <img className="content-img" src={content.imgLink} alt="" width="100%"/>
+              </Grid>
+              <Grid item sm={8} xs ={12}sx={{
+                margin:'auto',
+                padding:'0px px 0px 0px',
+                lineHeight:'1.4',
+              }}>
+                <Typography variant="p">
+                  {content.article}
+                </Typography>
+              </Grid>
+              <Grid item xs={12}>
+              <Stack 
+                direction="row" 
+                spacing={1}
+                justifyContent="flex-end"
+                alignItems="flex-end"
+                marginRight="10px"
+              >
+                {content.tags.map((tag)=>
+                  <Chip key={tag.id} label={tag.tagName} size="small" color="success" />
+                )}
+              </Stack>
+              </Grid>
             </Grid>
-            <Grid item sm={4} xs={12}>
-                <img className="content-img" src="IMG_1708.JPG" alt="" width="100%"/>
-            </Grid>
-            <Grid item sm={8} xs ={12}sx={{
-              margin:'auto',
-              lineHeight:'1.4',
-              "& :hover":{
-                color: "darkgray"
-              }
-            }}>
-              <Typography variant="p">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur voluptatum exercitationem vero, dolorem dicta dolorum, magnam ad nesciunt tempore animi incidunt sit inventore corporis cum voluptas eius rerum dolores commodi?
-              </Typography>
-            </Grid>
-            <Grid item xs={12}>
-            <Stack 
-              direction="row" 
-              spacing={1}
-              justifyContent="flex-end"
-              alignItems="flex-end"
-            >
-              <Chip label="success" size="small" color="success" />
-              <Chip label="success" size="small" color="success" />
-              <Chip label="success" size="small" color="success" />
-            </Stack>
-            </Grid>
-          </Grid>
-          </CardContent>
-      </Card>
+            </CardContent>
+        </Card>
+      </Link>
     </Button>
   );
 }
