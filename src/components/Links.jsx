@@ -14,21 +14,24 @@ const linkList = [
 const theme = createTheme({
     palette:{
         danger:{
-            main:'#ff8a65'
+            main:'coral'
         }
     },
     font:{
-        a:'Noto Sans Display',
+        a:"'Nunito', sans-serif"
     }
 });
 const ColorLink = styled(Chip)(({theme })=>({
     background:theme.palette.danger.main,
     fontFamily:theme.font.a,
     fontWeight:'bold',
-    color: 'white',
+    fontSize:'14px',
+    color: 'bisque',
+    boxShadow: 'inset 1px 1px 3px  black',
     cursor: 'pointer',
     '&:hover':{
-        background: 'gray'
+        background: 'gray',
+        color:'white'
     },
 }));
 

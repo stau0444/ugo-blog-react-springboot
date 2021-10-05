@@ -13,11 +13,13 @@ export default function ContentCard({content}) {
         <Card className="content-card"
               component="App" 
               sx={{ 
+                width:'90%',
                 borderRadius:"20px",
                 color:'white' ,
                 minWidth: 275 ,
                 margin:'5px auto' ,
-                padding:0,
+                padding:'0 10px',
+                fontFamily:"'Nunito', sans-serif",
                 background:'linear-gradient(to right bottom, rgb(0, 127, 255), rgb(0, 89, 178) 120%);',
                   "&>div:hover":{
                     background: 'linear-gradient(to right bottom, rgba(255, 0, 55, 0.295), rgb(0, 89, 178) 120%);'

@@ -1,43 +1,37 @@
-import hljs from "highlight.js";
 import 'highlight.js/styles/base16/google-dark.css';
-import React, { useState } from "react";
-import ReactQuill from 'react-quill';
+import { useState } from "react";
+import Typography from '@mui/material/Typography';
+import { Grid} from "@mui/material";
+
+import ContentForm from "./ContentForm";
 import CodeBlock from './CodeBlock';
 
-hljs.configure({   // optionally configure hljs
-    languages: ['javascript', 'ruby', 'python']
-});
-const modules = {
-    toolbar: [
-        [{ 'header': [1, 2, false] }],
-        ['bold', 'italic', 'underline','strike', 'blockquote'],
-        [{'list': 'ordered'}, {'list': 'bullet'},],
-        ['link', 'image'],
-        ['clean'],
-        ['code-block']
-    ],
-    syntax: {
-      highlight: (text) => hljs.highlightAuto(text).value,
-    },
-}
-
-const formats = [
-    'header',
-    'bold', 'italic', 'underline', 'strike', 'blockquote',
-    'list', 'bullet', 'indent',
-    'link', 'image',
-    'code-block'
-]
-
+//value , data  리덕스로 전환
 
 export default function TextEditor() {
-  const [value, setValue] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
 
-  return (
+  if(isOpen){
+    return (
+      <>  
+        <Grid container>
+          <Grid item xs={12} lg={6}>
+            <ContentForm setIsOpen={()=>{setIsOpen(false)}}/>
+          </Grid>
+          <Grid item xs={12} lg={6}>
+              <Grid item xs={12} sx={{marginLeft:'30px'}}>
+                  <Typography sx={{  fontSize:'25px' , fontWeight:'bold' ,color:'white'}}>본문 미리보기</Typography>
+              </Grid>            
+              <CodeBlock value={''}/>
+          </Grid>
+        </Grid>
+      </>
+    );
+  }
+  return(
     <>
-        <ReactQuill theme="snow"  modules={modules} formats={formats} value={value} onChange={setValue}/>
-        <CodeBlock value={value}/>
+        <ContentForm setIsOpen={()=>{setIsOpen(true)}} />
     </>
-  );
+  )
 }
 

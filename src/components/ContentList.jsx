@@ -30,6 +30,7 @@ const tags = [
 
 const contents = [
   {
+
     id: 0,
     title : "자바란 무엇인가?",
     imgLink : "IMG_1708.JPG",
