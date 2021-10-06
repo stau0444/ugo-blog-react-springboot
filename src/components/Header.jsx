@@ -21,7 +21,6 @@ export default function Header() {
         </div>
         <img className="logo" src="/logo_transparent.png" alt="logo"  />
         <Links/>
-        
     </>
     );
 }

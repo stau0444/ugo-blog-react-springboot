@@ -3,8 +3,9 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { useState } from 'react';
 import { StyledInputLabel } from './ContentForm';
+import { useDispatch, useSelector } from 'react-redux';
+import { addTag } from '../redux/moduels/contentTags';
 
 const ITEM_HEIGHT = 20;
 const ITEM_PADDING_TOP = 10;
@@ -28,24 +29,22 @@ function getStyles(name, personName, theme) {
 }
 
 export default function MultiSelect({tags}) {
+  
+  const dispatch = useDispatch();
   const theme = useTheme();
-  const [selectedTags, setSelectedTags] = useState([]);
+  const selectedTags = useSelector(state => state.contentTags);
 
-  const handleChange = (event) => {
-      
-    if(event.target.value.length > 3 ){
+  const handleChange = (e) => {
+    e.preventDefault()
+    if(e.target.value.length > 3 ){
         alert("tag는 3개까지 추가할 수 있습니다.")
         return;
     }
-
-    console.log(event.target.value);
     const {
       target: { value },
-    } = event;
-    setSelectedTags(
-      // On autofill we get a the stringified value.
-      [...value]
-    );
+    } = e;
+    
+    dispatch(addTag(value))
   };
   
   return (

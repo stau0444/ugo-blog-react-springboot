@@ -1,11 +1,10 @@
-import { Button, Grid, Input } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import MultiSelect from './MultiSelect';
 import ReactQuill  from 'react-quill';
-import { useRef ,useEffect,useState} from 'react';
 import hljs from "highlight.js";
 
-const tagss = [
+const tagList = [
 {
     id: 0,
     tagName: "JAVA",
@@ -60,11 +59,15 @@ const formats = [
     'code-block',
 ]
   
-const StyledInput = styled(Input)`
+const StyledInput = styled('input')`
   width: 90%;
   text-align: center;
   color:bisque;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
   border-bottom:1px solid bisque;
+  background-color: transparent;
 `
 export const StyledInputLabel = styled('p')`
   color:bisque;
@@ -75,66 +78,24 @@ export const StyledInputLabel = styled('p')`
   border-radius:5px;
 `
 
-
-
-export default function ContentForm({setIsOpen}) {
-    const [value, setValue] = useState('');
-    const [image , setImage] =useState({file:null,imagePreviewUrl:'/logo_transparent.png'})
-    const [tags ,setTags] = useState([])
-    const titleRef = useRef('');
-    const imageRef = useRef('');
-    const tagsRef =useRef([]);
-
-    const handleSubmit = (e) => {
-    e.preventDefault();
-    // TODO: do something with -> this.state.file
-    console.log('handle uploading-', this.state.file);
-    }
-
-    const handleImageChange = (e)=>{
-    e.preventDefault();
-
-    let reader = new FileReader();
-    let file = e.target.files[0];
-
-    reader.onloadend = () => {
-        setImage({
-        file: file,
-        imagePreviewUrl: reader.result
-        });
-    }
-
-    console.log(file);
-    reader.readAsDataURL(file);
-    }
-
-    const getTags = () =>{
-    return tagss;
-    }
-
-    useEffect(()=>{
-    console.log('image' , image);
-    console.log('tags',tagsRef)
-    setTags(getTags());
-    },[image,tagsRef])
-        
+export default function ContentForm({setIsOpen,titleRef,hadleContentValue,handleSubmit,handleImageChange,image,value}) {
     return(
         <>
-            <Grid sx={{textAlign:'center' ,margin:"30px auto"}}>
-                <StyledInput ref={titleRef} placeholder="Title" inputProps={{name:'title'}} />
-                    <Grid xs={12} sx={{margin:"7px 0" ,}} >
+            <Grid item sx={{textAlign:'center' ,margin:"30px auto"}}>
+                <StyledInput ref={titleRef} placeholder="Title" type='text' />
+                    <Grid item xs={12} sx={{margin:"7px 0" ,}} >
                         <StyledInputLabel>대표 이미지를 업로드 해주세요 </StyledInputLabel>
                     </Grid>
-                    <StyledInput ref={imageRef} placeholder="Image" accept="image/*" id="contained-button-file" multiple type="file" inputProps={{name:'image'}} onChange={handleImageChange}/>
+                    <StyledInput  placeholder="Image" accept="image/*" id="contained-button-file" multiple type="file"  onChange={handleImageChange}/>
                     <img className="imagePreviewUrl" src={image.imagePreviewUrl} alt="imagePreview"/>
-                <Grid xs={12} sx={{justifyContent:"center"}}>
-                    <MultiSelect tagsRef={tagsRef} tags={tags}/>
+                <Grid item xs={12} sx={{justifyContent:"center"}}>
+                    <MultiSelect  tags={tagList}/>
                 </Grid>
             </Grid>
-            <ReactQuill theme="snow"  modules={modules} formats={formats} value={value} onChange={setValue}/>
+            <ReactQuill theme="snow"  modules={modules} formats={formats} value={value} onChange={hadleContentValue}/>
             <Grid item xs={12} sx={{width:'95%',textAlign:'right'}}>
                 <Button variant="outlined" sx={{marginRight:'5px'}} onClick={()=>{setIsOpen(true)}}>본문 미리 보기</Button>  
-                <Button variant="outlined">저장</Button>
+                <Button variant="outlined" onClick={handleSubmit}>저장</Button>
             </Grid>
         </>
     );

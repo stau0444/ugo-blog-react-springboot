@@ -11,7 +11,6 @@ export default function ContentCard({content}) {
     <Button sx={{borderRadius:"20px" , width :"100%"}}>
       <Link to={'/content/'+JSON.stringify(content.id)}>
         <Card className="content-card"
-              component="App" 
               sx={{ 
                 width:'90%',
                 borderRadius:"20px",
@@ -41,11 +40,7 @@ export default function ContentCard({content}) {
               <Grid item sm={4} xs={12}>
                   <img className="content-img" src={content.imgLink} alt="" width="100%"/>
               </Grid>
-              <Grid item sm={8} xs ={12}sx={{
-                margin:'auto',
-                padding:'0px px 0px 0px',
-                lineHeight:'1.4',
-              }}>
+              <Grid item sm={8} xs ={12} >
                 <Typography variant="p">
                   {content.article}
                 </Typography>

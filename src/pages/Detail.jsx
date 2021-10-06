@@ -1,7 +1,7 @@
-import ContentDetail from '../components/ContentDetail';
+import ContentDetailContainer from '../containers/ContentDetailContainer';
 
-export default function Detail() {
+export default function Detail({match}) {
     return(
-        <ContentDetail/>
+        <ContentDetailContainer match={match}/>
     );
 }

@@ -68,7 +68,7 @@ export default function ContentList() {
         <>
           <Grid container sx={{width:"100%" ,margin:"0 auto" , padding:0}}>
             {contents.map((content)=>
-              <Grid item xs={24}>
+              <Grid key={content.id} item xs={12}>
                 <ContentCard content = {content}/>
               </Grid>
             )}
