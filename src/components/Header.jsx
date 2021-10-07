@@ -17,7 +17,8 @@ export default function Header() {
         <div style={{textAlign:"center" , backgroundColor:'white'}}>
             <Link to="/"><StyledBtn>/</StyledBtn></Link> 
             <Link to="/content"><StyledBtn>/content</StyledBtn></Link>
-            <Link to="/content/add"><StyledBtn>/content/add</StyledBtn></Link>
+            <Link to="/content/{keyowrd}" ><StyledBtn>/content/category</StyledBtn></Link>
+            <Link to="/add-content" ><StyledBtn>/add-content</StyledBtn></Link>
         </div>
         <img className="logo" src="/logo_transparent.png" alt="logo"  />
         <Links/>

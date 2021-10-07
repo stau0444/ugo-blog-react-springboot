@@ -18,7 +18,7 @@ ul ,h2,h1,h3,h4,h5,p,a,div{
   width: 90%;
   padding: 0 20px 20px 20px;
   position: relative; /* 추후 박스 하단에 추가 버튼을 위치시키기 위한 설정 */
-  background:rgb(57, 66, 75);
+  background:rgb(65, 65, 77);
   border-radius: 16px;
   box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.04);
   
@@ -33,7 +33,7 @@ ul ,h2,h1,h3,h4,h5,p,a,div{
 // 카테고리 메뉴 ul
 .menu-links{
   margin: 20px auto;
-  width: 80%;
+  width: 75%;
   border-bottom: 2px solid rgba(0, 51, 128, 0.747);
   border-radius: 2px;
   justify-content: center;
@@ -46,7 +46,7 @@ ul ,h2,h1,h3,h4,h5,p,a,div{
 .menu-link-list{
     padding:5px 10px;
     border-radius: 30px;
-    background-color: rgb(102, 119, 105);
+    background-color: rgba(122, 126, 123, 0.753);
     overflow-x: scroll;
     max-width:95%;
     box-shadow: inset 1px 1px 3px black;
@@ -94,21 +94,12 @@ ul ,h2,h1,h3,h4,h5,p,a,div{
     box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.664);
   }
   
-  .go-corner {
-    opacity: 0.7;
-  }
 
   &:hover {
     border: 1px solid #00838d;
-    box-shadow: 0px 0px 999px 999px rgba(239, 252, 244, 0.247);
     z-index: 500;
-  }
-}
-
-.content-card :hover {
-  .go-corner {
-    transition: opactiy 0.3s linear;
-    opacity: 1;
+    transition: width 0.1s linear;
+    width: 92%;
   }
 }
 
@@ -117,9 +108,8 @@ ul ,h2,h1,h3,h4,h5,p,a,div{
 
 .code-block{
   min-height: 400px;
-
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.459);
-  background-color: coral;
+  box-shadow: 8px  8px 10px rgba(0, 0, 0, 0.459);
+  background-color: bisque;
   padding: 20px 0px;
   margin: 10px auto;
   border-radius: 20px;
@@ -213,6 +203,12 @@ ul ,h2,h1,h3,h4,h5,p,a,div{
   white-space: pre-wrap;
   word-wrap: break-word;
 }
+
+a.nav-link-active div{
+  color:yellowgreen;
+  background-color: gray;
+}
+
  > * {
   cursor: text;
 }
