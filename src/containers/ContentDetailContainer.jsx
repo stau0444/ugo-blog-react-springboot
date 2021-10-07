@@ -1,4 +1,3 @@
-import axios from "axios";
 import ContentDetail from "../components/ContentDetail";
 import { useEffect } from 'react';
 import { getContentDetailFail, getContentDetailSuccess, getContentDetailStart } from '../redux/moduels/contents';
@@ -46,7 +45,7 @@ export default function ContentDetailContainer({match}) {
     
     useEffect(()=>{
       const getContent = () => {
-        const contentId = match.params.contentId;
+        // const contentId = match.params.contentId;
         async function getContent(){
           try{
             dispatch(getContentDetailStart());

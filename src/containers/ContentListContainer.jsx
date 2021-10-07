@@ -1,5 +1,4 @@
-import axios from "axios";
-import { useCallback, useEffect } from "react";
+import {useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ContentList from "../components/ContentList";
 import { getContentListStart, getContentListSuccess, getContentListFail } from '../redux/moduels/contentList';

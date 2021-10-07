@@ -1,5 +1,5 @@
-import { Chip, createTheme, Stack } from '@mui/material';
-import {ThemeProvider, styled } from '@mui/material/styles';
+import { Chip, Stack } from '@mui/material';
+import {styled } from '@mui/material/styles';
 import {  NavLink } from 'react-router-dom';
 const linkList = [
     'JAVA',
@@ -43,8 +43,8 @@ export default function Links() {
             alignItems="flex-end"
             >
                 {linkList.map((link,index)=>
-                    <NavLink to={"/contents/"+link} active activeClassName="nav-link-active">
-                        <ColorLink key={index} size="small" label={link}/>
+                    <NavLink key={index} to={"/contents/"+link}  activeClassName="nav-link-active">
+                        <ColorLink  size="small" label={link}/>
                     </NavLink>
                 )}
             </Stack>

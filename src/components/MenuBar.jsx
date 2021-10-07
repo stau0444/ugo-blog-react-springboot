@@ -8,6 +8,7 @@ import InputBase from '@mui/material/InputBase';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import LoginMenu from './LoginMenu';
+import { useRef } from 'react';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -56,8 +57,14 @@ const clickMenuIcon = () => {
 }
 
 export default function MenuBar() {
+  
+  const searchKeywordInput = useRef('')
+  const testClick = () => {
+    console.log(searchKeywordInput.current.children[0].value);
+  }
   return (
     <Box sx={{ flexGrow: 1 }}>
+      <button onClick={testClick}>버튼</button>
       <AppBar position="static" sx={{backgroundColor:'transparent' ,opacity:0.9}}>
         <Toolbar>
           <IconButton
@@ -82,8 +89,9 @@ export default function MenuBar() {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
+              ref={searchKeywordInput}
               placeholder="글 검색"
-              inputProps={{ 'aria-label': 'search' }}
+              inputProps={{ 'aria-label': 'search' ,'ref':{searchKeywordInput}}}
             />
           </Search>
           <LoginMenu/>

@@ -21,7 +21,7 @@ export default function LoginMenu() {
     setAnchorEl(null);
   };
   return (
-    <React.Fragment>
+    <>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
         <Tooltip title="Account settings">
           <IconButton onClick={handleClick} size="small" sx={{ ml: 2 }}>
@@ -83,6 +83,6 @@ export default function LoginMenu() {
           <Link to="/logout">Log-out</Link>
         </MenuItem>
       </Menu>
-    </React.Fragment>
+    </>
   );
 }
