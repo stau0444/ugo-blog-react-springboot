@@ -1,5 +1,4 @@
 import { Chip, Grid, Typography } from "@mui/material";
-import { useSelector } from "react-redux";
 import CodeBlock from "./CodeBlock";
 import ContentDetailLoading from "./ContentDetailLoading";
 
