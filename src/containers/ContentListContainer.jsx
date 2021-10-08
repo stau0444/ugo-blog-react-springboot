@@ -72,16 +72,18 @@ const tags = [
 export default function ContentListContainer({keyword}) {
     const dispatch = useDispatch();
     const contentList = useSelector(state => state.contentList);
-    
-    
+    const loading = useSelector(state => state.contentList.loading);
+    console.log('loading',loading)
     useEffect(()=>{
         const getContentList= () => {
           async function getContentList(){
               try{
                   dispatch(getContentListStart());
                   const data = contents;
+                  setTimeout(()=>{
+                    dispatch(getContentListSuccess(data,keyword));
+                  },3000)
                   // const data = await axios.get(`/content/`+keyword);
-                  dispatch(getContentListSuccess(data,keyword));
               }catch(error){
                   dispatch(getContentListFail(error));
               }

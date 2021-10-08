@@ -10,7 +10,7 @@ const GET_CONTENT_DETAIL_FAIL = "ugo-blog/content/GET_CONTENT_DETAIL_FAIL"
 export function getContentDetailStart(){
     return {
         type:GET_CONTENT_DETAIL_START,
-        loding:true
+        loading:true
     }
 }
 
@@ -18,7 +18,7 @@ export function getContentDetailSuccess(data){
     console.log('asd1')
     return {
         type:GET_CONTENT_DETAIL_SUCCESS,
-        loding:false,
+        loading:false,
         data:data
     }
 }
@@ -26,7 +26,7 @@ export function getContentDetailSuccess(data){
 export function getContentDetailFail(error){
     return {
         type:GET_CONTENT_DETAIL_FAIL,
-        loding:false,
+        loading:false,
         error:error
     }
 }
@@ -34,14 +34,14 @@ export function getContentDetailFail(error){
 export function postContentStart(){
     return {
         type:POST_CONTENT_START,
-        loding:true
+        loading:true
     }
 }
 
 export function postContentSuccess(data){
     return {
         type:POST_CONTENT_SUCCESS,
-        loding:false,
+        loading:false,
         data:data
     }
 }
@@ -49,12 +49,13 @@ export function postContentSuccess(data){
 export function postContentFail(error){
     return {
         type:POST_CONTENT_FAIL,
-        loding:false,
+        loading:false,
         error:error
     }
 }
 
 const initialState = {
+    loading:false,
     id:0,
     title:'',
     createAt:'',
@@ -89,16 +90,27 @@ export default function reducer(state = initialState , action) {
     }
 
     if(action.type === GET_CONTENT_DETAIL_START){
-        console.log('action',action);
+        console.log('start' , action);
+        return {
+            ...action.data,
+            loading:action.loading
+        }
     }
 
     if(action.type === GET_CONTENT_DETAIL_SUCCESS){
-        console.log('action',action);
-        return action.data;
+        console.log('SUCCESS' , action);
+        return {
+            ...action.data,
+            loading:action.loading
+        }
     }
     
     if(action.type === GET_CONTENT_DETAIL_FAIL){
-        console.log('action',action);
+        return {
+            ...action.data,
+            loading:action.loading,
+            error:action.error
+        }
     }
 
     return state;

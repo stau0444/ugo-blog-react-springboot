@@ -29,13 +29,17 @@ export function getContentListFail(error){
 
 const initialState = {
                        keyword:'',
+                       loading:true,
                        data:[]
                      };
 
 export default function reducer(state = initialState , action) {
 
     if(action.type === GET_CONTENT_LIST_START){
-        return state;
+        return {
+            ...state,
+            loading:action.loading
+        }
     }
 
     if(action.type === GET_CONTENT_LIST_SUCCESS){
@@ -43,6 +47,7 @@ export default function reducer(state = initialState , action) {
         return {
           keyword: action.keyword,
           data: action.data,
+          loading:action.loading
         };
     }
 
@@ -50,7 +55,8 @@ export default function reducer(state = initialState , action) {
         console.log(action);
         return{
             ...state,
-            error: action.error
+            error: action.error,
+            loading:action.loading
         }
     }
     return state;

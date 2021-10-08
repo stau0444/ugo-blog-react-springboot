@@ -13,25 +13,27 @@ export default function ContentCard({content}) {
       sx={{
         borderRadius: "20px",
         width: "100%",
+        
       }}
     >
       <Link to={"/content/" + JSON.stringify(content.id)}>
         <Card
           className="content-card"
           sx={{
-            width: "90%",
+            width: "92%",
             borderRadius: "20px",
             color: "bisque",
             minWidth: 275,
             margin: "5px auto",
             padding: "0 10px",
             fontFamily: "'Nunito', sans-serif",
+            boxShadow:'5px 8px 1px 0px rgba(100, 100, 111, 0.2)',
             background:
               "linear-gradient(to right bottom, rgb(0, 127, 255), rgb(0, 89, 178) 120%);",
             "&:hover": {
-              background:
-                "linear-gradient(to right bottom, rgba(255, 0, 55, 0.644), rgb(0, 89, 178) 120%);",
-              zIndex: 1,
+              background:"linear-gradient(to right bottom, rgba(255, 0, 55, 0.644), rgb(0, 89, 178) 120%);",
+              transition: 'width 0.1s linear',
+              width: '94%'
             },
           }}
         >

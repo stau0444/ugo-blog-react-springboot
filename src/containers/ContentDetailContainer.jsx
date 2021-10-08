@@ -39,6 +39,8 @@ const sempleContent = {
 
 export default function ContentDetailContainer({match}) {
     const content = useSelector(state=>state.contents);
+    const loading = useSelector(state=>state.contents.loading);
+    console.log('loading' , loading)
     const dispatch = useDispatch();
 
     console.log('content',content)
@@ -51,7 +53,10 @@ export default function ContentDetailContainer({match}) {
             dispatch(getContentDetailStart());
             // const resp = await axios.get("/content/"+contentId)
             const resp = sempleContent;
-            dispatch(getContentDetailSuccess(resp));
+            setTimeout(()=>{
+              dispatch(getContentDetailSuccess(resp));
+            },3000);
+            
           }catch(error){
             dispatch(getContentDetailFail(error));
           }
@@ -60,12 +65,6 @@ export default function ContentDetailContainer({match}) {
       }
       getContent();
     },[match,dispatch])  
-    
 
-    
-    
-  
-    
-    
-    return <ContentDetail match={ match } content = { content }/>;
+    return <ContentDetail loading = {loading} match={ match } content = { content }/>;
 }

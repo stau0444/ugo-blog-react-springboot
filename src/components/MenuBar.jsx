@@ -57,10 +57,10 @@ const clickMenuIcon = () => {
 }
 
 export default function MenuBar() {
-  
+
   const searchKeywordInput = useRef('')
   const testClick = () => {
-    console.log(searchKeywordInput.current.children[0].value);
+    
   }
   return (
     <Box sx={{ flexGrow: 1 }}>
