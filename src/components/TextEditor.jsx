@@ -16,12 +16,13 @@ export default function TextEditor() {
   if(isOpen){
     return (
       <>  
+      
         <Grid container>
           <Grid item xs={12} lg={6}>
-            <ContentFormContainer setIsOpen={()=>{setIsOpen(false)}}/>
+            <ContentFormContainer isOpen={isOpen} setIsOpen={()=>{setIsOpen(false)}}/>
           </Grid>
           <Grid item xs={12} lg={6}>
-              <Grid item xs={12} sx={{marginLeft:'30px'}}>
+              <Grid item xs={12} sx={{marginLeft:'30px' , marginTop:{lg:''}}}>
                   <Typography sx={{  fontSize:'25px' , fontWeight:'bold' ,color:'white'}}>본문 미리보기</Typography>
               </Grid>            
               <CodeBlock value={value}/>
@@ -32,7 +33,7 @@ export default function TextEditor() {
   }
   return(
     <>
-        <ContentFormContainer setIsOpen={()=>{setIsOpen(true)}} />
+        <ContentFormContainer isOpen={isOpen} setIsOpen={()=>{setIsOpen(true)}} />
     </>
   )
 }

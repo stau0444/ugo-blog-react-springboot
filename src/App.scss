@@ -1,6 +1,7 @@
 html{
   background: rgb(32, 38, 45);
   margin: 0 auto;
+  
 }
 ul ,h2,h1,h3,h4,h5,p,a,div{
   list-style: none;
@@ -15,7 +16,8 @@ ul ,h2,h1,h3,h4,h5,p,a,div{
 
 /* linear-gradient(to right bottom, rgb(0, 127, 255), rgb(0, 89, 178) 120%); */
 .App {
-  width: 80%;
+  width: 85%;
+  font-family: 'Gowun Batang', serif;
   padding: 0 20px 20px 20px;
   position: relative; /* 추후 박스 하단에 추가 버튼을 위치시키기 위한 설정 */
   border-radius: 16px;
@@ -31,13 +33,16 @@ ul ,h2,h1,h3,h4,h5,p,a,div{
 
 // 카테고리 메뉴 ul
 .menu-links{
-  margin: 20px auto;
+  margin: 0 auto;
+  margin-top: -20px;
+  margin-bottom: 20px;
   width: 75%;
   border-bottom: 2px solid rgba(0, 51, 128, 0.747);
   border-radius: 2px;
   justify-content: center;
   display: flex;
   padding: 10px 10px;
+  padding-bottom: 20px;
 }
 
 
@@ -102,8 +107,13 @@ ul ,h2,h1,h3,h4,h5,p,a,div{
   }
 }
 
-
-// 컨텐츠 뷰
+// 인풋 전역ㄴ
+.text-editor{
+  padding:20px 0;
+  border: 1px solid bisque;
+  border-radius: 20px;
+}
+// 미리보기 뷰
 
 .code-block{
   min-height: 400px;
@@ -137,8 +147,8 @@ ul ,h2,h1,h3,h4,h5,p,a,div{
 
 //image upload preview
 .imagePreviewUrl{
-  width: 80%;
-  margin: 20px 0;
+  width: 70%;
+  margin: 35px 0 20px 0;
   border-radius: 20px;
   border :1px solid bisque;
   padding: 3px;

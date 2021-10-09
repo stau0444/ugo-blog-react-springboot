@@ -72,8 +72,7 @@ const tags = [
 export default function ContentListContainer({keyword}) {
     const dispatch = useDispatch();
     const contentList = useSelector(state => state.contentList);
-    const loading = useSelector(state => state.contentList.loading);
-    console.log('loading',loading)
+    
     useEffect(()=>{
         const getContentList= () => {
           async function getContentList(){

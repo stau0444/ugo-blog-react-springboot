@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import { useEffect, useRef } from "react";
 
 export default function CodeBlock({value}) {
@@ -7,9 +8,9 @@ export default function CodeBlock({value}) {
     });
     return(
         <>
-            <div ref={contentRef} className='code-block'>
+            <Box ref={contentRef} className='code-block' sx={{marginTop:{sm:'40'}}}>
             
-            </div>
+            </Box>
         </>
     );
 }

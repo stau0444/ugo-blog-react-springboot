@@ -6,16 +6,29 @@ import Header from './components/Header';
 import Home from './pages/Home';
 import AddContent from './pages/AddContent';
 import Detail from './pages/Detail';
+import { useCallback } from 'react';
+import { useStore } from 'react-redux';
+import UpdateContent from './pages/UpdateContent';
+
 
 function App() {
+  const store = useStore();
+  const state =store.getState();
+
+  useCallback(()=>{
+    console.log(state)
+  },[state])
+
   return (
     <div className="App">
       <BrowserRouter>  
-          <Header/>
-          <Route path="/contents/:keyword" exact={true} component={Home}/>
-          <Route path="/content/:contentId" exact={true} component={Detail}/>
-          <Route path="/add-content"  exact={true} component={AddContent}/>
-          <Route path="/" exact={true} component={Home}/>
+        <Header/>
+        <Route path="/contents/:keyword" exact={true} component={Home}/>
+        <Route path="/content/update/:contentId" component={UpdateContent}/>
+        {/* <Route path="/content/delete/:contentId" component={}/> */}
+        <Route path="/content/:contentId" exact={true} component={Detail}/>
+        <Route path="/add-content"  exact={true} component={AddContent}/>
+        <Route path="/" exact={true} component={Home}/>
       </BrowserRouter>
     </div>
   );

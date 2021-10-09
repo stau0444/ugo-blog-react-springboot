@@ -13,13 +13,14 @@ const StyledBtn = styled(Button)`
 export default function Header() {
     return(
     <>  
-        <MenuBar/>
         <div style={{textAlign:"center" , backgroundColor:'white'}}>
             <Link to="/"><StyledBtn>/</StyledBtn></Link> 
             <Link to="/content"><StyledBtn>/content</StyledBtn></Link>
-            <Link to="/content/{keyowrd}" ><StyledBtn>/content/category</StyledBtn></Link>
+            <Link to="/content"><StyledBtn>/content/(id)</StyledBtn></Link>
+            <Link to="/contents/{keyowrd}" ><StyledBtn>/contents/(category)</StyledBtn></Link>
             <Link to="/add-content" ><StyledBtn>/add-content</StyledBtn></Link>
         </div>
+        <MenuBar/>
         <img className="logo" src="/logo_transparent.png" alt="logo"  />
         <Links/>
     </>

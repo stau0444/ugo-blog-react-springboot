@@ -7,6 +7,8 @@ export default function Home({match}) {
         keyword = '';
     }
     return(
+        <>
         <ContentListContainer keyword = {keyword}/>
+        </>
     );
 }

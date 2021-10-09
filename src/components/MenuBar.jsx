@@ -65,7 +65,7 @@ export default function MenuBar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <button onClick={testClick}>버튼</button>
-      <AppBar position="static" sx={{backgroundColor:'transparent' ,opacity:0.9}}>
+      <AppBar position="static" sx={{backgroundColor:'transparent' ,background:'#777c7c20',width:'100%',opacity:0.9,borderRadius:'20px',}}>
         <Toolbar>
           <IconButton
             size="large"

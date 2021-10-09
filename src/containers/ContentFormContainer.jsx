@@ -5,13 +5,16 @@ import { useCallback, useRef, useState } from "react";
 import { postContentFail, postContentStart, postContentSuccess } from "../redux/moduels/contents";
 import { resetContentTags } from "../redux/moduels/contentTags";
 
-export default function ContentFormContainer({setIsOpen}) {
+export default function ContentFormContainer({isOpen, isUpdate,setIsOpen}) {
+    
     const [image , setImage] =useState({file:null,imagePreviewUrl:'/logo_transparent.png'})
     const titleRef = useRef('');
     const value = useSelector(state => state.contentValue);
     const tags = useSelector(state => state.contentTags);
 
     const dispatch = useDispatch();
+    
+    
 
     // 에디터 value 관리 함수
     const hadleContentValue = (e) =>{
@@ -34,6 +37,8 @@ export default function ContentFormContainer({setIsOpen}) {
         reader.readAsDataURL(file);
     }
 
+    
+
     //post 요청 함수
     const handleSubmit = useCallback((e) => {
         async function postContent(){
@@ -50,6 +55,7 @@ export default function ContentFormContainer({setIsOpen}) {
                     content: value,
                     tags: tags,
             };
+            console.log('data' , data);
             try{
                 dispatch(postContentStart())
                 const resp = data;
@@ -62,15 +68,18 @@ export default function ContentFormContainer({setIsOpen}) {
         }
         postContent();
     },[dispatch,titleRef,image,value,tags]);
-   
+    
     return (
+    <>
       <ContentForm
         hadleContentValue={hadleContentValue}
         handleSubmit={handleSubmit}
         handleImageChange={handleImageChange}
         image={image}
         value={value}
+        isOpen={isOpen}
         setIsOpen={setIsOpen}
       />
+      </>
     );
 }

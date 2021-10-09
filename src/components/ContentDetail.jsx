@@ -1,4 +1,5 @@
-import { Chip, Grid, Typography } from "@mui/material";
+import { Button, Chip, Grid, Typography } from "@mui/material";
+import { NavLink } from "react-router-dom";
 import CodeBlock from "./CodeBlock";
 import ContentDetailLoading from "./ContentDetailLoading";
 
@@ -20,6 +21,18 @@ export default function ContentDetail({content,loading}) {
                         )}
                     </Grid>
                     <CodeBlock value={content.article}/>
+                    <Grid item sx={{float:'right',marginRight:'40px' , marginTop:'20px'}}>
+                        <NavLink to={"/content/update/"+content.id}>
+                            <Button variant="outlined" color="success" sx={{marginRight:'10px'}}>
+                            수정
+                            </Button>
+                        </NavLink>  
+                        <NavLink to={'/content/delete/'+content.id}>
+                            <Button variant="outlined" color="error">
+                            삭제
+                            </Button>
+                        </NavLink>  
+                    </Grid>
                 </>
                 }
             </Grid>

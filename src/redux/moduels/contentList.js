@@ -43,7 +43,6 @@ export default function reducer(state = initialState , action) {
     }
 
     if(action.type === GET_CONTENT_LIST_SUCCESS){
-        console.log(action);
         return {
           keyword: action.keyword,
           data: action.data,
@@ -52,7 +51,6 @@ export default function reducer(state = initialState , action) {
     }
 
     if(action.type === GET_CONTENT_LIST_FAIL){
-        console.log(action);
         return{
             ...state,
             error: action.error,

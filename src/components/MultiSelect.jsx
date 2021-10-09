@@ -6,6 +6,7 @@ import Select from '@mui/material/Select';
 import { StyledInputLabel } from './ContentForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { addTag } from '../redux/moduels/contentTags';
+import { Box, Chip, Typography } from '@mui/material';
 
 const ITEM_HEIGHT = 20;
 const ITEM_PADDING_TOP = 10;
@@ -33,7 +34,20 @@ export default function MultiSelect({tags}) {
   const dispatch = useDispatch();
   const theme = useTheme();
   const selectedTags = useSelector(state => state.contentTags);
-
+  // const testTags = [
+  //   {
+  //     id: 0,
+  //     tagName: "JAVA",
+  //   },
+  //   {
+  //     id: 2,
+  //     tagName: "JAVASCIPT",
+  //   },
+  //   {
+  //     id: 3,
+  //     tagName: "JPA",
+  //   },
+  // ]; 
   const handleChange = (e) => {
     e.preventDefault()
     if(e.target.value.length > 3 ){
@@ -50,9 +64,15 @@ export default function MultiSelect({tags}) {
   return (
     <>
       <StyledInputLabel sx={{border:0}}>관련 태그를 선택해주세요</StyledInputLabel>
-      <FormControl sx={{ width: '80%' ,color:'bisque' }}>
+      <Typography variant="p" sx={{color:'#1976d2' ,fontSize:"12px" ,border:"1px solid #1976d2" ,padding:'4px' ,borderRadius:'5px'}}>선택된 태그</Typography>
+      <Box sx={{height:'64px'}}>
+        {selectedTags.map((tag)=>
+            <Chip key={tag.id} label={tag.tagName} size="small" color="success" sx={{margin:'20px 5px'}}/>
+        )}
+      </Box>
+      <FormControl sx={{ width: '70%',fontSize:'10px' ,color:'bisque' }}>
         <Select
-          sx={{  width: '100%' ,color:'bisque' ,border:'1px solid bisque',fontWeight:'bold'}}
+          sx={{  width: '100%',color:'bisque' , fontSize:'13px',border:'1px solid bisque',fontWeight:'bold'}}
           labelId="demo-multiple-name-label"
           id="demo-multiple-name"
           multiple

@@ -4,31 +4,14 @@ import { getContentDetailFail, getContentDetailSuccess, getContentDetailStart } 
 import { useDispatch, useSelector } from 'react-redux';
 
 const tags = [
-    {
-      id: 0,
-      tagName: "JAVA",
-    },
-    {
-      id: 2,
-      tagName: "JAVASCIPT",
-    },
-    {
-      id: 3,
-      tagName: "JPA",
-    },
-    {
-      id: 4,
-      tagName: "SPRING-BOOT",
-    },
-    {
-      id: 5,
-      tagName: "JPA",
-    },
-    {
-      id: 6,
-      tagName: "REACT",
-    },
-  ];
+  { id: 0, tagName: "JAVA" },
+  { id: 2, tagName: "JAVASCIPT" },
+  { id: 3, tagName: "JPA" },
+  { id: 4, tagName: "SPRING-BOOT" },
+  { id: 5, tagName: "JPA" },
+  { id: 6, tagName: "REACT" },
+];
+
 const sempleContent = {
   id: 0,
   title : "자바란 무엇인가?",
@@ -40,11 +23,10 @@ const sempleContent = {
 export default function ContentDetailContainer({match}) {
     const content = useSelector(state=>state.contents);
     const loading = useSelector(state=>state.contents.loading);
-    console.log('loading' , loading)
-    const dispatch = useDispatch();
 
-    console.log('content',content)
+    const dispatch = useDispatch();
     
+    // GET /content/contentId API 요청
     useEffect(()=>{
       const getContent = () => {
         // const contentId = match.params.contentId;

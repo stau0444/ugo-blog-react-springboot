@@ -15,7 +15,6 @@ export function getContentDetailStart(){
 }
 
 export function getContentDetailSuccess(data){
-    console.log('asd1')
     return {
         type:GET_CONTENT_DETAIL_SUCCESS,
         loading:false,
@@ -83,14 +82,12 @@ export default function reducer(state = initialState , action) {
         }
     }
     if(action.type === POST_CONTENT_FAIL){
-        console.log(action.error);
         return{
             
         }
     }
 
     if(action.type === GET_CONTENT_DETAIL_START){
-        console.log('start' , action);
         return {
             ...action.data,
             loading:action.loading
@@ -98,7 +95,6 @@ export default function reducer(state = initialState , action) {
     }
 
     if(action.type === GET_CONTENT_DETAIL_SUCCESS){
-        console.log('SUCCESS' , action);
         return {
             ...action.data,
             loading:action.loading

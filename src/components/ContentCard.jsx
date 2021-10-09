@@ -13,27 +13,27 @@ export default function ContentCard({content}) {
       sx={{
         borderRadius: "20px",
         width: "100%",
-        
       }}
     >
       <Link to={"/content/" + JSON.stringify(content.id)}>
         <Card
           className="content-card"
           sx={{
-            width: "92%",
+            width: "90%",
             borderRadius: "20px",
             color: "bisque",
             minWidth: 275,
             margin: "5px auto",
             padding: "0 10px",
             fontFamily: "'Nunito', sans-serif",
-            boxShadow:'5px 8px 1px 0px rgba(100, 100, 111, 0.2)',
+            boxShadow:'0px 0px 0px 0px rgba(5, 5, 20, 0.452)',
             background:
               "linear-gradient(to right bottom, rgb(0, 127, 255), rgb(0, 89, 178) 120%);",
             "&:hover": {
               background:"linear-gradient(to right bottom, rgba(255, 0, 55, 0.644), rgb(0, 89, 178) 120%);",
-              transition: 'width 0.1s linear',
-              width: '94%'
+              transition: 'all 0.1s linear',
+              width: '91%',
+              boxShadow:'3px 3px 1px 0px rgba(5, 5, 20, 0.726)',
             },
           }}
         >
@@ -43,7 +43,7 @@ export default function ContentCard({content}) {
                 <Typography
                   variant="h5"
                   component="div"
-                  sx={{ fontWeight: "bold", margin: "0 0 10px 0" }}
+                  sx={{fontWeight:"700",fontFamily: "'Gowun Batang', serif",  margin: "0 0 10px 0" }}
                 >
                   {content.title}
                 </Typography>
