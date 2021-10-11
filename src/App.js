@@ -9,6 +9,7 @@ import Detail from './pages/Detail';
 import { useCallback } from 'react';
 import { useStore } from 'react-redux';
 import UpdateContent from './pages/UpdateContent';
+import Test from './pages/Test';
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         {/* <Route path="/content/delete/:contentId" component={}/> */}
         <Route path="/content/:contentId" exact={true} component={Detail}/>
         <Route path="/add-content"  exact={true} component={AddContent}/>
+        <Route path="/test" exact={true} component={Test}/>
         <Route path="/" exact={true} component={Home}/>
       </BrowserRouter>
     </div>

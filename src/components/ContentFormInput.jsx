@@ -76,7 +76,6 @@ export default function ContentFormInput({titleRef,handleImageChange,image}) {
           <Grid item xs={12} sx={{ margin: "7px 0" }}>
             <StyledInputLabel
               htmlFor="imageInput"
-              for="imageInput"
               sx={{
                 position: "absolute",
                 border: "1px solid #1976d2",

@@ -5,6 +5,20 @@ import { useCallback, useRef, useState } from "react";
 import { postContentFail, postContentStart, postContentSuccess } from "../redux/moduels/contents";
 import { resetContentTags } from "../redux/moduels/contentTags";
 import AWS from "aws-sdk"
+import { useHistory } from "react-router";
+
+
+/*
+    이미지 선택시 thumbnail 이미지 보여주는 방식 
+
+    1. 파일 인풋에서 이미지 선택시에 업로드 시키고 선택한 이미지 url을 img 태그에 넣어 보여준다.
+        - 전체 폼 전송 이전에 이미지 업로드가 일어나 폼 전송 실패시에도 이미지가 업로드될 수 있다.  
+        - 비동기 코드 catch 부분에서 문제있을시에 이미지 삭제함수를 호출한다 .
+        * 요청이 여러번 일어난다. 
+
+    2. 이미지 선택시  FileReadr를 통해 이미지를 보여준다 . 전체폼 전송시 성공시에 이미지를 전송한다.
+*/
+
 
 export default function ContentFormContainer({isOpen, isUpdate,setIsOpen}) {
     
@@ -12,9 +26,10 @@ export default function ContentFormContainer({isOpen, isUpdate,setIsOpen}) {
     const titleRef = useRef('');
     const value = useSelector(state => state.contentValue);
     const tags = useSelector(state => state.contentTags);
-
+    const history = useHistory();
     const dispatch = useDispatch();
     
+    //AWS  config
 
     AWS.config.update({
         region:'ap-northeast-2',
@@ -23,19 +38,27 @@ export default function ContentFormContainer({isOpen, isUpdate,setIsOpen}) {
         })
     })
     
+    //S3 이미지 삭제 함수
+    // const deleteImageFromS3 = (fileName) =>{
+    //     new AWS.S3().deleteObject({
+    //         Bucket: 'ugo-blog-image-bucket',
+    //         Key: fileName 
+    //       },(err, data) => {
+    //         if (err) { console.log(err) ; throw err; }
+    //         console.log('s3 deleteObject ', data)
+    //       })
+    // }
 
     // 에디터 value 관리 함수
-    const hadleContentValue = (e) =>{
+    const hadleContentValue = useCallback( (e) =>{
         dispatch(handleContentValue(e))
-    };
+    },[dispatch]);
 
     //이미지 관리 함수
-    const handleImageChange = (e)=>{
-
+    const handleImageChange = useCallback((e)=>{
         let reader = new FileReader();
         let file = e.target.files[0];
 
-        console.log('file' , file);
         reader.onloadend = () => {
             setImage({
             file: file,
@@ -43,77 +66,64 @@ export default function ContentFormContainer({isOpen, isUpdate,setIsOpen}) {
             });
         }
         reader.readAsDataURL(file);
-
-        const upload = new AWS.S3.ManagedUpload({
-            params:{
-                Bucket : 'ugo-blog-image-bucket',
-                Key : file.name,
-                Body: file ,
-            },
-        })
-        /*
-            버킷에 저장되는 이름
-            https://ugo-blog-image-bucket.s3.ap-northeast-2.amazonaws.com/
-            %E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB
-            %E1%84%89%E1%85%A3%E1%86%BA+2021-06-12+%E1%84%8B%E1%85%A9%E1%84%
-            92%E1%85%AE+8.42.12.png
-            
-            decodeURI() 로 디코딩 할 수 있다.  
-
-            1. 저장 버튼 누를 때 S3 upload 함수가 실행되도록한다 . 
-            2. 함수가 실행될때 마지막에 위의 형태고 파일명을 encodeURI 해서 DB에 저장한다 . 
-            3. 불러올때 해당 링크를 이미지 링크로 사용한다.
-
-        */
-
-
-        console.log('file.name' , file.name)
-        const promise = upload.promise()
-
-        promise.then(
-            function (data) {
-                alert("S3에 이미지 업로드 됨")
-            },
-            function (error) {
-                return alert("S3 업로드 오류 발생 " , error.message)
-            }
-        )        
-    }
-
-    
+    },[]);
 
     //post 요청 함수
     const handleSubmit = useCallback((e) => {
         async function postContent(){
+            //s3 이미지 업로드 함수
+            const uploadToS3 = () =>{
+                const upload = new AWS.S3.ManagedUpload({
+                    params:{
+                        Bucket : 'ugo-blog-image-bucket',
+                        Key : image.file.name,
+                        Body: image.file,
+                    },
+                })
+
+                const promise = upload.promise()
+
+                promise.then(
+                    function (data) {
+                        return console.log("S3 업로드 성공");
+                    },
+                    function (error) {
+                        return console.log("S3 업로드 오류 발생 ", error.message);
+                    }
+                )        
+            }
             //인풋 초기화 함수
             const resetInputValues = () =>{
                 dispatch(resetContentValue());
                 dispatch(resetContentTags());
                 setImage({file:null,imagePreviewUrl:'/logo_transparent.png'})
             }
-
-            const data = {
+            
+            //DB에 저장되는 데이터
+            const postData = {
                     title: titleRef.current.value,
-                    image: image,
+                    imageUrl: `https://ugo-blog-image-bucket.s3.ap-northeast-2.amazonaws.com/${image.file.name}`,
                     content: value,
                     tags: tags,
             };
-            console.log('data' , data);
+
             try{
                 dispatch(postContentStart())
-                const resp = data;
+                //응답 데이터 
+                const resp = postData;
                 // const resp = await axios.post("www.naver.com",data);
                 dispatch(postContentSuccess(resp));
+                uploadToS3();
                 resetInputValues();
+                history.push('/')
             }catch(error){
                 dispatch(postContentFail(error))
             }
         }
         postContent();
-    },[dispatch,titleRef,image,value,tags]);
+    },[dispatch,titleRef,image,value,tags,history]);
     
     return (
-    <>
       <ContentForm
         hadleContentValue={hadleContentValue}
         handleSubmit={handleSubmit}
@@ -123,6 +133,5 @@ export default function ContentFormContainer({isOpen, isUpdate,setIsOpen}) {
         isOpen={isOpen}
         setIsOpen={setIsOpen}
       />
-      </>
     );
 }

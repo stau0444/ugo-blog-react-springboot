@@ -37,11 +37,11 @@ export function postContentStart(){
     }
 }
 
-export function postContentSuccess(data){
+export function postContentSuccess(resp){
     return {
         type:POST_CONTENT_SUCCESS,
         loading:false,
-        data:data
+        resp:resp
     }
 }
 
@@ -69,16 +69,8 @@ export default function reducer(state = initialState , action) {
     }
 
     if(action.type === POST_CONTENT_SUCCESS){
-        const data = action.data;
         return{
-            ...state,
-            data:{
-                id:data.id,
-                title:data.title,
-                createdAt:data.createdAt,
-                tags:data.tags,
-                article:data.article
-            }
+            resp:action.resp
         }
     }
     if(action.type === POST_CONTENT_FAIL){
