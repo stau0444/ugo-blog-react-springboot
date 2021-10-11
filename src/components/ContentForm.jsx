@@ -67,7 +67,7 @@ export default function ContentForm({
           ) : (
             <ContentFormInput
               image={image}
-              handleImage={handleImageChange}
+              handleImageChange={handleImageChange}
               titleRef={titleRef}
             />
           )}

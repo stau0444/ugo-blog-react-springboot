@@ -6,7 +6,6 @@ import { Chip, Grid, Stack } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import { Link } from 'react-router-dom';
 
-
 export default function ContentCard({content}) {
   return (
     <Button

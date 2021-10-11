@@ -1,7 +1,6 @@
 import { styled } from '@mui/material/styles';
 import { Grid } from "@mui/material";
 import MultiSelect from "./MultiSelect";
-import { StyledInputLabel } from './ContentForm';
 
 const tagList = [
     {
@@ -35,6 +34,16 @@ const StyledInput = styled('input')`
   border-right: 0;
   border-bottom:1px solid bisque;
   background-color: transparent;
+`
+export const StyledInputLabel = styled('label')`
+
+  color:bisque;
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  margin: 15px;
+  padding: 3px;
+  border-radius:5px;
 `
 
 export default function ContentFormInput({titleRef,handleImageChange,image}) {
