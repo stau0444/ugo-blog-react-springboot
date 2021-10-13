@@ -19,6 +19,7 @@ export default function Header() {
             <Link to="/content"><StyledBtn>/content/(id)</StyledBtn></Link>
             <Link to="/contents/{keyowrd}" ><StyledBtn>/contents/(category)</StyledBtn></Link>
             <Link to="/add-content" ><StyledBtn>/add-content</StyledBtn></Link>
+            <Link to="/test" ><StyledBtn>/test</StyledBtn></Link>
         </div>
         <MenuBar/>
         <img className="logo" src="/logo_transparent.png" alt="logo"  />
