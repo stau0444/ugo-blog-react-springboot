@@ -1,7 +1,7 @@
 import ContentForm from "../components/ContentForm";
 import { useDispatch, useSelector } from 'react-redux';
 import { handleContentValue, resetContentValue } from '../redux/moduels/contentValue';
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 import {postContentFail, postContentStart, postContentSuccess } from "../redux/moduels/contents";
 import {resetContentTags } from "../redux/moduels/contentTags";
 import { useHistory } from "react-router";

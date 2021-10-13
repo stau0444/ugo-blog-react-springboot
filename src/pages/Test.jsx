@@ -41,11 +41,9 @@ export default function Test() {
         font-weight: bold;
         font-family:${selectedOption}
     `
-
-
-    const fontChangePerLang = () =>{
+    /* const fontChangePerLang = () =>{
         printRef.current.innerHTML = preRef.current.innerHTML;
-    }
+    } */
     const handleSelectValue = () =>{
         setSelectedOption(selectRef.current.value)
     }

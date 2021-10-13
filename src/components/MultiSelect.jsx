@@ -5,7 +5,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { StyledInputLabel } from './ContentForm';
 import { useDispatch, useSelector, useStore } from 'react-redux';
-import { addTag, removeTag } from '../redux/moduels/contentTags';
+import { addTag } from '../redux/moduels/contentTags';
 import { Box, Button, Chip, Typography } from '@mui/material';
 import { useEffect } from 'react';
 

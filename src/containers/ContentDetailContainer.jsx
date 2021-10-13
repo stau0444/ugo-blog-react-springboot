@@ -1,7 +1,7 @@
 import ContentDetail from "../components/ContentDetail";
 import { useEffect } from 'react';
 import { getContentDetailFail, getContentDetailSuccess, getContentDetailStart } from '../redux/moduels/contents';
-import { useDispatch, useSelector, useStore } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { tagList } from "../sampleData";
 
 
