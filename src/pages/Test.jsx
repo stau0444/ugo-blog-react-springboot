@@ -31,7 +31,6 @@ export default function Test() {
     const selectRef = useRef('');
     const regEng =new RegExp(/^[a-zA-Z]*$/);
     const preRef = useRef('');
-    const printRef = useRef('');
 
 
     const EngType = styled('span')`
