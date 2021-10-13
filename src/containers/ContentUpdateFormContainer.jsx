@@ -20,20 +20,22 @@ export default function ContentUpdateFormContainer({isOpen,isUpdate,setIsOpen}) 
     const [image , setImage] = useState({file:null,imagePreviewUrl:'/logo_transparent.png'})
     const [title , setTitle] = useState('');
     const [value , setValue] = useState('');
-    
+    const [description,setDescription] = useState('');
+
     const tags = useSelector(state => state.contentTags);
     const history = useHistory();
     const dispatch = useDispatch();
     const content = useSelector(state => state.contents);
     
-    useEffect(()=>{
+    useEffect(()=>{ 
       const getData = () => {
              setImage({file:null,imagePreviewUrl:content.imageUrl});
              setTitle(content.title);
              setValue(content.article);
+             setDescription(content.description)
       }
       return getData();
-    },[dispatch,content.imageUrl,content.title,content.article])
+    },[dispatch,content.imageUrl,content.title,content.article,content.description])
     
     // title 관리 함수
     const hadleTitleValue = useCallback((e) =>{
@@ -60,6 +62,11 @@ export default function ContentUpdateFormContainer({isOpen,isUpdate,setIsOpen}) 
         reader.readAsDataURL(file);
     },[]);
 
+    const hadleDescriptionValue = useCallback( (e) =>{
+      setDescription(e.target.value)
+    },[setDescription]);
+
+
     //post 요청 함수
     const handleSubmit = useCallback((e) => {
         async function postContent(){
@@ -67,6 +74,7 @@ export default function ContentUpdateFormContainer({isOpen,isUpdate,setIsOpen}) 
             const putData = {
                 title: title,
                 imageUrl: image.file?image.imagePreviewUrl:content.imageUrl ,
+                description:description,
                 article: value,
                 tags: tags,
             };
@@ -92,7 +100,7 @@ export default function ContentUpdateFormContainer({isOpen,isUpdate,setIsOpen}) 
             }
         }
         postContent();
-    },[dispatch,title,image,value,tags,history,content.imageUrl]);
+    },[dispatch,title,image,value,tags,history,description,content.imageUrl]);
     
     return (
       <ContentUpdateForm
@@ -100,6 +108,8 @@ export default function ContentUpdateFormContainer({isOpen,isUpdate,setIsOpen}) 
         handleSubmit={handleSubmit}
         handleImageChange={handleImageChange}
         hadleTitleValue={hadleTitleValue}
+        hadleDescriptionValue={hadleDescriptionValue}
+        description={description}
         image={image}
         title={title}
         value={value}

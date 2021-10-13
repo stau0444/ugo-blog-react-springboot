@@ -11,7 +11,7 @@ export default function ContentCard({content}) {
     <Button
       sx={{
         borderRadius: "20px",
-        width: "100%",
+        width: {xs:"100%"},
       }}
     >
       <Link to={"/content/" + JSON.stringify(content.id)}>
@@ -61,13 +61,14 @@ export default function ContentCard({content}) {
                 sm={8}
                 xs={12}
                 sx={{
-                  maxHeight: 230,
+                  maxHeight: 220,
                   overflow:"hidden",
+                  textOverflow:"ellipsis",
                   overflowWrap:"break-word"
                 }}
               >
-                <Typography variant="p" sx={{}}>
-                  {content.article}
+                <Typography>
+                  {content.description}
                 </Typography>
               </Grid>
               <Grid item xs={12}>

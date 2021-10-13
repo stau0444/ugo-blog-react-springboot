@@ -24,7 +24,7 @@ export default function ContentList({contentList}) {
               <LoadingAnimation/>
           </Grid>
           :contentList.data.map((content) => (
-            <Grid key={content.id} item xs={12}>
+            <Grid key={content.id} item xs={12} md={6}>
               <ContentCard content={content} />
             </Grid>
           ))

@@ -3,6 +3,7 @@ import { useState } from "react";
 import ReactQuill from "react-quill";
 import { formats, modules } from "../QuillConfig";
 import { tagList } from "../sampleData";
+import { StyledTextarea } from "./ContentForm";
 import ContentPreviewModal from "./ContentPreviewModal";
 import MultiSelect from "./MultiSelect";
 
@@ -36,7 +37,9 @@ export default function ContentUpdateForm({
   hadleTitleValue,
   image,
   value,
-  isOpen
+  isOpen,
+  hadleDescriptionValue,
+  description
 }) {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -109,6 +112,18 @@ export default function ContentUpdateForm({
             <Grid item xs={12} sx={{ justifyContent: "center" }}>
               <MultiSelect tags={tagList} />
             </Grid>
+            <StyledInputLabel
+                sx={{
+                  margin: "25px auto",
+                  width:"20%",
+                  border: "1px solid #1976d2",
+                  color: "#1976d2",
+                  backgroundColor: "transparent",
+                }}
+              >
+               컨텐츠 설명
+              </StyledInputLabel>
+              <StyledTextarea value={description} onChange={hadleDescriptionValue} placeholder="리스트에 표시되는 설명을 적어 주세요"/>
           </Grid>
           <Grid item xs={12} md={6} >
             <Typography

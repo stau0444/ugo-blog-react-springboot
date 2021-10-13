@@ -58,6 +58,7 @@ export default function ContentFormContainer({isOpen,isUpdate,setIsOpen}) {
     
     const [image , setImage] = useState({file:null,imagePreviewUrl:'/logo_transparent.png'})
     const [title , setTitle] = useState('');
+    const [description,setDescription] = useState('');
     const value = useSelector(state => state.contentValue);
     const tags = useSelector(state => state.contentTags);
     const history = useHistory();
@@ -87,6 +88,10 @@ export default function ContentFormContainer({isOpen,isUpdate,setIsOpen}) {
         dispatch(handleContentValue(e))
     },[dispatch]);
 
+    const hadleDescriptionValue = useCallback( (e) =>{
+        setDescription(e.target.value)
+    },[setDescription]);
+
     
     //인풋 초기화 함수
     const resetInputValues = () =>{
@@ -104,6 +109,7 @@ export default function ContentFormContainer({isOpen,isUpdate,setIsOpen}) {
                     imageUrl: `https://ugo-blog-image-bucket.s3.ap-northeast-2.amazonaws.com/${image.file.name}`,
                     article: value,
                     tags: tags,
+                    description:description
             };
 
             try{
@@ -133,6 +139,7 @@ export default function ContentFormContainer({isOpen,isUpdate,setIsOpen}) {
         handleSubmit={handleSubmit}
         handleImageChange={handleImageChange}
         hadleTitleValue={hadleTitleValue}
+        hadleDescriptionValue={hadleDescriptionValue}
         image={image}
         title={title}
         value={value}

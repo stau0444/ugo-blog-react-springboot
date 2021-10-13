@@ -12,6 +12,7 @@ export const sempleContent = {
   createdAt:"2015-12-12",
   tags:[tagList[0],tagList[3],tagList[2]],
   article:"<p>asdddd</p>",
+  description:"description12333",
   imageUrl: "https://ugo-blog-image-bucket.s3.ap-northeast-2.amazonaws.com/등기부등본(건물).jpeg"
 }
 

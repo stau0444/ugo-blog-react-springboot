@@ -17,6 +17,16 @@ export const StyledInputLabel = styled('label')`
   padding: 3px;
   border-radius:5px;
 `
+export const StyledTextarea = styled('textarea')`
+  display: block;
+  background-color: bisque;
+  font-family: sans-serif;
+  padding: 3px;
+  margin:0 auto;
+  width: 60%;
+  height: 150px;
+  border-radius:5px;
+`
 
 export default function ContentForm({
     hadleTitleValue,
@@ -24,6 +34,8 @@ export default function ContentForm({
     hadleContentValue,
     handleSubmit,
     handleImageChange,
+    hadleDescriptionValue,
+    description,
     image,
     value,
 }) {
@@ -97,6 +109,20 @@ export default function ContentForm({
             </Grid>
             <Grid item xs={12} sx={{ justifyContent: "center" }}>
               <MultiSelect tags={tagList} />
+            </Grid>
+            <Grid item xs={12}>
+            <StyledInputLabel
+                sx={{
+                  margin: "25px auto",
+                  width:"20%",
+                  border: "1px solid #1976d2",
+                  color: "#1976d2",
+                  backgroundColor: "transparent",
+                }}
+              >
+               컨텐츠 설명
+              </StyledInputLabel>
+              <StyledTextarea value={description} onChange={hadleDescriptionValue} placeholder="리스트에 표시되는 설명을 적어 주세요"/>
             </Grid>
           </Grid>
           <Grid item xs={12} md={6} sx={{}} >
