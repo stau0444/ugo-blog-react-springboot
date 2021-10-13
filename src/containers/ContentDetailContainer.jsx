@@ -1,23 +1,34 @@
 import ContentDetail from "../components/ContentDetail";
 import { useEffect } from 'react';
 import { getContentDetailFail, getContentDetailSuccess, getContentDetailStart } from '../redux/moduels/contents';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector, useStore } from 'react-redux';
+import { tagList } from "../sampleData";
 
-const tags = [
-  { id: 0, tagName: "JAVA" },
-  { id: 2, tagName: "JAVASCIPT" },
-  { id: 3, tagName: "JPA" },
-  { id: 4, tagName: "SPRING-BOOT" },
-  { id: 5, tagName: "JPA" },
-  { id: 6, tagName: "REACT" },
-];
 
-const sempleContent = {
+
+export const sempleContent = {
   id: 0,
-  title : "자바란 무엇인가?",
+  title : "고양이는 cat 강아지는 dog",
   createdAt:"2015-12-12",
-  tags:[tags[0],tags[1],tags[2]],
-  article:"<h2>자바는 블라블라블라</h2>"
+  tags:[tagList[0],tagList[3],tagList[2]],
+  article:"<p>asdddd</p>",
+  imageUrl: "https://ugo-blog-image-bucket.s3.ap-northeast-2.amazonaws.com/등기부등본(건물).jpeg"
+}
+
+export const getContent = (dispatch,contentId) => {
+  async function getContent(){
+    try{
+      dispatch(getContentDetailStart());
+      // const resp = await axios.get("/content/"+contentId)
+      const resp = sempleContent;
+      setTimeout(()=>{
+        dispatch(getContentDetailSuccess(resp));
+      },3000);
+    }catch(error){
+      dispatch(getContentDetailFail(error));
+    }
+  }
+  getContent();
 }
 
 export default function ContentDetailContainer({match}) {
@@ -28,24 +39,7 @@ export default function ContentDetailContainer({match}) {
     
     // GET /content/contentId API 요청
     useEffect(()=>{
-      const getContent = () => {
-        // const contentId = match.params.contentId;
-        async function getContent(){
-          try{
-            dispatch(getContentDetailStart());
-            // const resp = await axios.get("/content/"+contentId)
-            const resp = sempleContent;
-            setTimeout(()=>{
-              dispatch(getContentDetailSuccess(resp));
-            },3000);
-            
-          }catch(error){
-            dispatch(getContentDetailFail(error));
-          }
-        }
-        getContent();
-      }
-      getContent();
+      getContent(dispatch,match.params.contentId);
     },[match,dispatch])  
 
     return <ContentDetail loading = {loading} match={ match } content = { content }/>;

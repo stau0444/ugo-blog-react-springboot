@@ -15,7 +15,6 @@ export function resetContentValue() {
 const initialState = '';
 
 export default function reducer(state = initialState , action) {
-    
     if(action.type === CONTENT_HANDLE_VALUE){
         return action.contentValue;
     }

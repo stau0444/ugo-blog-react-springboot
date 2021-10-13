@@ -1,12 +1,13 @@
-import { useTheme } from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { StyledInputLabel } from './ContentForm';
-import { useDispatch, useSelector } from 'react-redux';
-import { addTag } from '../redux/moduels/contentTags';
-import { Box, Chip, Typography } from '@mui/material';
+import { useDispatch, useSelector, useStore } from 'react-redux';
+import { addTag, removeTag } from '../redux/moduels/contentTags';
+import { Box, Button, Chip, Typography } from '@mui/material';
+import { useEffect } from 'react';
 
 const ITEM_HEIGHT = 20;
 const ITEM_PADDING_TOP = 10;
@@ -29,25 +30,21 @@ function getStyles(name, personName, theme) {
   };
 }
 
-export default function MultiSelect({tags}) {
+const RemoveTagBtn = styled(Button)`
+  background-color: transparent;
+  border:0
+`;
+export default function MultiSelect({isUpdate,tags,savedTags}) {
   
   const dispatch = useDispatch();
   const theme = useTheme();
   const selectedTags = useSelector(state => state.contentTags);
-  // const testTags = [
-  //   {
-  //     id: 0,
-  //     tagName: "JAVA",
-  //   },
-  //   {
-  //     id: 2,
-  //     tagName: "JAVASCIPT",
-  //   },
-  //   {
-  //     id: 3,
-  //     tagName: "JPA",
-  //   },
-  // ]; 
+  const store = useStore()
+
+  useEffect(()=>{
+    dispatch(addTag([]))
+  },[savedTags,dispatch,store])
+
   const handleChange = (e) => {
     e.preventDefault()
     if(e.target.value.length > 3 ){
@@ -60,7 +57,6 @@ export default function MultiSelect({tags}) {
     
     dispatch(addTag(value))
   };
-  
   return (
     <>
       <StyledInputLabel sx={{border:0}}>관련 태그를 선택해주세요</StyledInputLabel>
@@ -78,7 +74,7 @@ export default function MultiSelect({tags}) {
           multiple
           value={selectedTags}
           onChange={handleChange}
-          input={<OutlinedInput label="Name" name="tagsList"/>}
+          input={<OutlinedInput label="Name" id ="tagsList" name="tagsList"/>}
           MenuProps={MenuProps}
         >
           {tags.map((tag) => {

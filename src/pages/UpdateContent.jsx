@@ -1,6 +1,11 @@
-import ContentFormUpdateContainer from "../containers/ContentFormUpdateContainer";
+import TextEditor from '../components/TextEditor';
 
 export default function UpdateContent() {
-    const isUpdate = true ;
-    return <ContentFormUpdateContainer isUpdate={isUpdate} setIsOpen={()=>{alert('열림')}}/>;
+    return (
+    <>
+        <div className="text-editor">
+            <TextEditor isUpdate={true}/>
+        </div>
+    </>
+    );
 }

@@ -1,38 +1,49 @@
-import { Button, Grid, Typography } from "@mui/material";
-import { styled } from '@mui/material/styles';
+import { Button, Grid,styled, Typography, } from "@mui/material";
 import { useState } from "react";
-import ReactQuill  from 'react-quill';
+import ReactQuill from "react-quill";
 import { formats, modules } from "../QuillConfig";
 import { tagList } from "../sampleData";
 import ContentPreviewModal from "./ContentPreviewModal";
-import { StyledInput } from "./ContentUpdateForm";
 import MultiSelect from "./MultiSelect";
 
+
+export const StyledInput = styled('input')`
+width: 90%;
+text-align: center;
+color:bisque;
+border-top: 0;
+border-left: 0;
+border-right: 0;
+border-bottom:1px solid bisque;
+background-color: transparent;
+`
 export const StyledInputLabel = styled('label')`
-  color:bisque;
-  display: block;
-  font-size: 12px;
-  font-weight: 400;
-  margin: 15px;
-  padding: 3px;
-  border-radius:5px;
+
+color:bisque;
+display: block;
+font-size: 12px;
+font-weight: 400;
+margin: 15px;
+padding: 3px;
+border-radius:5px;
 `
 
-export default function ContentForm({
-    hadleTitleValue,
-    title,
-    hadleContentValue,
-    handleSubmit,
-    handleImageChange,
-    image,
-    value,
+export default function ContentUpdateForm({
+  title,
+  hadleContentValue,
+  handleSubmit,
+  handleImageChange,
+  hadleTitleValue,
+  image,
+  value,
+  isOpen
 }) {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     return (
       <>
-        <Grid container >
+        <Grid container>
           <Grid
             item
             sx={{
@@ -99,7 +110,7 @@ export default function ContentForm({
               <MultiSelect tags={tagList} />
             </Grid>
           </Grid>
-          <Grid item xs={12} md={6} sx={{}} >
+          <Grid item xs={12} md={6} >
             <Typography
               variant="h5"
               sx={{
@@ -112,18 +123,18 @@ export default function ContentForm({
               본문
             </Typography>
             <ReactQuill
-              theme="snow"
-              modules={modules}
-              formats={formats}
-              value={value}
-              onChange={hadleContentValue}
+                theme="snow"
+                modules={modules}
+                formats={formats}
+                value={value||''}
+                onChange={hadleContentValue}
             />
           </Grid>
         </Grid>
         <Grid item xs={12} sx={{ width: "95%", textAlign: "right" }}>
-          <Button onClick={handleOpen}>본문 미리 보기</Button>
-          <Button onClick={handleSubmit} variant="outlined">
-            저장
+          <Button sx={{marginRight:'10px'}}onClick={handleOpen} variant="outlined">본문 미리 보기</Button>
+          <Button onClick={handleSubmit} variant="outlined" color="success">
+            수정
           </Button>
         </Grid>
         <ContentPreviewModal

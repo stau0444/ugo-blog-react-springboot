@@ -54,12 +54,12 @@ export function postContentFail(error){
 }
 
 const initialState = {
-    loading:false,
-    id:0,
-    title:'',
-    createAt:'',
-    tags:[],
-    article:""
+    article: "",
+    createAt: "",
+    id: 0,
+    loading: false,
+    tags: [],
+    title: ""
 }
 
 export default function reducer(state = initialState , action) {
@@ -70,12 +70,12 @@ export default function reducer(state = initialState , action) {
 
     if(action.type === POST_CONTENT_SUCCESS){
         return{
-            resp:action.resp
+            ...action.resp
         }
     }
     if(action.type === POST_CONTENT_FAIL){
         return{
-            
+            ...action.error
         }
     }
 

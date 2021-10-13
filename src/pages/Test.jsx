@@ -44,7 +44,6 @@ export default function Test() {
 
 
     const fontChangePerLang = () =>{
-        console.log(preRef.current.innerHTML);
         printRef.current.innerHTML = preRef.current.innerHTML;
     }
     const handleSelectValue = () =>{

@@ -10,6 +10,13 @@ import { useCallback } from 'react';
 import { useStore } from 'react-redux';
 import UpdateContent from './pages/UpdateContent';
 import Test from './pages/Test';
+import AWS from "aws-sdk"
+import hljs from 'highlight.js';
+
+
+hljs.configure({   // optionally configure hljs
+  languages: ['javascript' ,'java','python','html']
+});
 
 
 function App() {
@@ -20,6 +27,13 @@ function App() {
     console.log(state)
   },[state])
 
+  //AWS  config
+  AWS.config.update({
+    region:'ap-northeast-2',
+    credentials: new AWS.CognitoIdentityCredentials({
+        IdentityPoolId:'ap-northeast-2:f4eab593-5f5f-4e47-8b60-a45049ed7a5d',
+    })
+  })
   return (
     <div className="App">
       <BrowserRouter>  
