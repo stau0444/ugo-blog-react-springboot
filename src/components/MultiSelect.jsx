@@ -1,4 +1,4 @@
-import { styled, useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -6,7 +6,7 @@ import Select from '@mui/material/Select';
 import { StyledInputLabel } from './ContentForm';
 import { useDispatch, useSelector, useStore } from 'react-redux';
 import { addTag } from '../redux/moduels/contentTags';
-import { Box, Button, Chip, Typography } from '@mui/material';
+import { Box, Chip, Typography } from '@mui/material';
 import { useEffect } from 'react';
 
 const ITEM_HEIGHT = 20;
