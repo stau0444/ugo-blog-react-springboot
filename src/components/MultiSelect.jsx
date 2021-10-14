@@ -30,10 +30,6 @@ function getStyles(name, personName, theme) {
   };
 }
 
-// const RemoveTagBtn = styled(Button)`
-//   background-color: transparent;
-//   border:0
-// `;
 export default function MultiSelect({isUpdate,tags,savedTags}) {
   
   const dispatch = useDispatch();

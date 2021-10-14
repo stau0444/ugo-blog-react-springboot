@@ -12,6 +12,10 @@ export default function ContentDetailLoading() {
             <Skeleton sx={{width:'15%' ,height:"40px" , marginRight:"7px",borderRadius:"15px" }}/>
         </Box>
         <Skeleton sx={{width:'85%' ,height:"800px" , margin:"10px 0"}}/>
+        <Box sx={{width:"85%",display:'flex' , marginTop:'-130px',justifyContent:"right"}}>
+            <Skeleton sx={{width:'10%' ,marginRight:"15px" ,height:"50px" }}/>
+            <Skeleton sx={{width:'10%' ,height:"50px" }}/>
+        </Box>
     </Box>
     );
 }

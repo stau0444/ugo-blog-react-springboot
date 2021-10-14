@@ -572,3 +572,54 @@ a.nav-link-active div{
   position: absolute;
   right: 15px;
 }
+
+
+//페이지네이션 css
+
+.pagination { 
+  width: 30%;
+  margin: 60px auto;
+  display: flex; 
+  justify-content: center; 
+  padding-right: 20px;
+} 
+
+ul.pagination li { 
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  margin:0px 4px;
+  padding:2px 5px;
+  display: inline-block;  
+  font-weight: bold;
+  width: 20%;
+  height: 25px; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+} 
+ul.pagination li::before{ 
+  content: none;
+} 
+ul.pagination li:first-child{ 
+  border-radius: 5px 0 0 5px; 
+} 
+ul.pagination li:last-child{ 
+  border-radius: 0 5px 5px 0;
+} 
+ul.pagination li a { 
+  text-decoration: none;
+  color: #777; 
+  font-size: 1rem; 
+} 
+ul.pagination li.active a { 
+  color: white; 
+} 
+ul.pagination li.active {
+  border-radius: 40px;
+  background-color: #337ab7; 
+} 
+ul.pagination li a:hover, ul.pagination li a.active {
+    color: blue; 
+} 
+
+
+

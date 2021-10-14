@@ -42,7 +42,7 @@ export default function ContentCard({content}) {
                 <Typography
                   variant="h5"
                   component="div"
-                  sx={{fontWeight:"700",fontFamily: "'Gowun Batang', serif",  margin: "0 0 10px 0" }}
+                  sx={{fontWeight:"700",color:"#04f7ff",fontFamily: "'Gowun Batang', serif",  margin: "0 0 10px 0" }}
                 >
                   {content.title}
                 </Typography>

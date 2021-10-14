@@ -29,7 +29,7 @@ export const contents = [
       title : "자바란 무엇인가?",
       imgLink : "/IMG_1708.JPG",
       article : "<p>asdddd</p>",
-      description:"asd",
+      description:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Et officia facilis omnis fugit culpa quae rerum dolor, itaque, ea quis, vero possimus excepturi necessitatibus voluptatem velit fugiat molestiae id? Distinctio.",
       tags:[tagList[0],tagList[1],tagList[2]]
     },
     {
@@ -38,7 +38,7 @@ export const contents = [
       title : "자바 스크립트 무엇인가?",
       imgLink : "/IMG_1708.JPG",
       article : "<p>asdddd</p>",
-      description:"asd",
+      description:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Et officia facilis omnis fugit culpa quae rerum dolor, itaque, ea quis, vero possimus excepturi necessitatibus voluptatem velit fugiat molestiae id? Distinctio.",
       tags:[tagList[0],tagList[1],tagList[2]]
     },
     {
@@ -47,7 +47,7 @@ export const contents = [
       title : "JPA란 무엇인가?",
       imgLink : "/IMG_1708.JPG",
       article : "<p>asdddd</p>",
-      description:"asd",
+      description:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Et officia facilis omnis fugit culpa quae rerum dolor, itaque, ea quis, vero possimus excepturi necessitatibus voluptatem velit fugiat molestiae id? Distinctio.",
       tags:[tagList[0],tagList[1],tagList[2]]
     },
     {
@@ -56,7 +56,25 @@ export const contents = [
       title : "REACT란 무엇인가?",
       imgLink : "/IMG_1708.JPG",
       article : "<p>asdddd</p>",
-      description:"asd",
+      description:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Et officia facilis omnis fugit culpa quae rerum dolor, itaque, ea quis, vero possimus excepturi necessitatibus voluptatem velit fugiat molestiae id? Distinctio.",
       tags:[tagList[0],tagList[1],tagList[2]]
-    }
+    },
+    {
+  
+      id: 4,
+      title : "VUE란 무엇인가?",
+      imgLink : "/IMG_1708.JPG",
+      article : "<p>asdddd</p>",
+      description:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Et officia facilis omnis fugit culpa quae rerum dolor, itaque, ea quis, vero possimus excepturi necessitatibus voluptatem velit fugiat molestiae id? Distinctio.",
+      tags:[tagList[0],tagList[1],tagList[2]]
+    },
+    {
+  
+      id: 5,
+      title : "TypeScript란 무엇인가?",
+      imgLink : "/IMG_1708.JPG",
+      article : "<p>asdddd</p>",
+      description:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Et officia facilis omnis fugit culpa quae rerum dolor, itaque, ea quis, vero possimus excepturi necessitatibus voluptatem velit fugiat molestiae id? Distinctio.",
+      tags:[tagList[0],tagList[1],tagList[2]]
+    },
   ] 

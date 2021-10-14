@@ -38,7 +38,7 @@ function App() {
     <div className="App">
       <BrowserRouter>  
         <Header/>
-        <Route path="/contents/:keyword" exact={true} component={Home}/>
+        <Route path="/contents/:category" exact={true} component={Home}/>
         <Route path="/content/update/:contentId" component={UpdateContent}/>
         {/* <Route path="/content/delete/:contentId" component={}/> */}
         <Route path="/content/:contentId" exact={true} component={Detail}/>

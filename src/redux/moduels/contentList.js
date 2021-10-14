@@ -1,7 +1,7 @@
 const GET_CONTENT_LIST_START = "ugo-blog/content/GET_CONTENT_LIST_START"
 const GET_CONTENT_LIST_SUCCESS = "ugo-blog/content/GET_CONTENT_LIST_SUCCESS"
 const GET_CONTENT_LIST_FAIL = "ugo-blog/content/GET_CONTENT_LIST_FAIL"
-
+const GET_CONTENT_HANDLE_PAGE = "ugo-blog/content/GET_CONTENT_HANDLE_PAGE"
 
 export function getContentListStart(){
     return {
@@ -10,12 +10,14 @@ export function getContentListStart(){
     }
 }
 
-export function getContentListSuccess(data,keyword){
+export function getContentListSuccess(data,category,page,totalCount){
     return{
         type:GET_CONTENT_LIST_SUCCESS,
         loading:false,
         data,
-        keyword
+        category,
+        page,
+        totalCount,
     }
 }
 
@@ -27,10 +29,19 @@ export function getContentListFail(error){
     }
 }
 
+export function getContentHandlePage(page){
+    return{
+        type:GET_CONTENT_HANDLE_PAGE,
+        page
+    }
+}
+
 const initialState = {
-                       keyword:'',
                        loading:true,
-                       data:[]
+                       page:1,
+                       category:'',
+                       data:[],
+                       totalCount:30
                      };
 
 export default function reducer(state = initialState , action) {
@@ -43,10 +54,21 @@ export default function reducer(state = initialState , action) {
     }
 
     if(action.type === GET_CONTENT_LIST_SUCCESS){
+        if(state.category !== action.category){
+            return {
+                category: action.category,
+                page: 1,
+                data: action.data,
+                loading:action.loading,
+                totalCount:action.totalCount
+              };
+        }
         return {
-          keyword: action.keyword,
+          category: action.category,
+          page: action.page,
           data: action.data,
-          loading:action.loading
+          loading:action.loading,
+          totalCount:action.totalCount
         };
     }
 
@@ -55,6 +77,13 @@ export default function reducer(state = initialState , action) {
             ...state,
             error: action.error,
             loading:action.loading
+        }
+    }
+
+    if(action.type === GET_CONTENT_HANDLE_PAGE){
+        return{
+            ...state,
+            page:action.page
         }
     }
     return state;

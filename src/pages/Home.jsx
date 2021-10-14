@@ -1,13 +1,13 @@
 import ContentListContainer from '../containers/ContentListContainer';
 
 export default function Home({match}) {
-    let keyword = match.params.keyword;
-    if(keyword === undefined){
-        keyword = '';
+    let category = match.params.category;
+    if(category === undefined){
+        category = '';
     }
     return(
         <>
-            <ContentListContainer keyword = {keyword}/>
+            <ContentListContainer category = {category}/>
         </>
     );
 }
