@@ -1,7 +1,7 @@
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useCallback, useEffect, useState } from "react";
-import {postContentFail, postContentStart, postContentSuccess } from "../redux/moduels/contents";
+import {putContentFail, putContentStart, putContentSuccess } from "../redux/moduels/contents";
 import { useHistory } from "react-router";
 import ContentUpdateForm from '../components/ContentUpdateForm';
 import { inputsNullCheck, uploadToS3 } from './ContentFormContainer';
@@ -69,7 +69,7 @@ export default function ContentUpdateFormContainer({isOpen,isUpdate,setIsOpen}) 
 
     //post 요청 함수
     const handleSubmit = useCallback((e) => {
-        async function postContent(){
+        async function updateContent(){
             //DB에 저장되는 데이터
             const putData = {
                 title: title,
@@ -83,23 +83,21 @@ export default function ContentUpdateFormContainer({isOpen,isUpdate,setIsOpen}) 
                 if(hasNull){
                   return;
                 }
-                dispatch(postContentStart())
-                //put 요청 전송 데이터 
+                dispatch(putContentStart())
                 const resp = putData;
                 console.log(resp);
                 // const resp = await axios.put("www.naver.com",data);
-                dispatch(postContentSuccess(resp));
+                dispatch(putContentSuccess(resp));
                 if(image.file){
                   setImage({file:null,imagePreviewUrl: `https://ugo-blog-image-bucket.s3.ap-northeast-2.amazonaws.com/${image.file.name}`})
                   uploadToS3(image);
                 }
-                // resetInputValues();
                 history.push('/')
             }catch(error){
-                dispatch(postContentFail(error))
+                dispatch(putContentFail(error))
             }
         }
-        postContent();
+        updateContent();
     },[dispatch,title,image,value,tags,history,description,content.imageUrl]);
     
     return (

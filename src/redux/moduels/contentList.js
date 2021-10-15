@@ -2,7 +2,21 @@ const GET_CONTENT_LIST_START = "ugo-blog/content/GET_CONTENT_LIST_START"
 const GET_CONTENT_LIST_SUCCESS = "ugo-blog/content/GET_CONTENT_LIST_SUCCESS"
 const GET_CONTENT_LIST_FAIL = "ugo-blog/content/GET_CONTENT_LIST_FAIL"
 const GET_CONTENT_HANDLE_PAGE = "ugo-blog/content/GET_CONTENT_HANDLE_PAGE"
+const HANDLE_PAGE_NUM = "ugo-blog/content/serchList/HANDLE_PAGE_NUM"
+const RESET_CONTENT_LIST_STATE="ugo-blog/content/serchList/RESET_CONTENT_LIST_STATE";
 
+export function resetContentListState() {
+    return{
+        type:RESET_CONTENT_LIST_STATE
+    }
+}
+
+export function handlePageNum(page) {
+    return{
+        type:HANDLE_PAGE_NUM,
+        page
+    }
+}
 export function getContentListStart(){
     return {
         type:GET_CONTENT_LIST_START,
@@ -46,6 +60,12 @@ const initialState = {
 
 export default function reducer(state = initialState , action) {
 
+    if(action.type === HANDLE_PAGE_NUM){
+        return{
+            ...state,
+            page:action.page
+        }
+    }
     if(action.type === GET_CONTENT_LIST_START){
         return {
             ...state,
@@ -54,18 +74,10 @@ export default function reducer(state = initialState , action) {
     }
 
     if(action.type === GET_CONTENT_LIST_SUCCESS){
-        if(state.category !== action.category){
-            return {
-                category: action.category,
-                page: 1,
-                data: action.data,
-                loading:action.loading,
-                totalCount:action.totalCount
-              };
-        }
+        console.log(action)
         return {
           category: action.category,
-          page: action.page,
+          page:  action.page,
           data: action.data,
           loading:action.loading,
           totalCount:action.totalCount
@@ -86,5 +98,9 @@ export default function reducer(state = initialState , action) {
             page:action.page
         }
     }
+    if(action.type === RESET_CONTENT_LIST_STATE){
+        return initialState;
+    }
+    
     return state;
 }

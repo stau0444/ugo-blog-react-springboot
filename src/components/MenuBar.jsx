@@ -9,6 +9,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import LoginMenu from './LoginMenu';
 import { useRef } from 'react';
+import { useHistory } from 'react-router';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -52,19 +53,20 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const clickMenuIcon = () => {
-  console.log('menubar')
-}
+
 
 export default function MenuBar() {
+  const history = useHistory();
 
-  const searchKeywordInput = useRef('')
-  const testClick = () => {
-    
+  const handleSearch = (e) => {
+    if(e.key === "Enter"){
+      history.push("/contents/search/"+e.target.value);
+    }
   }
+  const searchKeywordInput = useRef('')
+
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <button onClick={testClick}>버튼</button>
       <AppBar position="static" sx={{backgroundColor:'transparent' ,background:'#777c7c20',width:'100%',opacity:0.9,borderRadius:'20px',}}>
         <Toolbar>
           <IconButton
@@ -72,7 +74,6 @@ export default function MenuBar() {
             edge="start"
             color="inherit"
             aria-label="open drawer"
-            onClick={clickMenuIcon}
             sx={{ mr: 2 }}
           >
             <MenuIcon />
@@ -91,7 +92,7 @@ export default function MenuBar() {
             <StyledInputBase
               ref={searchKeywordInput}
               placeholder="글 검색"
-              inputProps={{ 'aria-label': 'search' ,'ref':{searchKeywordInput}}}
+              inputProps={{ 'aria-label': 'search' ,onKeyPress:handleSearch}}
             />
           </Search>
           <LoginMenu/>

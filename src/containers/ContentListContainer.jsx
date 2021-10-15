@@ -1,31 +1,31 @@
-import {useCallback, useEffect, useState } from "react";
+import {useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ContentList from "../components/ContentList";
-import { getContentListStart, getContentListSuccess, getContentListFail } from '../redux/moduels/contentList';
+import { getContentListStart, getContentListSuccess, getContentListFail, handlePageNum } from '../redux/moduels/contentList';
 import {contents } from "../sampleData";
 
 export default function ContentListContainer({category}) {
     const dispatch = useDispatch();
     const contentList = useSelector(state => state.contentList);
     const totalCount = useSelector(state => state.contentList.totalCount);
-    const [page,setPage] = useState(1);
+    const page = useSelector(state => state.contentList.page);
     
-    const handlePageChange = useCallback((page) => {
-        setPage(page);
-    },[]);
+    const handlePageChange = (page) => {
+        dispatch(handlePageNum(page));
+    };
+
     
     useEffect(()=>{
         const getContentList= () => {
           async function getContentList(){
               try{
-                dispatch(getContentListStart());
+                dispatch(getContentListStart())
                 const data = contents;
-                const totalCount = 40;
                 // const data = await axios.get(`/contents?keyword=${keyword?keyword:""}&page=${page}`);  
-                setTimeout(()=>{
+                console.log('데이터 요청')
+                setTimeout(()=>{                    
                     dispatch(getContentListSuccess(data,category,page,totalCount));      
                 },3000)
-
               }catch(error){
                   dispatch(getContentListFail(error));
               }
@@ -33,7 +33,7 @@ export default function ContentListContainer({category}) {
           getContentList();
         };
         getContentList();
-    },[category,dispatch,page])
+    },[category,dispatch,page,totalCount])
 
     
     

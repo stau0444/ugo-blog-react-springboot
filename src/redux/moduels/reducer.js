@@ -3,13 +3,14 @@ import contents from './contents'
 import contentTags from './contentTags';
 import contentValue from './contentValue';
 import contentList from './contentList';
-
+import searchList from './searchList';
 
 const mainReducer = combineReducers({
     contents,
     contentTags,
     contentValue,
-    contentList
+    contentList,
+    searchList
 })
 
 export default mainReducer;

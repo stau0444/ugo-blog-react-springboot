@@ -3,7 +3,8 @@ import { NavLink } from "react-router-dom";
 import CodeBlock from "./CodeBlock";
 import ContentDetailLoading from "./ContentDetailLoading";
 
-export default function ContentDetail({content,loading}) {
+export default function ContentDetail({content,loading,deleteContent}) {
+    console.log('content' , content)
     return(
         <Grid container>
             <Grid item xs={12} >
@@ -26,12 +27,10 @@ export default function ContentDetail({content,loading}) {
                             수정
                             </Button>
                         </NavLink>  
-                        <NavLink to={'/content/delete/'+content.id}>
-                            <Button variant="outlined" color="error">
-                            삭제
-                            </Button>
-                        </NavLink>  
-                    </Grid>
+                        <Button onClick={()=>{deleteContent(content.id)}} variant="outlined" color="error">
+                        삭제
+                        </Button>
+                    </Grid> 
                 </>
                 }
             </Grid>

@@ -1,8 +1,9 @@
 import ContentDetail from "../components/ContentDetail";
 import { useEffect } from 'react';
-import { getContentDetailFail, getContentDetailSuccess, getContentDetailStart } from '../redux/moduels/contents';
+import { getContentDetailFail, getContentDetailSuccess, getContentDetailStart, deleteContentStart, deleteContentSuccess, deleteContentFail } from '../redux/moduels/contents';
 import { useDispatch, useSelector } from 'react-redux';
 import { tagList } from "../sampleData";
+import { useHistory } from "react-router";
 
 
 
@@ -35,13 +36,38 @@ export const getContent = (dispatch,contentId) => {
 export default function ContentDetailContainer({match}) {
     const content = useSelector(state=>state.contents);
     const loading = useSelector(state=>state.contents.loading);
-
+    const history = useHistory();
     const dispatch = useDispatch();
-    
+    useEffect(()=>{
+      console.log('contentDetail' , content)
+    })
+    //컨텐츠 삭제 함수
+    const deleteContent = (contentId) =>{
+      async function deleteContent(){
+        try{
+          dispatch(deleteContentStart());
+          // setTimeout(()=>{
+          // },3000);
+          // const resp = await axios.delete("/content/"+contentId)
+          const isDelete = window.confirm("삭제하시겠습니까?");
+          if(isDelete){
+            const resp = contentId + "컨텐츠 삭제됨"
+            dispatch(deleteContentSuccess(resp));
+            history.push("/");
+            console.log('after delete', content)
+          }
+          return;
+        }catch(error){
+          dispatch(deleteContentFail(error));
+        }
+      }
+      deleteContent();
+    }
+
     // GET /content/contentId API 요청
     useEffect(()=>{
       getContent(dispatch,match.params.contentId);
     },[match,dispatch])  
 
-    return <ContentDetail loading = {loading} match={ match } content = { content }/>;
+    return <ContentDetail deleteContent={deleteContent} loading = {loading} match={ match } content = { content }/>;
 }

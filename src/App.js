@@ -12,6 +12,7 @@ import UpdateContent from './pages/UpdateContent';
 import Test from './pages/Test';
 import AWS from "aws-sdk"
 import hljs from 'highlight.js';
+import Search from './pages/Search';
 
 
 hljs.configure({   // optionally configure hljs
@@ -38,13 +39,13 @@ function App() {
     <div className="App">
       <BrowserRouter>  
         <Header/>
-        <Route path="/contents/:category" exact={true} component={Home}/>
+        <Route path="/contents/search/:keyword" exact component={Search}/>
+        <Route path="/contents/:category" exact component={Home}/>
         <Route path="/content/update/:contentId" component={UpdateContent}/>
-        {/* <Route path="/content/delete/:contentId" component={}/> */}
-        <Route path="/content/:contentId" exact={true} component={Detail}/>
-        <Route path="/add-content"  exact={true} component={AddContent}/>
-        <Route path="/test" exact={true} component={Test}/>
-        <Route path="/" exact={true} component={Home}/>
+        <Route path="/content/add"  exact component={AddContent}/>
+        <Route path="/content/:contentId" exact component={Detail}/>
+        <Route path="/test" exact component={Test}/>
+        <Route path="/" exact component={Home}/>
       </BrowserRouter>
     </div>
   );
