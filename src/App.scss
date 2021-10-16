@@ -9,54 +9,11 @@ ul ,h2,h1,h3,h4,h5,p,a,div{
   text-decoration: none;
 }
 .logo{
-  width: 40%;
-  margin:auto;
-  margin-top: 30px;
+  width: 100%;
+  margin:40px auto;
+  margin-top: 70px;
   
 }
-
-/* linear-gradient(to right bottom, rgb(0, 127, 255), rgb(0, 89, 178) 120%); */
-.App {
-  width: 90%;
-  font-family: 'Gowun Batang', serif;
-  padding: 0 20px 20px 20px;
-  position: relative; /* 추후 박스 하단에 추가 버튼을 위치시키기 위한 설정 */
-  border-radius: 16px;
-  box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.04);
-  
-  margin: 0 auto; /* 페이지 중앙에 나타나도록 설정 */
-
-  margin-top: 32px;
-  margin-bottom: 32px;
-  display: flex;
-  flex-direction: column;
-}
-
-// 카테고리 메뉴 ul
-.menu-links{
-  margin: 0 auto;
-  margin-top: -20px;
-  margin-bottom: 20px;
-  width: 75%;
-  border-bottom: 2px solid rgba(0, 51, 128, 0.747);
-  border-radius: 2px;
-  justify-content: center;
-  display: flex;
-  padding: 10px 10px;
-  padding-bottom: 20px;
-}
-
-
-// 카테고리 메뉴 리스트 
-.menu-link-list{
-    padding:5px 10px;
-    border-radius: 30px;
-    background-color: rgba(122, 126, 123, 0.753);
-    overflow-x: scroll;
-    max-width:95%;
-    box-shadow: inset 1px 1px 3px black;
-}
-
 
 // 카테고리 메뉴 리스트 스크롤 
 /* width */
@@ -80,6 +37,68 @@ ul ,h2,h1,h3,h4,h5,p,a,div{
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+
+/* linear-gradient(to right bottom, rgb(0, 127, 255), rgb(0, 89, 178) 120%); */
+.App {
+  width: 90%;
+  font-family: 'Gowun Batang', serif;
+  padding: 0 20px 20px 20px;
+  position: relative; /* 추후 박스 하단에 추가 버튼을 위치시키기 위한 설정 */
+  border-radius: 16px;
+  box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.04);
+  
+  margin: 0 auto; /* 페이지 중앙에 나타나도록 설정 */
+
+  margin-top: 32px;
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  & ::-webkit-scrollbar-thumb {
+    background: none;
+    border-radius: 20px;
+  }
+  //rgb(20, 79, 206)
+}
+.header-divider{
+  height: 2px;
+  background-color: rgb(55, 95, 182);
+  border: none;
+}
+//텍스트 하이라이트 효과
+.highlighted-text{
+  background-color: rgb(235, 99, 99);
+  font-family: 'Gowun Batang', serif;
+  font-weight: bold;
+  border-radius: 10px;
+  padding: 0px 5px;
+  color: white;
+}
+
+// 카테고리 메뉴 ul
+.menu-links{
+  margin-bottom: 8px;
+  margin-left: -9px;
+  width: 75%;
+  border-radius: 2px;
+  display: flex;
+  padding: 10px 10px;
+  padding-bottom: 20px;
+}
+
+
+// 카테고리 메뉴 리스트 
+.menu-link-list{
+    border-bottom: 4px solid rgba(27, 94, 194, 0.966);
+    padding:5px 10px;
+    border-radius: 30px;
+    background-color: rgba(122, 126, 123, 0.753);
+    overflow-x: scroll;
+    max-width:95%;
+    box-shadow: inset 1px 1px 3px black;
+}
+
+
 
 
 // 콘텐츠 카드 hover 효과

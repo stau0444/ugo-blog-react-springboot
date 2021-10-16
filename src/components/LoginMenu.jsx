@@ -24,7 +24,7 @@ export default function LoginMenu() {
     <>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
         <Tooltip title="Account settings">
-          <IconButton onClick={handleClick} size="small" sx={{ ml: 2 }}>
+          <IconButton onClick={handleClick} size="small" sx={{ ml: 2 ,marginBottom:{xs:'5px',sm:'13px'}}}>
             <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
           </IconButton>
         </Tooltip>

@@ -66,8 +66,7 @@ export default function reducer(state = initialState , action) {
     }
     if(action.type === GET_SEARCH_LIST_FAIL){
         return{
-            ...state,
-            error:action.error
+            error:action.error.message
         }
     }
     return state;

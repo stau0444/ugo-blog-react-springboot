@@ -31,7 +31,7 @@ export default function ContentList({
           </Grid>
         ) : (
           contentList.data.map((content) => (
-            <Grid key={content.id} item xs={12} md={6}>
+            <Grid key={content.id} item xs={12} md={6} lg={4}>
               <ContentCard content={content} />
             </Grid>
           ))

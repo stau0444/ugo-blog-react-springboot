@@ -5,13 +5,14 @@ import Typography from '@mui/material/Typography';
 import { Chip, Grid, Stack } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import { Link } from 'react-router-dom';
+import { highlightedText } from './SearchList';
 
-export default function ContentCard({content}) {
+export default function ContentCard({keyword,content}) {
   return (
     <Button
       sx={{
         borderRadius: "20px",
-        width: {xs:"100%"},
+        width: { xs: "100%" },
       }}
     >
       <Link to={"/content/" + JSON.stringify(content.id)}>
@@ -25,14 +26,16 @@ export default function ContentCard({content}) {
             margin: "5px auto",
             padding: "0 10px",
             fontFamily: "'Nunito', sans-serif",
-            boxShadow:'0px 0px 0px 0px rgba(5, 5, 20, 0.452)',
+            boxShadow: "0px 0px 0px 0px rgba(5, 5, 20, 0.452)",
             background:
               "linear-gradient(to right bottom, rgb(0, 127, 255), rgb(0, 89, 178) 120%);",
             "&:hover": {
-              background:"linear-gradient(to right bottom, rgba(255, 0, 55, 0.644), rgb(0, 89, 178) 120%);",
-              transition: 'all 0.1s linear',
-              width: '91%',
-              boxShadow:'3px 3px 1px 0px rgba(5, 5, 20, 0.726)',
+              background:
+                "linear-gradient(to right bottom, rgba(255, 0, 55, 0.644), rgb(0, 89, 178) 120%);",
+              transition: "all 0.1s linear",
+              width: "91%",
+              boxShadow: "3px 3px 1px 0px rgba(5, 5, 20, 0.726)",
+              color:"white"
             },
           }}
         >
@@ -42,9 +45,16 @@ export default function ContentCard({content}) {
                 <Typography
                   variant="h5"
                   component="div"
-                  sx={{fontWeight:"700",color:"#04f7ff",fontFamily: "'Gowun Batang', serif",  margin: "0 0 10px 0" }}
+                  sx={{
+                    fontWeight: "bold",
+                    color: "#ecd6d4",
+                    fontFamily: "'Gowun Batang', serif",
+                    margin: "0 0 10px 0",
+                  }}
                 >
-                  {content.title}
+                  {keyword
+                    ? highlightedText(content.title, keyword)
+                    : content.title}
                 </Typography>
                 <Divider color="white" />
               </Grid>
@@ -61,14 +71,15 @@ export default function ContentCard({content}) {
                 sm={8}
                 xs={12}
                 sx={{
-                  maxHeight: 220,
-                  overflow:"hidden",
-                  textOverflow:"ellipsis",
-                  overflowWrap:"break-word"
+                  marginTop: "10px",
+                  maxHeight: 230,
+                  overflow: "hidden",
                 }}
               >
                 <Typography>
-                  {content.description}
+                  {keyword
+                    ? highlightedText(content.description, keyword)
+                    : content.description}
                 </Typography>
               </Grid>
               <Grid item xs={12}>

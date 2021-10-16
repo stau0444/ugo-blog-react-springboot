@@ -3,8 +3,49 @@ import ContentCard from "./ContentCard";
 import LoadingAnimation from "./LoadingAnimation";
 import Pagenator from "./Pagenator";
 
+
+export const highlightedText = (text, query) => {
+  query = query.toLowerCase();
+  text = text.toLowerCase();
+  if (query !== '' && text.includes(query)) {
+    const parts = text.split(new RegExp(`(${query})`, 'gi'));      
+    return (
+      <>
+        {parts.map((part, index) =>
+          part === query ? (
+            <span class="highlighted-text"key={index}>{part}</span>
+          ) : (
+            part
+          ),
+        )}
+      </>
+    );
+  }
+  return text;
+};
 export default function SearchList({keyword,searchList,page,handlePageChange,totalCount}) {
     return (
+      <>
+      {searchList.error?
+           <Grid container>
+              <Grid item
+                sx={{
+                  width: "100%",
+                  height: "200px",
+                  display:'flex',
+                  justifyContent:"center",
+                  alignItems:"center",
+                  border: "1px solid bisque",
+                  borderRadius: "20px",
+                  backgroundColor: "bisque",
+                }}
+              >
+                <Typography variant="h4" sx={{padding:'px' , background:"#777",borderRadius:"15px",color:"bisque" }}>
+                  {searchList.error}
+                </Typography>
+              </Grid>
+            </Grid>
+          :
         <Grid
           container
           sx={{
@@ -17,8 +58,8 @@ export default function SearchList({keyword,searchList,page,handlePageChange,tot
           }}
         >
           <Grid item xs={12} sx={{ textAlign: "center" }}>
-            <Typography variant="h4">
-              {keyword}에 대한 검색 결과입니다.
+            <Typography variant="h4" sx={{color:'#777' ,margin:"20px"}}>
+              {highlightedText(`${keyword}에 대한 검색 결과입니다.`,keyword)}
             </Typography>
           </Grid>
           {searchList.loading ? (
@@ -30,8 +71,8 @@ export default function SearchList({keyword,searchList,page,handlePageChange,tot
             </Grid>
           ) : (
             searchList.data.map((content) => (
-              <Grid key={content.id} item xs={12} md={6}>
-                <ContentCard content={content} />
+              <Grid key={content.id} item xs={12} md={6} lg={4}>
+                <ContentCard keyword={keyword} content={content} />
               </Grid>
             ))
           )}
@@ -43,5 +84,7 @@ export default function SearchList({keyword,searchList,page,handlePageChange,tot
             />
           </Grid>
         </Grid>
+      }
+      </>
     );
 }

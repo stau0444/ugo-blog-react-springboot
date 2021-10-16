@@ -28,7 +28,7 @@ export const ColorLink = styled(Chip)(()=>({
     '&.active':{
          background: 'gray',
         color:'yellowgreen'
-    }
+    },
 }));
 
 

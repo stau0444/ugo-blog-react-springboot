@@ -23,9 +23,7 @@ export default function ContentListContainer({category}) {
                 const data = contents;
                 // const data = await axios.get(`/contents?keyword=${keyword?keyword:""}&page=${page}`);  
                 console.log('데이터 요청')
-                setTimeout(()=>{                    
-                    dispatch(getContentListSuccess(data,category,page,totalCount));      
-                },3000)
+                dispatch(getContentListSuccess(data,category,page,totalCount));      
               }catch(error){
                   dispatch(getContentListFail(error));
               }
@@ -34,9 +32,6 @@ export default function ContentListContainer({category}) {
         };
         getContentList();
     },[category,dispatch,page,totalCount])
-
-    
-    
 
     return <ContentList totalCount={totalCount} page={page} handlePageChange={handlePageChange} contentList = {contentList}/>;
 }

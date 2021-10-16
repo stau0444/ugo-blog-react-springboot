@@ -2,14 +2,17 @@ import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
-import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import LoginMenu from './LoginMenu';
 import { useRef } from 'react';
 import { useHistory } from 'react-router';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
+import HomeIcon from '@mui/icons-material/Home';
+import { Link } from 'react-router-dom';
+
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -66,38 +69,71 @@ export default function MenuBar() {
   const searchKeywordInput = useRef('')
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{backgroundColor:'transparent' ,background:'#777c7c20',width:'100%',opacity:0.9,borderRadius:'20px',}}>
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
-          >
-          </Typography>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              ref={searchKeywordInput}
-              placeholder="글 검색"
-              inputProps={{ 'aria-label': 'search' ,onKeyPress:handleSearch}}
-            />
-          </Search>
-          <LoginMenu/>
-        </Toolbar>
-      </AppBar>
-    </Box>
+    <>
+      {/* <EndPoints isOpen={isOpen} /> */}
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar
+          position="static"
+          sx={{
+            zIndex: 1,
+            backgroundColor: "transparent",
+            background: "#23ca98ef",
+            height: '8%',
+            width: "96%",
+            borderRadius: "20px",
+            position: "fixed",
+            top: 5,
+            left: "2%",
+            right: "2%",
+          }}
+        >
+          <Toolbar sx={{justifyContent:"flex-end"}}>
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{
+                fontFamily: "'Righteous', cursive",
+                flexGrow: 1,
+                display: { xs: "block", sm: "none" },
+                fontWeight: "bold",
+                marginBottom:"5px"
+              }}
+            >
+              UGO's DEV BLOG
+            </Typography>
+            <Box  sx={{display:{xs:"none",sm:"block"},marginBottom:"6px",position:"absolute",left:40}}>
+              <Link to="/">
+                <HomeIcon fontSize="large" sx={{color:'white', marginRight:"10px"}}/>
+              </Link>
+              <a href="https://github.com/stau0444" style={{color:'white'}}>
+                <GitHubIcon fontSize="large" sx={{marginRight:"10px"}}/>
+              </a>
+              <a href="https://github.com/stau0444" style={{color:'white'}}>
+                <PermContactCalendarIcon fontSize="large" sx={{marginRight:"10px" }}/>
+              </a>
+              <a href="https://ugo04.tistory.com/" style={{color:'white'}}>
+                <svg xmlns="http://www.w3.org/2000/svg"style={{marginBottom:"3px",width:"32px" ,fill:"white"}} viewBox="0 0 459 459"><title>티스토리 로고</title><g><path d="M229.5,0C102.75,0,0,102.75,0,229.5S102.75,459,229.5,459,459,356.25,459,229.5,356.25,0,229.5,0ZM130.21,191.45a39.57,39.57,0,1,1,39.56-39.57A39.58,39.58,0,0,1,130.21,191.45ZM229.5,390a39.56,39.56,0,1,1,39.56-39.56A39.56,39.56,0,0,1,229.5,390Zm0-99.29a39.56,39.56,0,1,1,39.56-39.56A39.56,39.56,0,0,1,229.5,290.74Zm0-99.29a39.57,39.57,0,1,1,39.56-39.57A39.57,39.57,0,0,1,229.5,191.45Zm99.29,0a39.57,39.57,0,1,1,39.57-39.57A39.57,39.57,0,0,1,328.79,191.45Z"/></g></svg>
+              </a>
+            </Box>
+            <Search sx={{width:{xs:"45%",sm:"45%"},marginBottom:{xs:'4px',sm:'10px'}}}>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                sx={{width:"100%"}}
+                ref={searchKeywordInput}
+                placeholder="글 검색"
+                inputProps={{
+                  "aria-label": "search",
+                  onKeyPress: handleSearch,
+                }}
+              />
+            </Search>
+            <LoginMenu />
+          </Toolbar>
+        </AppBar>
+      </Box>
+    </>
   );
 }

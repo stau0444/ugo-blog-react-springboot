@@ -13,6 +13,7 @@ import Test from './pages/Test';
 import AWS from "aws-sdk"
 import hljs from 'highlight.js';
 import Search from './pages/Search';
+import Footer from './components/Footer';
 
 
 hljs.configure({   // optionally configure hljs
@@ -46,6 +47,7 @@ function App() {
         <Route path="/content/:contentId" exact component={Detail}/>
         <Route path="/test" exact component={Test}/>
         <Route path="/" exact component={Home}/>
+        <Footer/>
       </BrowserRouter>
     </div>
   );
