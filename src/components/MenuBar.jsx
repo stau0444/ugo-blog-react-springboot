@@ -78,7 +78,7 @@ export default function MenuBar() {
             zIndex: 1,
             backgroundColor: "transparent",
             background: "#23ca98ef",
-            height: '8%',
+            height: '55px',
             width: "96%",
             borderRadius: "20px",
             position: "fixed",
