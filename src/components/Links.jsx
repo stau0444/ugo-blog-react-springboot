@@ -39,8 +39,6 @@ export default function Links() {
             className="menu-link-list"
             direction="row" 
             spacing={0.5}
-            justifyContent="flex-start"
-            alignItems="flex-end"
             >
                 {linkList.map((link,index)=>
                     <NavLink key={index} to={"/contents/"+link}  activeClassName="nav-link-active">

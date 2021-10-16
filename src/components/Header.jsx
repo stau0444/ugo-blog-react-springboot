@@ -40,6 +40,7 @@ export default function Header() {
               }}
             >
               <hr className="header-divider" />
+
               {/* <hr className="header-divider" />
               <hr className="header-divider" />
               <hr className="header-divider" />  
@@ -100,7 +101,7 @@ export default function Header() {
           </Grid>
         </Grid>
         {/* <img className="logo" src="/logo_transparent.png" alt="logo"  /> */}
-        <Grid item xs={12} sx={{ margin: { xs: "0 55px", sm: "10px 0px" } }}>
+        <Grid item xs={12} sx={{ margin: { xs: "0 auto", sm: "20px 0px" } }}>
           <Links />
         </Grid>
       </Grid>

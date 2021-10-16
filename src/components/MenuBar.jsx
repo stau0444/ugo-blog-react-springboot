@@ -71,7 +71,7 @@ export default function MenuBar() {
   return (
     <>
       {/* <EndPoints isOpen={isOpen} /> */}
-      <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ flexGrow: 1  } }>
         <AppBar
           position="static"
           sx={{
