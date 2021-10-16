@@ -97,7 +97,8 @@ export default function MenuBar() {
                 flexGrow: 1,
                 display: { xs: "block", sm: "none" },
                 fontWeight: "bold",
-                marginBottom:"5px"
+                marginBottom:"5px",
+                fontSize:"3.8vw"
               }}
             >
               UGO's DEV BLOG
