@@ -98,7 +98,7 @@ export default function MenuBar() {
                 display: { xs: "block", sm: "none" },
                 fontWeight: "bold",
                 marginBottom:"5px",
-                fontSize:"3.8vw"
+                fontSize:"3vw"
               }}
             >
               UGO's DEV BLOG
