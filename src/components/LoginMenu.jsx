@@ -10,10 +10,29 @@ import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import { useState }  from 'react';
 import { Link } from 'react-router-dom';
+import { Login } from '@mui/icons-material';
+import FiberNewIcon from '@mui/icons-material/FiberNew';
+import LoginForm from './LoginForm';
+import { Button } from '@mui/material';
+import SignUpForm from './SignUpForm';
 
 export default function LoginMenu() {
+  const [isLogin , setIsLogin]  = useState(false);
+  const [openLogin , setOpenLogin] = useState(false);
+  const [openSignUp , setOpenSignUp] = useState(false);
+
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+  
+  const openLoginForm = () =>{
+    setAnchorEl(null);
+    setOpenLogin(true);
+  }
+
+  const openSignUpForm = () =>{
+    setAnchorEl(null);
+    setOpenSignUp(true);
+  }
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -22,7 +41,7 @@ export default function LoginMenu() {
   };
   return (
     <>
-      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+      <Box sx={{listStyle:"none", display: 'flex', alignItems: 'center', textAlign: 'center' }}>
         <Tooltip title="Account settings">
           <IconButton onClick={handleClick} size="small" sx={{ ml: 2 ,marginBottom:{xs:'5px',sm:'13px'}}}>
             <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
@@ -33,7 +52,6 @@ export default function LoginMenu() {
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
-        onClick={handleClose}
         PaperProps={{
           elevation: 0,
           sx: {
@@ -63,26 +81,47 @@ export default function LoginMenu() {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <MenuItem>
+      {isLogin?
+      <>
+        <MenuItem component="div" sx={{}}>
           <Avatar /> <Link to="/profile">프로필</Link>
         </MenuItem>
-        <MenuItem>
+        <MenuItem component="div">
           <Avatar /> <Link to="/my-account">회원 정보 변경</Link>
         </MenuItem>
         <Divider />
-        <MenuItem>
-          <ListItemIcon>
+        <MenuItem component="div">
+          <ListItemIcon >
             <Settings fontSize="small" />
           </ListItemIcon>
           <Link to="/logout">Setting</Link>
         </MenuItem>
-        <MenuItem>
+        <MenuItem component="div">
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>
           <Link to="/logout">Log-out</Link>
+        </MenuItem> 
+      </>
+      :
+      <>
+        <MenuItem component="div">
+          <ListItemIcon>
+            <Login fontSize="small" />
+          </ListItemIcon>
+          <Button onClick={openLoginForm}>로그인</Button>
         </MenuItem>
+        <MenuItem component="div">
+          <ListItemIcon>
+            <FiberNewIcon fontSize="small" />
+          </ListItemIcon>
+          <Button  onClick={openSignUpForm}>회원가입</Button>
+        </MenuItem>
+        </>
+      }
       </Menu>
+      {!isLogin&&openLogin?<LoginForm setOpenLogin={setOpenLogin}/>:""}
+      {!isLogin&&openSignUp?<SignUpForm setOpenSignUp={setOpenSignUp}/>:""}
     </>
   );
 }

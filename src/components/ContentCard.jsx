@@ -73,6 +73,7 @@ export default function ContentCard({keyword,content}) {
                 sx={{
                   marginTop: "10px",
                   maxHeight: 230,
+                  minHeight:230,
                   overflow: "hidden",
                 }}
               >

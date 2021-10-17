@@ -58,9 +58,10 @@ export default function SearchList({keyword,searchList,page,handlePageChange,tot
           }}
         >
           <Grid item xs={12} sx={{ textAlign: "center" }}>
-            <Typography variant="h4" sx={{color:'#777' ,margin:"20px"}}>
-              {highlightedText(`${keyword}에 대한 검색 결과입니다.`,keyword)}
+            <Typography variant="h4" sx={{color:'#777' ,margin:"20px auto",width:"90%"}}>
+              {highlightedText(`${keyword}에 대한 검색 결과 입니다.`,keyword)}
             </Typography>
+            <hr className="content-divider"/>
           </Grid>
           {searchList.loading ? (
             <Grid item xs={12} sx={{ width: "90%", padding: "0px 20px" }}>
