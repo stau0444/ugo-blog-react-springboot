@@ -149,7 +149,7 @@ export default function reducer(state = initialState , action) {
     }
 
     if(action.type === POST_CONTENT_SUCCESS){
-        return {resp:action.resp , loading:action.loading};
+        return {...initialState};
     }
     if(action.type === POST_CONTENT_FAIL){
         return {error:action.error , loading: action.loading};
@@ -160,7 +160,7 @@ export default function reducer(state = initialState , action) {
     }
 
     if(action.type === PUT_CONTENT_SUCCESS){
-        return {...state ,resp:action.resp};
+        return {...initialState};
     }
     if(action.type === PUT_CONTENT_FAIL){
         return {error:action.error};
@@ -170,7 +170,7 @@ export default function reducer(state = initialState , action) {
         return state;
     }
     if(action.type === DELETE_CONTENT_SUCCESS){
-        return {...state ,resp:action.resp};
+        return {...initialState};
     }
     if(action.type === DELETE_CONTENT_FAIL){
         return {...state,error:action.error};

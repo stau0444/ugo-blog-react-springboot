@@ -1,8 +1,8 @@
+import axios from "axios";
 import {useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ContentList from "../components/ContentList";
 import { getContentListStart, getContentListSuccess, getContentListFail, handlePageNum } from '../redux/moduels/contentList';
-import {contents } from "../sampleData";
 
 export default function ContentListContainer({category}) {
     const dispatch = useDispatch();
@@ -20,10 +20,9 @@ export default function ContentListContainer({category}) {
           async function getContentList(){
               try{
                 dispatch(getContentListStart())
-                const data = contents;
-                // const data = await axios.get(`/contents?keyword=${keyword?keyword:""}&page=${page}`);  
-                console.log('데이터 요청')
-                dispatch(getContentListSuccess(data,category,page,totalCount));      
+                const resp = await axios.get(`/api/contents?category=${category?category:""}&page=${page-1}&size=6`);  
+                console.log('all resp' , resp)
+                dispatch(getContentListSuccess(resp.data.content,category,page,resp.data.totalElements));      
               }catch(error){
                   dispatch(getContentListFail(error));
               }

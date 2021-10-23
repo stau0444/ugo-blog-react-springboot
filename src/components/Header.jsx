@@ -1,10 +1,21 @@
 import MenuBar from './MenuBar';
 import Links from './Links';
-import { Box, Grid, Typography } from '@mui/material';
+import { Box, Grid, styled, Typography } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
 import HomeIcon from '@mui/icons-material/Home';
 import { Link } from 'react-router-dom';
+
+export const Logo = styled(Typography)`
+    font-family: 'Righteous', cursive;
+    font-size: "60px";
+    font-weight: bold;
+    margin: 70px 0 30px 10px;
+    color: bisque;
+    z-index: 1;
+    padding:0;
+    border-bottom: 2px solid bisque;
+`
 
 export default function Header() {
     return (
@@ -13,22 +24,33 @@ export default function Header() {
           <MenuBar />
         </Grid>
         <Grid item xs={12}>
-          <Typography
+          <Box 
             className="logo"
-            variant="h2"
-            noWrap
-            component="div"
-            sx={{
-              fontFamily: "'Righteous', cursive",
-              display: { xs: "none", sm: "block" },
-              fontWeight: "bold",
-              margin: "70px 0 30px 10px",
-              color: "bisque",
-              zIndex: 1,
-            }}
+            sx={{ display: { xs: "none", sm: "block" },}}
           >
-            UGO's DEV BLOG
-          </Typography>
+            <Logo
+              className="logo"
+              component="span"
+              sx={{fontSize:'60px'}}
+            >
+              UGO's {""}
+            </Logo>
+            <Typography
+                component="span"
+                sx={{
+                  color: "royalblue",
+                  fontSize: "60px",
+                  borderBottom:"3px dashed royalblue",
+                  fontWeight: "bold",
+                  fontFamily: "'Righteous', cursive",
+                }}
+              >
+                DEV{" "}
+              </Typography>
+            <Logo component='span' sx={{margin:"0",fontSize:"60px"}}>
+              BLOG
+            </Logo>
+          </Box>
           <Box sx={{ width: "100%", position: "relative" }}>
             <Box
               component="div"
@@ -39,21 +61,15 @@ export default function Header() {
                 zIndex: "-1",
               }}
             >
-              <hr className="header-divider" />
-
-              {/* <hr className="header-divider" />
-              <hr className="header-divider" />
-              <hr className="header-divider" />  
-              <hr className="header-divider" />
-              <hr className="header-divider" />
-              <hr className="header-divider" />
-              <hr className="header-divider" />
-              <hr className="header-divider" /> */}
             </Box>
           </Box>
           <Grid
             item
-            sx={{ textAlign:"center" ,marginTop:{xs:'50px'},display: {xs: "block", sm: "none" } }}
+            sx={{
+              textAlign: "center",
+              marginTop: { xs: "50px" },
+              display: { xs: "block", sm: "none" },
+            }}
           >
             <Link to="/">
               <HomeIcon
@@ -100,7 +116,7 @@ export default function Header() {
             </a>
           </Grid>
         </Grid>
-        {/* <img className="logo" src="/logo_transparent.png" alt="logo"  /> */}
+        <hr className="header-divider" />
         <Grid item xs={12} sx={{ margin: { xs: "0 auto", sm: "20px 0px" } }}>
           <Links />
         </Grid>

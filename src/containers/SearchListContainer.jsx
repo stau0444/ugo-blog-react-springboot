@@ -1,8 +1,8 @@
+import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch, useSelector} from "react-redux";
 import SearchList from "../components/SearchList";
 import { getSearchListFail, getSearchListStart, getSearchListSuccess, handlePageNum } from "../redux/moduels/searchList";
-import {contents} from '../sampleData'
 
 
 export default function SearchListContainer({keyword}) {
@@ -17,21 +17,16 @@ export default function SearchListContainer({keyword}) {
     };
 
     useEffect(()=>{
-      // if(searchList.keyword !== keyword){
-      //   dispatch(handlePageNum(1))
-      // }
       const getSearchList= () => {
         async function getSearchList(){
             try{
               dispatch(getSearchListStart());
-              const data = contents;
-              const totalCount = 30;
-              console.log("data 요청")
-              // const data = await axios.get(`/contents?keyword=${keyword?keyword:""}&page=${page}`);  
-              if(data.length === 0){
+              const resp = await axios.get(`/api/content/search?keyword=${keyword?keyword:""}&page=${page-1}&size=6`);  
+              console.log('resp' , resp);
+              if(resp.data.length === 0){
                 throw new Error(keyword+"로 검색된 결과가 없습니다.")
               }
-              dispatch(getSearchListSuccess(data,keyword,page,totalCount));      
+              dispatch(getSearchListSuccess(resp.data.content,keyword,page,resp.data.totalElements));      
             }catch(error){
                 dispatch(getSearchListFail(error));
             }

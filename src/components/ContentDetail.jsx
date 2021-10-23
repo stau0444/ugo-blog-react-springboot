@@ -4,7 +4,6 @@ import CodeBlock from "./CodeBlock";
 import ContentDetailLoading from "./ContentDetailLoading";
 
 export default function ContentDetail({content,loading,deleteContent}) {
-    console.log('content' , content)
     return(
         <Grid container>
             <Grid item xs={12} >

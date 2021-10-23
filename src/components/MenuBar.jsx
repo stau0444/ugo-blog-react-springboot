@@ -12,6 +12,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
 import HomeIcon from '@mui/icons-material/Home';
 import { Link } from 'react-router-dom';
+import { Logo } from './Header';
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -70,60 +71,112 @@ export default function MenuBar() {
 
   return (
     <>
-      {/* <EndPoints isOpen={isOpen} /> */}
-      <Box sx={{ flexGrow: 1  } }>
+      <Box sx={{flexGrow: 1 }}>
         <AppBar
           position="static"
           sx={{
             zIndex: 1,
             backgroundColor: "transparent",
             background: "#23ca98ef",
-            height: '55px',
-            width: "96%",
+            height: "55px",
+            width: "94%",
             borderRadius: "20px",
             position: "fixed",
             top: 5,
-            left: "2%",
-            right: "2%",
+            left: "3%",
+            right: "3%",
           }}
         >
           <Toolbar sx={{justifyContent:"flex-end"}}>
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
+            <Box
               sx={{
-                fontFamily: "'Righteous', cursive",
-                flexGrow: 1,
                 display: { xs: "block", sm: "none" },
-                fontWeight: "bold",
-                marginBottom:"5px",
-                fontSize:"3.2vw",
                 margin:"0 auto",
+                marginBottom:"7px",
               }}
             >
-              UGO's DEV BLOG
-            </Typography>
-            <Box  sx={{display:{xs:"none",sm:"block"},marginBottom:"6px",position:"absolute",left:40}}>
+              <Logo
+                component="span"
+                sx={{
+                  fontSize: "3.2vw",
+                  color: "white",
+                  borderBottom: "2px solid white",
+                }}
+              >
+                UGO's {""}
+              </Logo>
+              <Typography
+                component="span"
+                sx={{
+                  fontSize: "3.2vw",
+                  color: "royalblue",
+                  borderBottom: "3px dashed royalblue",
+                  fontWeight: "bold",
+                  fontFamily: "'Righteous', cursive",
+                }}
+              >
+                DEV{" "}
+              </Typography>
+              <Logo
+                component="span"
+                sx={{
+                  fontSize: "3.2vw",
+                  borderBottom: "2px solid white",
+                  margin: "0",
+                  color: "white",
+                }}
+              >
+                BLOG
+              </Logo>
+            </Box>
+            <Box
+              sx={{
+                display: { xs: "none", sm: "block" },
+                fontSize: { xs: "2.0vw", sm: "3.2vw" },
+                marginBottom: "6px",
+                position: "absolute",
+                left: 40,
+              }}
+            >
               <Link to="/">
-                <HomeIcon fontSize="large" sx={{color:'white', marginRight:"10px"}}/>
+                <HomeIcon
+                  fontSize="large"
+                  sx={{ color: "white", marginRight: "10px" }}
+                />
               </Link>
-              <a href="https://github.com/stau0444" style={{color:'white'}}>
-                <GitHubIcon fontSize="large" sx={{marginRight:"10px"}}/>
+              <a href="https://github.com/stau0444" style={{ color: "white" }}>
+                <GitHubIcon fontSize="large" sx={{ marginRight: "10px" }} />
               </a>
-              <a href="https://github.com/stau0444" style={{color:'white'}}>
-                <PermContactCalendarIcon fontSize="large" sx={{marginRight:"10px" }}/>
+              <a href="https://github.com/stau0444" style={{ color: "white" }}>
+                <PermContactCalendarIcon
+                  fontSize="large"
+                  sx={{ marginRight: "10px" }}
+                />
               </a>
-              <a href="https://ugo04.tistory.com/" style={{color:'white'}}>
-                <svg xmlns="http://www.w3.org/2000/svg"style={{marginBottom:"3px",width:"32px" ,fill:"white"}} viewBox="0 0 459 459"><title>티스토리 로고</title><g><path d="M229.5,0C102.75,0,0,102.75,0,229.5S102.75,459,229.5,459,459,356.25,459,229.5,356.25,0,229.5,0ZM130.21,191.45a39.57,39.57,0,1,1,39.56-39.57A39.58,39.58,0,0,1,130.21,191.45ZM229.5,390a39.56,39.56,0,1,1,39.56-39.56A39.56,39.56,0,0,1,229.5,390Zm0-99.29a39.56,39.56,0,1,1,39.56-39.56A39.56,39.56,0,0,1,229.5,290.74Zm0-99.29a39.57,39.57,0,1,1,39.56-39.57A39.57,39.57,0,0,1,229.5,191.45Zm99.29,0a39.57,39.57,0,1,1,39.57-39.57A39.57,39.57,0,0,1,328.79,191.45Z"/></g></svg>
+              <a href="https://ugo04.tistory.com/" style={{ color: "white" }}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  style={{ marginBottom: "3px", width: "32px", fill: "white" }}
+                  viewBox="0 0 459 459"
+                >
+                  <title>티스토리 로고</title>
+                  <g>
+                    <path d="M229.5,0C102.75,0,0,102.75,0,229.5S102.75,459,229.5,459,459,356.25,459,229.5,356.25,0,229.5,0ZM130.21,191.45a39.57,39.57,0,1,1,39.56-39.57A39.58,39.58,0,0,1,130.21,191.45ZM229.5,390a39.56,39.56,0,1,1,39.56-39.56A39.56,39.56,0,0,1,229.5,390Zm0-99.29a39.56,39.56,0,1,1,39.56-39.56A39.56,39.56,0,0,1,229.5,290.74Zm0-99.29a39.57,39.57,0,1,1,39.56-39.57A39.57,39.57,0,0,1,229.5,191.45Zm99.29,0a39.57,39.57,0,1,1,39.57-39.57A39.57,39.57,0,0,1,328.79,191.45Z" />
+                  </g>
+                </svg>
               </a>
             </Box>
-            <Search sx={{width:{xs:"45%",sm:"45%"},marginBottom:{xs:'4px',sm:'10px'}}}>
+            <Search
+              sx={{
+                width: { xs: "45%", sm: "45%" },
+                marginBottom: { xs: "4px", sm: "10px" },
+              }}
+            >
               <SearchIconWrapper>
                 <SearchIcon />
               </SearchIconWrapper>
               <StyledInputBase
-                sx={{width:"100%"}}
+                sx={{ width: "100%" }}
                 ref={searchKeywordInput}
                 placeholder="글 검색"
                 inputProps={{

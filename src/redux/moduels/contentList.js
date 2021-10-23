@@ -74,7 +74,6 @@ export default function reducer(state = initialState , action) {
     }
 
     if(action.type === GET_CONTENT_LIST_SUCCESS){
-        console.log(action)
         return {
           category: action.category,
           page:  action.page,

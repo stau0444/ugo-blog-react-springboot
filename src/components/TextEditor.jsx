@@ -4,10 +4,6 @@ import {Grid} from "@mui/material";
 import ContentFormContainer from '../containers/ContentFormContainer';
 import ContentUpdateFormContainer from '../containers/ContentUpdateFormContainer';
 
-/*todo
-  redux로 state 전환
-*/
-
 export default function TextEditor({isUpdate}) {
   const [isOpen, setIsOpen] = useState(false);
     return (

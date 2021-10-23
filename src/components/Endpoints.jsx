@@ -7,12 +7,12 @@ const StyledBtn = styled(Button)`
 `
 export default function EndPoints({isOpen}) {
     return(
-        <Box sx={{textAlign:"center" , backgroundColor:'white' , display:(isOpen?"":"none")}}>
+        <Box sx={{textAlign:"center" , backgroundColor:'white'}}>
             <Link to="/"><StyledBtn>/</StyledBtn></Link> 
             <Link to="/content"><StyledBtn>/content</StyledBtn></Link>
             <Link to="/content"><StyledBtn>/content/(id)</StyledBtn></Link>
             <Link to="/contents/{keyowrd}" ><StyledBtn>/contents/(category)</StyledBtn></Link>
-            <Link to="/content/add" ><StyledBtn>/content/add</StyledBtn></Link>
+            <Link to="/add-content" ><StyledBtn>/content/add</StyledBtn></Link>
             <Link to="/test" ><StyledBtn>/test</StyledBtn></Link>
         </Box>
     );

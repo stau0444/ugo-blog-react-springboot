@@ -1,6 +1,5 @@
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Chip, Grid, Stack } from '@mui/material';
 import Divider from '@mui/material/Divider';
@@ -9,21 +8,17 @@ import { highlightedText } from './SearchList';
 
 export default function ContentCard({keyword,content}) {
   return (
-    <Button
-      sx={{
-        borderRadius: "20px",
-        width: { xs: "100%" },
-      }}
-    >
+   
       <Link to={"/content/" + JSON.stringify(content.id)}>
         <Card
           className="content-card"
           sx={{
+            textAlign:"center",
             width: "90%",
             borderRadius: "20px",
             color: "bisque",
             minWidth: 275,
-            margin: "5px auto",
+            margin: "10px auto",
             padding: "0 10px",
             fontFamily: "'Nunito', sans-serif",
             boxShadow: "0px 0px 0px 0px rgba(5, 5, 20, 0.452)",
@@ -61,9 +56,10 @@ export default function ContentCard({keyword,content}) {
               <Grid item sm={4} xs={12}>
                 <img
                   className="content-img"
-                  src={content.imgLink}
+                  src={content.imageUrl}
                   alt=""
                   width="100%"
+                  height="100%"
                 />
               </Grid>
               <Grid
@@ -77,7 +73,7 @@ export default function ContentCard({keyword,content}) {
                   overflow: "hidden",
                 }}
               >
-                <Typography>
+                <Typography sx={{fontSize:"14px" ,fontFamily:"'Nanum Gothic', sans-serif" }}>
                   {keyword
                     ? highlightedText(content.description, keyword)
                     : content.description}
@@ -91,20 +87,24 @@ export default function ContentCard({keyword,content}) {
                   alignItems="flex-end"
                   marginRight="10px"
                 >
-                  {content.tags.map((tag) => (
+                  {
+                  content.tags !== undefined 
+                  ? content.tags.map((tag) => (
                     <Chip
                       key={tag.id}
                       label={tag.tagName}
                       size="small"
                       color="success"
                     />
-                  ))}
+                  ))
+                  :
+                    ""
+                  }
                 </Stack>
               </Grid>
             </Grid>
           </CardContent>
         </Card>
       </Link>
-    </Button>
   );
 }

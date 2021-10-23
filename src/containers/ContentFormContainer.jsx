@@ -6,6 +6,7 @@ import {postContentFail, postContentStart, postContentSuccess } from "../redux/m
 import {resetContentTags } from "../redux/moduels/contentTags";
 import { useHistory } from "react-router";
 import AWS from "aws-sdk"
+import axios from "axios";
 
 
 /*
@@ -54,7 +55,7 @@ export const inputsNullCheck = (data) =>{
     }
   }
 
-export default function ContentFormContainer({isOpen,isUpdate,setIsOpen}) {
+export default function ContentFormContainer({isOpen,setIsOpen}) {
     
     const [image , setImage] = useState({file:null,imagePreviewUrl:'/logo_transparent.png'})
     const [title , setTitle] = useState('');
@@ -119,9 +120,8 @@ export default function ContentFormContainer({isOpen,isUpdate,setIsOpen}) {
                 }
                 dispatch(postContentStart())
                 //응답 데이터 
-                const resp = postData;
-                console.log(resp);
-                // const resp = await axios.post("www.naver.com",data);
+                // const resp = postData;
+                const resp = await axios.post("/api/content",postData);
                 dispatch(postContentSuccess(resp));
                 uploadToS3(image);
                 resetInputValues();

@@ -12,5 +12,6 @@ export default function Footer() {
         <StyledFooter>
             <Typography variat="p" sx={{fontWeight:'bold'}}>Copyright &copy; 2021 UGO.</Typography>
         </StyledFooter>
+        
     );
 }

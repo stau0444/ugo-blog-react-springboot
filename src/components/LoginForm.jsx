@@ -1,12 +1,17 @@
 import "../Form.scss";
 import LoginIcon from '@mui/icons-material/Login';
-import { Label } from "@mui/icons-material";
 import { CloseBtn, Container, CustomModal, FindPwd, FormBtn, FormCancelBtn, FormInput, FormLogo, ImgContainer, InputLabel, ModalContent } from "../FormComponents";
 import { Link } from "react-router-dom";
+import { Box } from "@mui/material";
+import { useRef } from "react";
 
 
 
 export default function LoginForm({setOpenLogin}) {
+    const rememberMeRef = useRef();
+    const handleRememberMe = (e) => {
+      console.log(rememberMeRef.current.value)
+    }
     const handleDisplay= () => {
          setOpenLogin(false);
          document.getElementById('id01').style.display='none';
@@ -45,9 +50,14 @@ export default function LoginForm({setOpenLogin}) {
                 name="psw"
                 required
               />
-              <FormBtn type="submit">Login</FormBtn>
+              <Box sx={{margin:'20px 0px'}}>
+                <FormBtn color="royalblue"type="submit">로그인</FormBtn>
+                <FormBtn type="submit">네이버 로그인</FormBtn>
+                <FormBtn color="gold" type="submit">카카오 로그인</FormBtn>
+              </Box>
               <InputLabel>
-                <input type="checkbox" checked="checked" name="remember" />
+              
+                <input ref={rememberMeRef}type="checkbox"  name="remember" onChange={handleRememberMe}/>
                 자동 로그인
               </InputLabel>
             </Container>

@@ -13,7 +13,7 @@ export const highlightedText = (text, query) => {
       <>
         {parts.map((part, index) =>
           part === query ? (
-            <span class="highlighted-text"key={index}>{part}</span>
+            <span className="highlighted-text" key={index}>{part}</span>
           ) : (
             part
           ),
@@ -71,9 +71,9 @@ export default function SearchList({keyword,searchList,page,handlePageChange,tot
               <LoadingAnimation />
             </Grid>
           ) : (
-            searchList.data.map((content) => (
-              <Grid key={content.id} item xs={12} md={6} lg={4}>
-                <ContentCard keyword={keyword} content={content} />
+            searchList.data.map((content,index) => (
+              <Grid key={index} item  xs={12} md={6} lg={4}>
+                <ContentCard  key={index} keyword={keyword} content={content} />
               </Grid>
             ))
           )}

@@ -1,22 +1,23 @@
 import { styled } from "@mui/material"
 
 export const CustomModal = styled("div")`
-  display: block; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  display: block; 
+  position: fixed; 
+  z-index: 1; 
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  width: 100%; 
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0,0.4);
   padding-top: 60px;
 `
 
 export const FormBtn = styled('button')`
   background-color: ${props => props.color?props.color:'#04AA6D'};
   border-radius: 20px;
+  font-weight: bold;
   color: white;
   padding: 14px 20px;
   margin: ${props => props.margin?props.margin:'8px 0'};
@@ -25,6 +26,10 @@ export const FormBtn = styled('button')`
   width: 100%;
     &:hover{
         opacity: 0.8;
+    }
+    & img{
+      width:25px;
+      margin-left: 5px;
     }
 `
 
@@ -36,7 +41,7 @@ export const FormCancelBtn = styled(FormBtn)`
 `
 
 export const FormInput = styled("input")`
-  width: 100%;
+  width: ${props => props.width?props.width:"100%"};
   border-radius: 20px;
   padding: 12px 20px;
   margin: 5px 0;
@@ -55,7 +60,7 @@ export const InputLabel = styled('p')`
 export const FormLogo = styled('span')`
     color:black;
     font-weight:bold;
-    font-size : 20px;
+    font-size : 25px;
 `
 
 export const ImgContainer = styled('div')` 
@@ -77,7 +82,7 @@ export const FindPwd = styled('span')`
 export const ModalContent = styled('div')`
   border-radius: 20px;
   background-color: #fefefe;
-  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  margin: 5% auto 15% auto;
   border: 1px solid #888;
   width: 60%; 
 `

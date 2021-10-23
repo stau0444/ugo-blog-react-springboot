@@ -44,7 +44,6 @@ export default function TestContainer({content}) {
     }
     const fillImageFile = () => { 
         imgRef.current.files.item(1,image.file)
-        console.log('2',imgRef.current.files[0]);
     }
 
     useEffect(()=>{

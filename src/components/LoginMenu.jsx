@@ -39,6 +39,10 @@ export default function LoginMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const checkLogin = () => {
+    setIsLogin(true);
+  };
   return (
     <>
       <Box sx={{listStyle:"none", display: 'flex', alignItems: 'center', textAlign: 'center' }}>
@@ -82,7 +86,7 @@ export default function LoginMenu() {
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
       {isLogin?
-      <>
+      <div>
         <MenuItem component="div" sx={{}}>
           <Avatar /> <Link to="/profile">프로필</Link>
         </MenuItem>
@@ -102,9 +106,9 @@ export default function LoginMenu() {
           </ListItemIcon>
           <Link to="/logout">Log-out</Link>
         </MenuItem> 
-      </>
+      </div>
       :
-      <>
+      <div>
         <MenuItem component="div">
           <ListItemIcon>
             <Login fontSize="small" />
@@ -117,11 +121,12 @@ export default function LoginMenu() {
           </ListItemIcon>
           <Button  onClick={openSignUpForm}>회원가입</Button>
         </MenuItem>
-        </>
+      </div>
       }
       </Menu>
       {!isLogin&&openLogin?<LoginForm setOpenLogin={setOpenLogin}/>:""}
       {!isLogin&&openSignUp?<SignUpForm setOpenSignUp={setOpenSignUp}/>:""}
+      <Button sx={{display:"none"}} onClick={checkLogin}></Button>
     </>
   );
 }

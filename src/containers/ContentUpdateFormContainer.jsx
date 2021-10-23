@@ -5,6 +5,7 @@ import {putContentFail, putContentStart, putContentSuccess } from "../redux/modu
 import { useHistory } from "react-router";
 import ContentUpdateForm from '../components/ContentUpdateForm';
 import { inputsNullCheck, uploadToS3 } from './ContentFormContainer';
+import axios from 'axios';
 
 
 
@@ -26,7 +27,6 @@ export default function ContentUpdateFormContainer({isOpen,isUpdate,setIsOpen}) 
     const history = useHistory();
     const dispatch = useDispatch();
     const content = useSelector(state => state.contents);
-    
     useEffect(()=>{ 
       const getData = () => {
              setImage({file:null,imagePreviewUrl:content.imageUrl});
@@ -73,7 +73,7 @@ export default function ContentUpdateFormContainer({isOpen,isUpdate,setIsOpen}) 
             //DB에 저장되는 데이터
             const putData = {
                 title: title,
-                imageUrl: image.file?image.imagePreviewUrl:content.imageUrl ,
+                imageUrl: image.file?`https://ugo-blog-image-bucket.s3.ap-northeast-2.amazonaws.com/${image.file.name}`:content.imageUrl ,
                 description:description,
                 article: value,
                 tags: tags,
@@ -84,12 +84,9 @@ export default function ContentUpdateFormContainer({isOpen,isUpdate,setIsOpen}) 
                   return;
                 }
                 dispatch(putContentStart())
-                const resp = putData;
-                console.log(resp);
-                // const resp = await axios.put("www.naver.com",data);
+                const resp = await axios.put(`/api/content/${content.id}`,putData);
                 dispatch(putContentSuccess(resp));
                 if(image.file){
-                  setImage({file:null,imagePreviewUrl: `https://ugo-blog-image-bucket.s3.ap-northeast-2.amazonaws.com/${image.file.name}`})
                   uploadToS3(image);
                 }
                 history.push('/')
@@ -98,7 +95,7 @@ export default function ContentUpdateFormContainer({isOpen,isUpdate,setIsOpen}) 
             }
         }
         updateContent();
-    },[dispatch,title,image,value,tags,history,description,content.imageUrl]);
+    },[dispatch,title,image,value,tags,history,description,content.imageUrl,content.id]);
     
     return (
       <ContentUpdateForm
