@@ -78,6 +78,7 @@ export default function ContentUpdateFormContainer({isOpen,isUpdate,setIsOpen}) 
                 article: value,
                 tags: tags,
             };
+            console.log('putTags' , putData.tags);
             try{
                 const hasNull = inputsNullCheck(putData);
                 if(hasNull){
@@ -85,6 +86,7 @@ export default function ContentUpdateFormContainer({isOpen,isUpdate,setIsOpen}) 
                 }
                 dispatch(putContentStart())
                 const resp = await axios.put(`/api/content/${content.id}`,putData);
+                console.log('contentId' , content.id)
                 dispatch(putContentSuccess(resp));
                 if(image.file){
                   uploadToS3(image);

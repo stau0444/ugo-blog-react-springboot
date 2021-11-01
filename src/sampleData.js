@@ -5,7 +5,7 @@ export const tagList = [
     },
     {
         id: 2,
-        tagName: "JAVASCIPT",
+        tagName: "JAVASCRIPT",
     },
     {
         id: 3,

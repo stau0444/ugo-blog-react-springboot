@@ -1,6 +1,6 @@
 import {Grid} from "@mui/material";
 import ContentCard from './ContentCard';
-import LoadingAnimation from './LoadingAnimation';
+import LoadingSkeleton from "./LoadingSkeleton";
 import Pagenator from "./Pagenator";
 
 export default function ContentList({
@@ -24,14 +24,14 @@ export default function ContentList({
       >
         {contentList.loading ? (
           <Grid item xs={12} sx={{ width: "90%", padding: "0px 20px" }}>
-            <LoadingAnimation />
-            <LoadingAnimation />
-            <LoadingAnimation />
-            <LoadingAnimation />
+            <LoadingSkeleton />
+            <LoadingSkeleton />
+            <LoadingSkeleton />
+            <LoadingSkeleton />
           </Grid>
         ) : (
           contentList.data.map((content) => (
-            <Grid key={content.id} item xs={12} md={6} lg={4}>
+            <Grid key={content.id} item xs={12}  md={contentList.data.length !== 1 ? 6 : 12} lg={contentList.data.length !== 1 ? 4 : 12}>
               <ContentCard content={content} />
             </Grid>
           ))

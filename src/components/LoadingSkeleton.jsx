@@ -2,7 +2,7 @@ import { Skeleton, Typography } from "@mui/material";
 import Box from '@mui/material/Box';
 import  Avatar from '@mui/material/Avatar';
 
-export default function LoadingAnimation() {
+export default function LoadingSkeleton() {
   return (
       <div style={{border:'1px solid bisque' ,padding:"5px 15px 15px 15px" ,borderRadius:'20px',margin:'20px 0'}}>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>

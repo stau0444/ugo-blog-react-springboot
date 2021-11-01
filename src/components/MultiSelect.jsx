@@ -42,7 +42,7 @@ export default function MultiSelect({isUpdate,tags,savedTags}) {
   },[savedTags,dispatch,store])
 
   const handleChange = (e) => {
-    e.preventDefault()
+    console.log(e.target.value)
     if(e.target.value.length > 3 ){
         alert("tag는 3개까지 추가할 수 있습니다.")
         return;
@@ -59,7 +59,7 @@ export default function MultiSelect({isUpdate,tags,savedTags}) {
       <Typography variant="p" sx={{color:'#1976d2' ,fontSize:"12px" ,border:"1px solid #1976d2" ,padding:'4px' ,borderRadius:'5px'}}>선택된 태그</Typography>
       <Box sx={{height:'64px'}}>
         {selectedTags.map((tag)=>
-            <Chip key={tag.id} label={tag.tagName} size="small" color="success" sx={{margin:'20px 5px'}}/>
+            <Chip key={tag.id} label={tag} size="small" color="success" sx={{margin:'20px 5px'}}/>
         )}
       </Box>
       <FormControl sx={{ width: '70%',fontSize:'10px' ,color:'bisque' }}>
@@ -78,7 +78,7 @@ export default function MultiSelect({isUpdate,tags,savedTags}) {
                 <MenuItem
                 sx={{fontWeight:'large'}} 
                 key={tag.id}
-                value={tag}
+                value={tag.tagName}
                 style={getStyles(tag.tagName, selectedTags, theme)}
                 >
                   {tag.tagName}

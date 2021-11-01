@@ -1,6 +1,6 @@
 import { Grid, Typography } from "@mui/material"
 import ContentCard from "./ContentCard";
-import LoadingAnimation from "./LoadingAnimation";
+import LoadingSkeleton from "./LoadingSkeleton";
 import Pagenator from "./Pagenator";
 
 
@@ -26,66 +26,91 @@ export const highlightedText = (text, query) => {
 export default function SearchList({keyword,searchList,page,handlePageChange,totalCount}) {
     return (
       <>
-      {searchList.error?
-           <Grid container>
-              <Grid item
+        {searchList.error ? (
+          <Grid container>
+            <Grid
+              item
+              sx={{
+                width: "100%",
+                height: "200px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                border: "1px solid bisque",
+                borderRadius: "20px",
+                backgroundColor: "bisque",
+              }}
+            >
+              <Typography
+                variant="h4"
                 sx={{
-                  width: "100%",
-                  height: "200px",
-                  display:'flex',
-                  justifyContent:"center",
-                  alignItems:"center",
-                  border: "1px solid bisque",
-                  borderRadius: "20px",
-                  backgroundColor: "bisque",
+                  padding: "px",
+                  background: "#777",
+                  borderRadius: "15px",
+                  color: "bisque",
                 }}
               >
-                <Typography variant="h4" sx={{padding:'px' , background:"#777",borderRadius:"15px",color:"bisque" }}>
-                  {searchList.error}
-                </Typography>
-              </Grid>
+                {searchList.error}
+              </Typography>
             </Grid>
-          :
-        <Grid
-          container
-          sx={{
-            width: "100%",
-            margin: "0px auto",
-            padding: "10px 10px",
-            border: "1px solid bisque",
-            borderRadius: "20px",
-            backgroundColor: "bisque",
-          }}
-        >
-          <Grid item xs={12} sx={{ textAlign: "center" }}>
-            <Typography variant="h4" sx={{color:'#777' ,margin:"20px auto",width:"90%"}}>
-              {highlightedText(`${keyword}에 대한 검색 결과 입니다.`,keyword)}
-            </Typography>
-            <hr className="content-divider"/>
           </Grid>
-          {searchList.loading ? (
-            <Grid item xs={12} sx={{ width: "90%", padding: "0px 20px" }}>
-              <LoadingAnimation />
-              <LoadingAnimation />
-              <LoadingAnimation />
-              <LoadingAnimation />
+        ) : (
+          <Grid
+            container
+            sx={{
+              width: "100%",
+              margin: "0px auto",
+              padding: "10px 10px",
+              border: "1px solid bisque",
+              borderRadius: "20px",
+              backgroundColor: "bisque",
+            }}
+          >
+            <Grid item xs={12} sx={{ textAlign: "center" }}>
+              <Typography
+                variant="h4"
+                sx={{ color: "#777", margin: "20px auto", width: "90%" }}
+              >
+                {highlightedText(
+                  `${keyword}에 대한 검색 결과 입니다.`,
+                  keyword
+                )}
+              </Typography>
+              <hr className="content-divider" />
             </Grid>
-          ) : (
-            searchList.data.map((content,index) => (
-              <Grid key={index} item  xs={12} md={6} lg={4}>
-                <ContentCard  key={index} keyword={keyword} content={content} />
+            {searchList.loading ? (
+              <Grid item xs={12} sx={{ width: "90%", padding: "0px 20px" }}>
+                <LoadingSkeleton />
+                <LoadingSkeleton />
+                <LoadingSkeleton />
+                <LoadingSkeleton />
               </Grid>
-            ))
-          )}
-          <Grid item xs={12}>
-            <Pagenator
-              page={page}
-              totalCount={totalCount}
-              handlePageChange={handlePageChange}
-            />
+            ) : (
+              searchList.data.map((content, index) => (
+                <Grid
+                  key={index}
+                  item
+                  xs={12}
+                  md={searchList.data.length !== 1 ? 6 : 12}
+                  lg={searchList.data.length !== 1 ? 4 : 12}
+                >
+                  <ContentCard
+                    key={index}
+                    keyword={keyword}
+                    content={content}
+                  />
+                </Grid>
+              ))
+            )}
+            <Grid item xs={12}>
+              <Pagenator
+                page={page}
+                totalCount={totalCount}
+                handlePageChange={handlePageChange}
+              />
+            </Grid>
           </Grid>
-        </Grid>
-      }
+        )}
       </>
     );
 }

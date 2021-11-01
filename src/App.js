@@ -35,6 +35,13 @@ function App() {
         IdentityPoolId:'ap-northeast-2:f4eab593-5f5f-4e47-8b60-a45049ed7a5d',
     })
   })
+
+  const login = () =>{
+    console.log("login")
+    axios.get("/login");
+   
+  }
+
   return (
     <div className="App">
       <BrowserRouter>  
@@ -49,6 +56,7 @@ function App() {
         <Button sx={{border:"1px solid blue"}} onClick={testAPI}>API 테스트 버튼</Button>
         <Footer/>
         <EndPoints/>
+        <Button onClick={login}>로그인</Button>
       </BrowserRouter>
     </div>
 

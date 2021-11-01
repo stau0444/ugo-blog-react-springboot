@@ -89,10 +89,10 @@ export default function ContentCard({keyword,content}) {
                 >
                   {
                   content.tags !== undefined 
-                  ? content.tags.map((tag) => (
+                  ? content.tags.map((tag,index) => (
                     <Chip
-                      key={tag.id}
-                      label={tag.tagName}
+                      key={index}
+                      label={tag}
                       size="small"
                       color="success"
                     />

@@ -1,7 +1,7 @@
 import { Skeleton } from "@mui/material";
 import  Box  from '@mui/material/Box';
 
-export default function ContentDetailLoading() {
+export default function ContentDetailSkeleton() {
     return(
     <Box sx={{width:'100%', marginLeft:'8%'}}>
         <Skeleton sx={{width:'55%' ,height:"90px" ,marginBottom:'20px' ,marginTop:"20px"}}/>

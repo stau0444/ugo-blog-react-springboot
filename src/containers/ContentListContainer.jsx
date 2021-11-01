@@ -30,7 +30,7 @@ export default function ContentListContainer({category}) {
           getContentList();
         };
         getContentList();
-    },[category,dispatch,page,totalCount])
+    },[category,dispatch,page])
 
     return <ContentList totalCount={totalCount} page={page} handlePageChange={handlePageChange} contentList = {contentList}/>;
 }
