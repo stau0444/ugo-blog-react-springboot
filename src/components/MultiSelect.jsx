@@ -42,7 +42,6 @@ export default function MultiSelect({isUpdate,tags,savedTags}) {
   },[savedTags,dispatch,store])
 
   const handleChange = (e) => {
-    console.log(e.target.value)
     if(e.target.value.length > 3 ){
         alert("tag는 3개까지 추가할 수 있습니다.")
         return;

@@ -5,25 +5,6 @@ export default function TestContainer({content}) {
     const imgRef = useRef(null);
     const [image , setImage] = useState({file:null,imagePreviewUrl:""})
     
-    //text highlight 함수
-    // const highlightedText = (text, query) => {
-    //     if (query !== '' && text.includes(query)) {
-    //       const parts = text.split(new RegExp(`(${query})`, 'gi'));      
-    //       console.log('parts' , parts)
-    //       return (
-    //         <>
-    //           {parts.map((part, index) =>
-    //             part.toLowerCase() === query.toLowerCase() ? (
-    //               <mark key={index}>{part}</mark>
-    //             ) : (
-    //               part
-    //             ),
-    //           )}
-    //         </>
-    //       );
-    //     }
-    //     return text;
-    //   };
      //이미지 관리 함수
      const handleImageChange = (e)=>{
         e.preventDefault();

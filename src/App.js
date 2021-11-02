@@ -12,10 +12,6 @@ import AWS from "aws-sdk"
 import hljs from 'highlight.js';
 import Search from './pages/Search';
 import Footer from './components/Footer';
-import axios from 'axios';
-import EndPoints from './components/Endpoints';
-import { CSSTransition } from 'react-transition-group';
-import { TransitionGroup } from 'react-transition-group';
 
 
 hljs.configure({   // optionally configure hljs
@@ -35,28 +31,16 @@ function App() {
 
   return (
     <div className="App">
-      <Route render={({location}) => {
-          <TransitionGroup>
-          <CSSTransition
-            key={location.key}
-            timeout={1000}
-            classNames="page"
-          >
-            <Switch>  
-              <Header/>
-              <Route path="/contents/search/:keyword" exact component={Search}/>
-              <Route path="/contents/:category" exact component={Home}/>
-              <Route path="/content/update/:contentId" component={UpdateContent}/>
-              <Route path="/content/:contentId" exact component={Detail}/>
-              <Route path="/add-content"  exact component={AddContent}/>
-              <Route path="/test" exact component={Test}/>
-              <Route path="/" exact component={Home}/>  
-              <Footer/>
-              <EndPoints/>
-            </Switch>
-          </CSSTransition>
-        </TransitionGroup>
-      }}/>
+            <BrowserRouter>  
+                <Header/>
+                  <Route path="/contents/search/:keyword" exact component={Search}/>
+                  <Route path="/contents/:category" exact component={Home}/>
+                  <Route path="/content/update/:contentId" component={UpdateContent}/>
+                  <Route path="/content/:contentId" exact component={Detail}/>
+                  <Route path="/add-content"  exact component={AddContent}/>
+                  <Route path="/test" exact component={Test}/>
+                  <Route path="/" exact component={Home}/>  
+            </BrowserRouter>
     </div>
   );
 }
