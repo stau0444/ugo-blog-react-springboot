@@ -1,7 +1,7 @@
 import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.core.css';
 import './App.scss';
-import { Route, BrowserRouter, Switch } from 'react-router-dom';
+import { Route, BrowserRouter } from 'react-router-dom';
 import Header from './components/Header';
 import Home from './pages/Home';
 import AddContent from './pages/AddContent';
@@ -11,7 +11,6 @@ import Test from './pages/Test';
 import AWS from "aws-sdk"
 import hljs from 'highlight.js';
 import Search from './pages/Search';
-import Footer from './components/Footer';
 
 
 hljs.configure({   // optionally configure hljs

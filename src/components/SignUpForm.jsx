@@ -3,6 +3,8 @@ import LoginIcon from '@mui/icons-material/Login';
 import { CloseBtn, Container, CustomModal, FormBtn, FormInput, FormLogo, ImgContainer, InputLabel, ModalContent } from "../FormComponents";
 import { useRef, useState } from "react";
 import { Button, styled } from "@mui/material";
+import axios from "axios";
+import { useHistory } from "react-router";
 
 
 const UnverifedText = styled('p')`
@@ -19,22 +21,67 @@ const VerifedText = styled('p')`
 `
 
 export default function SignUpForm({setOpenSignUp}) {
+    
     const [pwdMatch,setPwdMatch] = useState(false);
     const [pwdRegMatch,setPwdRegMatch] = useState(false);
     const [isExistId,setIsExistId] = useState(false);
-    const [isClicked,setIsClicked] = useState(false);
+    const [isChecked,setIsChecked] = useState(false);
+    const [idRegMatch , setIdRegMatch] = useState(false);
     const userIdRef = useRef('')
     const pwdRef = useRef('')
     const pwdCheckRef = useRef('')
     const emailRef =useRef('')
     const pwdRegExp=  new RegExp(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/);
-    
+    const idRegExp = new RegExp(/^[A-za-z0-9]{5,15}$/);
+    const history = useHistory();
+    const handleSubmit = () => {
+      if(isExistId){
+        alert("이미 존재하는 아이디입니다.")
+        return;
+      }
+      if(!pwdMatch){
+        alert("비밀번호가 일치하지 않습니다.")
+        return;
+      }
+      if(!pwdRegMatch){
+        alert("비밀번호가 형식에 맞지 않습니다. 비밀번호는 특수문자 ,숫자를 포함한 7~15 글자 사이로 작성해주세요")
+        return;
+      }
+      if(!isChecked){
+        alert("중복확인이 필요합니다.");
+        return;
+      }
+      axios.post("/api/user",
+      {
+        userId:userIdRef.current.value,
+        password:pwdRef.current.value,
+        email:emailRef.current.value
+      });
+      setOpenSignUp(false);
+      alert("회원가입에 성공했습니다 로그인을 해주세요")
+      history.push("/")
+      
+    }
+
     const checkID = () =>{
       //중복확인 요청
-      setIsExistId(true);
-      setIsClicked(true);
+      axios.get(`/api/user/duplication-check?userId=${userIdRef.current.value}`)
+      .then((resp)=>{
+          setIsExistId(resp.data);
+          setIsChecked(true);
+      })
     }
     
+    //아이디 정규식 확인
+    const checkIdReg = () => {
+      setIsChecked(false);
+      if(!idRegExp.test(userIdRef.current.value)){
+        setIdRegMatch(false);
+      }else{
+        setIdRegMatch(true);
+      }
+    }
+    //비밀번호 정규식확인
     const checkPwd = () =>{
         if(!pwdRegExp.test(pwdRef.current.value)){
           setPwdRegMatch(false)
@@ -75,6 +122,7 @@ export default function SignUpForm({setOpenSignUp}) {
                 width="85%"
                 ref={userIdRef}
                 type="text"
+                onChange={checkIdReg}
                 className="signup-userid-input"
                 placeholder="Enter ID"
                 name="userId"
@@ -83,13 +131,20 @@ export default function SignUpForm({setOpenSignUp}) {
               <Button onClick={checkID}>중복확인</Button>
               {
               isExistId?
-                <UnverifedText sx={{display:(isClicked?"":"none")}}>
+                <UnverifedText sx={{display:(isChecked?"":"none")}}>
                   이미 존재하는 아이디 입니다.
                 </UnverifedText>
               :
-                <VerifedText sx={{display:(isClicked?"":"none")}}
-                  >사용가능한 아이디 입니다.
+                <VerifedText sx={{display:(isChecked?"":"none")}}>
+                  사용가능한 아이디 입니다.
                 </VerifedText>
+              }
+              {
+                !idRegMatch?
+                <UnverifedText>
+                  아이디는 5~15자 영문 또는 숫자로 조합으로 만들어주세요
+                </UnverifedText>
+                :""
               }
               <InputLabel>비밀번호</InputLabel>
               <FormInput
@@ -141,8 +196,7 @@ export default function SignUpForm({setOpenSignUp}) {
                 name="email"
                 required
               />
-              <FormBtn margin="20px 0" type="submit">가입</FormBtn>
-              
+              <FormBtn margin="20px 0" onClick={handleSubmit}>가입</FormBtn>
             </Container>
           </ModalContent>
         </CustomModal>

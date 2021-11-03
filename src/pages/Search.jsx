@@ -1,6 +1,4 @@
 import { useDispatch } from "react-redux";
-import { TransitionGroup } from "react-transition-group";
-import { CSSTransition } from "react-transition-group";
 import Footer from "../components/Footer";
 import PageTransition from "../components/PageTransition";
 import SearchListContainer from "../containers/SearchListContainer";
