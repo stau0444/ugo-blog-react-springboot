@@ -9,10 +9,10 @@ import LoginMenu from './LoginMenu';
 import { useRef } from 'react';
 import { useHistory } from 'react-router';
 import GitHubIcon from '@mui/icons-material/GitHub';
-import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
 import HomeIcon from '@mui/icons-material/Home';
 import { Link } from 'react-router-dom';
 import { Logo } from './Header';
+import ResumeModal from './ResumeModal';
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -147,12 +147,7 @@ export default function MenuBar() {
               <a href="https://github.com/stau0444" style={{ color: "white" }}>
                 <GitHubIcon fontSize="large" sx={{ marginRight: "10px" }} />
               </a>
-              <a href="https://github.com/stau0444" style={{ color: "white" }}>
-                <PermContactCalendarIcon
-                  fontSize="large"
-                  sx={{ marginRight: "10px" }}
-                />
-              </a>
+              <ResumeModal/>
               <a href="https://ugo04.tistory.com/" style={{ color: "white" }}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

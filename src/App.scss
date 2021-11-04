@@ -28,7 +28,7 @@ ul ,h2,h1,h3,h4,h5,p,a,div{
 
 .page-enter-active {
   opacity: 1;
-  transition: opacity 400ms ease-in-out;
+  transition: opacity 600ms ease-in-out;
 }
 
 .page-exit {
@@ -673,3 +673,7 @@ ul.pagination li a:hover, ul.pagination li a.active {
 
 
 
+.resume-skill-set{
+  width: 100%;
+  overflow: visible;
+}
