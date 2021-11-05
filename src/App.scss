@@ -677,3 +677,13 @@ ul.pagination li a:hover, ul.pagination li a.active {
   width: 100%;
   overflow: visible;
 }
+
+
+
+.resume-skills{
+  opacity: 0;
+  transition: opacity 2s;
+  &.active{
+    opacity: 1;
+  }
+}
