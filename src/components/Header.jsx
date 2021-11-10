@@ -5,51 +5,109 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
 import HomeIcon from '@mui/icons-material/Home';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import WbSunnyIcon from '@mui/icons-material/WbSunny';
+import NightsStayIcon from '@mui/icons-material/NightsStay';
+import { useDispatch, useSelector } from 'react-redux';
+import { handleTheme } from '../redux/moduels/nightMode';
+import { useEffect, useState } from 'react';
 
 export const Logo = styled(Typography)`
     font-family: 'Righteous', cursive;
     font-size: "60px";
     font-weight: bold;
-    margin: 70px 0 30px 10px;
-    color: bisque;
     z-index: 1;
     padding:0;
     border-bottom: 2px solid bisque;
 `
+const spring = {
+  type: "spring",
+  stiffness: 900,
+  damping: 50
+};
 
-export default function Header() {
+export default function Header() { 
+  //const toggleSwitch = () => setIsOn(!isOn);
+  const dispatch = useDispatch();
+  const isOn = useSelector(state=>state.nightMode)
+  const [logoColor,setLogoColor] = useState();
+  const [logoMidColor,setLogoMidColor] = useState();
+  const [iconColor, setIconColor] = useState();
+
+  useEffect(()=>{
+    const nightMode = () => {
+      setLogoColor("bisque")
+      setLogoMidColor("royalblue")
+      setIconColor("white")
+    }
+    const whiteMode = () => {
+      setLogoColor("rgb(55, 161, 13)")
+      setLogoMidColor("rgb(136, 145, 139)")
+      setIconColor("rgb(136, 145, 139)")
+    }
+    isOn?whiteMode():nightMode();
+  },[isOn,setLogoColor,setLogoMidColor])
+
+  const changeTheme = () =>{
+    dispatch(handleTheme())
+  }
+
     return (
       <Grid container>
         <Grid item xs={12}>
           <MenuBar />
         </Grid>
         <Grid item xs={12}>
-          <Box 
-            className="logo"
-            sx={{ display: { xs: "none", sm: "block" },}}
-          >
+          <Box className="logo" sx={{ display: { xs: "block"} }}>
             <Logo
               className="logo"
               component="span"
-              sx={{fontSize:'60px'}}
+              sx={{
+                margin:{xs:"70px 0 30px 0px",sm:"70px 0 30px 10px"},
+                fontSize: "60px",
+                color: logoColor,
+                borderBottomColor: logoColor,
+              }}
             >
               UGO's {""}
             </Logo>
             <Typography
-                component="span"
-                sx={{
-                  color: "royalblue",
-                  fontSize: "60px",
-                  borderBottom:"3px dashed royalblue",
-                  fontWeight: "bold",
-                  fontFamily: "'Righteous', cursive",
-                }}
-              >
-                DEV{" "}
-              </Typography>
-            <Logo component='span' sx={{margin:"0",fontSize:"60px"}}>
+              component="span"
+              sx={{
+                display: {xs:"block",sm:"inline"},
+                color: logoMidColor,
+                fontSize: "60px",
+                borderBottom: `3px dashed ${logoMidColor}`,
+                fontWeight: "bold",
+                fontFamily: "'Righteous', cursive",
+              }}
+            >
+              DEV{" "}
+            </Typography>
+            <Logo
+              component="span"
+              sx={{
+                margin: "0",
+                fontSize: "60px",
+                color: logoColor,
+                borderBottomColor: logoColor,
+              }}
+            >
               BLOG
             </Logo>
+            <Box sx={{position:{xs:"absolute"},top:"50px",right:"0px",margin: "0 20px", float: "right" }}>
+              <NightsStayIcon
+                fontSize="small"
+                sx={{ marginLeft: "4px", color: "black" }}
+              />
+              <WbSunnyIcon
+                fontSize="small"
+                sx={{ marginLeft: "20px", color: "white" }}
+              />
+              <div className="switch" data-isOn={isOn} onClick={changeTheme}>
+                <motion.div className="handle" layout transition={spring} />
+              </div>
+            </Box>
           </Box>
           <Box sx={{ width: "100%", position: "relative" }}>
             <Box
@@ -60,8 +118,7 @@ export default function Header() {
                 bottom: "0px",
                 zIndex: "-1",
               }}
-            >
-            </Box>
+            ></Box>
           </Box>
           <Grid
             item
@@ -74,7 +131,7 @@ export default function Header() {
             <Link to="/">
               <HomeIcon
                 fontSize="large"
-                sx={{ color: "white", marginRight: "10px" }}
+                sx={{ color: iconColor, marginRight: "10px" }}
               />
             </Link>
             <a
@@ -84,7 +141,7 @@ export default function Header() {
             >
               <GitHubIcon
                 fontSize="large"
-                sx={{ color: "white", marginRight: "10px" }}
+                sx={{ color: iconColor, marginRight: "10px" }}
               />
             </a>
             <a
@@ -94,7 +151,7 @@ export default function Header() {
             >
               <PermContactCalendarIcon
                 fontSize="large"
-                sx={{ color: "white", marginRight: "10px" }}
+                sx={{ color: iconColor, marginRight: "10px" }}
               />
             </a>
             <a
@@ -105,7 +162,7 @@ export default function Header() {
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                style={{ marginBottom: "2px", width: "32px", fill: "white" }}
+                style={{ marginBottom: "2px", width: "32px", fill: iconColor }}
                 viewBox="0 0 459 459"
               >
                 <title>티스토리 로고</title>
@@ -116,7 +173,7 @@ export default function Header() {
             </a>
           </Grid>
         </Grid>
-        <hr className="header-divider" />
+        <hr className="header-divider" data-isOn={isOn}/>
         <Grid item xs={12} sx={{ margin: { xs: "0 auto", sm: "20px 0px" } }}>
           <Links />
         </Grid>

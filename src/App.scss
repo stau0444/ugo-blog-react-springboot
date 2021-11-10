@@ -1,8 +1,9 @@
 html{
   background: rgb(32, 38, 45);
   margin: 0 auto;
-  
 }
+
+
 ul ,h2,h1,h3,h4,h5,p,a,div{
   list-style: none;
   margin: 0;
@@ -91,6 +92,12 @@ ul ,h2,h1,h3,h4,h5,p,a,div{
   width: 98%;
   height: 2px;
   background-color: tomato;
+  border: none;
+}
+.header-divider[data-isOn="true"]{
+  width: 98%;
+  height: 2px;
+  background-color: rgb(136, 145, 139);
   border: none;
 }
 .content-divider{
@@ -686,4 +693,30 @@ ul.pagination li a:hover, ul.pagination li a.active {
   &.active{
     opacity: 1;
   }
+}
+
+
+.switch {
+  width: 60px;
+  height: 8px;
+  background-color: rgba(22, 93, 245, 0.651);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 50px;
+  padding: 10px 5px;
+  cursor: pointer;
+}
+
+.switch[data-isOn="true"] {
+  justify-content: flex-end;
+  background-color: rgba(22, 93, 245, 0.651);
+}
+
+
+.handle {
+  width: 30px;
+  height: 22px;
+  background-color: white;
+  border-radius: 40px;
 }

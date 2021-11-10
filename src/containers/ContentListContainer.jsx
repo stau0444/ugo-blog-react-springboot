@@ -9,19 +9,19 @@ export default function ContentListContainer({category}) {
     const contentList = useSelector(state => state.contentList);
     const totalCount = useSelector(state => state.contentList.totalCount);
     const page = useSelector(state => state.contentList.page);
-    
+    const isOn = useSelector(state => state.nightMode);
     const handlePageChange = (page) => {
         dispatch(handlePageNum(page));
     };
 
-    
+
     useEffect(()=>{
         const getContentList= () => {
           async function getContentList(){
               try{
                 dispatch(getContentListStart())
-                const resp = await axios.get(`/api/contents?category=${category?category:""}&page=${page-1}&size=6`);  
-                dispatch(getContentListSuccess(resp.data.content,category,page,resp.data.totalElements));      
+                const resp = await axios.get(`/api/contents?category=${category?category:""}&page=${page-1}&size=6`);
+                dispatch(getContentListSuccess(resp.data.content,category,page,resp.data.totalElements));
               }catch(error){
                   dispatch(getContentListFail(error));
               }
@@ -29,7 +29,9 @@ export default function ContentListContainer({category}) {
           getContentList();
         };
         getContentList();
-    },[category,dispatch,page])
+    },[category,dispatch,page,isOn])
 
-    return <ContentList totalCount={totalCount} page={page} handlePageChange={handlePageChange} contentList = {contentList}/>;
+    return (
+        <ContentList totalCount={totalCount} page={page} handlePageChange={handlePageChange} contentList = {contentList}/>
+    )
 }

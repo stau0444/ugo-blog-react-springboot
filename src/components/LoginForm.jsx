@@ -1,20 +1,53 @@
 import "../Form.scss";
 import LoginIcon from '@mui/icons-material/Login';
 import { CloseBtn, Container, CustomModal, FindPwd, FormBtn, FormCancelBtn, FormInput, FormLogo, ImgContainer, InputLabel, ModalContent } from "../FormComponents";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Box } from "@mui/material";
 import { useRef } from "react";
+import { postLoginFail, postLoginStart, postLoginSuccess } from "../redux/moduels/login";
+import axios from "axios";
 
 
 
 export default function LoginForm({setOpenLogin}) {
     const rememberMeRef = useRef();
+    const userIdRef = useRef(); 
+    const pwdRef = useRef();
+    const history = useHistory();
+
     const handleRememberMe = (e) => {
       console.log(rememberMeRef.current.value)
     }
     const handleDisplay= () => {
          setOpenLogin(false);
          document.getElementById('id01').style.display='none';
+    }
+
+    const handleLogin =  () => {
+      async function handleLogin(){
+        try{
+          postLoginStart();
+          await axios.post("/api/user/login" , 
+          {
+            userId:userIdRef.current.value,
+            password:pwdRef.current.value
+          }).then(
+            resp=>{
+              const auth_token = resp.headers.auth_token;
+              const refresh_token = resp.headers.refresh_token;
+              localStorage.setItem("auth_token",'Bearer ' + auth_token);
+              localStorage.setItem("refresh_token",'Bearer ' + refresh_token);
+              setOpenLogin(false);
+              history.push("/")
+            }
+          );
+        
+          postLoginSuccess();
+        }catch(error){
+          postLoginFail(error);
+        }
+      }
+      handleLogin();
     }
     return (
       <div>        
@@ -28,7 +61,7 @@ export default function LoginForm({setOpenLogin}) {
               >
                 &times;
               </CloseBtn>
-              <FormLogo component="span">
+              <FormLogo component="button" >
                   로그인
               </FormLogo>
               <LoginIcon fontSize="small" sx={{color:"gray" ,marginLeft:"3px" , marginBottom:"-2px"}}/>
@@ -41,17 +74,19 @@ export default function LoginForm({setOpenLogin}) {
                 placeholder="Enter Username"
                 name="uname"
                 required
+                ref={userIdRef}
               />
             <InputLabel>비밀번호</InputLabel>
               <FormInput
                 className="login-pwd-input"
                 type="password"
                 placeholder="Enter Password"
-                name="psw"
+                name="pwd"
+                ref={pwdRef}
                 required
               />
               <Box sx={{margin:'20px 0px'}}>
-                <FormBtn color="royalblue"type="submit">로그인</FormBtn>
+                <FormBtn color="royalblue" onClick={handleLogin}>로그인</FormBtn>
                 <FormBtn type="submit">네이버 로그인</FormBtn>
                 <FormBtn color="gold" type="submit">카카오 로그인</FormBtn>
               </Box>

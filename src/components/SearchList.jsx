@@ -1,4 +1,5 @@
 import { Grid, Typography } from "@mui/material"
+import { AnimatePresence, motion } from "framer-motion";
 import ContentCard from "./ContentCard";
 import LoadingSkeleton from "./LoadingSkeleton";
 import Pagenator from "./Pagenator";
@@ -86,22 +87,33 @@ export default function SearchList({keyword,searchList,page,handlePageChange,tot
                 <LoadingSkeleton />
               </Grid>
             ) : (
-              searchList.data.map((content, index) => (
-                <Grid
-                  key={index}
-                  item
-                  xs={12}
-                  md={searchList.data.length !== 1 ? 6 : 12}
-                  lg={searchList.data.length !== 1 ? 4 : 12}
-                >
-                  <ContentCard
+          <AnimatePresence   initial={true}>
+              {searchList.data.map((content, index) => (
+                
+                  <Grid
                     key={index}
-                    keyword={keyword}
-                    content={content}
-                  />
-                </Grid>
-              ))
+                    item
+                    xs={12}
+                    md={searchList.data.length !== 1 ? 6 : 12}
+                    lg={searchList.data.length !== 1 ? 4 : 12}
+                  >
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                    >
+                      <ContentCard
+                        key={index}
+                        keyword={keyword}
+                        content={content}
+                      />
+                    </motion.div>
+                  </Grid>
+               
+              ))}
+            </AnimatePresence>
             )}
+            
             <Grid item xs={12}>
               <Pagenator
                 page={page}

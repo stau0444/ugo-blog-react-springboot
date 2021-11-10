@@ -35,13 +35,13 @@ export default function SearchListContainer({keyword}) {
       };
       getSearchList();
   },[keyword,dispatch,page])
-    return (
-      <SearchList
-        keyword={keyword}
-        totalCount={totalCount}
-        page={page}
-        searchList={searchList}
-        handlePageChange={handlePageChange}
-      />
+    return (      
+        <SearchList
+          keyword={keyword}
+          totalCount={totalCount}
+          page={page}
+          searchList={searchList}
+          handlePageChange={handlePageChange}
+        />
     );
 }
