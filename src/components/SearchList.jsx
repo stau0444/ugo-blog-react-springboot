@@ -1,5 +1,7 @@
 import { Grid, Typography } from "@mui/material"
 import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import ContentCard from "./ContentCard";
 import LoadingSkeleton from "./LoadingSkeleton";
 import Pagenator from "./Pagenator";
@@ -25,7 +27,17 @@ export const highlightedText = (text, query) => {
   return text;
 };
 export default function SearchList({keyword,searchList,page,handlePageChange,totalCount}) {
-    return (
+  const [listBgc,setListBgc] = useState();
+  const isOn = useSelector(state => state.nightMode);
+  useEffect(()=>{
+    console.log(isOn)
+    if(isOn){
+      setListBgc("#c9e0df")
+    }else{
+      setListBgc("#32323b")
+    }
+  },[isOn])  
+  return (
       <>
         {searchList.error ? (
           <Grid container>
@@ -37,9 +49,8 @@ export default function SearchList({keyword,searchList,page,handlePageChange,tot
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                border: "1px solid bisque",
                 borderRadius: "20px",
-                backgroundColor: "bisque",
+                backgroundColor: listBgc,
               }}
             >
               <Typography
@@ -64,13 +75,13 @@ export default function SearchList({keyword,searchList,page,handlePageChange,tot
               padding: "10px 10px",
               border: "1px solid bisque",
               borderRadius: "20px",
-              backgroundColor: "bisque",
+              backgroundColor: listBgc,
             }}
           >
             <Grid item xs={12} sx={{ textAlign: "center" }}>
               <Typography
                 variant="h4"
-                sx={{ color: "#777", margin: "20px auto", width: "90%" }}
+                sx={{ color: "bisque", margin: "20px auto", width: "90%" }}
               >
                 {highlightedText(
                   `${keyword}에 대한 검색 결과 입니다.`,

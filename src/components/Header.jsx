@@ -27,7 +27,6 @@ const spring = {
 };
 
 export default function Header() { 
-  //const toggleSwitch = () => setIsOn(!isOn);
   const dispatch = useDispatch();
   const isOn = useSelector(state=>state.nightMode)
   const [logoColor,setLogoColor] = useState();
@@ -142,6 +141,7 @@ export default function Header() {
               <GitHubIcon
                 fontSize="large"
                 sx={{ color: iconColor, marginRight: "10px" }}
+                alt="asd"
               />
             </a>
             <a

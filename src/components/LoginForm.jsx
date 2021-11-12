@@ -1,20 +1,28 @@
 import "../Form.scss";
 import LoginIcon from '@mui/icons-material/Login';
 import { CloseBtn, Container, CustomModal, FindPwd, FormBtn, FormCancelBtn, FormInput, FormLogo, ImgContainer, InputLabel, ModalContent } from "../FormComponents";
-import { Link, useHistory } from "react-router-dom";
-import { Box } from "@mui/material";
+import { Link } from "react-router-dom";
+import { Box, Button } from "@mui/material";
 import { useRef } from "react";
 import { postLoginFail, postLoginStart, postLoginSuccess } from "../redux/moduels/login";
 import axios from "axios";
+import { handleRequest } from "../Auth";
 
 
+const testBtnStyle ={
+  width:"50%",
+  color:"black",
+  top:"40px",
+  margin:"5px",
+  background: "rgba(231, 13, 13, 0.521);",
+  zIndex:"1",
+}
 
 export default function LoginForm({setOpenLogin}) {
     const rememberMeRef = useRef();
     const userIdRef = useRef(); 
     const pwdRef = useRef();
-    const history = useHistory();
-
+    
     const handleRememberMe = (e) => {
       console.log(rememberMeRef.current.value)
     }
@@ -23,25 +31,23 @@ export default function LoginForm({setOpenLogin}) {
          document.getElementById('id01').style.display='none';
     }
 
+    
     const handleLogin =  () => {
       async function handleLogin(){
         try{
           postLoginStart();
+          console.log("로그인 시도");
           await axios.post("/api/user/login" , 
           {
             userId:userIdRef.current.value,
             password:pwdRef.current.value
           }).then(
             resp=>{
-              const auth_token = resp.headers.auth_token;
-              const refresh_token = resp.headers.refresh_token;
-              localStorage.setItem("auth_token",'Bearer ' + auth_token);
-              localStorage.setItem("refresh_token",'Bearer ' + refresh_token);
-              setOpenLogin(false);
-              history.push("/")
+              const {auth_token,refresh_token} = resp.headers;
+              axios.defaults.headers.common['Authorization'] =  'Bearer '+auth_token;
+              localStorage.setItem("refresh_token" , refresh_token);
             }
-          );
-        
+          ).catch(error => console.log(error));
           postLoginSuccess();
         }catch(error){
           postLoginFail(error);
@@ -50,8 +56,12 @@ export default function LoginForm({setOpenLogin}) {
       handleLogin();
     }
     return (
-      <div>        
+      <div>   
         <CustomModal id="id01" className="modal">
+          <Box sx={{position:"fixed",right:0}}>
+            <Button onClick={""} sx={testBtnStyle}>logOut-Test-Btn</Button>
+            <Button onClick={()=>{handleRequest("/api/user/test")}} sx={testBtnStyle}>login-Test-Btn</Button>
+          </Box> 
           <ModalContent className="modal-content animate">
             <ImgContainer className="imgcontainer">
               <CloseBtn

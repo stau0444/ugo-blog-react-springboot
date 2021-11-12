@@ -1,5 +1,7 @@
 import {Grid} from "@mui/material";
 import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import ContentCard from './ContentCard';
 import LoadingSkeleton from "./LoadingSkeleton";
 import Pagenator from "./Pagenator";
@@ -10,6 +12,16 @@ export default function ContentList({
   page,
   handlePageChange,
 }) {
+  const [listBgc,setListBgc] = useState();
+  const isOn = useSelector(state => state.nightMode);
+  useEffect(()=>{
+    console.log(isOn)
+    if(isOn){
+      setListBgc("#c9e0df")
+    }else{
+      setListBgc("#34343a")
+    }
+  },[isOn])
   return (
     <>
       <Grid
@@ -17,9 +29,9 @@ export default function ContentList({
         sx={{
           width: "100%",
           margin: "0px auto",
-          padding: "10px 10px",
+          padding: "12px 12px",
           borderRadius: "20px",
-          backgroundColor: "bisque",
+          backgroundColor: listBgc,
         }}
       >
         {contentList.loading ? (
@@ -32,7 +44,7 @@ export default function ContentList({
         ) : (
           <AnimatePresence exitBeforeEnter  initial={true}>
             {contentList.data.map((content) => (
-                <Grid key={content.id} item xs={12}  md={contentList.data.length !== 1 ? 6 : 12} lg={contentList.data.length !== 1 ? 4 : 12}>
+                <Grid key={content.id} item xs={12}  md={contentList.data.length !== 1 ? 6 : ""} lg={contentList.data.length !== 1 ? 4 : ""}>
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -41,7 +53,6 @@ export default function ContentList({
                     <ContentCard content={content} />
                   </motion.div>
                 </Grid>
-              
             ))}
           </AnimatePresence>
         )}
@@ -50,5 +61,5 @@ export default function ContentList({
         </Grid>
       </Grid>
     </>
-  );
+  )
 }

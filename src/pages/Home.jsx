@@ -13,7 +13,7 @@ export default function Home({match,location}) {
     dispatch(resetContentListState());
     return(
         <>
-            <ContentListContainer category = {category}/> ;
+            <ContentListContainer category = {category}/> 
             <Footer/>
         </>
         );    

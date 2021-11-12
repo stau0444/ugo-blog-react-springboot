@@ -12,6 +12,7 @@ export default function ContentDetail({content,loading,deleteContent}) {
                 :
                 <>
                     <Typography variant='h2' sx={{width:'85%',margin:'10px auto',fontWeight:'',color:'#1976d2'}}>{content.title}</Typography>
+                    <hr style={{width:"90%"}}/>
                     <Typography variant='strong' sx={{width:'85%',margin:'20px auto' ,display:'block',color:'#1976d2'}}>{content.createdAt}</Typography>
                     <Typography variant='strong' sx={{width:'85%',margin:'20px auto' ,display:'block',color:'#1976d2'}}></Typography>
                     <Grid item  xs={12} className="content-tags" sx={{width:'87%',margin:'20px auto' ,display:'block'}}>

@@ -5,36 +5,43 @@ import { Chip, Grid, Stack } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import { Link } from 'react-router-dom';
 import { highlightedText } from './SearchList';
+import { useSelector } from 'react-redux';
 
 export default function ContentCard({keyword,content}) {
+  const nightMode = useSelector(state => state.nightMode);
   return (
-   
       <Link to={"/content/" + JSON.stringify(content.id)}>
         <Card
           className="content-card"
           sx={{
             textAlign:"center",
             width: "90%",
-            borderRadius: "20px",
-            color: "bisque",
+            borderRadius: "15px",
+            color: nightMode?"#746d6cfd":"bisque",
             minWidth: 275,
             margin: "10px auto",
             padding: "0 10px",
-            fontFamily: "'Nunito', sans-serif",
-            boxShadow: "0px 0px 0px 0px rgba(5, 5, 20, 0.452)",
-            background:
-              "linear-gradient(to right bottom, rgb(0, 127, 255), rgb(0, 89, 178) 120%);",
+            boxShadow: "10px 10px 20px rgba(0, 0, 0, 0.39)",
+            background:"rgba(255,255,255,0.1)",
+            borderTop:"1px solid rgba(255,255,255,0.5)",
+            borderLeft:"1px solid rgba(255,255,255,0.5)",
+            backdropFilter:"blur(5)",
+            // "linear-gradient(to right bottom, #ff00d4, rgb(0, 89, 178) 120%);",
             "&:hover": {
               background:
-                "linear-gradient(to right bottom, rgba(255, 0, 55, 0.644), rgb(0, 89, 178) 120%);",
+               nightMode ?
+               "linear-gradient(to right bottom, rgba(116, 196, 162, 0.952), whitesmoke 120%);"
+                :
+                "linear-gradient(to right bottom, rgba(0, 128, 255, 0.781), rgb(81, 87, 94) 120%);"
+              ,
               transition: "all 0.1s linear",
-              width: "91%",
+              width: "90%",
               boxShadow: "3px 3px 1px 0px rgba(5, 5, 20, 0.726)",
-              color:"white"
+              color:nightMode?"#020611fb":"bisque"
             },
           }}
         >
-          <CardContent sx={{ padding: "20px 0" }}>
+          <CardContent sx={{ padding: "20px 10px" }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <Typography
@@ -42,8 +49,8 @@ export default function ContentCard({keyword,content}) {
                   component="div"
                   sx={{
                     fontWeight: "bold",
-                    color: "#ecd6d4",
-                    fontFamily: "'Gowun Batang', serif",
+                    color: nightMode?"#22ad96":"bisque",
+                    fontFamily: "'Gowun Batang'",
                     margin: "0 0 10px 0",
                   }}
                 >
@@ -51,7 +58,7 @@ export default function ContentCard({keyword,content}) {
                     ? highlightedText(content.title, keyword)
                     : content.title}
                 </Typography>
-                <Divider color="white" />
+                <Divider color={nightMode?"darkgray":"bisque"}/>
               </Grid>
               <Grid item sm={4} xs={12}>
                 <img
@@ -69,11 +76,11 @@ export default function ContentCard({keyword,content}) {
                 sx={{
                   marginTop: "10px",
                   maxHeight: 230,
-                  minHeight:230,
+                  minHeight:190,
                   overflow: "hidden",
                 }}
               >
-                <Typography sx={{fontSize:"14px" ,fontFamily:"'Nanum Gothic', sans-serif" }}>
+                <Typography sx={{fontWeight:"450",color:nightMode?"#6b4f03":"#ecebea",fontSize:"14px" ,fontFamily:"" }}>
                   {keyword
                     ? highlightedText(content.description, keyword)
                     : content.description}

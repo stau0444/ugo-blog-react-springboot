@@ -74,8 +74,7 @@ ul ,h2,h1,h3,h4,h5,p,a,div{
   padding: 0 20px 20px 20px;
   position: relative; /* 추후 박스 하단에 추가 버튼을 위치시키기 위한 설정 */
   border-radius: 16px;
-  box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.04);
-  
+  box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.658);
   margin: 0 auto; /* 페이지 중앙에 나타나도록 설정 */
 
   margin-top: 32px;
@@ -141,34 +140,19 @@ ul ,h2,h1,h3,h4,h5,p,a,div{
 
 // 콘텐츠 카드 hover 효과
 .content-card {
-  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.664);
-  display: block;
-  top: 0px;
-  background-color: #f2f8f9;
-  border-radius: 4px;
-  margin:auto;
-  overflow: hidden;
-  border: 1px solid #f2f8f9;
+
   
   .content-img{
     max-width: 178px;
     border-radius: 20px;
     box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.664);
   }
-  
-
-  &:hover {
-    border: 1px solid #00838d;
-    z-index: 500;
-    transition: width 0.1s linear;
-    width: 92%;
-  }
 }
 
 // 인풋 전역ㄴ
 .text-editor{
   padding:20px 0;
-  border: 1px solid bisque;
+  border: 1px solid smoke;
   border-radius: 20px;
 }
 // 미리보기 뷰
@@ -720,3 +704,4 @@ ul.pagination li a:hover, ul.pagination li a.active {
   background-color: white;
   border-radius: 40px;
 }
+

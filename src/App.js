@@ -11,10 +11,11 @@ import Test from './pages/Test';
 import AWS from "aws-sdk"
 import hljs from 'highlight.js';
 import Search from './pages/Search';
-import { Button} from '@mui/material';
-import axios from 'axios';
+import { Box, Button} from '@mui/material';
 import { useEffect} from 'react';
 import { useSelector } from 'react-redux';
+import { handleRequest } from './Auth';
+import axios from 'axios';
 
 
 hljs.configure({   // optionally configure hljs
@@ -39,36 +40,30 @@ function App() {
         IdentityPoolId:'ap-northeast-2:f4eab593-5f5f-4e47-8b60-a45049ed7a5d',
     })
   })
-  
- 
 
-  const loginTest = () => {
-    const headers = {
-      "Content-type": "application/json; charset=utf-8",
-      "Authorization": localStorage.getItem("auth_token"),
-      "Cache-Control":"no-cache"
-    }
-    axios
-      .get("/api/user/test", { headers: headers })
-      .catch((error) => {
-        console.log(error);
-      })
-      .then((resp) => {
-        console.log("auth",localStorage.getItem("auth_token"))
-        console.log(resp);
-      });
+  const testBtnStyle ={
+    width:"50%",
+    color:"black",
+    top:"40px",
+    margin:"5px",
+    background: "rgba(231, 13, 13, 0.521);",
+    zIndex:"1",
   }
+
   const logOut = () =>{
     localStorage.clear();
-    
+    axios.defaults.headers.common['Authorization'] = null;
+    console.log(axios.defaults.headers.common['Authorization'])
   }
 
   return (
     <div className="App">
             <BrowserRouter>  
                 <Header/>
-                <Button onClick={logOut} sx={{width:"10%",color:"white",}}>logOutTestBtbn</Button>
-                <Button onClick={loginTest} sx={{width:"10%" ,color:"white"}}>loginTestBtn</Button>
+                <Box sx={{position:"fixed",right:0}}>
+                  <Button onClick={logOut} sx={testBtnStyle}>logOut-Test-Btn</Button>
+                  <Button onClick={()=>{handleRequest("/api/user/test")}} sx={testBtnStyle}>login-Test-Btn</Button>
+                </Box>
                 <Route path="/contents/search/:keyword" exact component={Search}/>
                 <Route path="/contents/:category" exact component={Home}/>
                 <Route path="/content/update/:contentId" component={UpdateContent}/>
