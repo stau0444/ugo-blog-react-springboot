@@ -1,4 +1,7 @@
 import axios from "axios";
+import Cookie from "universal-cookie";
+
+const cookie = new Cookie();
 
 //토큰 리프레쉬 후 request 재시도 
 export const retryRequest = (url) =>{
@@ -16,12 +19,10 @@ export const retryRequest = (url) =>{
 //토큰 리프레쉬 
 export  const tokenRefresh =(url) =>{
     async function tokenRefresh(){
-      axios.defaults.headers.common['Authorization'] =  'Bearer '+localStorage.getItem("refresh_token")
+      axios.defaults.headers.common['Authorization'] =  'Bearer '+cookie.get("refresh_token")
       await axios.get("/api/user/login")
       .then((resp)=>{
-        const {auth_token,refresh_token} = resp.headers;
-        axios.defaults.headers.common['Authorization'] =  'Bearer '+auth_token;
-        localStorage.setItem("refresh_token" , refresh_token);
+        setTokenToBrowser(resp)
         retryRequest(url);
       })
       .catch(error=>console.log('refresh error',error.response))
@@ -48,4 +49,15 @@ export const handleRequest = (url) => {
     }
     handleRequest()
   }
-  
+  //로그아웃
+  export const logOut = () =>{
+    cookie.remove("refresh_token");
+    delete axios.defaults.headers.common['Authorization'];
+  }
+
+  export const  setTokenToBrowser = (resp) => {
+    const {auth_token,refresh_token} = resp.headers;
+    axios.defaults.headers.common['Authorization'] =  'Bearer '+auth_token;
+    cookie.set("refresh_token",refresh_token);
+    localStorage.setItem("refresh_token" , refresh_token);
+  }

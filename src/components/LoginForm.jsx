@@ -6,7 +6,7 @@ import { Box, Button } from "@mui/material";
 import { useRef } from "react";
 import { postLoginFail, postLoginStart, postLoginSuccess } from "../redux/moduels/login";
 import axios from "axios";
-import { handleRequest } from "../Auth";
+import { handleRequest, setTokenToBrowser } from "../Auth";
 
 
 const testBtnStyle ={
@@ -43,9 +43,7 @@ export default function LoginForm({setOpenLogin}) {
             password:pwdRef.current.value
           }).then(
             resp=>{
-              const {auth_token,refresh_token} = resp.headers;
-              axios.defaults.headers.common['Authorization'] =  'Bearer '+auth_token;
-              localStorage.setItem("refresh_token" , refresh_token);
+              setTokenToBrowser(resp);
             }
           ).catch(error => console.log(error));
           postLoginSuccess();

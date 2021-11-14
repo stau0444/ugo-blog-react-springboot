@@ -14,9 +14,7 @@ import Search from './pages/Search';
 import { Box, Button} from '@mui/material';
 import { useEffect} from 'react';
 import { useSelector } from 'react-redux';
-import { handleRequest } from './Auth';
-import axios from 'axios';
-
+import { handleRequest, logOut } from './Auth';
 
 hljs.configure({   // optionally configure hljs
   languages: ['javascript' ,'java','python','html']
@@ -50,18 +48,14 @@ function App() {
     zIndex:"1",
   }
 
-  const logOut = () =>{
-    localStorage.clear();
-    axios.defaults.headers.common['Authorization'] = null;
-    console.log(axios.defaults.headers.common['Authorization'])
-  }
+  
 
   return (
     <div className="App">
             <BrowserRouter>  
                 <Header/>
                 <Box sx={{position:"fixed",right:0}}>
-                  <Button onClick={logOut} sx={testBtnStyle}>logOut-Test-Btn</Button>
+                  <Button onClick={()=>{logOut()}} sx={testBtnStyle}>logOut-Test-Btn</Button>
                   <Button onClick={()=>{handleRequest("/api/user/test")}} sx={testBtnStyle}>login-Test-Btn</Button>
                 </Box>
                 <Route path="/contents/search/:keyword" exact component={Search}/>

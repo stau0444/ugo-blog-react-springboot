@@ -1,63 +1,73 @@
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import { Chip, Grid, Stack } from '@mui/material';
+import { Chip, Grid, Stack, styled } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import { Link } from 'react-router-dom';
 import { highlightedText } from './SearchList';
 import { useSelector } from 'react-redux';
 
+const StyledCard = styled(Card)`
+  text-align:center;
+  width: 90%;
+  border-radius: 15px;
+  color: ${props =>  props.theme.nightMode?"#746d6cfd":"black"};
+  min-width: 275;
+  margin: 10px auto;
+  padding: 0 10px;
+  box-shadow: 10px 10px 20px rgba(0 , 0,  0,  0.39);
+  background:rgba(255,255,255,0.1);
+  border-top: 1px solid rgba(255,255,255,0.5);
+  border-left: 1px solid rgba(255,255,255,0.5);
+   /* "linear-gradient(to right bottom, #ff00d4, rgb(0, 89, 178) 120%);", */
+  &:hover{
+    background:
+    ${props => props.theme.nightMode?
+    "linear-gradient(to right bottom, rgba(116, 196, 162, 0.952), whitesmoke 120%)"
+    :
+    "linear-gradient(to right bottom, rgba(0, 128, 255, 0.781), rgb(81, 87, 94) 120%)"
+    };
+    transition: all 0.1s linear;
+    width: 90%;
+    box-shadow: 3px 3px 1px 0px rgba(5, 5, 20, 0.726);
+    color: ${props => props.theme.nightMode?"#020611fb":"bisque"};
+  }
+`;
+
+const ContentDescription = styled(Typography)`
+  font-weight:"450";
+  color:${props => props.theme.nightMode?"#6b4f03":"#ecebea"};
+  font-size:14px ;
+  font-family:"" ;
+`
+
+
+
+const ContentTitle = styled(Typography)`
+  font-weight: bold;
+  color: ${props => props.theme.nightMode?"#22ad96":"bisque"};
+  font-family: Gowun Batang;
+  margin: 0 0 10px 0;
+`
+
+
+
 export default function ContentCard({keyword,content}) {
   const nightMode = useSelector(state => state.nightMode);
+  const theme = { 
+    nightMode:nightMode
+  } 
   return (
       <Link to={"/content/" + JSON.stringify(content.id)}>
-        <Card
-          className="content-card"
-          sx={{
-            textAlign:"center",
-            width: "90%",
-            borderRadius: "15px",
-            color: nightMode?"#746d6cfd":"bisque",
-            minWidth: 275,
-            margin: "10px auto",
-            padding: "0 10px",
-            boxShadow: "10px 10px 20px rgba(0, 0, 0, 0.39)",
-            background:"rgba(255,255,255,0.1)",
-            borderTop:"1px solid rgba(255,255,255,0.5)",
-            borderLeft:"1px solid rgba(255,255,255,0.5)",
-            backdropFilter:"blur(5)",
-            // "linear-gradient(to right bottom, #ff00d4, rgb(0, 89, 178) 120%);",
-            "&:hover": {
-              background:
-               nightMode ?
-               "linear-gradient(to right bottom, rgba(116, 196, 162, 0.952), whitesmoke 120%);"
-                :
-                "linear-gradient(to right bottom, rgba(0, 128, 255, 0.781), rgb(81, 87, 94) 120%);"
-              ,
-              transition: "all 0.1s linear",
-              width: "90%",
-              boxShadow: "3px 3px 1px 0px rgba(5, 5, 20, 0.726)",
-              color:nightMode?"#020611fb":"bisque"
-            },
-          }}
-        >
+        <StyledCard theme={theme} nigthMode={nightMode} className="content-card">
           <CardContent sx={{ padding: "20px 10px" }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                <Typography
-                  variant="h5"
-                  component="div"
-                  sx={{
-                    fontWeight: "bold",
-                    color: nightMode?"#22ad96":"bisque",
-                    fontFamily: "'Gowun Batang'",
-                    margin: "0 0 10px 0",
-                  }}
-                >
+                <ContentTitle theme={theme}>
                   {keyword
                     ? highlightedText(content.title, keyword)
                     : content.title}
-                </Typography>
+                </ContentTitle>
                 <Divider color={nightMode?"darkgray":"bisque"}/>
               </Grid>
               <Grid item sm={4} xs={12}>
@@ -80,11 +90,11 @@ export default function ContentCard({keyword,content}) {
                   overflow: "hidden",
                 }}
               >
-                <Typography sx={{fontWeight:"450",color:nightMode?"#6b4f03":"#ecebea",fontSize:"14px" ,fontFamily:"" }}>
+                <ContentDescription theme={theme}>
                   {keyword
                     ? highlightedText(content.description, keyword)
                     : content.description}
-                </Typography>
+                </ContentDescription>
               </Grid>
               <Grid item xs={12}>
                 <Stack
@@ -111,7 +121,7 @@ export default function ContentCard({keyword,content}) {
               </Grid>
             </Grid>
           </CardContent>
-        </Card>
+        </StyledCard>
       </Link>
   );
 }
