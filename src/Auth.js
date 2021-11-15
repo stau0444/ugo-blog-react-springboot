@@ -2,7 +2,6 @@ import axios from "axios";
 import Cookie from "universal-cookie";
 
 const cookie = new Cookie();
-
 //토큰 리프레쉬 후 request 재시도 
 export const retryRequest = (url) =>{
     async function retryRequest(){
@@ -31,10 +30,13 @@ export  const tokenRefresh =(url) =>{
   }
 
 //리퀘스트 todo action type 까지 받도록 axios.create 로 변경
-export const handleRequest = (url) => {
+export const handleRequest = (url,action,data) => {
     async function handleRequest(){
-      await axios
-      .get(url)
+      await axios({
+        method: action,
+        url : url,
+        data:data
+      })
       .then((resp) => {
         console.log("success",resp);
       })
@@ -53,11 +55,11 @@ export const handleRequest = (url) => {
   export const logOut = () =>{
     cookie.remove("refresh_token");
     delete axios.defaults.headers.common['Authorization'];
+    
   }
 
   export const  setTokenToBrowser = (resp) => {
     const {auth_token,refresh_token} = resp.headers;
     axios.defaults.headers.common['Authorization'] =  'Bearer '+auth_token;
     cookie.set("refresh_token",refresh_token);
-    localStorage.setItem("refresh_token" , refresh_token);
   }

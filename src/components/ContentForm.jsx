@@ -9,13 +9,21 @@ import { StyledInput } from "./ContentUpdateForm";
 import MultiSelect from "./MultiSelect";
 
 export const StyledInputLabel = styled('label')`
+  width: 30%;
   color:bisque;
   display: block;
   font-size: 12px;
   font-weight: 400;
-  margin: 15px;
+  margin: 20px auto;
   padding: 3px;
   border-radius:5px;
+  position: "absolute";
+  border: 1px solid #1976d2;
+  color: "#1976d2";
+  cursor: pointer;
+   &:hover{
+    background:#82829495;
+  }
 `
 export const StyledTextarea = styled('textarea')`
   display: block;
@@ -55,14 +63,7 @@ export default function ContentForm({
             xs={12}
             md={6}
           >
-            <StyledInputLabel
-              sx={{
-                width: "30%",
-                margin: "0 auto",
-                border: "1px solid #1976d2",
-                color: "#1976d2",
-              }}
-            >
+            <StyledInputLabel>
               제목
             </StyledInputLabel>
             <StyledInput
@@ -73,23 +74,7 @@ export default function ContentForm({
               sx={{ margin: "31px 0" }}
             />
             <Grid item xs={12} sx={{ margin: "7px 0" }}>
-              <StyledInputLabel
-                htmlFor="imageInput"
-                sx={{
-                  position: "absolute",
-                  border: "1px solid #1976d2",
-                  color: "#1976d2",
-                  top: "85px",
-                  left: "25%",
-                  right: "25%",
-                  zIndex: "0",
-                  backgroundColor: "transparent",
-                  cursor: "pointer",
-                  "&:hover": {
-                    backgroundColor: "#82829495",
-                  },
-                }}
-              >
+              <StyledInputLabel htmlFor="imageInput">
                 썸네일 이미지 업로드
               </StyledInputLabel>
               <StyledInput
@@ -111,15 +96,7 @@ export default function ContentForm({
               <MultiSelect tags={tagList} />
             </Grid>
             <Grid item xs={12}>
-            <StyledInputLabel
-                sx={{
-                  margin: "25px auto",
-                  width:"20%",
-                  border: "1px solid #1976d2",
-                  color: "#1976d2",
-                  backgroundColor: "transparent",
-                }}
-              >
+            <StyledInputLabel>
                컨텐츠 설명
               </StyledInputLabel>
               <StyledTextarea value={description} onChange={hadleDescriptionValue} placeholder="리스트에 표시되는 설명을 적어 주세요"/>

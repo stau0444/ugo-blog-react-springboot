@@ -7,6 +7,7 @@ import { useRef } from "react";
 import { postLoginFail, postLoginStart, postLoginSuccess } from "../redux/moduels/login";
 import axios from "axios";
 import { handleRequest, setTokenToBrowser } from "../Auth";
+import { useDispatch } from "react-redux";
 
 
 const testBtnStyle ={
@@ -22,6 +23,7 @@ export default function LoginForm({setOpenLogin}) {
     const rememberMeRef = useRef();
     const userIdRef = useRef(); 
     const pwdRef = useRef();
+    const dispatch = useDispatch();
     
     const handleRememberMe = (e) => {
       console.log(rememberMeRef.current.value)
@@ -35,8 +37,7 @@ export default function LoginForm({setOpenLogin}) {
     const handleLogin =  () => {
       async function handleLogin(){
         try{
-          postLoginStart();
-          console.log("로그인 시도");
+          dispatch(postLoginStart());
           await axios.post("/api/user/login" , 
           {
             userId:userIdRef.current.value,
@@ -44,11 +45,11 @@ export default function LoginForm({setOpenLogin}) {
           }).then(
             resp=>{
               setTokenToBrowser(resp);
+              dispatch(postLoginSuccess(resp.data));
             }
           ).catch(error => console.log(error));
-          postLoginSuccess();
         }catch(error){
-          postLoginFail(error);
+          dispatch(postLoginFail(error));
         }
       }
       handleLogin();
@@ -56,10 +57,6 @@ export default function LoginForm({setOpenLogin}) {
     return (
       <div>   
         <CustomModal id="id01" className="modal">
-          <Box sx={{position:"fixed",right:0}}>
-            <Button onClick={""} sx={testBtnStyle}>logOut-Test-Btn</Button>
-            <Button onClick={()=>{handleRequest("/api/user/test")}} sx={testBtnStyle}>login-Test-Btn</Button>
-          </Box> 
           <ModalContent className="modal-content animate">
             <ImgContainer className="imgcontainer">
               <CloseBtn

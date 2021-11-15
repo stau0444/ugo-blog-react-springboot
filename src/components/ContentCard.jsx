@@ -44,12 +44,19 @@ const ContentDescription = styled(Typography)`
 
 
 const ContentTitle = styled(Typography)`
-  font-weight: bold;
+  font-weight: 700;
+  font-size:25px;
   color: ${props => props.theme.nightMode?"#22ad96":"bisque"};
   font-family: Gowun Batang;
   margin: 0 0 10px 0;
 `
 
+const ContentDivider = styled(Divider)`
+  margin:15px auto;
+  width:98%;
+  height:2px;
+  background : ${props => props.theme.nightMode?"darkgray":"#337ab7"};
+`
 
 
 export default function ContentCard({keyword,content}) {
@@ -68,7 +75,7 @@ export default function ContentCard({keyword,content}) {
                     ? highlightedText(content.title, keyword)
                     : content.title}
                 </ContentTitle>
-                <Divider color={nightMode?"darkgray":"bisque"}/>
+                <ContentDivider theme={theme}/>
               </Grid>
               <Grid item sm={4} xs={12}>
                 <img

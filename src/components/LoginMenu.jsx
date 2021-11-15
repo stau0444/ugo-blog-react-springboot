@@ -7,19 +7,38 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import Settings from '@mui/icons-material/Settings';
-import Logout from '@mui/icons-material/Logout';
 import { useState }  from 'react';
-import { Link } from 'react-router-dom';
 import { Login } from '@mui/icons-material';
+import LogoutIcon from '@mui/icons-material/Logout';
 import FiberNewIcon from '@mui/icons-material/FiberNew';
 import LoginForm from './LoginForm';
-import { Button } from '@mui/material';
+import { Button, Modal } from '@mui/material';
 import SignUpForm from './SignUpForm';
+import { useDispatch, useSelector } from 'react-redux';
+import UserInfoTable from './UserInfoTable';
+import { logOut } from '../Auth';
+import { postLogOut } from '../redux/moduels/login';
+
+const profileModalStyle = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: '50%',
+  height: '370',
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 
 export default function LoginMenu() {
-  const [isLogin , setIsLogin]  = useState(false);
+
+  const dispatch = useDispatch();
+  const {login, userInfo} = useSelector(state => state.login)
   const [openLogin , setOpenLogin] = useState(false);
   const [openSignUp , setOpenSignUp] = useState(false);
+  const [openProfile , setOpenProfile] = useState(false);
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -40,9 +59,10 @@ export default function LoginMenu() {
     setAnchorEl(null);
   };
 
-  const checkLogin = () => {
-    setIsLogin(true);
-  };
+  const handleProfileModal = () =>{
+    setOpenProfile(true);
+  }
+
   return (
     <>
       <Box sx={{listStyle:"none", display: 'flex', alignItems: 'center', textAlign: 'center' }}>
@@ -85,27 +105,41 @@ export default function LoginMenu() {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-      {isLogin?
+      {login?
       <div>
-        <MenuItem component="div" sx={{}}>
-          <Avatar /> <Link to="/profile">프로필</Link>
+        <MenuItem component="div">
+          <Button sx={{textAlign:"center"}} onClick={handleProfileModal}>
+            <Avatar sizes="small" sx={{marginRight:"10px"}}/>
+            프로필
+          </Button>
         </MenuItem>
         <MenuItem component="div">
-          <Avatar /> <Link to="/my-account">회원 정보 변경</Link>
+          <Button sx={{textAlign:"center"}} onClick={"handleProfileModal"}>
+            <Settings  sx={{marginRight:"10px"}} size="small"/>
+             회원 정보 변경
+          </Button>
+            <Modal
+            open={openProfile}
+            onClose={()=>{setOpenProfile(false)}}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={profileModalStyle}>
+              <UserInfoTable userInfo={userInfo}/>
+            </Box>
+          </Modal>
         </MenuItem>
         <Divider />
         <MenuItem component="div">
-          <ListItemIcon >
-            <Settings fontSize="small" />
-          </ListItemIcon>
-          <Link to="/logout">Setting</Link>
+          <Button sx={{textAlign:"center"}} onClick={()=>{
+                console.log("logout")
+                dispatch(postLogOut());
+                logOut();
+              }}>
+            <LogoutIcon sx={{marginRight:"10px",fontWeight:"800"}}  size="small"/>
+            Log-out
+          </Button>
         </MenuItem>
-        <MenuItem component="div">
-          <ListItemIcon>
-            <Logout fontSize="small" />
-          </ListItemIcon>
-          <Link to="/logout">Log-out</Link>
-        </MenuItem> 
       </div>
       :
       <div>
@@ -124,9 +158,8 @@ export default function LoginMenu() {
       </div>
       }
       </Menu>
-      {!isLogin&&openLogin?<LoginForm setOpenLogin={setOpenLogin}/>:""}
-      {!isLogin&&openSignUp?<SignUpForm setOpenSignUp={setOpenSignUp}/>:""}
-      <Button sx={{display:"none"}} onClick={checkLogin}></Button>
+      {!login&&openLogin?<LoginForm setOpenLogin={setOpenLogin}/>:""}
+      {!login&&openSignUp?<SignUpForm setOpenSignUp={setOpenSignUp}/>:""}
     </>
   );
 }

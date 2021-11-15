@@ -37,7 +37,6 @@ export default function ContentUpdateForm({
   hadleTitleValue,
   image,
   value,
-  isOpen,
   hadleDescriptionValue,
   description
 }) {
@@ -75,23 +74,7 @@ export default function ContentUpdateForm({
               sx={{ margin: "31px 0" }}
             />
             <Grid item xs={12} sx={{ margin: "7px 0" }}>
-              <StyledInputLabel
-                htmlFor="imageInput"
-                sx={{
-                  position: "absolute",
-                  border: "1px solid #1976d2",
-                  color: "#1976d2",
-                  top: "85px",
-                  left: "25%",
-                  right: "25%",
-                  zIndex: "0",
-                  backgroundColor: "transparent",
-                  cursor: "pointer",
-                  "&:hover": {
-                    backgroundColor: "#82829495",
-                  },
-                }}
-              >
+              <StyledInputLabel htmlFor="imageInput">
                 썸네일 이미지 업로드
               </StyledInputLabel>
               <StyledInput
@@ -112,15 +95,7 @@ export default function ContentUpdateForm({
             <Grid item xs={12} sx={{ justifyContent: "center" }}>
               <MultiSelect tags={tagList} />
             </Grid>
-            <StyledInputLabel
-                sx={{
-                  margin: "25px auto",
-                  width:"20%",
-                  border: "1px solid #1976d2",
-                  color: "#1976d2",
-                  backgroundColor: "transparent",
-                }}
-              >
+            <StyledInputLabel>
                컨텐츠 설명
               </StyledInputLabel>
               <StyledTextarea value={description} onChange={hadleDescriptionValue} placeholder="리스트에 표시되는 설명을 적어 주세요"/>

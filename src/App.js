@@ -55,7 +55,6 @@ function App() {
             <BrowserRouter>  
                 <Header/>
                 <Box sx={{position:"fixed",right:0}}>
-                  <Button onClick={()=>{logOut()}} sx={testBtnStyle}>logOut-Test-Btn</Button>
                   <Button onClick={()=>{handleRequest("/api/user/test")}} sx={testBtnStyle}>login-Test-Btn</Button>
                 </Box>
                 <Route path="/contents/search/:keyword" exact component={Search}/>

@@ -5,14 +5,16 @@ import contentValue from './contentValue';
 import contentList from './contentList';
 import searchList from './searchList';
 import nightMode from './nightMode';
+import login from './login';
 
 const mainReducer = combineReducers({
+    login,
     contents,
     contentTags,
     contentValue,
     contentList,
     searchList,
-    nightMode
+    nightMode,
 })
 
 export default mainReducer;

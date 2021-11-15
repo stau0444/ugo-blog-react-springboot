@@ -1,4 +1,4 @@
-import { Button, Chip, Grid, Typography } from "@mui/material";
+import { Button, Chip, Grid, styled, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import CodeBlock from "./CodeBlock";
 import ContentDetailSkeleton from "./ContentDetailSkeleton";
@@ -9,6 +9,15 @@ const headerTextStyle = {
   display: "block",
   color: "#1976d2",
 };
+const ContentTitle = styled("h2")`
+    width:85%;
+    font-size:40px;
+    margin:10px auto;
+    font-weight:300;
+    color:#1976d2;
+    margin:20px auto;
+`;
+
 
 export default function ContentDetail({content,loading,deleteContent}) {
     return(
@@ -18,7 +27,7 @@ export default function ContentDetail({content,loading,deleteContent}) {
                     <ContentDetailSkeleton/>
                 :
                 <>
-                    <Typography variant='h2' sx={{width:'85%',margin:'10px auto',fontWeight:'300',color:'#1976d2'}}>{content.title}</Typography>
+                    <ContentTitle >{content.title}</ContentTitle>
                     <hr style={{width:"90%"}}/>
                     <Typography variant='strong' sx={headerTextStyle}>{content.createdAt}</Typography>
                     <Typography variant='strong' sx={headerTextStyle}></Typography>
