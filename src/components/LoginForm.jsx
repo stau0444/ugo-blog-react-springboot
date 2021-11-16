@@ -2,22 +2,15 @@ import "../Form.scss";
 import LoginIcon from '@mui/icons-material/Login';
 import { CloseBtn, Container, CustomModal, FindPwd, FormBtn, FormCancelBtn, FormInput, FormLogo, ImgContainer, InputLabel, ModalContent } from "../FormComponents";
 import { Link } from "react-router-dom";
-import { Box, Button } from "@mui/material";
+import { Box,  } from "@mui/material";
 import { useRef } from "react";
 import { postLoginFail, postLoginStart, postLoginSuccess } from "../redux/moduels/login";
 import axios from "axios";
-import { handleRequest, setTokenToBrowser } from "../Auth";
+import {  setTokenToBrowser } from "../Auth";
 import { useDispatch } from "react-redux";
 
 
-const testBtnStyle ={
-  width:"50%",
-  color:"black",
-  top:"40px",
-  margin:"5px",
-  background: "rgba(231, 13, 13, 0.521);",
-  zIndex:"1",
-}
+
 
 export default function LoginForm({setOpenLogin}) {
     const rememberMeRef = useRef();
@@ -47,7 +40,7 @@ export default function LoginForm({setOpenLogin}) {
               setTokenToBrowser(resp);
               dispatch(postLoginSuccess(resp.data));
             }
-          ).catch(error => console.log(error));
+          ).catch(error => console.log(error.response));
         }catch(error){
           dispatch(postLoginFail(error));
         }

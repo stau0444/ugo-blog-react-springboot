@@ -27,7 +27,7 @@ export default function NightModeSwitchButton({isOn}) {
                 fontSize="small"
                 sx={{ marginLeft: "20px", color: "white" }}
                 />
-                <div className="switch" data-isOn={isOn} onClick={changeTheme}>
+                <div className="switch" data-ison={isOn} onClick={changeTheme}>
                 <motion.div className="handle" layout transition={spring} />
                 </div>
             </Box>

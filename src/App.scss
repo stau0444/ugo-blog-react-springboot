@@ -93,7 +93,7 @@ ul ,h2,h1,h3,h4,h5,p,a,div{
   background-color: tomato;
   border: none;
 }
-.header-divider[data-isOn="true"]{
+.header-divider[data-ison="true"]{
   width: 98%;
   height: 2px;
   background-color: rgb(136, 145, 139);
@@ -694,7 +694,7 @@ ul.pagination li a:hover, ul.pagination li a.active {
   cursor: pointer;
 }
 
-.switch[data-isOn="true"] {
+.switch[data-ison="true"] {
   justify-content: flex-end;
   background-color: rgba(22, 93, 245, 0.651);
 }

@@ -7,7 +7,7 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import Settings from '@mui/icons-material/Settings';
-import { useState }  from 'react';
+import { useEffect, useState }  from 'react';
 import { Login } from '@mui/icons-material';
 import LogoutIcon from '@mui/icons-material/Logout';
 import FiberNewIcon from '@mui/icons-material/FiberNew';
@@ -16,7 +16,7 @@ import { Button, Modal } from '@mui/material';
 import SignUpForm from './SignUpForm';
 import { useDispatch, useSelector } from 'react-redux';
 import UserInfoTable from './UserInfoTable';
-import { logOut } from '../Auth';
+import { checkLoginState, cookie, logOut } from '../Auth';
 import { postLogOut } from '../redux/moduels/login';
 
 const profileModalStyle = {
@@ -34,14 +34,16 @@ const profileModalStyle = {
 
 export default function LoginMenu() {
 
-  const dispatch = useDispatch();
-  const {login, userInfo} = useSelector(state => state.login)
   const [openLogin , setOpenLogin] = useState(false);
   const [openSignUp , setOpenSignUp] = useState(false);
   const [openProfile , setOpenProfile] = useState(false);
-
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+
+  
+  const dispatch = useDispatch();
+  const {login, userInfo} = useSelector(state => state.login)
+
   
   const openLoginForm = () =>{
     setAnchorEl(null);
@@ -68,7 +70,13 @@ export default function LoginMenu() {
       <Box sx={{listStyle:"none", display: 'flex', alignItems: 'center', textAlign: 'center' }}>
         <Tooltip title="Account settings">
           <IconButton onClick={handleClick} size="small" sx={{ ml: 2 ,marginBottom:{xs:'5px',sm:'13px'}}}>
-            <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+            {
+              login?
+              <Avatar sx={{ width: 32, height: 32 }}>I</Avatar>
+              :
+              <Avatar sx={{ width: 32, height: 32 }}>O</Avatar>
+            }
+            
           </IconButton>
         </Tooltip>
       </Box>
@@ -114,7 +122,7 @@ export default function LoginMenu() {
           </Button>
         </MenuItem>
         <MenuItem component="div">
-          <Button sx={{textAlign:"center"}} onClick={"handleProfileModal"}>
+          <Button sx={{textAlign:"center"}} onClick={handleProfileModal}>
             <Settings  sx={{marginRight:"10px"}} size="small"/>
              회원 정보 변경
           </Button>

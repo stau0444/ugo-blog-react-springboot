@@ -5,9 +5,8 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
 import HomeIcon from '@mui/icons-material/Home';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import {  useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import SwitchButton from './NightModeSwitchButton';
 import NightModeSwitchButton from './NightModeSwitchButton';
 
 export const Logo = styled(Typography)`
@@ -158,7 +157,7 @@ export default function Header() {
               </Tooltip>
           </Grid>
         </Grid>
-        <hr className="header-divider" data-isOn={isOn}/>
+        <hr className="header-divider" data-ison={isOn}/>
         <Grid item xs={12} sx={{ margin: { xs: "0 auto", sm: "20px 0px" } }}>
           <Links />
         </Grid>

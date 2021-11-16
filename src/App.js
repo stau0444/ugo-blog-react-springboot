@@ -13,17 +13,19 @@ import hljs from 'highlight.js';
 import Search from './pages/Search';
 import { Box, Button} from '@mui/material';
 import { useEffect} from 'react';
-import { useSelector } from 'react-redux';
-import { handleRequest, logOut } from './Auth';
+import {  useDispatch, useSelector } from 'react-redux';
+import {  cookie, handleRequest,  } from './Auth';
+import { postLogOut } from './redux/moduels/login';
+
 
 hljs.configure({   // optionally configure hljs
   languages: ['javascript' ,'java','python','html']
 });
 
-
 function App() {
-
+  //const dispatch = useDispatch();
   let isOn = useSelector(state=>state.nightMode)
+
   useEffect(()=>{
     if(isOn){
       document.querySelector(".App").style.background ="whitesmoke"
@@ -47,8 +49,6 @@ function App() {
     background: "rgba(231, 13, 13, 0.521);",
     zIndex:"1",
   }
-
-  
 
   return (
     <div className="App">

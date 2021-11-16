@@ -1,8 +1,12 @@
 import axios from "axios";
 import Cookie from "universal-cookie";
 
-const cookie = new Cookie();
+export const cookie = new Cookie();
 //토큰 리프레쉬 후 request 재시도 
+export const checkLoginState = (dispatch) =>{
+  logOut(); 
+  dispatch();
+}
 export const retryRequest = (url) =>{
     async function retryRequest(){
       console.log(axios.defaults.headers.common['Authorization'])
@@ -23,8 +27,12 @@ export  const tokenRefresh =(url) =>{
       .then((resp)=>{
         setTokenToBrowser(resp)
         retryRequest(url);
+        
       })
-      .catch(error=>console.log('refresh error',error.response))
+      .catch(error=> {
+        alert("토큰이 만료되어 로그아웃되었습니다. 다시 로그인 해주세요");
+        checkLoginState()
+      })
     }
     tokenRefresh();
   }
@@ -41,11 +49,10 @@ export const handleRequest = (url,action,data) => {
         console.log("success",resp);
       })
       .catch((error)=>{
-        if(error.response.status === 401 && error.response.data.message === "excess token 만료"){
+        console.log(error.response.status,error.response.data.message)
+        if(error.response.status === 401 && error.response.data.message === "ACCESS_TOKEN_EXPIRED"){
           console.log("refresh_token")
           tokenRefresh(url);  
-        }else{
-            alert("로그인에 실패했습니다 다시 로그인해주세요")
         }
       })
     }
@@ -53,6 +60,7 @@ export const handleRequest = (url,action,data) => {
   }
   //로그아웃
   export const logOut = () =>{
+    
     cookie.remove("refresh_token");
     delete axios.defaults.headers.common['Authorization'];
     

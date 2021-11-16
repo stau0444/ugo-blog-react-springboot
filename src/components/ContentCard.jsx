@@ -66,7 +66,7 @@ export default function ContentCard({keyword,content}) {
   } 
   return (
       <Link to={"/content/" + JSON.stringify(content.id)}>
-        <StyledCard theme={theme} nigthMode={nightMode} className="content-card">
+        <StyledCard theme={theme}  className="content-card">
           <CardContent sx={{ padding: "20px 10px" }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
