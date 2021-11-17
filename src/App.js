@@ -14,8 +14,9 @@ import Search from './pages/Search';
 import { Box, Button} from '@mui/material';
 import { useEffect} from 'react';
 import {  useDispatch, useSelector } from 'react-redux';
-import {  cookie, handleRequest,  } from './Auth';
-import { postLogOut } from './redux/moduels/login';
+import { cookie, handleRequest, logOut, setTokenToBrowser, } from './Auth';
+import { postLoginFail, postLoginStart, postLoginSuccess,  } from './redux/moduels/login';
+import axios from 'axios';
 
 
 hljs.configure({   // optionally configure hljs
@@ -23,16 +24,47 @@ hljs.configure({   // optionally configure hljs
 });
 
 function App() {
-  //const dispatch = useDispatch();
-  let isOn = useSelector(state=>state.nightMode)
 
+  const dispatch = useDispatch();
+  
+  let isOn = useSelector(state=>state.nightMode)
+  
   useEffect(()=>{
+    const initLoginState =  (token) => {
+      async function initLoginState(){
+        try{
+          const headers = {"Authorization":"Bearer "+ cookie.get("refresh_token")}
+          console.log(cookie.get("refresh_token"))
+          dispatch(postLoginStart());
+          await axios.post("/api/user/login",null,{headers:headers}).then(
+            resp=>{
+              console.log('resp' , resp)
+              setTokenToBrowser(resp);
+              dispatch(postLoginSuccess(resp.data));
+            }
+          )
+        }catch(error){
+          if(error.response.status === 401 && error.response.data.message === "REFRESH_TOKEN_EXPIRED"){
+            alert("토큰이 만료되었습니다 다시 로그인 해주세요!")
+            logOut(true);
+          }
+          console.log(error.response)
+          dispatch(postLoginFail(error));
+        }
+      }
+      initLoginState();
+    }
+
+    if(cookie.get("refresh_token")){
+      initLoginState()
+    }
+
     if(isOn){
       document.querySelector(".App").style.background ="whitesmoke"
     }else{
       document.querySelector(".App").style.background ="rgb(32, 38, 45)"
     }
-  },[isOn])
+  },[isOn,dispatch])
   //AWS  config
   AWS.config.update({
     region:'ap-northeast-2',

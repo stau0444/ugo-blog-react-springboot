@@ -6,7 +6,7 @@ export default function EmailSubSwitchBtn() {
         <>
             <Box sx={{position:{xs:"absolute"},top:"100px",right:"10px",margin: "0 20px", float: "right" }}>
                 <div className="switch" >
-                <motion.div className="handle" layout transition={spring} />
+                    <motion.div className="handle" layout transition={spring} />
                 </div>
             </Box>
         </>

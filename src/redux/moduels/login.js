@@ -2,9 +2,17 @@ const POST_LOGIN_START = "ugo-blog/login/POST_LOGIN_START"
 const POST_LOGIN_SUCCESS = "ugo-blog/login/POST_LOGIN_SUCCESS"
 const POST_LOGIN_FAIL = "ugo-blog/login/POST_LOGIN_FAIL"
 const POST_LOGOUT = "ugo-blog/login/POST_LOGOUT"
+const INIT_LOGINSTATER = "ugo-blog/login/INIT_LOGINSTATER"
 
 
 
+export const initLoginState = () => {
+    console.log("INIT_LOGINSTATER")
+    return{
+        type:INIT_LOGINSTATER,
+        loading:false,
+    }
+}
 export const postLogOut = () => {
     console.log("postLogOut")
     return{
@@ -56,10 +64,11 @@ export default function  reducer(state = initialState, action) {
         };
     } 
     if(action.type === POST_LOGIN_SUCCESS){
-        const {email,emailSubscribe,id,signUpAt,username} = action.loginState.userInfo;
+        const {email,emailSubscribe,id,signUpAt,username,profileUrl} = action.loginState.userInfo;
         return {
           login: action.loginState.login,
           userInfo: {
+            profileUrl,
             email,
             emailSubscribe,
             id,
@@ -73,6 +82,9 @@ export default function  reducer(state = initialState, action) {
             loginState:false,
             error:action.error
         }
+    }
+    if(action.type === INIT_LOGINSTATER){
+        return state;
     }
     return state;
 }

@@ -22,6 +22,7 @@ import axios from "axios";
 
 //s3 이미지 업로드 함수
 export const uploadToS3 = (image) =>{
+    console.log('S3 image' , image)
     const upload = new AWS.S3.ManagedUpload({
         params:{
             Bucket : 'ugo-blog-image-bucket',
@@ -32,10 +33,10 @@ export const uploadToS3 = (image) =>{
     const promise = upload.promise()
     promise.then(
         function (data) {
-            return console.log("S3 업로드 성공");
+             console.log("S3 업로드 성공");
         },
         function (error) {
-            return console.log("S3 업로드 오류 발생 ", error.message);
+             console.log("S3 업로드 오류 발생 ", error.message);
         }
     )        
 }

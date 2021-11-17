@@ -14,19 +14,19 @@ export default function ContentListContainer({category}) {
         dispatch(handlePageNum(page));
     };
 
-
+    
     useEffect(()=>{
         const getContentList= () => {
-          async function getContentList(){
-              try{
-                dispatch(getContentListStart())
-                const resp = await axios.get(`/api/contents?category=${category?category:""}&page=${page-1}&size=6`);
-                dispatch(getContentListSuccess(resp.data.content,category,page,resp.data.totalElements));
-              }catch(error){
-                  dispatch(getContentListFail(error));
-              }
-          }
-          getContentList();
+            async function getContentList(){
+                try{
+                    dispatch(getContentListStart())
+                    await axios.get(`/api/contents?category=${category?category:""}&page=${page-1}&size=6`)
+                    .then(resp => {dispatch(getContentListSuccess(resp.data.content,category,page,resp.data.totalElements))});
+                }catch(error){
+                    dispatch(getContentListFail(error));
+                }
+            } 
+            getContentList();
         };
         getContentList();
     },[category,dispatch,page,isOn])

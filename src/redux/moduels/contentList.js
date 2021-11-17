@@ -34,7 +34,7 @@ export function getContentListSuccess(data,category,page,totalCount){
         totalCount,
     }
 }
-
+ 
 export function getContentListFail(error){
     return{
         type:GET_CONTENT_LIST_FAIL,

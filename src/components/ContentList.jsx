@@ -42,7 +42,7 @@ export default function ContentList({
             <LoadingSkeleton />
           </Grid>
         ) : (
-          <AnimatePresence exitBeforeEnter  initial={true}>
+          <AnimatePresence  initial={true}>
             {contentList.data.map((content) => (
                 <Grid key={content.id} item xs={12}  md={contentList.data.length !== 1 ? 6 : ""} lg={contentList.data.length !== 1 ? 4 : ""}>
                   <motion.div

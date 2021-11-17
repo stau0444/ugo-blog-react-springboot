@@ -2,7 +2,11 @@ html{
   background: rgb(32, 38, 45);
   margin: 0 auto;
 }
-
+body{
+  padding-right: 0px;
+  padding-left: 0px;
+  overflow: scroll;
+}
 
 ul ,h2,h1,h3,h4,h5,p,a,div{
   list-style: none;
@@ -707,4 +711,9 @@ ul.pagination li a:hover, ul.pagination li a.active {
   background-color: white;
   border-radius: 40px;
 }
+
+table ,th{
+  padding:7px
+}
+
 

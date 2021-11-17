@@ -3,13 +3,9 @@ import Cookie from "universal-cookie";
 
 export const cookie = new Cookie();
 //토큰 리프레쉬 후 request 재시도 
-export const checkLoginState = (dispatch) =>{
-  logOut(); 
-  dispatch();
-}
+
 export const retryRequest = (url) =>{
     async function retryRequest(){
-      console.log(axios.defaults.headers.common['Authorization'])
         await axios.get(url)
         .then(resp => {
           console.log("retry requset ", resp)
@@ -26,12 +22,13 @@ export  const tokenRefresh =(url) =>{
       await axios.get("/api/user/login")
       .then((resp)=>{
         setTokenToBrowser(resp)
-        retryRequest(url);
-        
+        if(url){
+          retryRequest(url);
+        }
       })
       .catch(error=> {
         alert("토큰이 만료되어 로그아웃되었습니다. 다시 로그인 해주세요");
-        checkLoginState()
+        logOut();
       })
     }
     tokenRefresh();
@@ -59,11 +56,12 @@ export const handleRequest = (url,action,data) => {
     handleRequest()
   }
   //로그아웃
-  export const logOut = () =>{
-    
+  export const logOut = (refreshPage) =>{
     cookie.remove("refresh_token");
     delete axios.defaults.headers.common['Authorization'];
-    
+    if(!refreshPage){
+      window.location.href ='/';
+    }  
   }
 
   export const  setTokenToBrowser = (resp) => {

@@ -38,6 +38,7 @@ export default function LoginForm({setOpenLogin}) {
           }).then(
             resp=>{
               setTokenToBrowser(resp);
+              console.log("login Success" , resp.data)
               dispatch(postLoginSuccess(resp.data));
             }
           ).catch(error => console.log(error.response));

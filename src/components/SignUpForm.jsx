@@ -2,9 +2,11 @@ import "../Form.scss";
 import LoginIcon from '@mui/icons-material/Login';
 import { CloseBtn, Container, CustomModal, FormBtn, FormInput, FormLogo, ImgContainer, InputLabel, ModalContent } from "../FormComponents";
 import { useRef, useState } from "react";
-import { Button, styled } from "@mui/material";
+import { Box, Button, Chip, styled } from "@mui/material";
 import axios from "axios";
 import { useHistory } from "react-router";
+import UploadProfile from "./UploadProfile";
+import AWS from "aws-sdk"
 
 
 const UnverifedText = styled('p')`
@@ -20,6 +22,27 @@ const VerifedText = styled('p')`
 
 `
 
+const uploadBase64ImgToS3Bucket = (image) => {
+  const buf = Buffer.from(image.imagePreviewUrl.replace(/^data:image\/\w+;base64,/, ""),'base64')
+  const upload = new AWS.S3.ManagedUpload({
+      params:{
+          Key: image.file.name+":profile", 
+          Body: buf,
+          Bucket : 'ugo-blog-image-bucket',
+          ContentEncoding: 'base64',
+          ContentType: 'image/jpeg'
+      },
+  })
+  const promise = upload.promise()
+  promise.then(
+    function (data) {
+      console.log("after upload",data)
+    },
+    function (error) {
+      console.log("S3 업로드 오류 발생 ", error.message);
+    })
+}  
+
 export default function SignUpForm({setOpenSignUp}) {
     
     const [pwdMatch,setPwdMatch] = useState(false);
@@ -27,6 +50,7 @@ export default function SignUpForm({setOpenSignUp}) {
     const [isExistId,setIsExistId] = useState(false);
     const [isChecked,setIsChecked] = useState(false);
     const [idRegMatch , setIdRegMatch] = useState(false);
+    const [image , setImage] = useState({file:null,imagePreviewUrl:'/logo_transparent.png'})
     const userIdRef = useRef('')
     const pwdRef = useRef('')
     const pwdCheckRef = useRef('')
@@ -34,33 +58,52 @@ export default function SignUpForm({setOpenSignUp}) {
     const pwdRegExp=  new RegExp(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/);
     const idRegExp = new RegExp(/^[A-za-z0-9]{5,15}$/);
     const history = useHistory();
-    const handleSubmit = () => {
-      if(isExistId){
-        alert("이미 존재하는 아이디입니다.")
-        return;
+   
+     
+       
+    const handleSubmit = () => {   
+      async function handleSubmit(){  
+        if(isExistId){
+          alert("이미 존재하는 아이디입니다.")
+          return;
+        }
+        if(!pwdMatch){
+          alert("비밀번호가 일치하지 않습니다.")
+          return;
+        }
+        if(!pwdRegMatch){
+          alert("비밀번호가 형식에 맞지 않습니다. 비밀번호는 특수문자 ,숫자를 포함한 7~15 글자 사이로 작성해주세요")
+          return;
+        }
+        if(!isChecked){
+          alert("중복확인이 필요합니다.");
+          return;
+        }
+        if(!image){
+          alert("프로필 이미지를 등록해 주세요.");
+          return;
+        }
+
+        uploadBase64ImgToS3Bucket(image);
+
+        const userPostData = {
+          userId:userIdRef.current.value,
+          password:pwdRef.current.value,
+          email:emailRef.current.value,
+          profile:"https://ugo-blog-image-bucket.s3.ap-northeast-2.amazonaws.com/"+image.file.name+":profile"
+        }
+        console.log("userPostData",userPostData)
+        axios.post("/api/user",userPostData)
+        .then(()=>{
+          setOpenSignUp(false);
+          alert("회원가입에 성공했습니다 로그인을 해주세요")
+          history.push("/") 
+        })
+        .catch((error)=>{
+          alert("로그인에 실패했습니다 다시 시도해주세요.")
+        });
       }
-      if(!pwdMatch){
-        alert("비밀번호가 일치하지 않습니다.")
-        return;
-      }
-      if(!pwdRegMatch){
-        alert("비밀번호가 형식에 맞지 않습니다. 비밀번호는 특수문자 ,숫자를 포함한 7~15 글자 사이로 작성해주세요")
-        return;
-      }
-      if(!isChecked){
-        alert("중복확인이 필요합니다.");
-        return;
-      }
-      axios.post("/api/user",
-      {
-        userId:userIdRef.current.value,
-        password:pwdRef.current.value,
-        email:emailRef.current.value
-      });
-      setOpenSignUp(false);
-      alert("회원가입에 성공했습니다 로그인을 해주세요")
-      history.push("/")
-      
+      handleSubmit();
     }
 
     const checkID = () =>{
@@ -117,6 +160,12 @@ export default function SignUpForm({setOpenSignUp}) {
               <LoginIcon fontSize="small" sx={{color:"gray" ,marginLeft:"3px" , marginBottom:"-2px"}}/>
             </ImgContainer>
             <Container className="container">
+            <Box sx={{textAlign:"center"}}>
+              <Chip sx={{margin:"0 auto"}} color="success" label="프로필 이미지"/>
+            </Box>
+            <Box sx={{textAlign:"center" , margin:"10px"}}>
+              <UploadProfile image={image} setImage={setImage}/>
+            </Box>
             <InputLabel>아이디</InputLabel>
               <FormInput
                 width="85%"

@@ -7,7 +7,7 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import Settings from '@mui/icons-material/Settings';
-import { useEffect, useState }  from 'react';
+import {  useState }  from 'react';
 import { Login } from '@mui/icons-material';
 import LogoutIcon from '@mui/icons-material/Logout';
 import FiberNewIcon from '@mui/icons-material/FiberNew';
@@ -16,7 +16,7 @@ import { Button, Modal } from '@mui/material';
 import SignUpForm from './SignUpForm';
 import { useDispatch, useSelector } from 'react-redux';
 import UserInfoTable from './UserInfoTable';
-import { checkLoginState, cookie, logOut } from '../Auth';
+import { logOut } from '../Auth';
 import { postLogOut } from '../redux/moduels/login';
 
 const profileModalStyle = {
@@ -24,6 +24,7 @@ const profileModalStyle = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
+  borderRadius:'20px',
   width: '50%',
   height: '370',
   bgcolor: 'background.paper',
@@ -33,7 +34,8 @@ const profileModalStyle = {
 };
 
 export default function LoginMenu() {
-
+  
+  
   const [openLogin , setOpenLogin] = useState(false);
   const [openSignUp , setOpenSignUp] = useState(false);
   const [openProfile , setOpenProfile] = useState(false);
@@ -64,17 +66,16 @@ export default function LoginMenu() {
   const handleProfileModal = () =>{
     setOpenProfile(true);
   }
-
   return (
     <>
-      <Box sx={{listStyle:"none", display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+      <Box onClick={handleClick} sx={{listStyle:"none", display: 'flex', alignItems: 'center', textAlign: 'center' }}>
         <Tooltip title="Account settings">
-          <IconButton onClick={handleClick} size="small" sx={{ ml: 2 ,marginBottom:{xs:'5px',sm:'13px'}}}>
+          <IconButton size="small" sx={{ left:"7px",top:"2px",ml: 2 ,marginBottom:{xs:'5px',sm:'13px'}}}>
             {
               login?
-              <Avatar sx={{ width: 32, height: 32 }}>I</Avatar>
+              <Avatar src={userInfo.profileUrl} sx={{width: 39, height: 39 }}/>
               :
-              <Avatar sx={{ width: 32, height: 32 }}>O</Avatar>
+              <Avatar sx={{width: 39, height: 39 }}/>
             }
             
           </IconButton>
@@ -89,7 +90,6 @@ export default function LoginMenu() {
           sx: {
             overflow: 'visible',
             filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-            mt: 1.5,
             '& .MuiAvatar-root': {
               width: 32,
               height: 32,
@@ -117,7 +117,7 @@ export default function LoginMenu() {
       <div>
         <MenuItem component="div">
           <Button sx={{textAlign:"center"}} onClick={handleProfileModal}>
-            <Avatar sizes="small" sx={{marginRight:"10px"}}/>
+            <Avatar src={userInfo.profileUrl} sizes="small" sx={{marginRight:"10px"}}/>
             프로필
           </Button>
         </MenuItem>
@@ -133,14 +133,14 @@ export default function LoginMenu() {
             aria-describedby="modal-modal-description"
           >
             <Box sx={profileModalStyle}>
-              <UserInfoTable userInfo={userInfo}/>
+              <UserInfoTable setOpenProfile={setOpenProfile} userInfo={userInfo}/>
             </Box>
           </Modal>
         </MenuItem>
         <Divider />
         <MenuItem component="div">
           <Button sx={{textAlign:"center"}} onClick={()=>{
-                console.log("logout")
+                setOpenLogin(false);
                 dispatch(postLogOut());
                 logOut();
               }}>
