@@ -11,12 +11,13 @@ import Test from './pages/Test';
 import AWS from "aws-sdk"
 import hljs from 'highlight.js';
 import Search from './pages/Search';
-import { Box, Button} from '@mui/material';
-import { useEffect} from 'react';
+import { Box, Button, Modal} from '@mui/material';
+import { useEffect, useState} from 'react';
 import {  useDispatch, useSelector } from 'react-redux';
-import { cookie, handleRequest, logOut, setTokenToBrowser, } from './Auth';
+import { cookie, logOut, setTokenToBrowser, } from './Auth';
 import { postLoginFail, postLoginStart, postLoginSuccess,  } from './redux/moduels/login';
 import axios from 'axios';
+import ChattingModal from './components/ChattingModal';
 
 
 hljs.configure({   // optionally configure hljs
@@ -82,21 +83,44 @@ function App() {
     zIndex:"1",
   }
 
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   return (
     <div className="App">
-            <BrowserRouter>  
-                <Header/>
-                <Box sx={{position:"fixed",right:0}}>
-                  <Button onClick={()=>{handleRequest("/api/user/test")}} sx={testBtnStyle}>login-Test-Btn</Button>
-                </Box>
-                <Route path="/contents/search/:keyword" exact component={Search}/>
-                <Route path="/contents/:category" exact component={Home}/>
-                <Route path="/content/update/:contentId" component={UpdateContent}/>
-                <Route path="/content/:contentId" exact component={Detail}/>
-                <Route path="/add-content"  exact component={AddContent}/>
-                <Route path="/test" exact component={Test}/>
-                <Route path="/" exact component={Home}/>  
-            </BrowserRouter>
+      <BrowserRouter>
+        <Header />
+        <Box sx={{ position: "fixed", right: 0 }}>
+          <Button
+            onClick={handleOpen}
+            sx={{ ...testBtnStyle, background: "green" }}
+          >
+            open chat
+          </Button>
+          {/* <Button onClick={()=>{handleRequest("/api/user/test")}} sx={testBtnStyle}>login-Test-Btn</Button> */}
+        </Box>
+        <Modal
+          sx={{
+            width: "90%",
+            margin: "100px auto",
+
+          }}
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <ChattingModal />
+        </Modal>
+        <Route path="/contents/search/:keyword" exact component={Search} />
+        <Route path="/contents/:category" exact component={Home} />
+        <Route path="/content/update/:contentId" component={UpdateContent} />
+        <Route path="/content/:contentId" exact component={Detail} />
+        <Route path="/add-content" exact component={AddContent} />
+        <Route path="/test" exact component={Test} />
+        <Route path="/" exact component={Home} />
+      </BrowserRouter>
     </div>
   );
 }

@@ -68,16 +68,37 @@ export default function LoginMenu() {
   }
   return (
     <>
-      <Box onClick={handleClick} sx={{listStyle:"none", display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-        <Tooltip title="Account settings">
-          <IconButton size="small" sx={{ left:"7px",top:"2px",ml: 2 ,marginBottom:{xs:'5px',sm:'13px'}}}>
-            {
-              login?
-              <Avatar src={userInfo.profileUrl} sx={{width: 39, height: 39 }}/>
-              :
-              <Avatar sx={{width: 39, height: 39 }}/>
-            }
-            
+      <Box
+        onClick={handleClick}
+        sx={{
+          listStyle: "none",
+          display: "flex",
+          alignItems: "center",
+          textAlign: "center",
+        }}
+      >
+        <Tooltip title={login ? "회원 정보" : "로그인"}>
+          <IconButton
+            size="small"
+            sx={{
+              left: "7px",
+              top: "2px",
+              ml: 2,
+              marginBottom: { xs: "5px", sm: "13px" },
+            }}
+          >
+            {login ? (
+              <Avatar
+                src={userInfo.profileUrl}
+                sx={{
+                  boxShadow: "2px 2px 2px  rgba(0, 0, 0, 0.658)",
+                  width: 39,
+                  height: 39,
+                }}
+              />
+            ) : (
+              <Avatar sx={{ width: 39, height: 39 }} />
+            )}
           </IconButton>
         </Tooltip>
       </Box>
@@ -88,86 +109,102 @@ export default function LoginMenu() {
         PaperProps={{
           elevation: 0,
           sx: {
-            overflow: 'visible',
-            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-            '& .MuiAvatar-root': {
+            overflow: "visible",
+            filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+            "& .MuiAvatar-root": {
               width: 32,
               height: 32,
               ml: -0.5,
               mr: 1,
             },
-            '&:before': {
+            "&:before": {
               content: '""',
-              display: 'block',
-              position: 'absolute',
+              display: "block",
+              position: "absolute",
               top: 0,
               right: 14,
               width: 10,
               height: 10,
-              bgcolor: 'background.paper',
-              transform: 'translateY(-50%) rotate(45deg)',
+              bgcolor: "background.paper",
+              transform: "translateY(-50%) rotate(45deg)",
               zIndex: 0,
             },
           },
         }}
-        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+        transformOrigin={{ horizontal: "right", vertical: "top" }}
+        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-      {login?
-      <div>
-        <MenuItem component="div">
-          <Button sx={{textAlign:"center"}} onClick={handleProfileModal}>
-            <Avatar src={userInfo.profileUrl} sizes="small" sx={{marginRight:"10px"}}/>
-            프로필
-          </Button>
-        </MenuItem>
-        <MenuItem component="div">
-          <Button sx={{textAlign:"center"}} onClick={handleProfileModal}>
-            <Settings  sx={{marginRight:"10px"}} size="small"/>
-             회원 정보 변경
-          </Button>
-            <Modal
-            open={openProfile}
-            onClose={()=>{setOpenProfile(false)}}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
-            <Box sx={profileModalStyle}>
-              <UserInfoTable setOpenProfile={setOpenProfile} userInfo={userInfo}/>
-            </Box>
-          </Modal>
-        </MenuItem>
-        <Divider />
-        <MenuItem component="div">
-          <Button sx={{textAlign:"center"}} onClick={()=>{
-                setOpenLogin(false);
-                dispatch(postLogOut());
-                logOut();
-              }}>
-            <LogoutIcon sx={{marginRight:"10px",fontWeight:"800"}}  size="small"/>
-            Log-out
-          </Button>
-        </MenuItem>
-      </div>
-      :
-      <div>
-        <MenuItem component="div">
-          <ListItemIcon>
-            <Login fontSize="small" />
-          </ListItemIcon>
-          <Button onClick={openLoginForm}>로그인</Button>
-        </MenuItem>
-        <MenuItem component="div">
-          <ListItemIcon>
-            <FiberNewIcon fontSize="small" />
-          </ListItemIcon>
-          <Button  onClick={openSignUpForm}>회원가입</Button>
-        </MenuItem>
-      </div>
-      }
+        {login ? (
+          <div>
+            <MenuItem component="div">
+              <Button sx={{ textAlign: "center" }} onClick={handleProfileModal}>
+                <Avatar
+                  src={userInfo.profileUrl}
+                  sx={{
+                    marginRight: "10px",
+                  }}
+                />
+                프로필
+              </Button>
+            </MenuItem>
+            <MenuItem component="div">
+              <Button sx={{ textAlign: "center" }} onClick={handleProfileModal}>
+                <Settings sx={{ marginRight: "10px" }} size="small" />
+                회원 정보 변경
+              </Button>
+              <Modal
+                open={openProfile}
+                onClose={() => {
+                  setOpenProfile(false);
+                }}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              >
+                <Box sx={profileModalStyle}>
+                  <UserInfoTable
+                    setOpenProfile={setOpenProfile}
+                    userInfo={userInfo}
+                  />
+                </Box>
+              </Modal>
+            </MenuItem>
+            <Divider />
+            <MenuItem component="div">
+              <Button
+                sx={{ textAlign: "center" }}
+                onClick={() => {
+                  setOpenLogin(false);
+                  dispatch(postLogOut());
+                  logOut();
+                }}
+              >
+                <LogoutIcon
+                  sx={{ marginRight: "10px", fontWeight: "800" }}
+                  size="small"
+                />
+                Log-out
+              </Button>
+            </MenuItem>
+          </div>
+        ) : (
+          <div>
+            <MenuItem component="div">
+              <ListItemIcon>
+                <Login fontSize="small" />
+              </ListItemIcon>
+              <Button onClick={openLoginForm}>로그인</Button>
+            </MenuItem>
+            <MenuItem component="div">
+              <ListItemIcon>
+                <FiberNewIcon fontSize="small" />
+              </ListItemIcon>
+              <Button onClick={openSignUpForm}>회원가입</Button>
+            </MenuItem>
+          </div>
+        )}
       </Menu>
-      {!login&&openLogin?<LoginForm setOpenLogin={setOpenLogin}/>:""}
-      {!login&&openSignUp?<SignUpForm setOpenSignUp={setOpenSignUp}/>:""}
+      {!login && openLogin ? <LoginForm setOpenLogin={setOpenLogin} /> : ""}
+      {!login && openSignUp ? <SignUpForm setOpenSignUp={setOpenSignUp} /> : ""}
     </>
   );
 }

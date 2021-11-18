@@ -46,10 +46,11 @@ export const handleRequest = (url,action,data) => {
         console.log("success",resp);
       })
       .catch((error)=>{
-        console.log(error.response.status,error.response.data.message)
         if(error.response.status === 401 && error.response.data.message === "ACCESS_TOKEN_EXPIRED"){
           console.log("refresh_token")
           tokenRefresh(url);  
+        }else if(error.response.status === 403){
+          alert("로그인이 필요합니다 로그인 후 다시 시도해 주세요.");
         }
       })
     }
