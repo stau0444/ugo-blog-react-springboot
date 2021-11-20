@@ -5,7 +5,6 @@ const POST_LOGOUT = "ugo-blog/login/POST_LOGOUT"
 const INIT_LOGINSTATER = "ugo-blog/login/INIT_LOGINSTATER"
 
 
-
 export const initLoginState = () => {
     console.log("INIT_LOGINSTATER")
     return{

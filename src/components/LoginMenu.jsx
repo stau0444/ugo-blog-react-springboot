@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import UserInfoTable from './UserInfoTable';
 import { logOut } from '../Auth';
 import { postLogOut } from '../redux/moduels/login';
+import UserInfoUpdateForm from './UserInfoUpdateForm';
 
 const profileModalStyle = {
   position: 'absolute',
@@ -41,7 +42,7 @@ export default function LoginMenu() {
   const [openProfile , setOpenProfile] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-
+  const [openProfileUpdate , setOpenProfileUpdate] = useState(false);
   
   const dispatch = useDispatch();
   const {login, userInfo} = useSelector(state => state.login)
@@ -148,21 +149,21 @@ export default function LoginMenu() {
               </Button>
             </MenuItem>
             <MenuItem component="div">
-              <Button sx={{ textAlign: "center" }} onClick={handleProfileModal}>
+              <Button sx={{ textAlign: "center" }} onClick={()=>{setOpenProfileUpdate(true)}}>
                 <Settings sx={{ marginRight: "10px" }} size="small" />
                 회원 정보 변경
               </Button>
               <Modal
-                open={openProfile}
+                open={openProfileUpdate}
                 onClose={() => {
-                  setOpenProfile(false);
+                  setOpenProfileUpdate(false);
                 }}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
               >
                 <Box sx={profileModalStyle}>
-                  <UserInfoTable
-                    setOpenProfile={setOpenProfile}
+                  <UserInfoUpdateForm
+                    setOpenProfile={setOpenProfileUpdate}
                     userInfo={userInfo}
                   />
                 </Box>

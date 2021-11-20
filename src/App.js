@@ -11,13 +11,13 @@ import Test from './pages/Test';
 import AWS from "aws-sdk"
 import hljs from 'highlight.js';
 import Search from './pages/Search';
-import { Box, Button, Modal} from '@mui/material';
-import { useEffect, useState} from 'react';
+import { useEffect, } from 'react';
 import {  useDispatch, useSelector } from 'react-redux';
-import { cookie, logOut, setTokenToBrowser, } from './Auth';
+import { cookie, handleRequest, logOut, setTokenToBrowser, } from './Auth';
 import { postLoginFail, postLoginStart, postLoginSuccess,  } from './redux/moduels/login';
 import axios from 'axios';
-import ChattingModal from './components/ChattingModal';
+import { Box, Button } from '@mui/material';
+import { testBtnStyle } from './components/RealtimeChatting';
 
 
 hljs.configure({   // optionally configure hljs
@@ -31,7 +31,7 @@ function App() {
   let isOn = useSelector(state=>state.nightMode)
   
   useEffect(()=>{
-    const initLoginState =  (token) => {
+    const initLoginState =  () => {
       async function initLoginState(){
         try{
           const headers = {"Authorization":"Bearer "+ cookie.get("refresh_token")}
@@ -66,53 +66,22 @@ function App() {
       document.querySelector(".App").style.background ="rgb(32, 38, 45)"
     }
   },[isOn,dispatch])
+
   //AWS  config
   AWS.config.update({
     region:'ap-northeast-2',
     credentials: new AWS.CognitoIdentityCredentials({
-        IdentityPoolId:'ap-northeast-2:f4eab593-5f5f-4e47-8b60-a45049ed7a5d',
+        IdentityPoolId:process.env.REACT_APP_AWS_S3_IDENTIFOOL_ID,
     })
   })
-
-  const testBtnStyle ={
-    width:"50%",
-    color:"black",
-    top:"40px",
-    margin:"5px",
-    background: "rgba(231, 13, 13, 0.521);",
-    zIndex:"1",
-  }
-
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
   return (
     <div className="App">
       <BrowserRouter>
         <Header />
-        <Box sx={{ position: "fixed", right: 0 }}>
-          <Button
-            onClick={handleOpen}
-            sx={{ ...testBtnStyle, background: "green" }}
-          >
-            open chat
-          </Button>
-          {/* <Button onClick={()=>{handleRequest("/api/user/test")}} sx={testBtnStyle}>login-Test-Btn</Button> */}
+        <Box sx={{position:"fixed",right:0}}>
+          <Button onClick={()=>{handleRequest("/api/user/test")}} sx={testBtnStyle}>login-Test-Btn</Button>
         </Box>
-        <Modal
-          sx={{
-            width: "90%",
-            margin: "100px auto",
-
-          }}
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <ChattingModal />
-        </Modal>
         <Route path="/contents/search/:keyword" exact component={Search} />
         <Route path="/contents/:category" exact component={Home} />
         <Route path="/content/update/:contentId" component={UpdateContent} />
