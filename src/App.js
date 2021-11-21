@@ -25,9 +25,7 @@ hljs.configure({   // optionally configure hljs
 });
 
 function App() {
-
   const dispatch = useDispatch();
-  
   let isOn = useSelector(state=>state.nightMode)
   
   useEffect(()=>{
@@ -71,7 +69,7 @@ function App() {
   AWS.config.update({
     region:'ap-northeast-2',
     credentials: new AWS.CognitoIdentityCredentials({
-        IdentityPoolId:process.env.REACT_APP_AWS_S3_IDENTIFOOL_ID,
+        IdentityPoolId:"ap-northeast-2:f4eab593-5f5f-4e47-8b60-a45049ed7a5d",
     })
   })
 

@@ -21,11 +21,11 @@ export default function UserInfoTable({setOpenProfile,userInfo}) {
         <Avatar
           src={userInfo.profileUrl}
           sx={{
-            width: "30%",
-            height: "100px",
-            margin:"25px auto",
+            width:"30%",
+            height: "140px",
             borderRadius: "50%",
-            background: "gray",
+            background:"gray",
+            margin: "30px auto"
           }}
         />
         <Table sx={{ color: "gray", textAlign: "center" }}>

@@ -15,7 +15,7 @@ export const profileStyle = {
     width:"30%",
     height: "140px",
     borderRadius: "50%",
-    background:"gray"
+    background:"gray",
 }
 export default function UploadProfile({image,setImage}) {
     const [open, setOpen] = useState(false);
@@ -23,7 +23,7 @@ export default function UploadProfile({image,setImage}) {
     const handleClose = () => setOpen(false);
     return(
         <>
-            <img style={profileStyle} src={image.imagePreviewUrl} alt="profileImg" onClick={handleOpen}/>
+            <img className="profileImg" style={profileStyle} src={image.imagePreviewUrl} alt="profileImg" onClick={handleOpen}/>
             <Modal
                 sx={modalStyle}
                 open={open}

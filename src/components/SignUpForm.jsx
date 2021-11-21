@@ -22,26 +22,31 @@ const VerifedText = styled('p')`
 
 `
 
-const uploadBase64ImgToS3Bucket = (image) => {
-  const buf = Buffer.from(image.imagePreviewUrl.replace(/^data:image\/\w+;base64,/, ""),'base64')
-  const upload = new AWS.S3.ManagedUpload({
-      params:{
-          Key: image.file.name+":profile", 
-          Body: buf,
-          Bucket : 'ugo-blog-image-bucket',
-          ContentEncoding: 'base64',
-          ContentType: 'image/jpeg'
-      },
-  })
-  const promise = upload.promise()
-  promise.then(
-    function (data) {
-      console.log("after upload",data)
-    },
-    function (error) {
-      console.log("S3 업로드 오류 발생 ", error.message);
+export const uploadBase64ImgToS3Bucket = (image) => {
+  async function uploadBase64ImgToS3Bucket(){
+    const buf = Buffer.from(image.imagePreviewUrl.replace(/^data:image\/\w+;base64,/, ""),'base64')
+    const upload = new AWS.S3.ManagedUpload({
+        params:{
+            Key: image.file.name+":profile", 
+            Body: buf,
+            Bucket : 'ugo-blog-image-bucket',
+            ContentEncoding: 'base64',
+            ContentType: 'image/jpeg'
+        },
     })
-}  
+    const promise = upload.promise()
+    await promise.then(
+      
+      function (data) {
+        console.log("after upload",data)
+      },
+      function (error) {
+        console.log("S3 업로드 오류 발생 ", error.message);
+      })
+      console.log("s3 upload")
+  }
+  uploadBase64ImgToS3Bucket();
+} 
 
 export default function SignUpForm({setOpenSignUp}) {
     

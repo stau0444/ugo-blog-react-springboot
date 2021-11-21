@@ -15,10 +15,10 @@ import LoginForm from './LoginForm';
 import { Button, Modal } from '@mui/material';
 import SignUpForm from './SignUpForm';
 import { useDispatch, useSelector } from 'react-redux';
-import UserInfoTable from './UserInfoTable';
 import { logOut } from '../Auth';
 import { postLogOut } from '../redux/moduels/login';
 import UserInfoUpdateForm from './UserInfoUpdateForm';
+import UserInfoTable from './UserInfoTable';
 
 const profileModalStyle = {
   position: 'absolute',
@@ -46,7 +46,7 @@ export default function LoginMenu() {
   
   const dispatch = useDispatch();
   const {login, userInfo} = useSelector(state => state.login)
-
+  
   
   const openLoginForm = () =>{
     setAnchorEl(null);
@@ -163,7 +163,22 @@ export default function LoginMenu() {
               >
                 <Box sx={profileModalStyle}>
                   <UserInfoUpdateForm
-                    setOpenProfile={setOpenProfileUpdate}
+                    setOpenProfileUpdate={setOpenProfileUpdate}
+                    userInfo={userInfo}
+                  />
+                </Box>
+              </Modal>
+              <Modal
+                open={openProfile}
+                onClose={() => {
+                  setOpenProfile(false);
+                }}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              >
+                <Box sx={profileModalStyle}>
+                  <UserInfoTable
+                    setOpenProfile={setOpenProfile}
                     userInfo={userInfo}
                   />
                 </Box>

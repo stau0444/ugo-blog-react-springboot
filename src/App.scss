@@ -717,3 +717,11 @@ table ,th{
 }
 
 
+.profileImg{
+  
+  &:hover{
+    transition: box-shadow 0.2s linear;
+    box-shadow: 5px 5px 10px black;
+    cursor: pointer;
+  }
+}

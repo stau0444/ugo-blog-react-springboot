@@ -1,28 +1,68 @@
-import { Avatar,  Box,  Button,  Checkbox,  Input,  Table, Typography } from "@mui/material";
-import axios from "axios";
+import {   Box,  Button,  Checkbox,  Input,  Table, Typography } from "@mui/material";
 import {useState } from "react";
+import { useDispatch } from "react-redux";
+import { handleRequest } from "../Auth";
+import { updateUserProfile } from "../redux/moduels/login";
+import { uploadBase64ImgToS3Bucket } from "./SignUpForm";
+import UploadProfile from "./UploadProfile";
+import AWS from "aws-sdk"
 
 
-export default function UserInfoUpdateForm({setOpenProfile,userInfo}) {
+export default function UserInfoUpdateForm({setOpenProfileUpdate,userInfo}) {
+    const dispatch = useDispatch();
+    const imageUrlBeforeUpdate = userInfo.profileUrl
     const [emailSubscribe , setEmailSubscribe] = useState(userInfo.emailSubscribe)
     const [email,setEmail] = useState(userInfo.email);
+    const [image , setImage] = useState({file:null,imagePreviewUrl:userInfo.profileUrl})
+    
+
+    const deleteS3Image=()=>{
+      const s3 = new AWS.S3()
+      console.log("imageUrlBeforeUpdate",imageUrlBeforeUpdate)
+      const params = {
+        Bucket: 'ugo-blog-image-bucket',
+        Key: `${imageUrlBeforeUpdate}`
+      };
+      s3.deleteObject(params, function(err, data) {
+        if (err) console.log("삭제실패",err, err.stack); 
+        else     console.log("삭제성공",data);           
+
+      });
+      
+    }
 
     const handleUpdate = () => {
         async function handleUpdate(){
+            const updateData = {
+                username:userInfo.username,
+                email:email,
+                emailSubscribe:emailSubscribe,
+                profileUrl:"https://ugo-blog-image-bucket.s3.ap-northeast-2.amazonaws.com/"+image.file.name+":profile"
+            }
+            console.log("updateData",updateData);
             try{
-                await axios.put("/api/user")
+                handleRequest("/api/user","put",updateData);
+                if(imageUrlBeforeUpdate !== undefined){
+                  console.log("delete Image",imageUrlBeforeUpdate)
+                  deleteS3Image();
+                }
+                 uploadBase64ImgToS3Bucket(image);
+                alert("회원정보가 수정되었습니다.")
+                setOpenProfileUpdate(false);     
+                
             }catch(error){
+                alert("회원정보 수정에 실패했습니다");
                 console.log(error)
             } 
         }
-        handleUpdate();        
+        handleUpdate();   
     }
 
     return (
       <>
         <Box
           onClick={() => {
-            setOpenProfile(false);
+            setOpenProfileUpdate(false);
           }}
           sx={{ float: "right" }}
         >
@@ -38,16 +78,17 @@ export default function UserInfoUpdateForm({setOpenProfile,userInfo}) {
             {userInfo.username}
           </Typography>
         </Typography>
-        <Avatar
-          src={userInfo.profileUrl}
+        <Box
           sx={{
-            width: "30%",
-            height: "100px",
-            margin: "25px auto",
-            borderRadius: "50%",
-            background: "gray",
+            textAlign: "center",
+            margin: "30px",
           }}
-        />
+        >
+          <UploadProfile image={image} setImage={setImage} />
+          <small style={{ display: "block", margin: "15px" }}>
+            위에 이미지를 클릭하여 변경할 이미지를 선택해주세요
+          </small>
+        </Box>
         <Table sx={{ color: "gray", textAlign: "center" }}>
           <tbody>
             <tr>
@@ -69,7 +110,7 @@ export default function UserInfoUpdateForm({setOpenProfile,userInfo}) {
               <th>Email 구독</th>
               <td>
                 <Checkbox
-                  value={emailSubscribe}
+                  checked={emailSubscribe}
                   onChange={() => {
                     setEmailSubscribe(emailSubscribe ? false : true);
                   }}
@@ -85,9 +126,12 @@ export default function UserInfoUpdateForm({setOpenProfile,userInfo}) {
             float: "right",
             color: "white",
             background: "#39c55c",
-            marginTop:"10px"
+            marginTop: "10px",
           }}
-          onClick={handleUpdate}
+          onClick={() => {
+            handleUpdate(image);
+            dispatch(updateUserProfile(image.imagePreviewUrl));
+          }}
         >
           변경
         </Button>
