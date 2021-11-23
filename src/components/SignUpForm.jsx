@@ -97,7 +97,6 @@ export default function SignUpForm({setOpenSignUp}) {
           email:emailRef.current.value,
           profile:"https://ugo-blog-image-bucket.s3.ap-northeast-2.amazonaws.com/"+image.file.name+":profile"
         }
-        console.log("userPostData",userPostData)
         axios.post("/api/user",userPostData)
         .then(()=>{
           setOpenSignUp(false);

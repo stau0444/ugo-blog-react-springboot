@@ -17,7 +17,6 @@ import axios from 'axios';
   - 컴포넌트를 다시 랜더하는 것이아니라 css display만 none으로 하는 방식으로 바꾼다.
 */
 export default function ContentUpdateFormContainer({isOpen,isUpdate,setIsOpen}) {
-    
     const [image , setImage] = useState({file:null,imagePreviewUrl:'/logo_transparent.png'})
     const [title , setTitle] = useState('');
     const [value , setValue] = useState('');
@@ -49,7 +48,7 @@ export default function ContentUpdateFormContainer({isOpen,isUpdate,setIsOpen}) 
     },[setValue]);
 
     //이미지 관리 함수
-    const handleImageChange = useCallback((e)=>{
+    const handleImageChange =  (e)=>{
         let reader = new FileReader();
         let file = e.target.files[0];
 
@@ -60,7 +59,7 @@ export default function ContentUpdateFormContainer({isOpen,isUpdate,setIsOpen}) 
             });
         }
         reader.readAsDataURL(file);
-    },[]);
+    };
 
     const hadleDescriptionValue = useCallback( (e) =>{
       setDescription(e.target.value)
@@ -78,21 +77,22 @@ export default function ContentUpdateFormContainer({isOpen,isUpdate,setIsOpen}) 
                 article: value,
                 tags: tags,
             };
-            console.log('putTags' , putData.tags);
+            console.log('putData',putData)
             try{
                 const hasNull = inputsNullCheck(putData);
                 if(hasNull){
                   return;
                 }
                 dispatch(putContentStart())
-                const resp = await axios.put(`/api/content/${content.id}`,putData);
-                console.log('contentId' , content.id)
+                const resp = axios.put(`/api/content/${content.id}`,putData)
                 dispatch(putContentSuccess(resp));
                 if(image.file){
                   uploadToS3(image);
                 }
-                history.push('/')
+                history.replace("/")
             }catch(error){
+              console.log("updateFail")
+              console.log("updateError" , error.response)
                 dispatch(putContentFail(error))
             }
         }

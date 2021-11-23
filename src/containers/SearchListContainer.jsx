@@ -22,7 +22,6 @@ export default function SearchListContainer({keyword}) {
             try{
               dispatch(getSearchListStart());
               const resp = await axios.get(`/api/content/search?keyword=${keyword?keyword:""}&page=${page-1}&size=6`);  
-              console.log('resp' , resp);
               if(resp.data.length === 0){
                 throw new Error(keyword+"로 검색된 결과가 없습니다.")
               }

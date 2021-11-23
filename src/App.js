@@ -13,7 +13,7 @@ import hljs from 'highlight.js';
 import Search from './pages/Search';
 import { useEffect, } from 'react';
 import {  useDispatch, useSelector } from 'react-redux';
-import { cookie, handleRequest, logOut, setTokenToBrowser, } from './Auth';
+import { cookie, handleAuthRequest, logOut, setTokenToBrowser, } from './Auth';
 import { postLoginFail, postLoginStart, postLoginSuccess,  } from './redux/moduels/login';
 import axios from 'axios';
 import { Box, Button } from '@mui/material';
@@ -33,11 +33,9 @@ function App() {
       async function initLoginState(){
         try{
           const headers = {"Authorization":"Bearer "+ cookie.get("refresh_token")}
-          console.log(cookie.get("refresh_token"))
           dispatch(postLoginStart());
           await axios.post("/api/user/login",null,{headers:headers}).then(
             resp=>{
-              console.log('resp' , resp)
               setTokenToBrowser(resp);
               dispatch(postLoginSuccess(resp.data));
             }
@@ -78,7 +76,7 @@ function App() {
       <BrowserRouter>
         <Header />
         <Box sx={{position:"fixed",right:0}}>
-          <Button onClick={()=>{handleRequest("/api/user/test")}} sx={testBtnStyle}>login-Test-Btn</Button>
+          <Button onClick={()=>{handleAuthRequest("/api/user/test")}} sx={testBtnStyle}>login-Test-Btn</Button>
         </Box>
         <Route path="/contents/search/:keyword" exact component={Search} />
         <Route path="/contents/:category" exact component={Home} />

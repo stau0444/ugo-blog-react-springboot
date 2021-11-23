@@ -10,10 +10,13 @@ export const getContent = (dispatch,contentId) => {
   async function getContent(){
     try{
       dispatch(getContentDetailStart());
+      delete axios.defaults.headers.common['Authorization'];
       const resp = await axios.get("/api/content/"+contentId)
       dispatch(getContentDetailSuccess(resp.data));
     }catch(error){
+      console.log('get detail Error',error.response)
       dispatch(getContentDetailFail(error));
+      
     }
   }
   getContent();
@@ -49,5 +52,12 @@ export default function ContentDetailContainer({match}) {
       getContent(dispatch,match.params.contentId);
     },[match,dispatch])  
 
-    return <ContentDetail deleteContent={deleteContent} loading = {loading} match={ match } content = { content }/>;
+    return (
+      <ContentDetail
+        deleteContent={deleteContent}
+        loading={loading}
+        match={match}
+        content={content}
+      />
+    );
 }

@@ -42,7 +42,7 @@ export default function Header() {
 
     return (
       <Grid container>
-        <Grid item xs={12} sx={{zIndex:0}}>
+        <Grid item xs={12} >
           <MenuBar />
         </Grid>
         <Grid item xs={12}>

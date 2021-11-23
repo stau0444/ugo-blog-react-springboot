@@ -69,7 +69,6 @@ export default function ResumeModal() {
     const handleClose = () => setOpen(false);
     
     const handleScroll = (e) => {
-      console.log(e.target.scrollTop);
       if(e.target.scrollTop <= 10){
          document.querySelector(".resume-ribbon").classList.add("active")
       }else{
@@ -80,7 +79,6 @@ export default function ResumeModal() {
       }else{
         document.querySelector(".resume-skills").classList.remove("active")
       }
-      console.log(document.querySelector(".resume-ribbon").classList)
     };
 
     return (

@@ -75,7 +75,7 @@ export default function MenuBar() {
         <AppBar
           position="static"
           sx={{
-            zIndex: 0,
+            zIndex: 1,
             backgroundColor: "transparent",
             background: "#23ca98ef",
             height: "55px",

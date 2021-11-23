@@ -19,7 +19,6 @@ export default function ImageEditor ({handleClose,image,setImage}) {
         };
     reader.readAsDataURL(file);
   };
-  console.log('image',image)
 
   
 

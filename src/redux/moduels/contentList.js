@@ -74,13 +74,23 @@ export default function reducer(state = initialState , action) {
     }
 
     if(action.type === GET_CONTENT_LIST_SUCCESS){
-        return {
-          category: action.category,
-          page:  action.page,
-          data: action.data,
-          loading:action.loading,
-          totalCount:action.totalCount
-        };
+        if(state.category !== action.category){
+            return {
+                category: action.category,
+                page:  1,
+                data: action.data,
+                loading:action.loading,
+                totalCount:action.totalCount
+              };
+        }else{
+            return {
+                category: action.category,
+                page:  action.page,
+                data: action.data,
+                loading:action.loading,
+                totalCount:action.totalCount
+              };
+        }
     }
 
     if(action.type === GET_CONTENT_LIST_FAIL){

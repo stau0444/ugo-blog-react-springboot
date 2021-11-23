@@ -21,7 +21,9 @@ export default function ContentListContainer({category}) {
                 try{
                     dispatch(getContentListStart())
                     await axios.get(`/api/contents?category=${category?category:""}&page=${page-1}&size=6`)
-                    .then(resp => {dispatch(getContentListSuccess(resp.data.content,category,page,resp.data.totalElements))});
+                    .then(resp => {
+                        dispatch(getContentListSuccess(resp.data.content,category,page,resp.data.totalElements))
+                    });
                 }catch(error){
                     dispatch(getContentListFail(error));
                 }

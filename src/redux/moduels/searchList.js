@@ -56,7 +56,6 @@ export default function reducer(state = initialState , action) {
       };
     }
     if(action.type === GET_SEARCH_LIST_SUCCESS){
-        console.log('action.data', action.data)
         return {
             data:action.data,
             loading:action.loading,

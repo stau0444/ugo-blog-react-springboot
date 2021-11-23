@@ -30,7 +30,6 @@ export default function SearchList({keyword,searchList,page,handlePageChange,tot
   const [listBgc,setListBgc] = useState();
   const isOn = useSelector(state => state.nightMode);
   useEffect(()=>{
-    console.log(isOn)
     if(isOn){
       setListBgc("#c9e0df")
     }else{

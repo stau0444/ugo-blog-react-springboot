@@ -117,7 +117,8 @@ const initialState = {
     id: 0,
     loading: false,
     tags: [],
-    title: ""
+    title: "",
+    userId:0
 }
 
 export default function reducer(state = initialState , action) {
@@ -137,11 +138,8 @@ export default function reducer(state = initialState , action) {
     }
     
     if(action.type === GET_CONTENT_FAIL){
-        return {
-            ...action.data,
-            loading:action.loading,
-            error:action.error
-        }
+        console.log("getContent fail")
+        return {...initialState}
     }
     
     if(action.type === POST_CONTENT_START){
@@ -152,6 +150,7 @@ export default function reducer(state = initialState , action) {
         return {...initialState};
     }
     if(action.type === POST_CONTENT_FAIL){
+        console.log("POST_CONTENT_FAIL")
         return {error:action.error , loading: action.loading};
     }
 
@@ -163,6 +162,7 @@ export default function reducer(state = initialState , action) {
         return {...initialState};
     }
     if(action.type === PUT_CONTENT_FAIL){
+        console.log("PUT_CONTENT_FAIL");
         return {error:action.error};
     }
 
@@ -173,6 +173,7 @@ export default function reducer(state = initialState , action) {
         return {...initialState};
     }
     if(action.type === DELETE_CONTENT_FAIL){
+        console.log('DELETE_CONTENT_FAIL');
         return {...state,error:action.error};
     }
     

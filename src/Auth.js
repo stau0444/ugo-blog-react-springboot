@@ -35,8 +35,8 @@ export  const tokenRefresh =(url) =>{
   }
 
 //리퀘스트 todo action type 까지 받도록 axios.create 로 변경
-export const handleRequest = (url,action,data) => {
-    async function handleRequest(){
+export const handleAuthRequest = (url,action,data) => {
+    async function handleAuthRequest(){
       await axios({
         method: action,
         url : url,
@@ -56,7 +56,7 @@ export const handleRequest = (url,action,data) => {
         }
       })
     }
-    handleRequest()
+    handleAuthRequest()
   }
   //로그아웃
   export const logOut = (refreshPage) =>{

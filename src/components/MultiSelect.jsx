@@ -4,10 +4,9 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { StyledInputLabel } from './ContentForm';
-import { useDispatch, useSelector, useStore } from 'react-redux';
+import { useDispatch, useSelector,  } from 'react-redux';
 import { addTag } from '../redux/moduels/contentTags';
 import { Box, Chip, Typography } from '@mui/material';
-import { useEffect } from 'react';
 
 const ITEM_HEIGHT = 20;
 const ITEM_PADDING_TOP = 10;
@@ -35,11 +34,6 @@ export default function MultiSelect({isUpdate,tags,savedTags}) {
   const dispatch = useDispatch();
   const theme = useTheme();
   const selectedTags = useSelector(state => state.contentTags);
-  const store = useStore()
-
-  useEffect(()=>{
-    dispatch(addTag([]))
-  },[savedTags,dispatch,store])
 
   const handleChange = (e) => {
     if(e.target.value.length > 3 ){
@@ -54,11 +48,12 @@ export default function MultiSelect({isUpdate,tags,savedTags}) {
   };
   return (
     <>
-      <StyledInputLabel sx={{border:0}}>관련 태그를 선택해주세요</StyledInputLabel>
-      <Typography variant="p" sx={{color:'#1976d2' ,fontSize:"12px" ,border:"1px solid #1976d2" ,padding:'4px' ,borderRadius:'5px'}}>선택된 태그</Typography>
+      <hr className="content-form-divider"/>
+      <StyledInputLabel sx={{margin:"40px auto",border:0,fontSize: "20px",}}>관련 태그를 선택해주세요</StyledInputLabel>
+      <Typography variant="p" sx={{color:'#1976d2' ,fontSize:"12px" ,border:"1px solid #1976d2" ,padding:'4px' ,borderRadius:'15px'}}>선택된 태그</Typography>
       <Box sx={{height:'64px'}}>
-        {selectedTags.map((tag)=>
-            <Chip key={tag.id} label={tag} size="small" color="success" sx={{margin:'20px 5px'}}/>
+        {selectedTags.map((tag,index)=>
+            <Chip key={index} label={tag} size="small" color="success" sx={{margin:'20px 5px'}}/>
         )}
       </Box>
       <FormControl sx={{ width: '70%',fontSize:'10px' ,color:'bisque' }}>

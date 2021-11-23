@@ -22,7 +22,6 @@ import axios from "axios";
 
 //s3 이미지 업로드 함수
 export const uploadToS3 = (image) =>{
-    console.log('S3 image' , image)
     const upload = new AWS.S3.ManagedUpload({
         params:{
             Bucket : 'ugo-blog-image-bucket',
@@ -61,6 +60,7 @@ export default function ContentFormContainer({isOpen,setIsOpen}) {
     const [image , setImage] = useState({file:null,imagePreviewUrl:'/logo_transparent.png'})
     const [title , setTitle] = useState('');
     const [description,setDescription] = useState('');
+    const userId = useSelector(state => state.login.userInfo.id)
     const value = useSelector(state => state.contentValue);
     const tags = useSelector(state => state.contentTags);
     const history = useHistory();
@@ -111,7 +111,8 @@ export default function ContentFormContainer({isOpen,setIsOpen}) {
                     imageUrl: `https://ugo-blog-image-bucket.s3.ap-northeast-2.amazonaws.com/${image.file.name}`,
                     article: value,
                     tags: tags,
-                    description:description
+                    description:description,
+                    userId:userId
             };
 
             try{
@@ -128,7 +129,12 @@ export default function ContentFormContainer({isOpen,setIsOpen}) {
                 resetInputValues();
                 history.push('/')
             }catch(error){
+                console.log("add content error ",error.response);
                 dispatch(postContentFail(error))
+                if(error.response.status === 403){
+                    alert("관리자만이 글을 작성할 수 있습니다. 홈페이지로 돌아갑니다.")
+                    history.push("/");
+                }
             }
         }
         postContent();

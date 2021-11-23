@@ -1,7 +1,7 @@
 import {   Box,  Button,  Checkbox,  Input,  Table, Typography } from "@mui/material";
 import {useState } from "react";
 import { useDispatch } from "react-redux";
-import { handleRequest } from "../Auth";
+import { handleAuthRequest } from "../Auth";
 import { updateUserProfile } from "../redux/moduels/login";
 import { uploadBase64ImgToS3Bucket } from "./SignUpForm";
 import UploadProfile from "./UploadProfile";
@@ -41,7 +41,7 @@ export default function UserInfoUpdateForm({setOpenProfileUpdate,userInfo}) {
             }
             console.log("updateData",updateData);
             try{
-                handleRequest("/api/user","put",updateData);
+              handleAuthRequest("/api/user","put",updateData);
                 if(imageUrlBeforeUpdate !== undefined){
                   console.log("delete Image",imageUrlBeforeUpdate)
                   deleteS3Image();
@@ -86,7 +86,7 @@ export default function UserInfoUpdateForm({setOpenProfileUpdate,userInfo}) {
         >
           <UploadProfile image={image} setImage={setImage} />
           <small style={{ display: "block", margin: "15px" }}>
-            위에 이미지를 클릭하여 변경할 이미지를 선택해주세요
+            이미지를 클릭하여 변경할 이미지를 선택해주세요
           </small>
         </Box>
         <Table sx={{ color: "gray", textAlign: "center" }}>

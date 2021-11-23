@@ -7,21 +7,18 @@ const UPDATE_USER_PROFILE = "ugo-blog/login/UPDATE_USER_PROFILE"
 
 
 export const updateUserProfile = (profileUrl) => {
-    console.log("profile update");
     return{
         type:UPDATE_USER_PROFILE,
         profileUrl
     }
 }
 export const initLoginState = () => {
-    console.log("INIT_LOGINSTATER")
     return{
         type:INIT_LOGINSTATER,
         loading:false,
     }
 }
 export const postLogOut = () => {
-    console.log("postLogOut")
     return{
         type:POST_LOGOUT,
         loading:false,
@@ -36,7 +33,6 @@ export const postLoginStart = () => {
 }
 
 export const postLoginSuccess = (loginState) => {
-    console.log("postLoginSuccess")
     return{
         type:POST_LOGIN_SUCCESS,
         loading:false,
@@ -45,7 +41,6 @@ export const postLoginSuccess = (loginState) => {
 }
 
 export const postLoginFail = () => {
-    console.log("postLoginFail")
     return{
         type:POST_LOGIN_FAIL,
         loading:false,
@@ -55,7 +50,12 @@ export const postLoginFail = () => {
 const initialState = {
     login:false,
     userInfo:{
-        
+        email: "",
+        emailSubscribe: false,
+        id: 0,
+        profileUrl:"",
+        signUpAt: "",
+        username: "",
     }
 };
 
@@ -70,7 +70,6 @@ export default function  reducer(state = initialState, action) {
         }
     } 
     if(action.type === POST_LOGOUT){
-        console.log("logOut",state)
         return {...initialState};
     }
     if(action.type === POST_LOGIN_START){
