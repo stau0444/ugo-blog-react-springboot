@@ -18,7 +18,6 @@ export default function UserInfoUpdateForm({setOpenProfileUpdate,userInfo}) {
 
     const deleteS3Image=()=>{
       const s3 = new AWS.S3()
-      console.log("imageUrlBeforeUpdate",imageUrlBeforeUpdate)
       const params = {
         Bucket: 'ugo-blog-image-bucket',
         Key: `${imageUrlBeforeUpdate}`
@@ -39,11 +38,9 @@ export default function UserInfoUpdateForm({setOpenProfileUpdate,userInfo}) {
                 emailSubscribe:emailSubscribe,
                 profileUrl:"https://ugo-blog-image-bucket.s3.ap-northeast-2.amazonaws.com/"+image.file.name+":profile"
             }
-            console.log("updateData",updateData);
             try{
               handleAuthRequest("/api/user","put",updateData);
                 if(imageUrlBeforeUpdate !== undefined){
-                  console.log("delete Image",imageUrlBeforeUpdate)
                   deleteS3Image();
                 }
                  uploadBase64ImgToS3Bucket(image);

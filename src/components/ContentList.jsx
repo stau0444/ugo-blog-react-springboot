@@ -15,7 +15,6 @@ export default function ContentList({
   const [listBgc,setListBgc] = useState();
   const isOn = useSelector(state => state.nightMode);
   useEffect(()=>{
-    console.log(isOn)
     if(isOn){
       setListBgc("#c9e0df")
     }else{
@@ -44,7 +43,7 @@ export default function ContentList({
         ) : (
           <AnimatePresence  initial={true}>
             {contentList.data.map((content) => (
-                <Grid key={content.id} item xs={12}  md={contentList.data.length !== 1 ? 6 : ""} lg={contentList.data.length !== 1 ? 4 : ""}>
+                <Grid item key={content.id}  xs={12}  sm={contentList.data.length !== 1 ? 6 : ""} lg={contentList.data.length !== 1 ? 4 : ""}>
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}

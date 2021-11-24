@@ -17,6 +17,9 @@ border-left: 0;
 border-right: 0;
 border-bottom:1px solid bisque;
 background-color: transparent;
+  &:focus{
+    outline: none !important;
+  }
 `
 export const StyledInputLabel = styled('label')`
 

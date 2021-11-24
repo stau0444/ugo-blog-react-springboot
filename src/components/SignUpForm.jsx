@@ -2,20 +2,20 @@ import "../Form.scss";
 import LoginIcon from '@mui/icons-material/Login';
 import { CloseBtn, Container, CustomModal, FormBtn, FormInput, FormLogo, ImgContainer, InputLabel, ModalContent } from "../FormComponents";
 import { useRef, useState } from "react";
-import { Box, Button, Chip, styled } from "@mui/material";
+import { Box, Button, Chip, Grid, styled } from "@mui/material";
 import axios from "axios";
 import { useHistory } from "react-router";
 import UploadProfile from "./UploadProfile";
 import AWS from "aws-sdk"
 
 
-const UnverifedText = styled('p')`
+export const UnverifedText = styled('p')`
   color:tomato;
   font-size:12px;
   margin:3px 10px;
 `
 
-const VerifedText = styled('p')`
+export const VerifedText = styled('p')`
   color:green;
   font-size:12px;
   margin:3px 10px;
@@ -147,7 +147,7 @@ export default function SignUpForm({setOpenSignUp}) {
          document.getElementById('id02').style.display='none';
     }
     return (
-      <div>        
+      <div>
         <CustomModal id="id02" className="modal">
           <ModalContent className="modal-content animate">
             <ImgContainer className="imgcontainer">
@@ -158,19 +158,24 @@ export default function SignUpForm({setOpenSignUp}) {
               >
                 &times;
               </CloseBtn>
-              <FormLogo component="span">
-                  회원가입
-              </FormLogo>
-              <LoginIcon fontSize="small" sx={{color:"gray" ,marginLeft:"3px" , marginBottom:"-2px"}}/>
+              <FormLogo component="span">회원가입</FormLogo>
+              <LoginIcon
+                fontSize="small"
+                sx={{ color: "gray", marginLeft: "3px", marginBottom: "-2px" }}
+              />
             </ImgContainer>
             <Container className="container">
-            <Box sx={{textAlign:"center"}}>
-              <Chip sx={{margin:"0 auto"}} color="success" label="프로필 이미지"/>
-            </Box>
-            <Box sx={{textAlign:"center" , margin:"10px"}}>
-              <UploadProfile image={image} setImage={setImage}/>
-            </Box>
-            <InputLabel>아이디</InputLabel>
+              <Box sx={{ textAlign: "center" }}>
+                <Chip
+                  sx={{ margin: "0 auto" }}
+                  color="success"
+                  label="프로필 이미지"
+                />
+              </Box>
+              <Box sx={{ textAlign: "center", margin: "10px" }}>
+                <UploadProfile image={image} setImage={setImage} />
+              </Box>
+              <InputLabel>아이디</InputLabel>
               <FormInput
                 width="85%"
                 ref={userIdRef}
@@ -181,24 +186,29 @@ export default function SignUpForm({setOpenSignUp}) {
                 name="userId"
                 required
               />
-              <Button onClick={checkID}>중복확인</Button>
-              {
-              isExistId?
-                <UnverifedText sx={{display:(isChecked?"":"none")}}>
+              <Button sx={{
+                
+                marginLeft: "10px",
+                background: "#4213c2ba",
+                borderRadius:"30px",
+                color: "white",
+              }}onClick={checkID}>중복확인</Button>
+              {isExistId ? (
+                <UnverifedText sx={{ display: isChecked ? "" : "none" }}>
                   이미 존재하는 아이디 입니다.
                 </UnverifedText>
-              :
-                <VerifedText sx={{display:(isChecked?"":"none")}}>
+              ) : (
+                <VerifedText sx={{ display: isChecked ? "" : "none" }}>
                   사용가능한 아이디 입니다.
                 </VerifedText>
-              }
-              {
-                !idRegMatch?
+              )}
+              {!idRegMatch ? (
                 <UnverifedText>
                   아이디는 5~15자 영문 또는 숫자로 조합으로 만들어주세요
                 </UnverifedText>
-                :""
-              }
+              ) : (
+                ""
+              )}
               <InputLabel>비밀번호</InputLabel>
               <FormInput
                 ref={pwdRef}
@@ -218,38 +228,53 @@ export default function SignUpForm({setOpenSignUp}) {
                 onChange={checkPwd}
                 required
               />
-              {
-                pwdMatch?
+              {pwdMatch ? (
                 ""
-                :
-                  <UnverifedText>
-                    비밀번호가 일치하지 않습니다.
-                  </UnverifedText>
-              }
-              {
-                !pwdRegMatch?
-                  <UnverifedText sx={{color:'gray'}}>
-                    비밀번호는 특수문자 ,숫자를 포함한 7~15 글자 사이로 작성해주세요
-                  </UnverifedText>
-                :
+              ) : (
+                <UnverifedText>비밀번호가 일치하지 않습니다.</UnverifedText>
+              )}
+              {!pwdRegMatch ? (
+                <UnverifedText sx={{ color: "gray" }}>
+                  비밀번호는 특수문자 ,숫자를 포함한 7~15 글자 사이로
+                  작성해주세요
+                </UnverifedText>
+              ) : (
                 ""
-              }
-              {
-                pwdMatch && pwdRegMatch ?
+              )}
+              {pwdMatch && pwdRegMatch ? (
                 <VerifedText>사용 가능한 비밀번호 입니다</VerifedText>
-                :
+              ) : (
                 ""
-              }
+              )}
               <InputLabel>이메일</InputLabel>
-              <FormInput
-                ref={emailRef}
-                className="login-email-input"
-                type="email"
-                placeholder="Enter email"
-                name="email"
-                required
-              />
-              <FormBtn margin="20px 0" onClick={handleSubmit}>가입</FormBtn>
+              <Grid container>
+                <Grid item xs={12} sm={9}>
+                  <FormInput
+                    ref={emailRef}
+                    className="login-email-input"
+                    type="email"
+                    placeholder="Enter email"
+                    name="email"
+                    required
+                  />
+                </Grid>
+                <Grid item xs={12} sm={3}>
+                  <Button
+                    sx={{
+                      marginTop: "6px",
+                      marginLeft: "10px",
+                      background: "#4213c2ba",
+                      borderRadius:"30px",
+                      color: "white",
+                    }}
+                  >
+                    인증
+                  </Button>
+                </Grid>
+              </Grid>
+              <FormBtn margin="20px 0" onClick={handleSubmit}>
+                가입
+              </FormBtn>
             </Container>
           </ModalContent>
         </CustomModal>

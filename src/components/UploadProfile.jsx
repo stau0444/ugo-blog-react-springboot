@@ -25,7 +25,7 @@ export default function UploadProfile({image,setImage}) {
         <>
             <img className="profileImg" style={profileStyle} src={image.imagePreviewUrl} alt="profileImg" onClick={handleOpen}/>
             <Modal
-                sx={modalStyle}
+                sx={{...modalStyle, width:"80%",maxWidth:"605px",}}
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="modal-modal-title"

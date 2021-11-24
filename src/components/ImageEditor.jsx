@@ -40,7 +40,7 @@ export default function ImageEditor ({handleClose,image,setImage}) {
     boxSizing: 'border-box',
   }
   return (
-    <div style={{ width: "100%", textAlign: "center" }}>
+    <div style={{ width: "100%",  textAlign: "center" }}>
       <div>
         <Typography
           sx={{
@@ -52,25 +52,22 @@ export default function ImageEditor ({handleClose,image,setImage}) {
           프로필 편집
         </Typography>
         <Button
-            sx={{
-              color: "tomato",
-              width: "70%",
-              padding:"0",
-              height:"28px",
-              border: "1px solid tomato",
-              margin: "15px auto",
-              "&:hover": {
-                color: "white",
-                background: "#eb5814bc",
-              },
-            }}
-          >
-            <StyledInputLabel
-            sx={{padding:0 ,}}
-            htmlFor="imageInput"
-            >
-                이미지 선택
-            </StyledInputLabel>
+          sx={{
+            color: "tomato",
+            width: "70%",
+            padding: "0",
+            height: "28px",
+            border: "1px solid tomato",
+            margin: "15px auto",
+            "&:hover": {
+              color: "white",
+              background: "#eb5814bc",
+            },
+          }}
+        >
+          <StyledInputLabel sx={{ padding: 0 }} htmlFor="imageInput">
+            이미지 선택
+          </StyledInputLabel>
         </Button>
         <StyledInput
           id="imageInput"
@@ -83,7 +80,7 @@ export default function ImageEditor ({handleClose,image,setImage}) {
         />
         <br />
         <Cropper
-          style={{ height: "250px", width: "100%" }}
+          style={{ margin:"0 auto" ,width:"60%"}}
           zoomTo={0.5}
           initialAspectRatio={1}
           preview=".img-preview"
@@ -121,7 +118,7 @@ export default function ImageEditor ({handleClose,image,setImage}) {
           }}
           onClick={getCropData}
         >
-        편집 이미지 확인
+          편집 이미지 확인
         </Button>
         <Button
           sx={{
@@ -134,11 +131,11 @@ export default function ImageEditor ({handleClose,image,setImage}) {
           }}
           onClick={setCroppedImg}
         >
-        현재 이미지 적용
+          현재 이미지 적용
         </Button>
       </div>
-      <br style={{ clear: "both" }} />setCroppedImg
-    <img alt="cropedImg" src={cropData}/>
+      <br style={{ clear: "both" }} />
+      <img alt="cropedImg" width="60%" src={cropData?cropData:"/no-image.png"}/>
     </div>
   );
 }
