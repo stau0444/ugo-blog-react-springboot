@@ -148,7 +148,12 @@ export default function LoginMenu() {
               </Button>
             </MenuItem>
             <MenuItem component="div">
-              <Button sx={{ textAlign: "center" }} onClick={()=>{setOpenProfileUpdate(true)}}>
+              <Button
+                sx={{ textAlign: "center" }}
+                onClick={() => {
+                  setOpenProfileUpdate(true);
+                }}
+              >
                 <Settings sx={{ marginRight: "10px" }} size="small" />
                 회원 정보 변경
               </Button>

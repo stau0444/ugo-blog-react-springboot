@@ -5,10 +5,10 @@ const ContentChip = styled(Chip)`
   margin-right: 4px;
   color: white;
   font-weight: bold;
-  background: color;
+  background: ${props => props.bgcolor?props.bgcolor:'#04AA6D'};
   height: 28px;
   margin-bottom:20px;
 `
 export default function ChipsGenerator({values,color}) {
-    return values.map((value, index) => <ContentChip key={index} label={value} />);
+    return values.map((value, index) => <ContentChip bgcolor={color} key={index} label={value} />);
 }

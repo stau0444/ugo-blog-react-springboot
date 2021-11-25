@@ -75,7 +75,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Header />
-        <Box sx={{position:"fixed",right:0}}>
+        <Box sx={{position:"fixed",right:0,bottom:"100px"}}>
           <Button onClick={()=>{handleAuthRequest("/api/user/test")}} sx={testBtnStyle}>login-Test-Btn</Button>
         </Box>
         <Route path="/contents/search/:keyword" exact component={Search} />

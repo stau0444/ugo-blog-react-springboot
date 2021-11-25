@@ -24,7 +24,7 @@ const FindLink = styled("a")`
 export const FindFormContainer = styled("div")`
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 49.5%;
   transform: translate(-50%, -50%);
   border-radius:20px;
   width: 60%;

@@ -1,10 +1,12 @@
-import {   Box,  Button,  Checkbox,  Input,  Table, Typography } from "@mui/material";
+import {   Box,  Button,  Checkbox,  Table, Typography } from "@mui/material";
 import {useState } from "react";
 import { useDispatch } from "react-redux";
 import { handleAuthRequest } from "../Auth";
 import { updateUserProfile } from "../redux/moduels/login";
 import { uploadBase64ImgToS3Bucket } from "./SignUpForm";
 import UploadProfile from "./UploadProfile";
+import CancelIcon from '@mui/icons-material/Cancel';
+
 import AWS from "aws-sdk"
 
 
@@ -12,7 +14,6 @@ export default function UserInfoUpdateForm({setOpenProfileUpdate,userInfo}) {
     const dispatch = useDispatch();
     const imageUrlBeforeUpdate = userInfo.profileUrl
     const [emailSubscribe , setEmailSubscribe] = useState(userInfo.emailSubscribe)
-    const [email,setEmail] = useState(userInfo.email);
     const [image , setImage] = useState({file:null,imagePreviewUrl:userInfo.profileUrl})
     
 
@@ -34,9 +35,9 @@ export default function UserInfoUpdateForm({setOpenProfileUpdate,userInfo}) {
         async function handleUpdate(){
             const updateData = {
                 username:userInfo.username,
-                email:email,
+                email:userInfo.email,
                 emailSubscribe:emailSubscribe,
-                profileUrl:"https://ugo-blog-image-bucket.s3.ap-northeast-2.amazonaws.com/"+image.file.name+":profile"
+                profileUrl:image.file?"https://ugo-blog-image-bucket.s3.ap-northeast-2.amazonaws.com/"+image.file.name+":profile":image.imagePreviewUrl
             }
             try{
               handleAuthRequest("/api/user","put",updateData);
@@ -63,7 +64,13 @@ export default function UserInfoUpdateForm({setOpenProfileUpdate,userInfo}) {
           }}
           sx={{ float: "right" }}
         >
-          X
+          <CancelIcon sx={{
+            color:"#16ec89",
+            "&:hover":{
+              color:"lightgray",
+              backgroundColor: "inherit"
+            }
+          }} fontSize="large" />
         </Box>
         <Typography
           variant="div"
@@ -90,14 +97,7 @@ export default function UserInfoUpdateForm({setOpenProfileUpdate,userInfo}) {
           <tbody>
             <tr>
               <th>Email</th>
-              <td>
-                <Input
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                  }}
-                  value={email}
-                />
-              </td>
+              <td>{userInfo.email}</td>
             </tr>
             <tr>
               <th>가입일</th>

@@ -1,13 +1,13 @@
 import HomeIcon from '@mui/icons-material/Home';
 import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
-import { Box, Grid, Modal, styled, Typography } from '@mui/material';
+import { Box, Button, Grid, Modal, styled, Tooltip, Typography } from '@mui/material';
 import { useState } from 'react';
 import EmojiPeopleIcon from '@mui/icons-material/EmojiPeople';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import ChipsGenerator from './ChipsGenerator';
-
+import CancelIcon from '@mui/icons-material/Cancel';
 
 const introduceStyle={
     margin:'40px 40px'
@@ -17,11 +17,11 @@ const modalStyle = {
     width: '80%',
     height:'95%',
     bgcolor: 'background.paper',
+    borderRadius:"12px",
     boxShadow: 24,
     p: 4,
     maxHeight:"700px", 
     overflowY:"auto" ,
-  
   };
 const ResumeImg = styled('img')`
     width:60%;
@@ -83,19 +83,49 @@ export default function ResumeModal() {
 
     return (
       <>
-        <PermContactCalendarIcon
-          fontSize="large"
-          sx={{ marginRight: "10px" }}
-          onClick={handleOpen}
-        />
+        <Tooltip title="ABOUT ME">
+          <PermContactCalendarIcon
+            fontSize="large"
+            sx={{
+              marginRight: "10px",
+              cursor: "pointer",
+            }}
+            onClick={handleOpen}
+          />
+        </Tooltip>
         <Modal
           open={open}
           onClose={handleClose}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Grid container onScroll={handleScroll} sx={modalStyle}>
+          <Grid
+            container
+            onScroll={handleScroll}
+            sx={{
+              ...modalStyle,
+              background: "whitesmoke",
+              "&:focus":{
+                outline: "none"
+              }
+            }}
+          >
             <Grid item xs={12}>
+            <Button 
+                sx={{
+                  left:"30px",
+                  top:"1px",
+                  float:"right",
+                  color:"#16ec89",
+                  "&:hover":{
+                    color:"lightgray",
+                    backgroundColor: "inherit"
+                  }
+                }}
+                onClick={handleClose}
+                >
+                <CancelIcon fontSize="large"/>
+            </Button>
               <ResumeRibbon className="resume-ribbon active">
                 <Typography
                   sx={{
@@ -118,39 +148,41 @@ export default function ResumeModal() {
               sx={{ margin: "70px 0 20px 0" }}
               className="resume-header"
             ></Grid>
-              <Grid item xs={12} sm={6} sx={{ textAlign: "center" }}>
-                <ResumeImg src="/IMG_1708.JPG" alt="" />
-              </Grid>
-              <Grid
-                item
-                xs={12}
-                sx={{ fontFamily: "serif" }}
-                sm={6}
-                className="resume-info"
-              >
-                <Typography id="resume" sx={{ mt: 2 }}>
-                  <EmojiPeopleIcon size="large" sx={{ marginRight: "10px" }} />
-                  <Typography variant="div" sx={{ marginBottom: "10px" }}>
-                    황경욱 1992/07/06
-                  </Typography>
+            <Grid item xs={12} sm={6} sx={{ textAlign: "center" }}>
+              <ResumeImg src="/IMG_1708.JPG" alt="" />
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              sx={{ fontFamily: "serif" }}
+              sm={6}
+              className="resume-info"
+            >
+              <Typography id="resume" sx={{ mt: 2 }}>
+                <EmojiPeopleIcon size="large" sx={{ marginRight: "10px" }} />
+                <Typography variant="div" sx={{ marginBottom: "10px" }}>
+                  황경욱 1992/07/06
                 </Typography>
-                <Typography  sx={{ mt: 2 }}>
-                  <HomeIcon size="large" sx={{ marginRight: "10px" }} />
-                  서울특별시 성북구 보국문로8나길 12
-                </Typography>
-                <Typography  sx={{ mt: 2 }}>
-                  <AlternateEmailIcon size="large" sx={{ marginRight: "10px" }} />
-                  stau04@gmail.com
-                </Typography>
-                <Typography  sx={{ mt: 2 }}>
-                  <ContactPhoneIcon size="large" sx={{ marginRight: "10px" }} />
-                  010-9115-0444
-                </Typography>
-                <Typography  sx={{ mt: 2 }}>
-                  <GitHubIcon size="large" sx={{ marginRight: "10px" }} />
-                  <a href="https://github.com/stau0444">https://github.com/stau0444</a>
-                </Typography>
-              </Grid>
+              </Typography>
+              <Typography sx={{ mt: 2 }}>
+                <HomeIcon size="large" sx={{ marginRight: "10px" }} />
+                서울특별시 성북구 보국문로8나길 12
+              </Typography>
+              <Typography sx={{ mt: 2 }}>
+                <AlternateEmailIcon size="large" sx={{ marginRight: "10px" }} />
+                stau04@gmail.com
+              </Typography>
+              <Typography sx={{ mt: 2 }}>
+                <ContactPhoneIcon size="large" sx={{ marginRight: "10px" }} />
+                010-9115-0444
+              </Typography>
+              <Typography sx={{ mt: 2 }}>
+                <GitHubIcon size="large" sx={{ marginRight: "10px" }} />
+                <a href="https://github.com/stau0444">
+                  https://github.com/stau0444
+                </a>
+              </Typography>
+            </Grid>
             <Grid item xs={12} sx={introduceStyle} className="resume-introduce">
               <Typography variant="h5" sx={{ margin: "20px 0" }}>
                 introduce
@@ -177,83 +209,129 @@ export default function ResumeModal() {
                 Skills
                 <hr />
               </Typography>
-              <Grid item xs={12} sx={{border:"1px solid black" ,padding:"20px"}}>
+              <Grid
+                item
+                xs={12}
+                sx={{ border: "1px solid black", padding: "20px" }}
+              >
                 <Box>
                   <Typography variant="h6" sx={{ margin: "20px 0" }}>
                     Language
-                    <hr/>
+                    <hr />
                   </Typography>
                   <Typography variant="p">
-                    <ChipsGenerator values={["Java" , "Javascript"]} color="gold"/>
-                    <br/>
-                    <small>* Java의 기본 개념, 문법에 대해 숙지하고 있음</small><br/>
-                    <small>* Javascript의 기본 개념, 문법에 대해 숙지하고 있음</small><br/>
+                    <ChipsGenerator
+                      values={["Java", "Javascript"]}
+                      color="gold"
+                    />
+                    <br />
+                    <small>* Java의 기본 개념, 문법에 대해 숙지하고 있음</small>
+                    <br />
+                    <small>
+                      * Javascript의 기본 개념, 문법에 대해 숙지하고 있음
+                    </small>
+                    <br />
                   </Typography>
                 </Box>
                 <Box>
                   <Typography variant="h6" sx={{ margin: "20px 0" }}>
-                  Front-end
-                  <hr/>
+                    Front-end
+                    <hr />
                   </Typography>
                   <Typography variant="p">
-                    <ChipsGenerator values={["React","Redux"]} color="coral"/>
+                    <ChipsGenerator values={["React", "Redux"]} color="coral" />
                   </Typography>
                 </Box>
                 <Box>
                   <Typography variant="h6" sx={{ margin: "20px 0" }}>
-                  Back-end
-                  <hr/>
+                    Back-end
+                    <hr />
                   </Typography>
                   <Typography variant="p">
-                    <ChipsGenerator values={["Spring-Boot" , "JPA" , "Spring-Security"]} color="royalblue"/>
-                    <br/>
-                    <small>* Spring-boot를 통한 개인프로젝트 경험</small><br/>
-                    <small>* Spring-Sequerity를 통한 사용자인증,권한,보안처리 구현 경험</small><br/>
-                    <small>* JPA 작동 원리, 사용법 대해 이해하고 있음 </small><br />
-                    <small>* Spring-data-JPA , QueryDSL을 활용한 JPA 사용법 숙지</small><br/>
+                    <ChipsGenerator
+                      values={["Spring-Boot", "JPA", "Spring-Security"]}
+                      color="royalblue"
+                    />
+                    <br />
+                    <small>* Spring-boot를 통한 개인프로젝트 경험</small>
+                    <br />
+                    <small>
+                      * Spring-Sequerity를 통한 사용자인증,권한,보안처리 구현
+                      경험
+                    </small>
+                    <br />
+                    <small>* JPA 작동 원리, 사용법 대해 이해하고 있음 </small>
+                    <br />
+                    <small>
+                      * Spring-data-JPA , QueryDSL을 활용한 JPA 사용법 숙지
+                    </small>
+                    <br />
                   </Typography>
                   <Typography variant="h6" sx={{ margin: "20px 0" }}>
-                  Version-Control
-                  <hr/>
+                    Version-Control
+                    <hr />
                   </Typography>
                   <Typography variant="p">
-                    <ChipsGenerator values={["Git","GitHub"]} color="green"/>
-                    <br/>
-                    <small>* Git / GitHub를 통한 프로젝트 협업 , 버전관리 경험 </small><br/>
+                    <ChipsGenerator values={["Git", "GitHub"]} color="green" />
+                    <br />
+                    <small>
+                      * Git / GitHub를 통한 프로젝트 협업 , 버전관리 경험{" "}
+                    </small>
+                    <br />
                   </Typography>
                 </Box>
                 <Box>
                   <Typography variant="h6" sx={{ margin: "20px 0" }}>
-                  Database
-                  <hr/>
+                    Database
+                    <hr />
                   </Typography>
                   <Typography variant="p">
-                    <ChipsGenerator values={["OracleDB",  "MariaDB" , "Mysql"]}  color="skyblue"/>
-                    <br/>
-                    <small>* 프로젝트 요구사항에 따른 데이터 모델링과 쿼리 작성 가능</small><br/>
+                    <ChipsGenerator
+                      values={["OracleDB", "MariaDB", "Mysql"]}
+                      color="skyblue"
+                    />
+                    <br />
+                    <small>
+                      * 프로젝트 요구사항에 따른 데이터 모델링과 쿼리 작성 가능
+                    </small>
+                    <br />
                   </Typography>
                 </Box>
                 <Box>
-                    <Typography variant="h6" sx={{ margin: "20px 0" }}>
-                      IDE
-                      <hr/>
-                    </Typography>
-                    <Typography variant="p">
-                      <ChipsGenerator values={["INTELLIJ","ECLIPSE" ,"VScode"]} color="gray"/>
-                      <br/>
-                      <small>*해당 IDE로 프로젝트 경험을 갖고 있으며 사용법을 숙지하고 있음 </small><br/>
-                    </Typography>
+                  <Typography variant="h6" sx={{ margin: "20px 0" }}>
+                    IDE
+                    <hr />
+                  </Typography>
+                  <Typography variant="p">
+                    <ChipsGenerator
+                      values={["INTELLIJ", "ECLIPSE", "VScode"]}
+                      color="gray"
+                    />
+                    <br />
+                    <small>
+                      *해당 IDE로 프로젝트 경험을 갖고 있으며 사용법을 숙지하고
+                      있음{" "}
+                    </small>
+                    <br />
+                  </Typography>
                 </Box>
                 <Box>
-                    <Typography variant="h6" sx={{ margin: "20px 0" }}>
-                      Deployment
-                      <hr/>
-                    </Typography>
-                    <Typography variant="p">
-                    <ChipsGenerator values={["AWS EC2" , "AWS RDS"]} color="navy"/>
-                      <br/>
-                      <small>* AWS EC2 와 RDS를 활용하여 스프링 부트 + React + JPA + Spring-Security 애플리케이션 배포 경험 </small><br/>
-                    </Typography>
+                  <Typography variant="h6" sx={{ margin: "20px 0" }}>
+                    Deployment
+                    <hr />
+                  </Typography>
+                  <Typography variant="p">
+                    <ChipsGenerator
+                      values={["AWS EC2", "AWS RDS"]}
+                      color="navy"
+                    />
+                    <br />
+                    <small>
+                      * AWS EC2 와 RDS를 활용하여 스프링 부트 + React + JPA +
+                      Spring-Security 애플리케이션 배포 경험{" "}
+                    </small>
+                    <br />
+                  </Typography>
                 </Box>
               </Grid>
             </Grid>

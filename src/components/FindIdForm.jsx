@@ -23,14 +23,16 @@ export default function FindIdForm() {
           <Typography
             variant="h5"
             sx={{
-              fontWeight:"700",
-              margin:"5px",
+              fontWeight: "700",
+              margin: "5px",
               fontFamily: "'Gowun Batang', serif",
             }}
           >
             아이디 찾기
           </Typography>
-          <small>가입시 등록한 이메일로 아이디가 전송됩니다.</small>
+          <Typography sx={{ color: "tomato", fontSize: "13px" }}>
+            가입시 등록한 이메일로 아이디가 전송됩니다.
+          </Typography>
         </Grid>
         <Grid
           item
@@ -45,14 +47,24 @@ export default function FindIdForm() {
               color: "black",
             }}
             placeholder="이메일을 입력해주세요"
-            onChange={(e)=>{setUserMail(e.target.value)}}
+            onChange={(e) => {
+              setUserMail(e.target.value);
+            }}
           />
         </Grid>
         <Grid item xs={12} sx={{ margin: "20px" }}>
-          <Button 
-          sx={{ float: "right" }}
-          onClick={handleFindId}
-          >아이디 찾기</Button>
+          <Button
+            sx={{
+              float: "right",
+              marginLeft: "10px",
+              background: "#4213c2ba",
+              borderRadius: "30px",
+              color: "white",
+            }}
+            onClick={handleFindId}
+          >
+            아이디 찾기
+          </Button>
         </Grid>
       </Grid>
     );

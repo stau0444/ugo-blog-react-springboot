@@ -1,9 +1,0 @@
-// Amazon Cognito 인증 공급자를 초기화합니다
-AWS.config.region = 'ap-northeast-2'; // 리전
-AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-    IdentityPoolId: 'ap-northeast-2:f4eab593-5f5f-4e47-8b60-a45049ed7a5d',
-});
-
-//s3 bucket url 예시
-
-https://ugo-blog-image-bucket.s3.ap-northeast-2.amazonaws.com/IMG_1708.JPG

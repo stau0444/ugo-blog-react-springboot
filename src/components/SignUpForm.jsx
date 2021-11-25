@@ -2,12 +2,15 @@ import "../Form.scss";
 import LoginIcon from '@mui/icons-material/Login';
 import { CloseBtn, Container, CustomModal, FormBtn, FormInput, FormLogo, ImgContainer, InputLabel, ModalContent } from "../FormComponents";
 import { useRef, useState } from "react";
-import { Box, Button, Chip, Grid, styled } from "@mui/material";
+import { Box, Button, Chip, CircularProgress, Grid, styled, Typography } from "@mui/material";
 import axios from "axios";
 import { useHistory } from "react-router";
 import UploadProfile from "./UploadProfile";
 import AWS from "aws-sdk"
-
+import { StyledInput } from "./ContentUpdateForm";
+import CheckIcon from '@mui/icons-material/Check';
+import { useDispatch, useSelector } from "react-redux";
+import { emailVerifyFail, emailVerifyStart, emailVerifySuccess } from "../redux/moduels/signUp";
 
 export const UnverifedText = styled('p')`
   color:tomato;
@@ -55,7 +58,11 @@ export default function SignUpForm({setOpenSignUp}) {
     const [isExistId,setIsExistId] = useState(false);
     const [isChecked,setIsChecked] = useState(false);
     const [idRegMatch , setIdRegMatch] = useState(false);
-    const [image , setImage] = useState({file:null,imagePreviewUrl:'/logo_transparent.png'})
+    const [isEmailverified,setIsEmailVerified] = useState(false);
+    const [verifyNum , setVerifyNum] = useState();
+    const [userVerifyNum,setUserVerifyNum] = useState();
+    const [showVerifyForm,setShowVerifyForm] = useState(false);
+    const [image , setImage] = useState({file:null,imagePreviewUrl:'/no-image.png'})
     const userIdRef = useRef('')
     const pwdRef = useRef('')
     const pwdCheckRef = useRef('')
@@ -63,9 +70,42 @@ export default function SignUpForm({setOpenSignUp}) {
     const pwdRegExp=  new RegExp(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/);
     const idRegExp = new RegExp(/^[A-za-z0-9]{5,15}$/);
     const history = useHistory();
-   
-     
-       
+    const dispatch = useDispatch();
+    const loading = useSelector(state => state.signUp.loading);
+    //인증번호 전송
+    const handleEmailVerify = () => {
+      async function handleEmailVerify(){
+        try{
+          dispatch(emailVerifyStart());
+          await axios.get(`/api/user/email-verify?email=${emailRef.current.value}`)
+          .then((resp)=>{
+            alert("이메일로 인증번호가 전송되었습니다.");
+            setVerifyNum(resp.data);
+            setShowVerifyForm(true);
+            dispatch(emailVerifySuccess());
+          })
+        }catch(error){
+            alert(error.response.data.message);
+            dispatch(emailVerifyFail());
+        }
+      }
+      handleEmailVerify();
+    }
+
+    //인증번호 검증
+    const handleVerifyNum = () => {
+      console.log(userVerifyNum,verifyNum)
+      if(userVerifyNum === verifyNum.toString()){
+        alert("인증에 성공했습니다")
+        setIsEmailVerified(true);
+        setShowVerifyForm(false);
+      }else{
+        alert("인증에 실패했습니다")
+        setIsEmailVerified(false)
+      }
+    }
+    
+    //회원가입 요청
     const handleSubmit = () => {   
       async function handleSubmit(){  
         if(isExistId){
@@ -84,8 +124,12 @@ export default function SignUpForm({setOpenSignUp}) {
           alert("중복확인이 필요합니다.");
           return;
         }
-        if(!image){
+        if(image.file===null){
           alert("프로필 이미지를 등록해 주세요.");
+          return;
+        }
+        if(!isEmailverified){
+          alert("이메일 인증이 필요합니다 .인증을 시도 해주세요")
           return;
         }
 
@@ -112,6 +156,9 @@ export default function SignUpForm({setOpenSignUp}) {
 
     const checkID = () =>{
       //중복확인 요청
+      if(userIdRef.current.value === ""){
+        alert("아이디를 입력해주세요.");
+      }
       axios.get(`/api/user/duplication-check?userId=${userIdRef.current.value}`)
       .then((resp)=>{
           setIsExistId(resp.data);
@@ -166,89 +213,99 @@ export default function SignUpForm({setOpenSignUp}) {
             </ImgContainer>
             <Container className="container">
               <Box sx={{ textAlign: "center" }}>
-                <Chip
-                  sx={{ margin: "0 auto" }}
-                  color="success"
-                  label="프로필 이미지"
-                />
+                <Chip color="success" label="프로필 이미지" />
               </Box>
               <Box sx={{ textAlign: "center", margin: "10px" }}>
                 <UploadProfile image={image} setImage={setImage} />
               </Box>
-              <InputLabel>아이디</InputLabel>
-              <FormInput
-                width="85%"
-                ref={userIdRef}
-                type="text"
-                onChange={checkIdReg}
-                className="signup-userid-input"
-                placeholder="Enter ID"
-                name="userId"
-                required
-              />
-              <Button sx={{
-                
-                marginLeft: "10px",
-                background: "#4213c2ba",
-                borderRadius:"30px",
-                color: "white",
-              }}onClick={checkID}>중복확인</Button>
-              {isExistId ? (
-                <UnverifedText sx={{ display: isChecked ? "" : "none" }}>
-                  이미 존재하는 아이디 입니다.
-                </UnverifedText>
-              ) : (
-                <VerifedText sx={{ display: isChecked ? "" : "none" }}>
-                  사용가능한 아이디 입니다.
-                </VerifedText>
-              )}
-              {!idRegMatch ? (
-                <UnverifedText>
-                  아이디는 5~15자 영문 또는 숫자로 조합으로 만들어주세요
-                </UnverifedText>
-              ) : (
-                ""
-              )}
-              <InputLabel>비밀번호</InputLabel>
-              <FormInput
-                ref={pwdRef}
-                className="signup-pwd-input"
-                type="password"
-                placeholder="Enter Password"
-                name="pwd"
-                onChange={checkPwd}
-                required
-              />
-              <InputLabel>비밀번호 확인</InputLabel>
-              <FormInput
-                ref={pwdCheckRef}
-                className="login-checkPwd-input"
-                type="password"
-                placeholder="Repeat Password"
-                onChange={checkPwd}
-                required
-              />
-              {pwdMatch ? (
-                ""
-              ) : (
-                <UnverifedText>비밀번호가 일치하지 않습니다.</UnverifedText>
-              )}
-              {!pwdRegMatch ? (
-                <UnverifedText sx={{ color: "gray" }}>
-                  비밀번호는 특수문자 ,숫자를 포함한 7~15 글자 사이로
-                  작성해주세요
-                </UnverifedText>
-              ) : (
-                ""
-              )}
-              {pwdMatch && pwdRegMatch ? (
-                <VerifedText>사용 가능한 비밀번호 입니다</VerifedText>
-              ) : (
-                ""
-              )}
-              <InputLabel>이메일</InputLabel>
               <Grid container>
-                <Grid item xs={12} sm={9}>
+                <Grid item xs={12}>
+                  <InputLabel>아이디</InputLabel>
+                  <FormInput
+                    width="100%"
+                    ref={userIdRef}
+                    type="text"
+                    onChange={checkIdReg}
+                    className="signup-userid-input"
+                    placeholder="Enter ID"
+                    name="userId"
+                    required
+                    disabled={isChecked && !isExistId}
+                  />
+                  <Button
+                    sx={{
+                      float: "right",
+                      marginTop: "10px",
+                      marginLeft: "10px",
+                      background: "#4213c2ba",
+                      borderRadius: "30px",
+                      color: "white",
+                      display: isChecked && !isExistId ? "none" : "",
+                    }}
+                    onClick={checkID}
+                  >
+                    중복확인
+                  </Button>
+                  {isExistId ? (
+                    <UnverifedText sx={{ display: isChecked ? "" : "none" }}>
+                      이미 존재하는 아이디 입니다.
+                    </UnverifedText>
+                  ) : (
+                    <VerifedText sx={{ display: isChecked ? "" : "none" }}>
+                      사용가능한 아이디 입니다.
+                    </VerifedText>
+                  )}
+                  {!idRegMatch ? (
+                    <UnverifedText>
+                      아이디는 5~15자 영문 또는 숫자로 조합으로 만들어주세요
+                    </UnverifedText>
+                  ) : (
+                    ""
+                  )}
+                </Grid>
+                <Grid item xs={12}>
+                  <InputLabel>비밀번호</InputLabel>
+                  <FormInput
+                    sx={{ width: "100%" }}
+                    ref={pwdRef}
+                    className="signup-pwd-input"
+                    type="password"
+                    placeholder="Enter Password"
+                    name="pwd"
+                    onChange={checkPwd}
+                    required
+                  />
+                  <InputLabel>비밀번호 확인</InputLabel>
+                  <FormInput
+                    sx={{ width: "100%" }}
+                    ref={pwdCheckRef}
+                    className="login-checkPwd-input"
+                    type="password"
+                    placeholder="Repeat Password"
+                    onChange={checkPwd}
+                    required
+                  />
+                  {pwdMatch ? (
+                    ""
+                  ) : (
+                    <UnverifedText>비밀번호가 일치하지 않습니다.</UnverifedText>
+                  )}
+                  {!pwdRegMatch ? (
+                    <UnverifedText sx={{ color: "gray" }}>
+                      비밀번호는 특수문자 ,숫자를 포함한 7~15 글자 사이로
+                      작성해주세요
+                    </UnverifedText>
+                  ) : (
+                    ""
+                  )}
+                  {pwdMatch && pwdRegMatch ? (
+                    <VerifedText>사용 가능한 비밀번호 입니다</VerifedText>
+                  ) : (
+                    ""
+                  )}
+                </Grid>
+                <Grid item xs={12}>
+                  <InputLabel>이메일</InputLabel>
                   <FormInput
                     ref={emailRef}
                     className="login-email-input"
@@ -256,23 +313,70 @@ export default function SignUpForm({setOpenSignUp}) {
                     placeholder="Enter email"
                     name="email"
                     required
+                    disabled={isEmailverified}
                   />
-                </Grid>
-                <Grid item xs={12} sm={3}>
-                  <Button
-                    sx={{
-                      marginTop: "6px",
-                      marginLeft: "10px",
-                      background: "#4213c2ba",
-                      borderRadius:"30px",
-                      color: "white",
-                    }}
-                  >
-                    인증
-                  </Button>
+                  {isEmailverified ? (
+                    <Typography
+                      variant="p"
+                      sx={{
+                        marginTop: "-80px",
+                        marginLeft: "5px",
+                        fontSize: "15px",
+                        color: "royalblue",
+                        float: "right"
+                      }}
+                    >
+                      인증됨
+                      <CheckIcon sx={{ color: "royalblue" }} />
+                    </Typography>
+                  ) : (
+                    <Button
+                      sx={{
+                        float: "right",
+                        marginTop: "6px",
+                        marginLeft: "10px",
+                        background: "#4213c2ba",
+                        borderRadius: "30px",
+                        color: "white",
+                      }}
+                      onClick={handleEmailVerify}
+                    >
+                      {loading?<CircularProgress color="info" size="30px" thickness={6}  sx={{color:"white"}}/>:"인증번호 받기"}
+                    </Button>
+                  )}
+                  {showVerifyForm ? (
+                    <Grid item xs={12} sx={{ textAlign: "center" }}>
+                      <StyledInput
+                        sx={{
+                          margin: "30px 0",
+                          width: "100%",
+                          color: "black",
+                          fontSize: "15px",
+                        }}
+                        placeholder="인증번호를 입력해주세요."
+                        onChange={(e) => {
+                          setUserVerifyNum(e.target.value);
+                        }}
+                      />
+                      <Button
+                        onClick={handleVerifyNum}
+                        sx={{
+                          backgroundColor: "lightgray",
+                          borderRadius: "30px",
+                        }}
+                      >
+                        번호인증
+                      </Button>
+                    </Grid>
+                  ) : (
+                    ""
+                  )}
                 </Grid>
               </Grid>
-              <FormBtn margin="20px 0" onClick={handleSubmit}>
+              <FormBtn
+                sx={{ width: "100%", margin: "20px 0" }}
+                onClick={handleSubmit}
+              >
                 가입
               </FormBtn>
             </Container>

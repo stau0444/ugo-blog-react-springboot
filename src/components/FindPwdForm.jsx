@@ -61,9 +61,9 @@ export default function FindPwdForm({setOpenFindPwd}) {
         >
           비밀번호 찾기
         </Typography>
-        <small>
-          가입시 등록한 이메일로 전송됩니다 인증 링크를 확인해주세요
-        </small>
+        <Typography sx={{ color: "tomato", fontSize: "13px" }}>
+          가입시 등록한 이메일로 인증번호가 전송됩니다 이메일을 확인해주세요.
+        </Typography>
       </Grid>
       <Grid
         item
@@ -96,7 +96,16 @@ export default function FindPwdForm({setOpenFindPwd}) {
         />
       </Grid>
       <Grid item xs={12} sx={{ margin: "20px" }}>
-        <Button onClick={handleFindPwd} sx={{ float: "right" }}>
+        <Button
+          onClick={handleFindPwd}
+          sx={{
+            float: "right",
+            marginLeft: "10px",
+            background: "#4213c2ba",
+            borderRadius: "30px",
+            color: "white",
+          }}
+        >
           인증링크 전송
         </Button>
       </Grid>
@@ -109,15 +118,23 @@ export default function FindPwdForm({setOpenFindPwd}) {
         aria-describedby="modal-modal-description"
       >
         <ChangePwdModal>
-          <ChagePwdForm setOpenFindPwd={setOpenFindPwd} userId={userId}/>
+          <ChagePwdForm setOpenFindPwd={setOpenFindPwd} userId={userId} />
         </ChangePwdModal>
       </Modal>
       {showVerifyForm ? (
-        <Grid item xs={12} sx={{ margin: "20px" }}>
+        <Grid
+          item
+          xs={12}
+          sx={{
+            margin: "20px",
+          }}
+        >
           <StyledInput
             sx={{ color: "black" }}
             placeholder="인증번호를 입력해주세요."
-            onChange={(e)=>{setUserVerifyNum(e.target.value)}}
+            onChange={(e) => {
+              setUserVerifyNum(e.target.value);
+            }}
           />
           <Button onClick={handleVerifyNum} sx={{ float: "right" }}>
             번호인증 하기

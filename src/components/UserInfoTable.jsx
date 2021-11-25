@@ -1,4 +1,5 @@
 import { Avatar,  Box,  Table, Typography } from "@mui/material";
+import CancelIcon from '@mui/icons-material/Cancel';
 
 
 export default function UserInfoTable({setOpenProfile,userInfo}) {
@@ -6,7 +7,13 @@ export default function UserInfoTable({setOpenProfile,userInfo}) {
     return (
       <>
         <Box onClick={()=>{setOpenProfile(false)}} sx={{float:"right"}}>
-          X
+        <CancelIcon sx={{
+            color:"#16ec89",
+            "&:hover":{
+              color:"lightgray",
+              backgroundColor: "inherit"
+            }
+          }} fontSize="large" />
         </Box>
         <Typography
           variant="div"
