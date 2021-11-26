@@ -1,16 +1,24 @@
-import { Button, Grid, Typography } from "@mui/material";
+import { Button, CircularProgress, Grid, Typography } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { emailVerifyFail, emailVerifyStart, emailVerifySuccess } from "../redux/moduels/signUp";
 import { StyledInput } from "./ContentUpdateForm";
 
-export default function FindIdForm() {
+export default function FindIdForm({setOpenFindId}) {
     const [userMail,setUserMail] = useState();
+    const dispatch = useDispatch();
+    const loading = useSelector(state => state.signUp.loading);
     const handleFindId = () =>{
         async function handleFindId(){
             try{
+                dispatch(emailVerifyStart());
                 await axios.get("/api/user/find-id?email="+userMail);
-                alert("이메일로 아이디가 전송되었습니다.")
+                dispatch(emailVerifySuccess());
+                alert("이메일로 아이디가 전송되었습니다.");
+                setOpenFindId(false);
             }catch(error){
+                dispatch(emailVerifyFail());
                 alert("해당 이메일로 등록된 아이디가 없습니다.")
                 console.log(error.response);
             }
@@ -63,7 +71,16 @@ export default function FindIdForm() {
             }}
             onClick={handleFindId}
           >
-            아이디 찾기
+            {loading ? (
+            <CircularProgress
+              color="info"
+              size="30px"
+              thickness={6}
+              sx={{ color: "white" }}
+            />
+          ) : (
+            "아이디 찾기"
+          )}
           </Button>
         </Grid>
       </Grid>

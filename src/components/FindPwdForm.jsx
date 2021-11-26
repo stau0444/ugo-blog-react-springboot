@@ -1,6 +1,8 @@
-import { Button, Grid, Modal, styled, Typography } from "@mui/material";
+import { Button, CircularProgress, Grid, Modal, styled, Typography } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { emailVerifyFail, emailVerifyStart, emailVerifySuccess } from "../redux/moduels/signUp";
 import ChagePwdForm from "./ChangePwdForm";
 import { StyledInput } from "./ContentUpdateForm";
 
@@ -21,6 +23,8 @@ export default function FindPwdForm({setOpenFindPwd}) {
   const [verifyNum,setVerifyNum] = useState();
   const [userVerifyNum,setUserVerifyNum] = useState();
   const [showVerifyForm,setShowVerifyForm] = useState(false);
+  const loading = useSelector(state => state.signUp.loading);
+  const dispatch = useDispatch();
   const handleVerifyNum = () => {
     
     if(verifyNum.toString() === userVerifyNum){
@@ -33,15 +37,17 @@ export default function FindPwdForm({setOpenFindPwd}) {
   const handleFindPwd = () =>{
       async function handleFindPwd(){
         try{
+          dispatch(emailVerifyStart());
           let verifyNum = "";
           await axios.get(`/api/user/find-pwd?userId=${userId}&userEmail=${userEmail}`).then((resp)=>{
             verifyNum = resp.data;
           })
+          dispatch(emailVerifySuccess());
           alert("이메일로 인증번호가 전송됬습니다.")
-          console.log('verifyNum',verifyNum);
           setVerifyNum(verifyNum);
           setShowVerifyForm(true);
         }catch(error){
+          dispatch(emailVerifyFail());
           alert("해당 아이디 혹은 이메일이 존재하지 않습니다.")
           console.log("error",error.response)
         }
@@ -74,9 +80,10 @@ export default function FindPwdForm({setOpenFindPwd}) {
       >
         <StyledInput
           sx={{
-            fontSize: "25px",
+            fontSize: "20px",
             color: "black",
-            margin: "20px",
+            margin: "0px 15px",
+            marginBottom: "20px",
           }}
           onChange={(e) => {
             setUserId(e.target.value);
@@ -85,9 +92,10 @@ export default function FindPwdForm({setOpenFindPwd}) {
         />
         <StyledInput
           sx={{
-            fontSize: "25px",
+            fontSize: "20px",
             color: "black",
-            margin: "20px",
+            margin: "0px 15px",
+            marginTop: "20px",
           }}
           onChange={(e) => {
             setUserEmail(e.target.value);
@@ -100,13 +108,22 @@ export default function FindPwdForm({setOpenFindPwd}) {
           onClick={handleFindPwd}
           sx={{
             float: "right",
-            marginLeft: "10px",
+            marginRight: "10px",
             background: "#4213c2ba",
             borderRadius: "30px",
             color: "white",
           }}
         >
-          인증링크 전송
+          {loading ? (
+            <CircularProgress
+              color="info"
+              size="30px"
+              thickness={6}
+              sx={{ color: "white" }}
+            />
+          ) : (
+            "인증번호 전송"
+          )}
         </Button>
       </Grid>
       <Modal
@@ -130,13 +147,26 @@ export default function FindPwdForm({setOpenFindPwd}) {
           }}
         >
           <StyledInput
-            sx={{ color: "black" }}
+            sx={{
+              color: "black",
+              margin: "0px 15px",
+            }}
             placeholder="인증번호를 입력해주세요."
             onChange={(e) => {
               setUserVerifyNum(e.target.value);
             }}
           />
-          <Button onClick={handleVerifyNum} sx={{ float: "right" }}>
+          <Button
+            onClick={handleVerifyNum}
+            sx={{
+              float: "right",
+              marginTop: "15px",
+              marginRight: "10px",
+              background: "#4213c2ba",
+              borderRadius: "30px",
+              color: "white",
+            }}
+          >
             번호인증 하기
           </Button>
         </Grid>

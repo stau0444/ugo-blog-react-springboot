@@ -147,7 +147,7 @@ export default function LoginForm({setOpenLogin}) {
               aria-describedby="modal-modal-description"
             >
               <FindFormContainer>
-                <FindIdForm/>
+                <FindIdForm setOpenFindId={setOpenFindId}/>
               </FindFormContainer>
             </Modal>
             <Modal

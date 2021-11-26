@@ -42,7 +42,7 @@ export default function ContentList({
           </Grid>
         ) : (
           <AnimatePresence  initial={true}>
-            {contentList.data.map((content) => (
+            {contentList?contentList.data.map((content) => (
                 <Grid item key={content.id}  xs={12}  sm={contentList.data.length !== 1 ? 6 : ""} lg={contentList.data.length !== 1 ? 4 : ""}>
                   <motion.div
                     initial={{ opacity: 0 }}
@@ -52,7 +52,10 @@ export default function ContentList({
                     <ContentCard content={content} />
                   </motion.div>
                 </Grid>
-            ))}
+            ))
+            :
+            ""
+          }
           </AnimatePresence>
         )}
         <Grid item xs={12}>
