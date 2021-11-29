@@ -2,17 +2,8 @@ import { Chip, Stack } from '@mui/material';
 import {styled } from '@mui/material/styles';
 import { useEffect } from 'react';
 import {  NavLink } from 'react-router-dom';
-const categories = [
-    'JAVA',
-    "JAVASCRIPT",
-    "REACT",
-    "JPA",
-    "SPRING",
-    "SPRING-SEC",
-    "AWS",
-    "WEB",
-    "VUE"
-]
+import { tagList } from '../sampleData';
+
 
 export const ColorLink = styled(Chip)(()=>({
     background:'tomato',
@@ -44,7 +35,7 @@ export default function Links() {
             direction="row" 
             spacing={0.5}
             >
-                {categories.map((category,index)=>
+                {tagList.map((category,index)=>
                     <NavLink key={index} to={"/contents/"+category}  activeClassName="nav-link-active">
                         <ColorLink  size="small" label={category}/>
                     </NavLink>

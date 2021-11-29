@@ -1,4 +1,6 @@
-import { Chip, styled } from "@mui/material";
+
+import styled from "@mui/material/styles/styled";
+import Chip from "@mui/material/Chip";
 
 const ContentChip = styled(Chip)`
   font-family:'Righteous', cursive ;

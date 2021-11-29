@@ -23,7 +23,7 @@ export default function UploadProfile({image,setImage}) {
     const handleClose = () => setOpen(false);
     return(
         <>
-            <img className="profileImg" style={profileStyle} src={image.imagePreviewUrl} alt="profileImg" onClick={handleOpen}/>
+            <img className="profileImg" style={profileStyle} src={image.imagePreviewUrl?image.imagePreviewUrl:"/no-image.png"} alt="profileImg" onClick={handleOpen}/>
             <Modal
                 sx={{...modalStyle, width:"80%",maxWidth:"605px",}}
                 open={open}

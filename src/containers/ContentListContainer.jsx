@@ -20,11 +20,14 @@ export default function ContentListContainer({category}) {
             async function getContentList(){
                 try{
                     dispatch(getContentListStart())
+                    console.log("리스트 요청")
                     await axios.get(`/api/contents?category=${category?category:""}&page=${page-1}&size=6`)
                     .then(resp => {
+                        console.log("리스트 요청 데이터" , resp)
                         dispatch(getContentListSuccess(resp.data.content,category,page,resp.data.totalElements))
                     });
                 }catch(error){
+                    console.log("리스트 요청 실페" , error)
                     dispatch(getContentListFail(error));
                 }
             } 

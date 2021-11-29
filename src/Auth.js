@@ -46,7 +46,10 @@ export const handleAuthRequest = (url,action,data) => {
         console.log("success",resp);
       })
       .catch((error)=>{
-        if(error.response.status === 401 && error.response.data.message === "ACCESS_TOKEN_EXPIRED"){
+        if(error.response === undefined){
+          alert("로그인 에러"  );
+          console.log("error", error);
+        }else if(error.response.status === 401 && error.response.data.message === "ACCESS_TOKEN_EXPIRED"){
           console.log("refresh_token")
           tokenRefresh(url);  
         }else if(error.response.status === 403){
@@ -69,6 +72,7 @@ export const handleAuthRequest = (url,action,data) => {
 
   export const  setTokenToBrowser = (resp) => {
     const {auth_token,refresh_token} = resp.headers;
+    console.log("auth token",auth_token,"refresh token",refresh_token)
     axios.defaults.headers.common['Authorization'] =  'Bearer '+auth_token;
     cookie.set("refresh_token",refresh_token);
   }

@@ -17,8 +17,15 @@ import { cookie, handleAuthRequest, logOut, setTokenToBrowser, } from './Auth';
 import { postLoginFail, postLoginStart, postLoginSuccess,  } from './redux/moduels/login';
 import axios from 'axios';
 import { Box, Button } from '@mui/material';
-import { testBtnStyle } from './components/RealtimeChatting';
 
+export const testBtnStyle ={
+  width:"50%",
+  color:"black",
+  top:"40px",
+  margin:"5px",
+  background: "rgba(231, 13, 13, 0.521);",
+  zIndex:"1",
+}
 
 hljs.configure({   // optionally configure hljs
   languages: ['javascript' ,'java','python','html']
@@ -41,9 +48,13 @@ function App() {
             }
           )
         }catch(error){
-          if(error.response.status === 401 && error.response.data.message === "REFRESH_TOKEN_EXPIRED"){
+          if(error.response === undefined){
+            alert("로그인 오류")
+          }else if(error.response.status === 401 && error.response.data.message === "REFRESH_TOKEN_EXPIRED"){
             alert("토큰이 만료되었습니다 다시 로그인 해주세요!")
             logOut(true);
+          }else{
+            return
           }
           console.log(error.response)
           dispatch(postLoginFail(error));
@@ -70,6 +81,10 @@ function App() {
         IdentityPoolId:"ap-northeast-2:f4eab593-5f5f-4e47-8b60-a45049ed7a5d",
     })
   })
+
+  axios.defaults.baseURL = 'http://localhost:9050';//'http://3.37.32.130:9050';
+
+  
 
   return (
     <div className="App">

@@ -49,23 +49,26 @@ export default function LoginForm({setOpenLogin}) {
       async function handleLogin(){
         try{
           dispatch(postLoginStart());
+          const data = {
+            userId: userIdRef.current.value,
+            password: pwdRef.current.value,
+          };
+          const headers={
+            "Content-Type":"application/x-www-form-urlencoded"
+          }
+          console.log("login req data", data) 
           await axios
-            .post("/api/user/login", {
-              userId: userIdRef.current.value,
-              password: pwdRef.current.value,
-            })
+            .post("/api/user/login", data,{headers:headers})
             .then((resp) => {
               setTokenToBrowser(resp);
               dispatch(postLoginSuccess(resp.data));
             })
-            .catch(
-              (error) => {
-                if(error){
-                  alert("아이디 혹은 비밀번호가 잘못되었습니다 .");
-                }
-                console.log(error.response)
+            .catch((error) => {
+              if (error) {
+                alert("아이디 혹은 비밀번호가 잘못되었습니다 .");
               }
-            );
+              console.log("로그인에러", error);
+            });
         }catch(error){
           dispatch(postLoginFail(error));
         }

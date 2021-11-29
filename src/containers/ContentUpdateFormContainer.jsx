@@ -8,14 +8,6 @@ import { inputsNullCheck, uploadToS3 } from './ContentFormContainer';
 import axios from 'axios';
 
 
-
-
-/*
-  update 함수 
-  -본문 미리보기시에 컴포넌트가 초기화되어  이전에 작성한 input의 value 가  사라짐
-  - 컨텐츠 이외의 인풋들을 모으고 다음단계에서 컨텐츠를 작성한 후 한번에 전송하는 방식으로 바꾼다. 
-  - 컴포넌트를 다시 랜더하는 것이아니라 css display만 none으로 하는 방식으로 바꾼다.
-*/
 export default function ContentUpdateFormContainer({isOpen,isUpdate,setIsOpen}) {
     const [image , setImage] = useState({file:null,imagePreviewUrl:'/logo_transparent.png'})
     const [title , setTitle] = useState('');

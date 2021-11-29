@@ -67,15 +67,15 @@ export default function MultiSelect({isUpdate,tags,savedTags}) {
           input={<OutlinedInput label="Name" id ="tagsList" name="tagsList"/>}
           MenuProps={MenuProps}
         >
-          {tags.map((tag) => {
+          {tags.map((tag,index) => {
               return(
                 <MenuItem
                 sx={{fontWeight:'large'}} 
-                key={tag.id}
-                value={tag.tagName}
-                style={getStyles(tag.tagName, selectedTags, theme)}
+                key={index}
+                value={tag}
+                style={getStyles(tag, selectedTags, theme)}
                 >
-                  {tag.tagName}
+                  {tag}
                 </MenuItem>
             )
           })}

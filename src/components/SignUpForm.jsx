@@ -94,7 +94,6 @@ export default function SignUpForm({setOpenSignUp}) {
 
     //인증번호 검증
     const handleVerifyNum = () => {
-      console.log(userVerifyNum,verifyNum)
       if(userVerifyNum === verifyNum.toString()){
         alert("인증에 성공했습니다")
         setIsEmailVerified(true);
