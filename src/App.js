@@ -82,7 +82,7 @@ function App() {
     })
   })
 
-  axios.defaults.baseURL = 'http://localhost:9050';//'http://3.37.32.130:9050';
+  axios.defaults.baseURL = 'http://3.37.32.130:9050'; //'http://localhost:9050';
 
   
 

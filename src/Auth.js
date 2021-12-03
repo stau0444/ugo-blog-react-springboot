@@ -43,7 +43,7 @@ export const handleAuthRequest = (url,action,data) => {
         data:data
       })
       .then((resp) => {
-        console.log("success",resp);
+        console.log("success");
       })
       .catch((error)=>{
         if(error.response === undefined){
@@ -72,7 +72,6 @@ export const handleAuthRequest = (url,action,data) => {
 
   export const  setTokenToBrowser = (resp) => {
     const {auth_token,refresh_token} = resp.headers;
-    console.log("auth token",auth_token,"refresh token",refresh_token)
     axios.defaults.headers.common['Authorization'] =  'Bearer '+auth_token;
     cookie.set("refresh_token",refresh_token);
   }

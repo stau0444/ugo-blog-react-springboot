@@ -56,7 +56,6 @@ export default function LoginForm({setOpenLogin}) {
           const headers={
             "Content-Type":"application/x-www-form-urlencoded"
           }
-          console.log("login req data", data) 
           await axios
             .post("/api/user/login", data,{headers:headers})
             .then((resp) => {

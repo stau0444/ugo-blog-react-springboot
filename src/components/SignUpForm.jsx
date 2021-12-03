@@ -41,7 +41,7 @@ export const uploadBase64ImgToS3Bucket = (image) => {
     await promise.then(
       
       function (data) {
-        console.log("after upload",data)
+        
       },
       function (error) {
         console.log("S3 업로드 오류 발생 ", error.message);
