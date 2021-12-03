@@ -82,7 +82,7 @@ function App() {
     })
   })
 
-  axios.defaults.baseURL = 'http://localhost:8080'; //
+  axios.defaults.baseURL = 'https://www.ugosdevblog.com'; //'http://localhost:8080'; //
 
   
 
