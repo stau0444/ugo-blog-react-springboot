@@ -13,19 +13,29 @@ import hljs from 'highlight.js';
 import Search from './pages/Search';
 import { useEffect, } from 'react';
 import {  useDispatch, useSelector } from 'react-redux';
-import { cookie, handleAuthRequest, logOut, setTokenToBrowser, } from './Auth';
+import { cookie, logOut, setTokenToBrowser, } from './Auth';
 import { postLoginFail, postLoginStart, postLoginSuccess,  } from './redux/moduels/login';
 import axios from 'axios';
-import { Box, Button } from '@mui/material';
-
+import { Box, Button, Tooltip } from '@mui/material';
+import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
+import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown';
 export const testBtnStyle ={
-  width:"50%",
+  width:"100%",
   color:"black",
   top:"40px",
+  left:"100px",
   margin:"5px",
   background: "rgba(231, 13, 13, 0.521);",
   zIndex:"1",
 }
+export const ScorllBtnStyle ={
+  top:"40px",
+  display:"block",
+  margin:"5px",
+  zIndex:"1",
+
+}
+
 
 hljs.configure({   // optionally configure hljs
   languages: ['javascript' ,'java','python','html']
@@ -82,7 +92,28 @@ function App() {
     })
   })
 
-  axios.defaults.baseURL = 'https://www.ugosdevblog.com'; //'http://localhost:8080'; //
+  const handleScrollTop = () => {
+    window.scrollTo(
+      {
+        top: 0,
+        behavior: 'smooth'
+      }
+    );
+    console.log("scroll to top")
+  }
+
+  const handleScrollBottom = () => {
+    window.scrollTo({
+      top: document.querySelector("html").scrollHeight,
+      behavior: 'smooth'
+    });
+    console.log("scroll to bottom")
+  }
+
+  //운영시 baseUrl
+  // axios.defaults.baseURL = 'https://www.ugosdevblog.com'; 
+  //개발시 baseUrl
+  axios.defaults.baseURL = 'http://localhost:8080'; 
 
   
 
@@ -90,8 +121,20 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Header />
-        <Box sx={{position:"fixed",right:0,bottom:"100px"}}>
-          <Button onClick={()=>{handleAuthRequest("/api/user/test")}} sx={testBtnStyle}>login-Test-Btn</Button>
+        <Box sx={{ position: "fixed", right: 0, bottom: "50%" }}>
+          <Button
+            sx={{...ScorllBtnStyle,}}
+            onClick={handleScrollTop}
+          >
+            <Tooltip title="위로 가기">
+              <ArrowCircleUpIcon sx={{ color:isOn?"#22AD96":"bisque",fontSize: "40px" }} />
+            </Tooltip>
+          </Button>
+          <Button sx={{ ...ScorllBtnStyle }} onClick={handleScrollBottom}>
+            <Tooltip title="아래로 가기">
+              <ArrowCircleDownIcon sx={{color:isOn?"#22AD96":"bisque", fontSize: "40px" }} />
+            </Tooltip>
+          </Button>
         </Box>
         <Route path="/contents/search/:keyword" exact component={Search} />
         <Route path="/contents/:category" exact component={Home} />

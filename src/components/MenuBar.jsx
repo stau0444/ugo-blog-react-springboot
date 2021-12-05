@@ -172,7 +172,7 @@ export default function MenuBar() {
             </Box>
             <Search
               sx={{
-                width: { xs: "45%"},
+                width: { xs: "65%",sm:"45%"},
                 marginBottom: { xs: "4px", sm: "10px" },
               }}
             >

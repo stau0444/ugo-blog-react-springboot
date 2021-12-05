@@ -12,7 +12,7 @@ import { Login } from '@mui/icons-material';
 import LogoutIcon from '@mui/icons-material/Logout';
 import FiberNewIcon from '@mui/icons-material/FiberNew';
 import LoginForm from './LoginForm';
-import { Button, Modal } from '@mui/material';
+import { Button, Chip, Modal } from '@mui/material';
 import SignUpForm from './SignUpForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { logOut } from '../Auth';
@@ -82,23 +82,47 @@ export default function LoginMenu() {
           <IconButton
             size="small"
             sx={{
-              left: "7px",
-              top: "2px",
+              background:{xs:"#a4d2ee",sm:"inherit"},
+              borderRadius:{xs:"20px"},
+              display: { sm: "flex"},
+              padding:{xs:"5px",sm:"0"},
+              position: { xs: "absolute", sm: "static" },
+              right: { xs: "10px", sm: "0px" },
+              top: { xs: "60px" ,sm:"0px"},
               ml: 2,
+              marginTop:"3px",
               marginBottom: { xs: "5px", sm: "13px" },
+              transition: "background 0.5s linear",
+              "&:hover":{
+                cursor: "pointer",
+                background: {xs:"whitesmoke",sm:"inherit"},
+              }
             }}
           >
             {login ? (
-              <Avatar
-                src={userInfo.profileUrl}
-                sx={{
-                  boxShadow: "2px 2px 2px  rgba(0, 0, 0, 0.658)",
-                  width: 39,
-                  height: 39,
-                }}
-              />
+              <>
+                <Avatar
+                  src={userInfo.profileUrl}
+                  sx={{
+                    boxShadow: "2px 2px 2px  rgba(0, 0, 0, 0.658)",
+                    width: 36,
+                    height: 36,
+                  }}
+                />
+                <Chip
+                  sx={{
+                    width: "100%",
+                    marginLeft: "10px",
+                    fontSize: "14px",
+                    background: "gray",
+                    fontFamily: "'Righteous'",
+                    color: "#e2f3dd",
+                  }}
+                  label={userInfo.username}
+                />
+              </>
             ) : (
-              <Avatar sx={{ width: 39, height: 39 }} />
+              <Avatar sx={{ boxShadow: "2px 2px 2px  rgba(0, 0, 0, 0.658)",width: 36, height: 36 }} />
             )}
           </IconButton>
         </Tooltip>
@@ -107,6 +131,7 @@ export default function LoginMenu() {
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
+        sx={{ position: {xs:"fixed"}, top: {xs:"95px" ,sm:"0px"} }}
         PaperProps={{
           elevation: 0,
           sx: {
