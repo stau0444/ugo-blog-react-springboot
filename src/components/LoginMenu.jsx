@@ -76,6 +76,9 @@ export default function LoginMenu() {
           display: "flex",
           alignItems: "center",
           textAlign: "center",
+            "&:hover":{
+              
+            }
         }}
       >
         <Tooltip title={login ? "회원 정보" : "로그인"}>
@@ -87,16 +90,17 @@ export default function LoginMenu() {
               display: { sm: "flex"},
               padding:{xs:"5px",sm:"0"},
               position: { xs: "absolute", sm: "static" },
-              right: { xs: "10px", sm: "0px" },
+              right: { xs: "5px", sm: "0px" },
               top: { xs: "60px" ,sm:"0px"},
               ml: 2,
               marginTop:"3px",
               marginBottom: { xs: "5px", sm: "13px" },
-              transition: "background 0.5s linear",
+              transition: "all 0.5s ease-in-out",
               "&:hover":{
                 cursor: "pointer",
                 background: {xs:"whitesmoke",sm:"inherit"},
-              }
+              },
+              
             }}
           >
             {login ? (
@@ -117,6 +121,7 @@ export default function LoginMenu() {
                     background: "gray",
                     fontFamily: "'Righteous'",
                     color: "#e2f3dd",
+                    cursor: "pointer",
                   }}
                   label={userInfo.username}
                 />

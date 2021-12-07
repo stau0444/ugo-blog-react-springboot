@@ -41,27 +41,36 @@ export default function ContentList({
             <LoadingSkeleton />
           </Grid>
         ) : (
-          <AnimatePresence  initial={true}>
-            {contentList?contentList.data.map((content) => (
-                <Grid item key={content.id}  xs={12}  sm={contentList.data.length !== 1 ? 6 : ""} lg={contentList.data.length !== 1 ? 4 : ""}>
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
+          <AnimatePresence initial={true}>
+            {contentList
+              ? contentList.data.map((content) => (
+                  <Grid
+                    item
+                    key={content.id}
+                    xs={12}
+                    sm={contentList.data.length !== 1 ? 6 : ""}
+                    lg={contentList.data.length !== 1 ? 4 : ""}
                   >
-                    <ContentCard content={content} />
-                  </motion.div>
-                </Grid>
-            ))
-            :
-            ""
-          }
+                    <motion.div
+                      initial={{ opacity: 0  }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 1 }}
+                    >
+                      <ContentCard content={content} />
+                    </motion.div>
+                  </Grid>
+                ))
+              : ""}
           </AnimatePresence>
         )}
         <Grid item xs={12}>
-          <Pagenator page={page} totalCount={totalCount} handlePageChange={handlePageChange} />
+          <Pagenator
+            page={page}
+            totalCount={totalCount}
+            handlePageChange={handlePageChange}
+          />
         </Grid>
       </Grid>
     </>
-  )
+  );
 }

@@ -80,7 +80,7 @@ export default function SearchList({keyword,searchList,page,handlePageChange,tot
             <Grid item xs={12} sx={{ textAlign: "center" }}>
               <Typography
                 variant="h4"
-                sx={{ color: "bisque", margin: "20px auto", width: "90%" }}
+                sx={{ color: isOn?"#22ad96":"bisque", margin: "20px auto", width: "90%" }}
               >
                 {highlightedText(
                   `${keyword}에 대한 검색 결과 입니다.`,

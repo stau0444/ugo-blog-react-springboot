@@ -42,16 +42,21 @@ export default function Header() {
 
     return (
       <Grid container>
-        <Grid item xs={12}  >
+        <Grid item xs={12}>
           <MenuBar />
         </Grid>
         <Grid item xs={12}>
-          <Box className="logo" sx={{ display: { xs: "block"} }}>
+          <Box
+            className="logo"
+            sx={{
+              display: { xs: "block" },
+            }}
+          >
             <Logo
               className="logo"
               component="span"
               sx={{
-                margin:{xs:"70px 0 30px 0px",sm:"70px 0 30px 10px"},
+                margin: { xs: "70px 0 30px 0px", sm: "70px 0 30px 10px" },
                 fontSize: "60px",
                 color: logoColor,
                 borderBottomColor: logoColor,
@@ -62,7 +67,7 @@ export default function Header() {
             <Typography
               component="span"
               sx={{
-                display: {xs:"block",sm:"inline"},
+                display: { xs: "block", sm: "inline" },
                 color: logoMidColor,
                 fontSize: "60px",
                 borderBottom: `3px dashed ${logoMidColor}`,
@@ -84,7 +89,7 @@ export default function Header() {
               BLOG
             </Logo>
           </Box>
-          <NightModeSwitchButton isOn={isOn}/>
+          <NightModeSwitchButton isOn={isOn} />
           <Box sx={{ width: "100%", position: "relative" }}>
             <Box
               component="div"
@@ -92,7 +97,7 @@ export default function Header() {
                 width: "100%",
                 position: "absolute",
                 bottom: "0px",
-                zIndex:"-1",
+                zIndex: "-1",
               }}
             ></Box>
           </Box>
@@ -112,53 +117,64 @@ export default function Header() {
                 />
               </Tooltip>
             </Link>
-              <a
-                href="https://github.com/stau0444"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <Tooltip title="GitHub 이동">
-                  <GitHubIcon
-                    fontSize="large"
-                    sx={{ color: iconColor, marginRight: "10px" }}
-                    alt="asd"
-                  />
-                </Tooltip>
-              </a>
-              <a
-                href="https://github.com/stau0444"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <Tooltip title="이력서 열기">
-                  <PermContactCalendarIcon
-                    fontSize="large"
-                    sx={{ color: iconColor, marginRight: "10px" }}
-                  />
-                </Tooltip>
-              </a>
-              <Tooltip  title="티스토리 블로그 이동">
-                <a
-                  href="https://ugo04.tistory.com/"
-                  alt="티스토리"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    style={{ marginBottom: "2px", width: "32px", fill: iconColor }}
-                    viewBox="0 0 459 459"
-                  >
-                    <g>
-                      <path d="M229.5,0C102.75,0,0,102.75,0,229.5S102.75,459,229.5,459,459,356.25,459,229.5,356.25,0,229.5,0ZM130.21,191.45a39.57,39.57,0,1,1,39.56-39.57A39.58,39.58,0,0,1,130.21,191.45ZM229.5,390a39.56,39.56,0,1,1,39.56-39.56A39.56,39.56,0,0,1,229.5,390Zm0-99.29a39.56,39.56,0,1,1,39.56-39.56A39.56,39.56,0,0,1,229.5,290.74Zm0-99.29a39.57,39.57,0,1,1,39.56-39.57A39.57,39.57,0,0,1,229.5,191.45Zm99.29,0a39.57,39.57,0,1,1,39.57-39.57A39.57,39.57,0,0,1,328.79,191.45Z" />
-                    </g>
-                  </svg>
-                </a>
+            <a
+              href="https://github.com/stau0444"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Tooltip title="GitHub 이동">
+                <GitHubIcon
+                  fontSize="large"
+                  sx={{ color: iconColor, marginRight: "10px" }}
+                  alt="asd"
+                />
               </Tooltip>
+            </a>
+            <a
+              href="https://github.com/stau0444"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Tooltip title="이력서 열기">
+                <PermContactCalendarIcon
+                  fontSize="large"
+                  sx={{ color: iconColor, marginRight: "10px" }}
+                />
+              </Tooltip>
+            </a>
+            <Tooltip title="티스토리 블로그 이동">
+              <a
+                href="https://ugo04.tistory.com/"
+                alt="티스토리"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  style={{
+                    marginBottom: "2px",
+                    width: "32px",
+                    fill: iconColor,
+                  }}
+                  viewBox="0 0 459 459"
+                >
+                  <g>
+                    <path d="M229.5,0C102.75,0,0,102.75,0,229.5S102.75,459,229.5,459,459,356.25,459,229.5,356.25,0,229.5,0ZM130.21,191.45a39.57,39.57,0,1,1,39.56-39.57A39.58,39.58,0,0,1,130.21,191.45ZM229.5,390a39.56,39.56,0,1,1,39.56-39.56A39.56,39.56,0,0,1,229.5,390Zm0-99.29a39.56,39.56,0,1,1,39.56-39.56A39.56,39.56,0,0,1,229.5,290.74Zm0-99.29a39.57,39.57,0,1,1,39.56-39.57A39.57,39.57,0,0,1,229.5,191.45Zm99.29,0a39.57,39.57,0,1,1,39.57-39.57A39.57,39.57,0,0,1,328.79,191.45Z" />
+                  </g>
+                </svg>
+              </a>
+            </Tooltip>
           </Grid>
         </Grid>
-        <hr className="header-divider" data-ison={isOn}/>
-        <Grid item xs={12} sx={{ margin: { xs: "0 auto", sm: "20px 0px" } }}>
+        <hr className="header-divider" data-ison={isOn} />
+        <Grid
+          item
+          xs={12}
+          sx={{
+            margin: { xs: "0 auto", sm: "15px 0px" },
+            transition: "all 0.5s ease-in-out"
+          }}
+        >
           <Links />
         </Grid>
       </Grid>
