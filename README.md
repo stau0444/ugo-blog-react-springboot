@@ -51,6 +51,7 @@ Component Design | Marterial-Design , Styled Component , SCSS
 - 이메일 인증을 통한 회원가입
 - JWT 토큰 방식을 이용한 로그인 인증 및 로그인 유지
 - Quill.js 이용한 텍스트 에디팅(이미지 , 폰트 스타일 , 코드블럭 입력)
+- 
 
 #
 ## 4. 페이지별 설명 
@@ -145,12 +146,11 @@ Component Design | Marterial-Design , Styled Component , SCSS
 
 - JWT 토큰을 통한 로그인 인증 및 로그인 유지 
 
->Log-in process
-
-1. 클라이언트 로그인 요청(userId , password) 
-2. 서버에서 userId , password를 확인 후 JWT 토큰 생성하여 response header에 실어 전달 
-3. 클라이언트에서는 로그인 성공시 받아온 토큰을 
-
+1. 로그인 성공시 Access token 과 Refresh token 을 받아옴<br/>
+2. Access token은 Axios default header로 지정되고 refresh token은 브라우저 쿠키에 저장됨. <br/>
+3. access 토큰의 유효시간은 10분 refresh token은 1시간으로 지정되어있으며 
+access 토큰이 만료될시 refresh token을 전달하여 access 토큰을 새로 발급 받음<br/>
+4. refresh 토큰이 만료되면 alert 를 띄워 다시 로그인하도록 함.
 #
 
 <small>- 로그인 모달</small>
