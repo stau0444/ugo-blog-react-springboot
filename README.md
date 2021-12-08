@@ -7,7 +7,9 @@
 <br/>
 [2. 사용 라이브러리](#2.-사용-라이브러리)
 <br/>
-[3. 페이지별 설명](#3.-페이지별-설명)
+[3. 주요 기능](#3.-주요-기능)
+<br/>
+[4. 페이지별 설명](#4.-페이지별-설명)
 <br/>
 
 #
@@ -34,6 +36,7 @@ Front-end Libraries||
 HTTP client | Axios
 Component Design | Marterial-Design , Styled Component , SCSS
 프로젝트 관리| ESLint , Prettier , Husky , Lint-staged
+이미지 저장 | AWS S3
 기타| Quill.js(텍스트 에디터) , Highlight.js(텍스트 하이라이팅) , Cropper.js(이미지 편집) , framer-motion(애니메이션)
 
 
@@ -41,7 +44,16 @@ Component Design | Marterial-Design , Styled Component , SCSS
 <br/>
 
 #
-## 3. 페이지별 설명
+## 3. 주요 기능
+#
+- 밝기 변경 (LightMode , DarkMode)기능
+- S3 연동 이미지 업로드 (이미지 파일은 S3 업로드되며 생성되는 객체 URL은 DB에 저장)
+- 이메일 인증을 통한 회원가입
+- JWT 토큰 방식을 이용한 로그인 인증 및 로그인 유지
+- Quill.js 이용한 텍스트 에디팅(이미지 , 폰트 스타일 , 코드블럭 입력)
+
+#
+## 4. 페이지별 설명 
 #
 
 > ###   홈 페이지 ( / )
@@ -99,6 +111,7 @@ Component Design | Marterial-Design , Styled Component , SCSS
 <br/>
 
 - cropper.js  프로필 이미지 편집 구현
+- AWS S3를 연동하여 이미지 파일은 S3 버킷에 저장되고 생성되는 객체 URL DB에 저장
 - 이메일 인증을 통한 본인인증 구현(하나의 이메일에 하나의 아이디만 가입 가능하도록 구현)
 
 #
@@ -158,7 +171,7 @@ Component Design | Marterial-Design , Styled Component , SCSS
 
 #
 
-> ### 글 작성 (/content/add-content)
+> ### 글 작성 ,수정 , 삭제 
 <br/>
 
 - Quill.js 사용을 통해 텍스트,이미지 , 코드블럭 작성
@@ -181,4 +194,6 @@ Component Design | Marterial-Design , Styled Component , SCSS
 ![추가된 컨텐츠](https://blog.kakaocdn.net/dn/3KYgq/btrnjeQFkCp/PZSJUOdE3Sdkpe6h4YCPKK/img.png)
 
 
+#
+#
 #
