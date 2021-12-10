@@ -3,17 +3,17 @@
 
 ### 목차
 
-[1.프로젝트 설명](#1.프로젝트-설명 )
+[1. 프로젝트 설명](#1프로젝트-설명 )
 <br/>
-[2.사용 라이브러리](#2.사용-라이브러리)
+[2. 사용 라이브러리](#2사용-라이브러리)
 <br/>
-[3.주요 기능](#3.주요-기능)
+[3. 주요 기능](#3주요-기능)
 <br/>
-[4.페이지별 설명](#4.페이지별-설명)
+[4. 페이지별 설명](#4페이지별-설명)
 <br/>
 
 #
-## 1`.`프로젝트 설명 
+## 1.프로젝트 설명 
 #
 ![로고 이미지](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FEACL2%2FbtrnfBYVtgA%2FL4dVWu9Dv4RddOZrhwxBrK%2Fimg.png)
 
@@ -31,7 +31,7 @@
 <br/>
 
 #
-## 2`.`사용 라이브러리
+## 2.사용 라이브러리
 #
 
 <br/>
@@ -52,7 +52,7 @@ Component Design | Marterial-Design , Styled Component , SCSS
 <br/>
 
 #
-## 3`.`주요 기능
+## 3.주요 기능
 #
 - 밝기 변경 (LightMode , DarkMode)기능
 - S3 연동 이미지 업로드 (이미지 파일은 S3 업로드되며 생성되는 객체 URL은 DB에 저장)
@@ -62,7 +62,7 @@ Component Design | Marterial-Design , Styled Component , SCSS
 - 반응형 웹디자인
 
 #
-## 4`.`페이지별 설명 
+## 4.페이지별 설명 
 #
 
 > ###   홈 페이지 ( / )
