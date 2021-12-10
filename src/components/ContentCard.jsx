@@ -35,10 +35,18 @@ const StyledCard = styled(Card)`
 `;
 
 const ContentDescription = styled(Typography)`
-  font-weight:"450";
   color:${props => props.theme.nightMode?"#6b4f03":"#ecebea"};
   font-size:14px ;
   font-family:"" ;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 11; /* 라인수 */
+  -webkit-box-orient: vertical;
+  word-wrap:break-word; 
+  line-height: 1.4em;
+  height: 15.2em;
+  
 `
 
 
@@ -48,6 +56,9 @@ const ContentTitle = styled(Typography)`
   font-size:25px;
   color: ${props => props.theme.nightMode?"#22ad96":"bisque"};
   font-family: Gowun Batang;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
   margin: 0 0 10px 0;
 `
 

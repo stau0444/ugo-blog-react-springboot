@@ -64,23 +64,31 @@ export default function UserInfoUpdateForm({setOpenProfileUpdate,userInfo}) {
           }}
           sx={{ float: "right" }}
         >
-          <CancelIcon sx={{
-            color:"#16ec89",
-            "&:hover":{
-              color:"lightgray",
-              backgroundColor: "inherit"
-            }
-          }} fontSize="large" />
+          <CancelIcon
+            sx={{
+              color: "#16ec89",
+              "&:hover": {
+                color: "lightgray",
+                backgroundColor: "inherit",
+              },
+            }}
+            fontSize="large"
+          />
         </Box>
         <Typography
           variant="div"
           sx={{ textAlign: "center", margin: "20px auto" }}
         >
           <Typography
-            sx={{ fontWeight: 800, fontSize: "35px", color: "royalblue" }}
+            sx={{
+              fontFamily: "'Fredoka One', cursive",
+              fontSize: "35px",
+              color: "royalblue",
+            }}
           >
             {userInfo.username}
           </Typography>
+          <hr/>
         </Typography>
         <Box
           sx={{

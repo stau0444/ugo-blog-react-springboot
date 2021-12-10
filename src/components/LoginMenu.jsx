@@ -116,12 +116,14 @@ export default function LoginMenu() {
                 <Chip
                   sx={{
                     width: "100%",
+                    height:"30px",
                     marginLeft: "10px",
-                    fontSize: "14px",
-                    background: "gray",
-                    fontFamily: "'Righteous'",
-                    color: "#e2f3dd",
+                    fontSize: "13px",
+                    background: "#7a7573",
+                    fontFamily: "'Fredoka One', cursive",
+                    color: "#ebe1cf",
                     cursor: "pointer",
+                    boxShadow: "inset 1px 2px 2px rgba(0, 0, 0, 0.658)"
                   }}
                   label={userInfo.username}
                 />
