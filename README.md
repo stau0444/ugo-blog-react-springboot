@@ -3,37 +3,45 @@
 
 ### 목차
 
-[1. 프로젝트 설명](#1.-프로젝트-설명 )
+[1. 프로젝트 설명](#1.프로젝트-설명 )
 <br/>
-[2. 사용 라이브러리](#2.-사용-라이브러리)
+[2. 사용 라이브러리](#2.사용-라이브러리)
 <br/>
-[3. 주요 기능](#3.-주요-기능)
+[3. 주요 기능](#3.주요-기능)
 <br/>
-[4. 페이지별 설명](#4.-페이지별-설명)
+[4. 페이지별 설명](#4.페이지별-설명)
 <br/>
 
 #
-## 1. 프로젝트 설명 
+## 1.프로젝트 설명 
 #
 ![로고 이미지](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FEACL2%2FbtrnfBYVtgA%2FL4dVWu9Dv4RddOZrhwxBrK%2Fimg.png)
 
 
 공부하는 것들을 정리해 놓을 수 있는 저만의 블로그를 만들어 보고 싶어 시작한 프로젝트입니다. 리액트와 리덕스를 기반으로 만들어졌고 현재 프런트엔드 서버는 netlify 를 통해 배포되어있으며 , 아래 링크에서 확인할 수 있습니다. REST API 방식으로 EC2 인스턴스에 배포되어 있는 Spring-boot API 서버에서 데이터를 받아오고 있으며. JWT 토큰 방식을 사용하여 로그인 기능이 구현되었습니다. 
 
-https://blog.ugosdev.com/
+<br/>
+
+> page URL
+
+<br/>
+
+- https://blog.ugosdev.com
+
+<br/>
 
 #
-## 2. 사용 라이브러리
+## 2.사용 라이브러리
 #
 
 <br/>
 
-Front-end Libraries||
+Front-end Stack||
 --|--  
-라이브러리|React.js
-상태관리|Redux
-라우팅| React-router-dom
-HTTP client | Axios
+라이브러리|React.js 17.0.2
+상태관리|Redux 4.1.1
+라우팅| React-router-dom 5.3.0
+HTTP client | Axios 
 Component Design | Marterial-Design , Styled Component , SCSS
 프로젝트 관리| ESLint , Prettier , Husky , Lint-staged
 이미지 저장 | AWS S3
@@ -44,17 +52,17 @@ Component Design | Marterial-Design , Styled Component , SCSS
 <br/>
 
 #
-## 3. 주요 기능
+## 3.주요 기능
 #
 - 밝기 변경 (LightMode , DarkMode)기능
 - S3 연동 이미지 업로드 (이미지 파일은 S3 업로드되며 생성되는 객체 URL은 DB에 저장)
 - 이메일 인증을 통한 회원가입
 - JWT 토큰 방식을 이용한 로그인 인증 및 로그인 유지
 - Quill.js 이용한 텍스트 에디팅(이미지 , 폰트 스타일 , 코드블럭 입력)
-- 
+- 반응형 웹디자인
 
 #
-## 4. 페이지별 설명 
+## 4.페이지별 설명 
 #
 
 > ###   홈 페이지 ( / )

@@ -1,6 +1,6 @@
 import MenuBar from './MenuBar';
 import Links from './Links';
-import { Box, Grid, styled, Tooltip, Typography } from '@mui/material';
+import { Box, Grid, styled, SvgIcon, Tooltip, Typography } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
 import HomeIcon from '@mui/icons-material/Home';
@@ -18,6 +18,10 @@ export const Logo = styled(Typography)`
     border-bottom: 2px solid bisque;
 `
 
+const iconStlye = {
+  display: { xs: "inline", sm: "none" },
+  marginRight: "10px",
+}
 
 export default function Header() { 
   const isOn = useSelector(state=>state.nightMode)
@@ -48,9 +52,6 @@ export default function Header() {
         <Grid item xs={12}>
           <Box
             className="logo"
-            sx={{
-              display: { xs: "block" },
-            }}
           >
             <Logo
               className="logo"
@@ -90,30 +91,22 @@ export default function Header() {
             </Logo>
           </Box>
           <NightModeSwitchButton isOn={isOn} />
-          <Box sx={{ width: "100%", position: "relative" }}>
-            <Box
-              component="div"
-              sx={{
-                width: "100%",
-                position: "absolute",
-                bottom: "0px",
-                zIndex: "-1",
-              }}
-            ></Box>
-          </Box>
           <Grid
             item
             sx={{
               textAlign: "center",
-              marginTop: { xs: "50px" },
-              display: { xs: "block", sm: "none" },
+              opacity: { xs: 1, sm: 0 },
+              transition: {
+                xs: "opacity 0.7s linear",
+                sm: "opacity 0s linear",
+              },
             }}
           >
             <Link to="/">
               <Tooltip title="Home">
                 <HomeIcon
                   fontSize="large"
-                  sx={{ color: iconColor, marginRight: "10px" }}
+                  sx={{...iconStlye,color:iconColor}}
                 />
               </Tooltip>
             </Link>
@@ -125,7 +118,7 @@ export default function Header() {
               <Tooltip title="GitHub 이동">
                 <GitHubIcon
                   fontSize="large"
-                  sx={{ color: iconColor, marginRight: "10px" }}
+                  sx={{...iconStlye,color:iconColor}}
                   alt="asd"
                 />
               </Tooltip>
@@ -138,30 +131,32 @@ export default function Header() {
               <Tooltip title="이력서 열기">
                 <PermContactCalendarIcon
                   fontSize="large"
-                  sx={{ color: iconColor, marginRight: "10px" }}
+                  sx={{...iconStlye,color:iconColor}}
                 />
               </Tooltip>
             </a>
-            <Tooltip title="티스토리 블로그 이동">
+            <Tooltip  title="티스토리 블로그 이동">
               <a
                 href="https://ugo04.tistory.com/"
                 alt="티스토리"
                 target="_blank"
                 rel="noreferrer"
               >
-                <svg
+                <SvgIcon
                   xmlns="http://www.w3.org/2000/svg"
-                  style={{
+                  sx={{
+                    ...iconStlye, 
                     marginBottom: "2px",
-                    width: "32px",
-                    fill: iconColor,
+                    width: "31px",
+                    height: "31px",
+                    color: iconColor,
                   }}
                   viewBox="0 0 459 459"
                 >
                   <g>
                     <path d="M229.5,0C102.75,0,0,102.75,0,229.5S102.75,459,229.5,459,459,356.25,459,229.5,356.25,0,229.5,0ZM130.21,191.45a39.57,39.57,0,1,1,39.56-39.57A39.58,39.58,0,0,1,130.21,191.45ZM229.5,390a39.56,39.56,0,1,1,39.56-39.56A39.56,39.56,0,0,1,229.5,390Zm0-99.29a39.56,39.56,0,1,1,39.56-39.56A39.56,39.56,0,0,1,229.5,290.74Zm0-99.29a39.57,39.57,0,1,1,39.56-39.57A39.57,39.57,0,0,1,229.5,191.45Zm99.29,0a39.57,39.57,0,1,1,39.57-39.57A39.57,39.57,0,0,1,328.79,191.45Z" />
                   </g>
-                </svg>
+                </SvgIcon>
               </a>
             </Tooltip>
           </Grid>
@@ -172,7 +167,7 @@ export default function Header() {
           xs={12}
           sx={{
             margin: { xs: "0 auto", sm: "15px 0px" },
-            transition: "all 0.5s ease-in-out"
+            transition: "all 0.5s ease-in-out",
           }}
         >
           <Links />
