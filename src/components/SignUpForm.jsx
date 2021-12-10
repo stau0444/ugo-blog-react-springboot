@@ -24,15 +24,16 @@ export const VerifedText = styled('p')`
   margin:3px 10px;
 
 `
-
+const AWS_S3_BUCKET_NAME = process.env.REACT_APP_AWS_S3_BUCKET_NAME;
 export const uploadBase64ImgToS3Bucket = (image) => {
   async function uploadBase64ImgToS3Bucket(){
+    
     const buf = Buffer.from(image.imagePreviewUrl.replace(/^data:image\/\w+;base64,/, ""),'base64')
     const upload = new AWS.S3.ManagedUpload({
         params:{
             Key: image.file.name+":profile", 
             Body: buf,
-            Bucket : 'ugo-blog-image-bucket',
+            Bucket : AWS_S3_BUCKET_NAME,
             ContentEncoding: 'base64',
             ContentType: 'image/jpeg'
         },

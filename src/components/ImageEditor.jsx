@@ -80,7 +80,7 @@ export default function ImageEditor ({handleClose,image,setImage}) {
         />
         <br />
         <Cropper
-          style={{ margin:"0 auto" ,width:"60%"}}
+          style={{ margin:"0 auto" ,width:"60%",maxWidth:"300px"}}
           zoomTo={0.5}
           initialAspectRatio={1}
           preview=".img-preview"
@@ -135,7 +135,7 @@ export default function ImageEditor ({handleClose,image,setImage}) {
         </Button>
       </div>
       <br style={{ clear: "both" }} />
-      <img alt="cropedImg" width="60%" src={cropData?cropData:"/no-image.png"}/>
+      <img alt="cropedImg" style={{maxWidth:"300px",width:"60%"}} src={cropData?cropData:"/no-image.png"}/>
     </div>
   );
 }

@@ -84,11 +84,13 @@ function App() {
     }
   },[isOn,dispatch])
 
+
+  const AWS_IDENTITY_POOL_ID = process.env.REACT_APP_AWS_IDENTITY_POOL_ID;
   //AWS  config
   AWS.config.update({
     region:'ap-northeast-2',
     credentials: new AWS.CognitoIdentityCredentials({
-        IdentityPoolId:"ap-northeast-2:f4eab593-5f5f-4e47-8b60-a45049ed7a5d",
+        IdentityPoolId:AWS_IDENTITY_POOL_ID,
     })
   })
 
