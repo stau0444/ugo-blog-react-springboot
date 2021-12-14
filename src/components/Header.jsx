@@ -50,9 +50,7 @@ export default function Header() {
           <MenuBar />
         </Grid>
         <Grid item xs={12}>
-          <Box
-            className="logo"
-          >
+          <Box className="logo">
             <Logo
               className="logo"
               component="span"
@@ -106,7 +104,7 @@ export default function Header() {
               <Tooltip title="Home">
                 <HomeIcon
                   fontSize="large"
-                  sx={{...iconStlye,color:iconColor}}
+                  sx={{ ...iconStlye, color: iconColor }}
                 />
               </Tooltip>
             </Link>
@@ -118,7 +116,7 @@ export default function Header() {
               <Tooltip title="GitHub 이동">
                 <GitHubIcon
                   fontSize="large"
-                  sx={{...iconStlye,color:iconColor}}
+                  sx={{ ...iconStlye, color: iconColor }}
                   alt="asd"
                 />
               </Tooltip>
@@ -131,11 +129,11 @@ export default function Header() {
               <Tooltip title="이력서 열기">
                 <PermContactCalendarIcon
                   fontSize="large"
-                  sx={{...iconStlye,color:iconColor}}
+                  sx={{ ...iconStlye, color: iconColor }}
                 />
               </Tooltip>
             </a>
-            <Tooltip  title="티스토리 블로그 이동">
+            <Tooltip title="티스토리 블로그 이동">
               <a
                 href="https://ugo04.tistory.com/"
                 alt="티스토리"
@@ -145,7 +143,7 @@ export default function Header() {
                 <SvgIcon
                   xmlns="http://www.w3.org/2000/svg"
                   sx={{
-                    ...iconStlye, 
+                    ...iconStlye,
                     marginBottom: "2px",
                     width: "31px",
                     height: "31px",
@@ -171,6 +169,7 @@ export default function Header() {
           }}
         >
           <Links />
+
         </Grid>
       </Grid>
     );  

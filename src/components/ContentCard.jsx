@@ -19,6 +19,7 @@ const StyledCard = styled(Card)`
   background:rgba(255,255,255,0.1);
   border-top: 1px solid rgba(255,255,255,0.5);
   border-left: 1px solid rgba(255,255,255,0.5);
+  transition: 'background 1s linear';
    /* "linear-gradient(to right bottom, #ff00d4, rgb(0, 89, 178) 120%);", */
   &:hover{
     background:
