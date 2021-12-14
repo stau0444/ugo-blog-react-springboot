@@ -115,7 +115,7 @@ function App() {
   //운영시 baseUrl
   axios.defaults.baseURL = 'https://www.ugosdevblog.com'; 
   //개발시 baseUrl
-  // axios.defaults.baseURL = 'http://localhost:8080'; 
+  //  axios.defaults.baseURL = 'http://localhost:8080'; 
 
   
 
@@ -123,9 +123,9 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Header />
-        <Box sx={{ position: "fixed", right: 0, bottom: "50%" }}>
+        <Box sx={{ position: "fixed", right: 0, bottom: "50%" ,display:{xs:"none"}}}>
           <Button
-            sx={{...ScorllBtnStyle,}}
+            sx={{...ScorllBtnStyle}}
             onClick={handleScrollTop}
           >
             <Tooltip title="위로 가기">
