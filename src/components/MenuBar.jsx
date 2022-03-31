@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import LoginMenu from './LoginMenu';
-import {useState } from 'react';
+import {useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import HomeIcon from '@mui/icons-material/Home';
@@ -14,6 +14,7 @@ import { Link } from 'react-router-dom';
 import { Logo } from './Header';
 import ResumeModal from './ResumeModal';
 import { Button, Tooltip } from '@mui/material';
+import axios from 'axios';
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -41,13 +42,38 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
   justifyContent: 'center',
 }));
 
+const SearchIconWrapperList = styled('div')(({ theme }) => ({
+  pointerEvents: 'none',
+  display: 'flex',
+}));
+const WhiteList= styled("ul")`
+  color:white;
+  background-color: #26f0143c;
+  visibility: ${props => props.isselected==="true"?"hidden":"visible"};
+  list-style:none;
+  padding:0;
+  border-radius: 0 0 10px 10px;
+  & > li{
+    padding:5px 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s all linear;
+    :hover{
+      box-shadow: 0px 2px gray;
+      background-color: #96919192;
+    }
+  }
+  & > li:last-child{
+    border-radius: 0 0 10px 10px;
+  }
+`
+
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('sm')]: {
       width: '12ch',
@@ -63,6 +89,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function MenuBar() {
   const history = useHistory();
   const [keyword,setKeyword] = useState("");
+  const [whitelist,setWhitelist] =useState([]);
+  const [isselected , setIsselected] = useState(false);
+
   const handleSearch = (e) => {
     if(e.key === "Enter"){
       history.push("/contents/search/"+e.target.value);
@@ -71,13 +100,28 @@ export default function MenuBar() {
       history.push("/contents/search/"+keyword);
     }
   }
+  const searchKeywordRef = useRef();
+  const handleWhitelist= (value) =>{
+    async function handleWhitelist(){
+       await axios.get("/api/whitelist?keyword="+value).then((resp)=>{
+          setWhitelist([...resp.data]);
+          setIsselected(false);
+       })
+    }
+    handleWhitelist();
+  }
+
+  const handleSearchKeyword = (ql) =>{
+    searchKeywordRef.current.value = ql ;
+    setIsselected(true);
+    setKeyword(ql);
+  }
 
 
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
         <AppBar
-          position="static"
           sx={{
             zIndex: 1,
             background: "#23ca98ef",
@@ -200,11 +244,38 @@ export default function MenuBar() {
                 inputProps={{
                   onChange: (e) => {
                     setKeyword(e.target.value);
+                    handleWhitelist(e.target.value);
                   },
+                  ref: searchKeywordRef,
                   "aria-label": "search",
+                  style: { fontWeight: "bold" },
                   onKeyPress: handleSearch,
+                  onBlur:()=>{setIsselected(true)},
                 }}
               />
+              <Box
+                sx={{
+                  width: "100%",
+                  position: "absolute",
+                }}
+              >
+                <WhiteList isselected={isselected.toString()}>
+                  {whitelist.map((wl, i) => (
+                    <li
+                      className="white-list-jxef"
+                      key={i}
+                      onClick={() => {
+                        handleSearchKeyword(wl);
+                      }}
+                    >
+                      <SearchIconWrapperList>
+                        <SearchIcon />
+                        {wl}
+                      </SearchIconWrapperList>
+                    </li>
+                  ))}
+                </WhiteList>
+              </Box>
               <Button
                 sx={{
                   padding: "3px 0",

@@ -113,9 +113,9 @@ function App() {
   }
 
   //운영시 baseUrl
-  axios.defaults.baseURL = 'https://www.ugosdevblog.com'; 
+  //axios.defaults.baseURL = 'https://www.ugosdevblog.com'; 
   //개발시 baseUrl
-  // axios.defaults.baseURL = 'http://localhost:8080'; 
+  axios.defaults.baseURL = 'http://localhost:9000'; 
 
   
 

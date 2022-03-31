@@ -118,7 +118,9 @@ const initialState = {
     loading: false,
     tags: [],
     title: "",
-    userId:0
+    userId:0,
+    nextContent:{id:0,title:''},
+    prevContent:{id:0,title:''}
 }
 
 export default function reducer(state = initialState , action) {

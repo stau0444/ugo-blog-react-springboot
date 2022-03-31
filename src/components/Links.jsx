@@ -1,8 +1,9 @@
 import { Chip, Stack } from '@mui/material';
 import {styled } from '@mui/material/styles';
-import { useEffect } from 'react';
+import axios from 'axios';
+import { useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
 import {  NavLink } from 'react-router-dom';
-import { tagList } from '../sampleData';
 
 
 export const ColorLink = styled(Chip)(()=>({
@@ -25,10 +26,33 @@ export const ColorLink = styled(Chip)(()=>({
 
 
 export default function Links() {
-    useEffect(()=>{
+    const username = useSelector(state=>state.login.userInfo.username);
         
-    })
+    const [tagList,setTagList] = useState([])
+    const tagRef = useRef('');
+    useEffect(()=>{
+        const getTags = async() =>{
+            const resp = await axios.get("/api/tags");
+            setTagList([...resp.data]);
+        }
+        getTags();
+    },[])
+    const addTag = async() =>{
+            await axios.post("/api/tag?name="+tagRef.current.value);
+    }
+    
     return(
+    <>
+        {
+            username==="stau04"&&username!==undefined?
+            <>
+                <input ref={tagRef} type="text" />
+                <button onClick={addTag}>추가</button>
+            </>
+            :
+            ""
+        }
+        
         <ul className="menu-links"> 
             <Stack 
             className="menu-link-list"
@@ -42,5 +66,7 @@ export default function Links() {
                 )}
             </Stack>
         </ul>
+
+    </>
     );
 }

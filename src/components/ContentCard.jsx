@@ -69,7 +69,13 @@ const ContentDivider = styled(Divider)`
   height:2px;
   background : ${props => props.theme.nightMode?"darkgray":"#337ab7"};
 `
-
+const CreatedDate = styled("p")`
+  margin:0 10px 5px 0;
+  color:${props => props.theme.nightMode?"#416139":"coral"};
+  float:right;
+  font-size: 12px;
+  font-weight: bold;
+`
 
 export default function ContentCard({keyword,content}) {
   const nightMode = useSelector(state => state.nightMode);
@@ -87,6 +93,7 @@ export default function ContentCard({keyword,content}) {
                     ? highlightedText(content.title, keyword)
                     : content.title}
                 </ContentTitle>
+                <CreatedDate theme={theme}>{content.createdAt}</CreatedDate>
                 <ContentDivider theme={theme}/>
               </Grid>
               <Grid item sm={4} xs={12}>

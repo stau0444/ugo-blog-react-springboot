@@ -29,6 +29,8 @@ export const highlightedText = (text, query) => {
 export default function SearchList({keyword,searchList,page,handlePageChange,totalCount}) {
   const [listBgc,setListBgc] = useState();
   const isOn = useSelector(state => state.nightMode);
+  console.log('content' , searchList)
+
   useEffect(()=>{
     if(isOn){
       setListBgc("#c9e0df")

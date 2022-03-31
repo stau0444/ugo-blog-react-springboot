@@ -1,9 +1,9 @@
 import { Box, Button, Grid, Typography } from "@mui/material";
 import { styled } from '@mui/material/styles';
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import ReactQuill  from 'react-quill';
 import { formats, modules } from "../QuillConfig";
-import { tagList } from "../sampleData";
 import ContentPreviewModal from "./ContentPreviewModal";
 import { StyledInput } from "./ContentUpdateForm";
 import MultiSelect from "./MultiSelect";
@@ -47,6 +47,14 @@ export default function ContentForm({
     value,
 }) {
     const [open, setOpen] = useState(false);
+    const [tagList,setTagList] = useState([])
+    useEffect(()=>{
+        const getTags = async() =>{
+            const resp = await axios.get("/api/tags");
+            setTagList([...resp.data]);
+        }
+        getTags();
+    },[])
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     return (

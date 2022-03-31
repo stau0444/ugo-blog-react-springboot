@@ -221,18 +221,24 @@ ul ,h2,h1,h3,h4,h5,p,a,div{
   background-color: bisque;
   border-radius: 20px;
   border: 0;
+  position: relative;
   img{
     width: 50%;
   }
+  .ql-container.ql-snow{
+    border: 0px;
+  }
+  
+  .ql-toolbar.ql-snow{
+    border: 0px;
+    transition: all 0.3s linear;
+    padding: 20px;
+    top: 0;
+  }
 }
 
-.ql-container.ql-snow{
-  border: 0px;
-}
-.ql-toolbar.ql-snow{
-  border: 0px;
 
-}
+
 
 .ql-container {
   box-sizing: border-box;
@@ -240,7 +246,6 @@ ul ,h2,h1,h3,h4,h5,p,a,div{
   font-size: 13px;
   height: 100%;
   margin: 0px;
-  position: relative;
 }
 .ql-container.ql-disabled .ql-tooltip {
   visibility: hidden;
@@ -304,9 +309,6 @@ a.nav-link-active div{
  ul > li {
   list-style-type: none;
 }
- ul > li::before {
-  content: '\2022';
-}
  ul[data-checked=true],
  ul[data-checked=false] {
   pointer-events: none;
@@ -341,10 +343,7 @@ a.nav-link-active div{
   margin-left: 0.3em;
   margin-right: -1.5em;
 }
- ol li:not(.ql-direction-rtl),
- ul li:not(.ql-direction-rtl) {
-  padding-left: 1.5em;
-}
+
  ol li.ql-direction-rtl,
  ul li.ql-direction-rtl {
   padding-right: 1.5em;
