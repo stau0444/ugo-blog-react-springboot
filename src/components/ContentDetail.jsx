@@ -1,5 +1,6 @@
 import { Box, Button, Chip, Grid, styled, Typography } from "@mui/material";
 import { motion } from "framer-motion";
+import { useRef } from "react";
 import { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import CodeBlock from "./CodeBlock";
@@ -60,10 +61,82 @@ height: 0;
 border: 1px solid gray;
 `
 
-export default function ContentDetail({content,loading,deleteContent}) {
-    const {login,userInfo} = useSelector(state => state.login);
+const CommentConatiner = styled('div')`
+ margin:100px auto;
+ width: 90%;
+`
+
+const CommentHeader = styled('div')`
+font-weight: 700;
+padding:5px;
+font-size: 20px;
+color: lightgray;
+margin: 0px 0;
+border-bottom:1px solid white;
+`
+const AddContentBox = styled('div')`
+ padding: 15px;
+ margin: 20px 10px 20px 0;
+ border-bottom: 1px solid gray;
+`
+const CommentInput = styled("input")`
+  width: 90%;
+  color: lightgray;
+  font-size: 15px;
+  border:0;
+  float: left;
+  margin-top: 10px;
+  outline: none;
+  background-color: inherit;
+`
+const CommentsubmitBtn = styled('button')`
+background-color: inherit;
+border: 1px solid green;
+padding:10px;
+border-radius: 15px;
+color: #23ca98ef;
+`
+
+const CommentList = styled('ul')`
+padding: 0;
+`
+const CommentListBox = styled('div')`
+
+`
+const Comment = styled('li')`
+
+font-size: 14px;
+padding: 7px;
+margin:15px 0;
+border-bottom: 1px solid gray;
+font-family:'Righteous', cursive;
+`
+const CommentUserBox = styled('span')`
+color: royalblue;
+width: 20%;
+text-align: center;
+
+`
+const CommentUser = styled('p')`
+border-radius: 15px;
+border:1px solid gray;
+padding: 5px 0;
+`
+const CommentBody = styled('span')`
+width:50%;
+padding-left: 10px;
+`
+const CommentCreatedAt = styled('span')`
+width:30%
+`
+const LoginAlert = styled('p')`
+color: lightgrey;
+`
+
+
+export default function ContentDetail({commentList,login,userInfo,content,loading,deleteContent,addComment}) {
     const userId = useSelector(state => state.contents.userId)
-    console.log('content' , content)
+    const commentRef = useRef("");
     return (
       <Grid container>
         <Grid item xs={12}>
@@ -101,7 +174,7 @@ export default function ContentDetail({content,loading,deleteContent}) {
                     : ""}
                 </Grid>
                 <CodeBlock value={content.article} />
-                <div style={{marginTop:"40px"}}>
+                <div style={{ marginTop: "40px" }}>
                   {content.prevContent ? (
                     <PrevContent>
                       <Link to={"/content/" + content.prevContent.id}>
@@ -153,6 +226,47 @@ export default function ContentDetail({content,loading,deleteContent}) {
                 ) : (
                   <Box sx={{ margin: "40px" }}></Box>
                 )}
+                <CommentConatiner>
+                  <CommentHeader>댓글 ({commentList.length})</CommentHeader>
+                  {login ? (
+                    <>
+                      <AddContentBox>
+                        <CommentInput placeholder="댓글을 입력해 주세요." white ref={commentRef} type="text" />
+                        <CommentsubmitBtn
+                          onClick={() => {
+                            addComment(
+                              content.id,
+                              userInfo.id,
+                              commentRef.current.value
+                            );
+                          }}
+                        >
+                          댓글달기
+                        </CommentsubmitBtn>
+                      </AddContentBox>
+                    </>
+                  ) : (
+                    <LoginAlert>로그인이 필요합니다.</LoginAlert>
+                  )}
+                  <CommentListBox>
+                    <CommentList>
+                      {commentList.map((comment, i) => (
+                        <Comment
+                          key={i}
+                          style={{ color: "white", display: "flex" }}
+                        >
+                          <CommentUserBox>
+                            <CommentUser>{comment.userName}</CommentUser>
+                          </CommentUserBox>
+                          <CommentBody>{comment.body}</CommentBody>
+                          <CommentCreatedAt>
+                            {comment.createdAt}
+                          </CommentCreatedAt>
+                        </Comment>
+                      ))}
+                    </CommentList>
+                  </CommentListBox>
+                </CommentConatiner>
               </>
             </motion.div>
           )}
