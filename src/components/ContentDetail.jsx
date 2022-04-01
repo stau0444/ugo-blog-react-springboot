@@ -1,11 +1,15 @@
 import { Box, Button, Chip, Grid, styled, Typography } from "@mui/material";
 import { motion } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import CodeBlock from "./CodeBlock";
 import ContentDetailSkeleton from "./ContentDetailSkeleton";
-
+import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EmojiPeopleIcon from '@mui/icons-material/EmojiPeople';
+import LabelImportantIcon from '@mui/icons-material/LabelImportant';
+import { CommentTwoTone } from "@mui/icons-material";
 const headerTextStyle = {
   width: "85%",
   margin: "20px auto",
@@ -80,7 +84,7 @@ const AddContentBox = styled('div')`
  border-bottom: 1px solid gray;
 `
 const CommentInput = styled("input")`
-  width: 90%;
+  width: 80%;
   color: lightgray;
   font-size: 15px;
   border:0;
@@ -98,21 +102,19 @@ color: #23ca98ef;
 `
 
 const CommentList = styled('ul')`
-padding: 0;
+padding: 10px;
 `
 const CommentListBox = styled('div')`
 
 `
 const Comment = styled('li')`
-
 font-size: 14px;
-padding: 7px;
-margin:15px 0;
+padding: 10px;
 border-bottom: 1px solid gray;
 font-family:'Righteous', cursive;
 `
 const CommentUserBox = styled('span')`
-color: royalblue;
+color: ${props=>props.color};
 width: 20%;
 text-align: center;
 
@@ -121,22 +123,63 @@ const CommentUser = styled('p')`
 border-radius: 15px;
 border:1px solid gray;
 padding: 5px 0;
+max-width: 100px;
+
 `
 const CommentBody = styled('span')`
 width:50%;
 padding-left: 10px;
+margin-top: 5px;
 `
 const CommentCreatedAt = styled('span')`
-width:30%
+font-size: 11px;
+color: #ada0a0;
+width:30%;
+margin-top: 8px;
+text-align: center;
 `
 const LoginAlert = styled('p')`
 color: lightgrey;
+padding:10px;
+margin: 40px 0;
 `
 
-
+const ReplyBtn = styled('button')`
+float: right;
+background-color: inherit;
+border: 1px solid gray;
+color: gray;
+border-radius: 5px;
+ &:hover{
+   background-color: #5f5757;
+ }
+`
+const ReplyBox = styled('div')`
+width: 100%;
+margin: 15px;
+display:${props=>props.isReplyOpen?"block":"none"};
+`
+const ReplySubmitBtn = styled('button')`
+background-color: inherit;
+color: green;
+border: 1px solid green;
+border-radius: 5px;
+`
+const ReplyInput =styled('input')`
+background-color: inherit;
+width: 80%;
+margin-right:15px;
+color: gray;
+outline: none;
+border:0;
+border-bottom: 1px solid green;
+`
 export default function ContentDetail({commentList,login,userInfo,content,loading,deleteContent,addComment}) {
     const userId = useSelector(state => state.contents.userId)
     const commentRef = useRef("");
+    const replyRef = useRef("");
+    const [isReplyOpen,setIsReplyOpen] =useState(false);
+    const [checkedId,setCheckedId]= useState();
     return (
       <Grid container>
         <Grid item xs={12}>
@@ -231,7 +274,11 @@ export default function ContentDetail({commentList,login,userInfo,content,loadin
                   {login ? (
                     <>
                       <AddContentBox>
-                        <CommentInput placeholder="댓글을 입력해 주세요." white ref={commentRef} type="text" />
+                        <CommentInput
+                          placeholder="댓글을 입력해 주세요."
+                          ref={commentRef}
+                          type="text"
+                        />
                         <CommentsubmitBtn
                           onClick={() => {
                             addComment(
@@ -246,23 +293,107 @@ export default function ContentDetail({commentList,login,userInfo,content,loadin
                       </AddContentBox>
                     </>
                   ) : (
-                    <LoginAlert>로그인이 필요합니다.</LoginAlert>
+                    <LoginAlert>
+                      댓글을 작성하려면 로그인이 필요합니다.
+                    </LoginAlert>
                   )}
                   <CommentListBox>
                     <CommentList>
                       {commentList.map((comment, i) => (
-                        <Comment
-                          key={i}
-                          style={{ color: "white", display: "flex" }}
-                        >
-                          <CommentUserBox>
-                            <CommentUser>{comment.userName}</CommentUser>
-                          </CommentUserBox>
-                          <CommentBody>{comment.body}</CommentBody>
-                          <CommentCreatedAt>
-                            {comment.createdAt}
-                          </CommentCreatedAt>
-                        </Comment>
+                        <>
+                          <Comment
+                            key={i}
+                            style={{ color: "white", display: "flex" }}
+                          >
+                            {comment.commentId === comment.repliedCommentId ? (
+                              ""
+                            ) : (
+                              <>
+                                <LabelImportantIcon
+                                  sx={{ color: "yellowgreen",fontSize:"14px" }}
+                                  fontSize="small"
+                                />
+                                <EmojiPeopleIcon
+                                  sx={{fontSize:"22px" }}
+                                 />
+                              </>
+                            )}
+                            <CommentUserBox
+                              color={
+                                comment.commentId === comment.repliedCommentId
+                                  ? "royalblue"
+                                  : "lightcoral"
+                              }
+                            >
+                              <CommentUser>{comment.userName}</CommentUser>
+                            </CommentUserBox>
+                            <CommentBody>
+                              {comment.body}
+                              {comment.commentId === comment.repliedCommentId &&
+                              login ? (
+                                <ReplyBtn
+                                  onClick={() => {
+                                    setIsReplyOpen(isReplyOpen ? false : true);
+                                    setCheckedId(i);
+                                  }}
+                                >
+                                  {isReplyOpen && checkedId === i
+                                    ? "닫기"
+                                    : "답글달기"}
+                                </ReplyBtn>
+                              ) : (
+                                ""
+                              )}
+                            </CommentBody>
+                            <CommentCreatedAt>
+                              {comment.createdAt}
+                              <div>
+                                {userInfo.username === comment.userName ? (
+                                  <>
+                                    <Button sx={{ bgcolor: "inherit" }}>
+                                      <DriveFileRenameOutlineIcon
+                                        sx={{
+                                          color: "green",
+                                          fontSize: "15px",
+                                        }}
+                                        fontSize="small"
+                                      />
+                                    </Button>
+                                    <Button>
+                                      <DeleteIcon
+                                        sx={{
+                                          color: "tomato",
+                                          fontSize: "15px",
+                                        }}
+                                      />
+                                    </Button>
+                                  </>
+                                ) : (
+                                  ""
+                                )}
+                              </div>
+                            </CommentCreatedAt>
+                          </Comment>
+                          {checkedId === i ? (
+                            <ReplyBox key={i} isReplyOpen={isReplyOpen}>
+                              <ReplyInput ref={replyRef} />
+                              <ReplySubmitBtn
+                                onClick={() => {
+                                  addComment(
+                                    content.id,
+                                    userInfo.id,
+                                    replyRef.current.value,
+                                    comment.commentId
+                                  );
+                                }}
+                              >
+                                답글 전송
+                              </ReplySubmitBtn>
+                            </ReplyBox>
+                          ) : (
+                            ""
+                          )}
+                        </>
                       ))}
                     </CommentList>
                   </CommentListBox>

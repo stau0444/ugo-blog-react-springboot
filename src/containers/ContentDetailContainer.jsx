@@ -50,6 +50,7 @@ export default function ContentDetailContainer({match}) {
     const addComment = (contentId,userId,body,repliedCommentId)=>{
       async function addComment(){
         try{
+          console.log('repliedCommentId',repliedCommentId)
           await axios.post(`/api/content/${contentId}/comment`,{
             userId,
             body,
