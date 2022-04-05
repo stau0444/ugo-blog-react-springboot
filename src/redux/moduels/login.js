@@ -94,8 +94,11 @@ export default function  reducer(state = initialState, action) {
     }
     if(action.type === POST_LOGIN_FAIL){
         return{
-            loginState:false,
-            error:action.error
+            login:false,
+            error:action.error,
+            userInfo:{
+                ...initialState.userInfo
+            }
         }
     }
     if(action.type === INIT_LOGINSTATER){

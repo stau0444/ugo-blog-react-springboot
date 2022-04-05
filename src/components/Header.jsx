@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import {  useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import NightModeSwitchButton from './NightModeSwitchButton';
+import SubtitlesTwoToneIcon from '@mui/icons-material/SubtitlesTwoTone';
 
 export const Logo = styled(Typography)`
     font-family: 'Righteous', cursive;
@@ -61,6 +62,14 @@ export default function Header() {
                 borderBottomColor: logoColor,
               }}
             >
+              <SubtitlesTwoToneIcon
+                fontSize="large"
+                sx={{
+                  color:"lightgray",
+                  fontSize: "50px",
+                  margin: "0px 12px -2px 0px",
+                }}
+              />
               UGO's {""}
             </Logo>
             <Typography
@@ -88,6 +97,7 @@ export default function Header() {
               BLOG
             </Logo>
           </Box>
+
           <NightModeSwitchButton isOn={isOn} />
           <Grid
             item
@@ -169,7 +179,6 @@ export default function Header() {
           }}
         >
           <Links />
-
         </Grid>
       </Grid>
     );  

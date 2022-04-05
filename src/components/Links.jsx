@@ -26,8 +26,12 @@ export const ColorLink = styled(Chip)(()=>({
 
 
 export default function Links() {
-    const username = useSelector(state=>state.login.userInfo.username);
-        
+    
+    let username = useSelector(state=>state.login.userInfo.username);
+    
+    if(!username){
+        username =""
+    }
     const [tagList,setTagList] = useState([])
     const tagRef = useRef('');
     useEffect(()=>{

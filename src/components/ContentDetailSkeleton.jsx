@@ -1,6 +1,5 @@
 import { Skeleton } from "@mui/material";
 import  Box  from '@mui/material/Box';
-
 const SkeletonStyle = {
   width: "15%",
   height: "40px",

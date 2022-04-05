@@ -186,6 +186,7 @@ export default function MenuBar() {
                 marginBottom: "6px",
                 position: "absolute",
                 left: 40,
+                top: 10
               }}
             >
               <Link to="/">

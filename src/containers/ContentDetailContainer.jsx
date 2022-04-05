@@ -47,14 +47,14 @@ export default function ContentDetailContainer({match}) {
       getComment();
     }
 
-    const addComment = (contentId,userId,body,repliedCommentId)=>{
+    const addComment = (contentId,userId,body,repliedCommentId,originCommentId)=>{
       async function addComment(){
         try{
-          console.log('repliedCommentId',repliedCommentId)
           await axios.post(`/api/content/${contentId}/comment`,{
             userId,
             body,
-            repliedCommentId
+            repliedCommentId,
+            originCommentId
           });
         }catch(error){
           console.log("댓글 추가 실패",error)
