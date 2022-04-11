@@ -79,7 +79,7 @@ const ContentDivider = styled(Divider)`
   height:2px;
   background : ${props => props.theme.nightMode?"darkgray":"#337ab7"};
 `
-const CreatedDate = styled("p")`
+export const CreatedDate = styled("p")`
   margin:-3px 5px 12px 0;
   color:${props => props.theme.nightMode?"gray":"rgb(38, 93, 151)"};
   float:right;  

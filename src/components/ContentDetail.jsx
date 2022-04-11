@@ -7,12 +7,24 @@ import ContentDetailSkeleton from "./ContentDetailSkeleton";
 import MenuBookRoundedIcon from '@mui/icons-material/MenuBookRounded';
 import Comments from "./Comments";
 import { ContentTag } from "./ContentCard";
+import LocalOfferOutlinedIcon from '@mui/icons-material/LocalOfferOutlined';
+
 const headerTextStyle = {
   width: "85%",
   margin: "20px auto",
   display: "block",
   color: "#1976d2",
+  
 };
+const ContentCreatedAt = styled(Typography)`
+  width: 85%;
+  margin:20px auto;
+  display:block;
+  font-size: 15px;
+  color: #c1f1d4;
+  font-family: inherit;
+ text-align: right;
+`
 const ContentTitle = styled("h2")`
     width:85%;
     font-size:40px;
@@ -85,18 +97,36 @@ export default function ContentDetail({commentList,login,userInfo,content,loadin
               exit={{ opacity: 0 }}
             >
               <>
-                <ContentTitle><MenuBookRoundedIcon fontSize="large" sx={{color:"#3ef1bcee;" ,margin:"0 20px"}}/>{content.title}</ContentTitle>
+                <ContentTitle>
+                  <MenuBookRoundedIcon
+                    fontSize="large"
+                    sx={{ color: "#3ef1bcee;", margin: "0 20px" }}
+                  />
+                  {content.title}
+                </ContentTitle>
+                <ContentCreatedAt>{content.createdAt}</ContentCreatedAt>
                 <hr style={{ width: "90%" }} />
-                <Typography variant="strong" sx={headerTextStyle}>
-                {content.createdAt} 
-                </Typography>
                 <Typography variant="strong" sx={headerTextStyle}></Typography>
                 <Grid
                   item
                   xs={12}
                   className="content-tags"
-                  sx={{ width: "87%", margin: "20px auto",marginTop:"0px", display: "block" }}
+                  sx={{
+                    width: "87%",
+                    margin: "20px auto",
+                    marginTop: "0px",
+                    display: "block",
+                  }}
                 >
+                  <LocalOfferOutlinedIcon
+                    fontSize="medium"
+                    sx={{
+                      marginRight: "5px",
+                      color: "lightgray",
+                      verticalAlign:"middle",
+
+                    }}
+                  />
                   {content.tags !== undefined
                     ? content.tags.map((tag, index) => (
                         <ContentTag
@@ -104,7 +134,7 @@ export default function ContentDetail({commentList,login,userInfo,content,loadin
                           label={tag}
                           size="small"
                           color="success"
-                          sx={{ margin: "20px 5px" }}
+                          sx={{ margin: "10px 5px" }}
                         />
                       ))
                     : ""}
