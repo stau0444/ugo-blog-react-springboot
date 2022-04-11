@@ -325,6 +325,14 @@ export default function ResumeModal() {
                       Spring-Security 애플리케이션 배포 경험{" "}
                     </small>
                     <br />
+                    <small>
+                      * AWS S3를 활용한 이미지 업로드 구현
+                    </small>
+                    <br />
+                    <small>
+                      * Route53  , ACM을 통한 https인증 및 도메인 주소 연결
+                    </small>
+                    <br />
                   </Typography>
                 </Box>
               </Grid>

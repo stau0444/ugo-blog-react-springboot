@@ -99,6 +99,7 @@ export default function MenuBar() {
     if(e.type === "click"){
       history.push("/contents/search/"+keyword);
     }
+    setIsselected(true);
   }
   const searchKeywordRef = useRef();
   const handleWhitelist= (value) =>{

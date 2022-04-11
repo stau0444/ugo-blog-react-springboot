@@ -116,6 +116,7 @@ export default function ContentCard({keyword,content}) {
                   ? highlightedText(content.title, keyword)
                   : content.title}
               </ContentTitle>
+              <ContentDivider theme={theme} />
               <CreatedDate theme={theme}>
                 <AccessTimeIcon
                   fontSize="small"
@@ -126,7 +127,6 @@ export default function ContentCard({keyword,content}) {
                 />
                 {content.createdAt}
               </CreatedDate>
-              <ContentDivider theme={theme} />
             </Grid>
             <Grid item sm={4} xs={12}>
               <img
