@@ -57,6 +57,8 @@ export default function ContentDetailContainer({match}) {
           });
         }catch(error){
           console.log("댓글 추가 실패",error)
+        }finally{
+          getcomment(contentId);
         }
       }
       addComment();
