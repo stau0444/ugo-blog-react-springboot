@@ -1,5 +1,5 @@
 import ContentDetail from "../components/ContentDetail";
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { getContentDetailFail, getContentDetailSuccess, getContentDetailStart, deleteContentStart, deleteContentSuccess, deleteContentFail } from '../redux/moduels/contents';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from "react-router";
@@ -33,19 +33,18 @@ export default function ContentDetailContainer({match}) {
     const dispatch = useDispatch();
 
     
-    const getComment = (contentId)=>{
-      async function getComment(){
-        try{
-          const resp = await axios.get(`/api/content/${contentId}/comment`);
-          console.log(resp.data);
-          setCommentList([...resp.data])
-          console.log('commentList',commentList);
-        }catch(error){
-          console.log("댓글 로딩 실패",error)
+    const getcomment = useCallback((contentId)=>{
+        async function getComment(){
+          try{
+            const resp = await axios.get(`/api/content/${contentId}/comment`);
+            console.log(resp.data);
+            setCommentList([...resp.data])
+          }catch(error){
+            console.log("댓글 로딩 실패",error)
+          }
         }
-      }
-      getComment();
-    }
+        getComment();
+    },[])
 
     const addComment = (contentId,userId,body,repliedCommentId,originCommentId)=>{
       async function addComment(){
@@ -58,8 +57,6 @@ export default function ContentDetailContainer({match}) {
           });
         }catch(error){
           console.log("댓글 추가 실패",error)
-        }finally{
-          getComment(match.params.contentId);
         }
       }
       addComment();
@@ -87,8 +84,8 @@ export default function ContentDetailContainer({match}) {
     // GET /content/contentId API 요청
     useEffect(()=>{
       getContent(dispatch,match.params.contentId);
-      getComment(match.params.contentId);
-    },[match,dispatch])  
+      getcomment(match.params.contentId);
+    },[match,dispatch,getcomment])  
 
     return (
       <ContentDetail
