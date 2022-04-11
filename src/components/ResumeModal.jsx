@@ -10,7 +10,6 @@ import ChipsGenerator from './ChipsGenerator';
 import CancelIcon from '@mui/icons-material/Cancel';
 
 const introduceStyle={
-    margin:'40px 40px'
 }
 const modalStyle = {
     margin: "20px auto",
@@ -73,11 +72,6 @@ export default function ResumeModal() {
          document.querySelector(".resume-ribbon").classList.add("active")
       }else{
         document.querySelector(".resume-ribbon").classList.remove("active")
-      }
-      if(e.target.scrollTop >= 300){
-        document.querySelector(".resume-skills").classList.add("active")
-      }else{
-        document.querySelector(".resume-skills").classList.remove("active")
       }
     };
 
@@ -154,7 +148,8 @@ export default function ResumeModal() {
             <Grid
               item
               xs={12}
-              sx={{ fontFamily: "serif" }}
+              sx={{
+               }}
               sm={6}
               className="resume-info"
             >
@@ -184,17 +179,21 @@ export default function ResumeModal() {
               </Typography>
             </Grid>
             <Grid item xs={12} sx={introduceStyle} className="resume-introduce">
-              <Typography variant="h5" sx={{ margin: "20px 0" }}>
-                introduce
-                <hr />
-              </Typography>
-              <Typography variant="p">
-              요리사였고 현재는 개발 공부를 하고있는 황경욱입니다. 팀워크에 중요성을 이해하고 일하는 것이 일할 때에 가장 기본이 되는 것이라 생각하며 , 
-              앞으로 배워야 할 것들에 대한 부담보다는 새로운 것을 배우게 된다는 기대가 더 크고 지금까지의 경험을 바탕으로 빠르게 팀에 적응하고 함께 발전해 나가겠습니다.
-              </Typography>
+              <Box>
+                <Typography variant="h5" sx={{ fontWeight:'bold',margin: "40px 0 0 0" }}>
+                  introduce
+                  <hr />
+                </Typography>
+              </Box>
+              <Box sx={{padding:"10px", fontSize:"14px", lineHeight:"20px"}}>
+                <Typography variant="textarea">
+                요리사였고 현재는 개발 공부를 하고있는 황경욱입니다. 팀워크에 중요성을 이해하고 일하는 것이 일할 때에 가장 기본이 되는 것이라 생각하며 , 
+                앞으로 배워야 할 것들에 대한 부담보다는 새로운 것을 배우게 된다는 기대가 더 크고 지금까지의 경험을 바탕으로 빠르게 팀에 적응하고 함께 발전해 나가겠습니다.
+                </Typography>
+              </Box>
             </Grid>
-            <Grid item xs={12} sx={introduceStyle} className="resume-skills">
-              <Typography variant="h5" sx={{ margin: "20px 0" }}>
+            <Grid item xs={12} sx={introduceStyle} className="resume-skills active">
+            <Typography variant="h5" sx={{ fontWeight:'bold',margin: "40px 0 0 0" }}>
                 Skills
                 <hr />
               </Typography>
@@ -229,6 +228,12 @@ export default function ResumeModal() {
                   </Typography>
                   <Typography variant="p">
                     <ChipsGenerator values={["React", "Redux"]} color="coral" />
+                    <br />
+                    <small>* React , Redux를 통한 개인프로젝트 경험 </small>
+                    <br />
+                    <small>* React의 사용법과 Redux를 통한 상태관리방식에 대해 숙지하고 있음 </small>
+                    <br />
+                    <small>* Styled-Component , Material-ui를 통한 컴포넌트 스타일링 </small>
                   </Typography>
                 </Box>
                 <Box>

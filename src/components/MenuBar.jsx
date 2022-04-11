@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import LoginMenu from './LoginMenu';
-import {useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useHistory } from 'react-router';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import HomeIcon from '@mui/icons-material/Home';

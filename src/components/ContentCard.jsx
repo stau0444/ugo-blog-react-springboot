@@ -53,9 +53,6 @@ const ContentDescription = styled(Typography)`
   
 `
 
-
-
-
 const ContentTitle = styled(Typography)`
   font-weight: 700;
   font-size:25px;
@@ -69,6 +66,11 @@ const ContentTitle = styled(Typography)`
   text-overflow:ellipsis;
   white-space:nowrap;
   margin: 10px 0 15px 0;
+`
+export const ContentTag=styled(Chip)`
+background-color: green;
+font-size:14px;
+font-family: 'Righteous', cursive;
 `
 
 const ContentDivider = styled(Divider)`
@@ -161,7 +163,7 @@ export default function ContentCard({keyword,content}) {
               >
                 {content.tags !== undefined
                   ? content.tags.map((tag, index) => (
-                      <Chip
+                      <ContentTag
                         key={index}
                         label={tag}
                         size="small"
