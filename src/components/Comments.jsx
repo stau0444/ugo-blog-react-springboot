@@ -4,7 +4,7 @@ import EmojiPeopleIcon from '@mui/icons-material/EmojiPeople';
 import LabelImportantIcon from '@mui/icons-material/LabelImportant';
 import ChatIcon from '@mui/icons-material/Chat';
 import RadioButtonCheckedRoundedIcon from '@mui/icons-material/RadioButtonCheckedRounded';
-import { Box, Button, styled } from "@mui/material";
+import { Box, Button, Divider, styled } from "@mui/material";
 import { useSelector } from "react-redux";
 import { useRef, useState } from "react";
 
@@ -40,6 +40,7 @@ const CommentInput = styled("input")`
   background-color: inherit;
 `
 const CommentsubmitBtn = styled('button')`
+cursor: pointer;
 background-color: inherit;
 border: 1px solid green;
 padding:10px;
@@ -60,15 +61,19 @@ const CommentListBox = styled('div')`
 const Comment = styled('li')`
 font-size: 13px;
 padding: 10px;
-border-bottom: 1px solid gray;
+border: 1px solid gray;
+border-radius: 20px;
+background-color: rgba(97, 140, 190, 0.226);
 font-family:'Righteous', cursive;
+margin: 10px;
+box-shadow:inset 2px 2px 4px rgba(0 , 0,  0,  0.39);
+
 `
 const CommentUserBox = styled('span')`
-color: ${props=>props.isRepliedComment?"royalblue":"#c8d1c0d2"};
+color: ${props=>props.isRepliedComment?"royalblue":"#c8d1c0d2"}; 
 font-size:${props=>props.isRepliedComment?"14px":"13px"};
 width: 20%;
 text-align: center;
-
 `
 const CommentUser = styled('p')`
 border-radius: 15px;
@@ -76,7 +81,6 @@ border:1px solid gray;
 padding: 5px 10px;
 max-width: 100px;
 min-width: 65px;
-
 `
 
 const CommentBody = styled('span')`
@@ -96,9 +100,11 @@ const LoginAlert = styled('p')`
 color: lightgrey;
 padding:10px;
 margin: 40px 0;
+text-align: center;
 `
 
 const ReplyBtn = styled('button')`
+cursor: pointer;
 float: right;
 background-color: inherit; 
 border: 1px solid gray;
@@ -114,9 +120,11 @@ transition: all 0.1s linear;
 const ReplyBox = styled('div')`
 width: 100%;
 margin: 15px;
+text-align: center;
 display:${props=>props.isReplyOpen?"block":"none"};
 `
 const ReplySubmitBtn = styled('button')`
+cursor: pointer;
 background-color: inherit;
 color: #23ca98ef;
 padding: 5px;
@@ -143,13 +151,14 @@ padding-left: 10px;
 const ReplyedSign = styled('span')`
   color:gray;
   margin-right:4px;
+  font-weight: bold;
 `
 const ReplyBy= styled('span')`
   color:lightcoral;
   margin: 0 3px 0 -3px;
 `
 const ReplyTo= styled('span')`
- 
+  color:white
 `
 
 export default function Comments({commentList,contentId,login,userInfo,addComment}) {
@@ -227,7 +236,7 @@ export default function Comments({commentList,contentId,login,userInfo,addCommen
                                 >
                                   {isReplyOpen && checkedId === i
                                     ? "닫기"
-                                    : "답글달기"}
+                                    : "답글"}
                                 </ReplyBtn>
                               ) : (
                                 ""
@@ -291,6 +300,7 @@ export default function Comments({commentList,contentId,login,userInfo,addCommen
                   </CommentListBox>
                   {login ? (
                     <>
+                      <Divider sx={{height:"1px",bgcolor:"gray"}}/>
                       <AddCommentBox>
                         <CommentInput
                           placeholder="댓글을 입력해 주세요."
@@ -311,9 +321,12 @@ export default function Comments({commentList,contentId,login,userInfo,addCommen
                       </AddCommentBox>
                     </>
                   ) : (
-                    <LoginAlert>
-                      댓글을 작성하려면 로그인이 필요합니다.
-                    </LoginAlert>
+                    <>
+                      <hr/>
+                      <LoginAlert>
+                        댓글을 작성하려면 로그인이 필요합니다.
+                      </LoginAlert>
+                    </>
                   )}
                 </CommentConatiner>
     );

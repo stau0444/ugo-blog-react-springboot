@@ -83,7 +83,7 @@ const CreatedDate = styled("p")`
   margin:-3px 5px 12px 0;
   color:${props => props.theme.nightMode?"gray":"rgb(38, 93, 151)"};
   float:right;  
-  background-color: rgba(186, 233, 219, 0.966);
+  background-color: rgba(170, 236, 215, 0.87);
   font-size: 12px;
   border:1px solid gray;
   padding:3px 8px;
