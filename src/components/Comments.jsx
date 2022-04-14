@@ -72,28 +72,45 @@ box-shadow:inset 2px 2px 4px rgba(0 , 0,  0,  0.39);
 const CommentUserBox = styled('span')`
 color: ${props=>props.isRepliedComment?"royalblue":"#c8d1c0d2"}; 
 font-size:${props=>props.isRepliedComment?"14px":"13px"};
-width: 20%;
+width: 100%;
 text-align: center;
+margin-top: 10px;
 `
 const CommentUser = styled('p')`
 border-radius: 15px;
 border:1px solid gray;
 padding: 5px 10px;
-max-width: 100px;
-min-width: 65px;
-`
+max-width: 200px;
+box-shadow: 1px 1px 1px rgba(0 , 0,  0,  0.39);
 
+`
+const CommentBodyBox = styled('div')`
+width: 100%;
+margin: 5px 0;
+
+text-align: left;
+display: flex;
+justify-content: start;
+
+`
 const CommentBody = styled('span')`
-width:50%;
+width: 80%;
 padding-left: 10px;
-margin: 8px 15px;
-color: ${props => props.theme.nightMode?"gray":"lightgray"};
+margin: 8px 0px;
+margin-right: 5px;
+text-align: left;
+border: 1px solid gray;
+box-shadow: 1px 1px 1px rgba(0 , 0,  0,  0.39);
+border-radius: 15px;
+padding :10px;
+color: ${props => props.theme.nightMode?"#8e948e":"lightgray"};
 font-family:"IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
 `
 const CommentCreatedAt = styled('span')`
+width: 20%;
 font-size: 11px;
 color: #ada0a0;
-width:30%;
 text-align: center;
 `
 const LoginAlert = styled('p')`
@@ -151,14 +168,16 @@ padding-left: 10px;
 const ReplyedSign = styled('span')`
   color:gray;
   margin-right:4px;
+  margin-left: 17px;
   font-weight: bold;
+  font-size:17px;
 `
 const ReplyBy= styled('span')`
   color:lightcoral;
   margin: 0 3px 0 -3px;
 `
 const ReplyTo= styled('span')`
-  color:white
+  color:#979ec0;
 `
 
 export default function Comments({commentList,contentId,login,userInfo,addComment}) {
@@ -175,8 +194,7 @@ export default function Comments({commentList,contentId,login,userInfo,addCommen
         <CommentConatiner>
                   <CommentHeader theme={theme}>
                     댓글 ({commentList.length})
-                    <ChatIcon sx={{marginLeft:"10px",height:"20px",width:"20px"}}/>
-                    
+                    <ChatIcon sx={{verticalAlign:"middle",marginBottom:"3px",marginLeft:"5px",height:"23px",width:"23px"}}/>
                   </CommentHeader>
                   <CommentListBox>
                     <CommentList >
@@ -190,7 +208,7 @@ export default function Comments({commentList,contentId,login,userInfo,addCommen
                             }}
                           >
                             {comment.commentId === comment.repliedCommentId ? (
-                              <RadioButtonCheckedRoundedIcon fontSize="small" sx={{margin:"4px 6px 4px 0px" , color:"lightgray"}}/>
+                              <RadioButtonCheckedRoundedIcon fontSize="small" sx={{margin:"14px 6px 4px 0px" , color:nightMode?"#978c8c":"lightgray"}}/>
                             ) : (
                               <ReplyedSign>↳</ReplyedSign>
                             )}
@@ -224,52 +242,54 @@ export default function Comments({commentList,contentId,login,userInfo,addCommen
                                   </Box>
                                 )}
                               </CommentUser>
-                            </CommentUserBox>
-                            <CommentBody theme={theme}>
-                              {comment.body}
-                              {login ? (
-                                <ReplyBtn
-                                  onClick={() => {
-                                    setIsReplyOpen(isReplyOpen ? false : true);
-                                    setCheckedId(i);
-                                  }}
-                                >
-                                  {isReplyOpen && checkedId === i
-                                    ? "닫기"
-                                    : "답글"}
-                                </ReplyBtn>
-                              ) : (
-                                ""
-                              )}
-                            </CommentBody>
-                            <CommentCreatedAt>
-                              {comment.createdAt}
-                              <div>
-                                {userInfo.username === comment.userName ? (
-                                  <>
-                                    <Button sx={{ bgcolor: "inherit" }}>
-                                      <DriveFileRenameOutlineIcon
-                                        sx={{
-                                          color: "green",
-                                          fontSize: "15px",
-                                        }}
-                                        fontSize="small"
-                                      />
-                                    </Button>
-                                    <Button>
-                                      <DeleteIcon
-                                        sx={{
-                                          color: "tomato",
-                                          fontSize: "15px",
-                                        }}
-                                      />
-                                    </Button>
-                                  </>
+                              <CommentBodyBox>
+                                <CommentBody theme={theme}>
+                                {comment.body}
+                                {login ? (
+                                  <ReplyBtn
+                                    onClick={() => {
+                                      setIsReplyOpen(isReplyOpen ? false : true);
+                                      setCheckedId(i);
+                                    }}
+                                  >
+                                    {isReplyOpen && checkedId === i
+                                      ? "닫기"
+                                      : "답글"}
+                                  </ReplyBtn>
                                 ) : (
                                   ""
                                 )}
-                              </div>
-                            </CommentCreatedAt>
+                              </CommentBody>
+                              <CommentCreatedAt>
+                                {comment.createdAt}
+                                <div>
+                                  {userInfo.username === comment.userName ? (
+                                    <>
+                                      <Button sx={{ bgcolor: "inherit" }}>
+                                        <DriveFileRenameOutlineIcon
+                                          sx={{
+                                            color: "green",
+                                            fontSize: "15px",
+                                          }}
+                                          fontSize="small"
+                                        />
+                                      </Button>
+                                      <Button>
+                                        <DeleteIcon
+                                          sx={{
+                                            color: "tomato",
+                                            fontSize: "15px",
+                                          }}
+                                        />
+                                      </Button>
+                                    </>
+                                  ) : (
+                                    ""
+                                  )}
+                                </div>
+                              </CommentCreatedAt>
+                            </CommentBodyBox>
+                            </CommentUserBox>
                           </Comment>
                           {checkedId === i ? (
                             <ReplyBox key={i} isReplyOpen={isReplyOpen}>
@@ -297,6 +317,7 @@ export default function Comments({commentList,contentId,login,userInfo,addCommen
                         </>
                       ))}
                     </CommentList>
+                    
                   </CommentListBox>
                   {login ? (
                     <>
