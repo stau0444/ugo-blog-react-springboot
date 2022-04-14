@@ -58,9 +58,14 @@ padding: 10px;
 const CommentListBox = styled('div')`
 
 `
+const CommentBox = styled('div')`
+width: 100%;
+display: flex;
+`
 const Comment = styled('li')`
+width: 100%;
 font-size: 13px;
-padding: 10px;
+padding: 10px 15px;
 border: 1px solid gray;
 border-radius: 20px;
 background-color: rgba(97, 140, 190, 0.226);
@@ -168,7 +173,7 @@ padding-left: 10px;
 const ReplyedSign = styled('span')`
   color:gray;
   margin-right:4px;
-  margin-left: 17px;
+  margin-left: 8px;
   font-weight: bold;
   font-size:17px;
 `
@@ -190,165 +195,173 @@ export default function Comments({commentList,contentId,login,userInfo,addCommen
     const [isReplyOpen,setIsReplyOpen] =useState(false);
     const [checkedId,setCheckedId]= useState();
 
-    return(
-        <CommentConatiner>
-                  <CommentHeader theme={theme}>
-                    댓글 ({commentList.length})
-                    <ChatIcon sx={{verticalAlign:"middle",marginBottom:"3px",marginLeft:"5px",height:"23px",width:"23px"}}/>
-                  </CommentHeader>
-                  <CommentListBox>
-                    <CommentList >
-                      {commentList.map((comment, i) => (
-                        <>
-                          <Comment
-                            key={i}
-                            style={{
-                              color: "white",
-                              display: "flex",
-                            }}
-                          >
-                            {comment.commentId === comment.repliedCommentId ? (
-                              <RadioButtonCheckedRoundedIcon fontSize="small" sx={{margin:"14px 6px 4px 0px" , color:nightMode?"#978c8c":"lightgray"}}/>
-                            ) : (
-                              <ReplyedSign>↳</ReplyedSign>
-                            )}
-                            
-                            <CommentUserBox
-                              isRepliedComment={
-                                comment.commentId === comment.repliedCommentId
-                              }
+    return (
+      <CommentConatiner>
+        <CommentHeader theme={theme}>
+          댓글 ({commentList.length})
+          <ChatIcon
+            sx={{
+              verticalAlign: "middle",
+              marginBottom: "3px",
+              marginLeft: "5px",
+              height: "23px",
+              width: "23px",
+            }}
+          />
+        </CommentHeader>
+        <CommentListBox>
+          <CommentList>
+            {commentList.map((comment, i) => (
+              <>
+                <CommentBox>
+                  {comment.commentId === comment.repliedCommentId ? (
+                    ""
+                  ) : (
+                    <ReplyedSign>↳</ReplyedSign>
+                  )}
+                  <Comment
+                    key={i}
+                    style={{
+                      color: "white",
+                      display: "flex",
+                    }}
+                  >
+                    {comment.commentId === comment.repliedCommentId ? (
+                      <RadioButtonCheckedRoundedIcon
+                        fontSize="small"
+                        sx={{
+                          margin: "14px 6px 4px 0px",
+                          color: nightMode ? "#978c8c" : "lightgray",
+                        }}
+                      />
+                    ) : (
+                      ""
+                    )}
+
+                    <CommentUserBox
+                      isRepliedComment={
+                        comment.commentId === comment.repliedCommentId
+                      }
+                    >
+                      <CommentUser>
+                        {comment.commentId === comment.repliedCommentId ? (
+                          <>{comment.userName}</>
+                        ) : (
+                          <Box sx={{ display: "inline", margin: "5px" }}>
+                            <ReplyBy>{comment.userName}</ReplyBy>
+                            <LabelImportantIcon
+                              sx={{
+                                color: "gold",
+                                fontSize: "10px",
+                              }}
+                              fontSize="small"
+                            />
+                            <EmojiPeopleIcon
+                              sx={{ fontSize: "10px", color: "white" }}
+                            />
+                            <ReplyTo> {comment.replyTo}</ReplyTo>
+                          </Box>
+                        )}
+                      </CommentUser>
+                      <CommentBodyBox>
+                        <CommentBody sx={{}} theme={theme}>
+                          {comment.body}
+                          {login ? (
+                            <ReplyBtn
+                              onClick={() => {
+                                setIsReplyOpen(isReplyOpen ? false : true);
+                                setCheckedId(i);
+                              }}
                             >
-                              <CommentUser>
-                                
-                                {comment.commentId ===
-                                comment.repliedCommentId ? (
-                                  <>{comment.userName}</>
-                                ) : (
-                                  <Box
-                                    sx={{ display: "inline", margin: "5px" }}
-                                  >
-                                    <ReplyBy>{comment.userName}</ReplyBy>
-                                    <LabelImportantIcon
-                                      sx={{
-                                        color: "gold",
-                                        fontSize: "10px",
-                                      }}
-                                      fontSize="small"
-                                    />
-                                    <EmojiPeopleIcon
-                                      sx={{ fontSize: "10px", color: "white" }}
-                                    />
-                                    <ReplyTo> {comment.replyTo}</ReplyTo>
-                                  </Box>
-                                )}
-                              </CommentUser>
-                              <CommentBodyBox>
-                                <CommentBody theme={theme}>
-                                {comment.body}
-                                {login ? (
-                                  <ReplyBtn
-                                    onClick={() => {
-                                      setIsReplyOpen(isReplyOpen ? false : true);
-                                      setCheckedId(i);
-                                    }}
-                                  >
-                                    {isReplyOpen && checkedId === i
-                                      ? "닫기"
-                                      : "답글"}
-                                  </ReplyBtn>
-                                ) : (
-                                  ""
-                                )}
-                              </CommentBody>
-                              <CommentCreatedAt>
-                                {comment.createdAt}
-                                <div>
-                                  {userInfo.username === comment.userName ? (
-                                    <>
-                                      <Button sx={{ bgcolor: "inherit" }}>
-                                        <DriveFileRenameOutlineIcon
-                                          sx={{
-                                            color: "green",
-                                            fontSize: "15px",
-                                          }}
-                                          fontSize="small"
-                                        />
-                                      </Button>
-                                      <Button>
-                                        <DeleteIcon
-                                          sx={{
-                                            color: "tomato",
-                                            fontSize: "15px",
-                                          }}
-                                        />
-                                      </Button>
-                                    </>
-                                  ) : (
-                                    ""
-                                  )}
-                                </div>
-                              </CommentCreatedAt>
-                            </CommentBodyBox>
-                            </CommentUserBox>
-                          </Comment>
-                          {checkedId === i ? (
-                            <ReplyBox key={i} isReplyOpen={isReplyOpen}>
-                              <ReplyInput
-                                placeholder="답글을 입력해 주세요"
-                                ref={replyRef}
-                              />
-                              <ReplySubmitBtn
-                                onClick={() => {
-                                  addComment(
-                                    contentId,
-                                    userInfo.id,
-                                    replyRef.current.value,
-                                    comment.commentId
-                                  );
-                                  setIsReplyOpen(false);
-                                }}
-                              >
-                                답글 달기
-                              </ReplySubmitBtn>
-                            </ReplyBox>
+                              {isReplyOpen && checkedId === i ? "닫기" : "답글"}
+                            </ReplyBtn>
                           ) : (
                             ""
                           )}
-                        </>
-                      ))}
-                    </CommentList>
-                    
-                  </CommentListBox>
-                  {login ? (
-                    <>
-                      <Divider sx={{height:"1px",bgcolor:"gray"}}/>
-                      <AddCommentBox>
-                        <CommentInput
-                          placeholder="댓글을 입력해 주세요."
-                          ref={commentRef}
-                          type="text"
-                        />
-                        <CommentsubmitBtn
-                          onClick={() => {
-                            addComment(
-                              contentId,
-                              userInfo.id,
-                              commentRef.current.value
-                            );
-                          }}
-                        >
-                          댓글달기
-                        </CommentsubmitBtn>
-                      </AddCommentBox>
-                    </>
-                  ) : (
-                    <>
-                      <hr/>
-                      <LoginAlert>
-                        댓글을 작성하려면 로그인이 필요합니다.
-                      </LoginAlert>
-                    </>
-                  )}
-                </CommentConatiner>
+                        </CommentBody>
+                        <CommentCreatedAt>
+                          {comment.createdAt}
+                          <div>
+                            {userInfo.username === comment.userName ? (
+                              <>
+                                <Button sx={{ bgcolor: "inherit" }}>
+                                  <DriveFileRenameOutlineIcon
+                                    sx={{
+                                      color: "green",
+                                      fontSize: "15px",
+                                    }}
+                                    fontSize="small"
+                                  />
+                                </Button>
+                                <Button>
+                                  <DeleteIcon
+                                    sx={{
+                                      color: "tomato",
+                                      fontSize: "15px",
+                                    }}
+                                  />
+                                </Button>
+                              </>
+                            ) : (
+                              ""
+                            )}
+                          </div>
+                        </CommentCreatedAt>
+                      </CommentBodyBox>
+                    </CommentUserBox>
+                  </Comment>
+                </CommentBox>
+                {checkedId === i ? (
+                  <ReplyBox key={i} isReplyOpen={isReplyOpen}>
+                    <ReplyInput
+                      placeholder="답글을 입력해 주세요"
+                      ref={replyRef}
+                    />
+                    <ReplySubmitBtn
+                      onClick={() => {
+                        addComment(
+                          contentId,
+                          userInfo.id,
+                          replyRef.current.value,
+                          comment.commentId
+                        );
+                        setIsReplyOpen(false);
+                      }}
+                    >
+                      답글 달기
+                    </ReplySubmitBtn>
+                  </ReplyBox>
+                ) : (
+                  ""
+                )}
+              </>
+            ))}
+          </CommentList>
+        </CommentListBox>
+        {login ? (
+          <>
+            <Divider sx={{ height: "1px", bgcolor: "gray" }} />
+            <AddCommentBox>
+              <CommentInput
+                placeholder="댓글을 입력해 주세요."
+                ref={commentRef}
+                type="text"
+              />
+              <CommentsubmitBtn
+                onClick={() => {
+                  addComment(contentId, userInfo.id, commentRef.current.value);
+                }}
+              >
+                댓글달기
+              </CommentsubmitBtn>
+            </AddCommentBox>
+          </>
+        ) : (
+          <>
+            <hr />
+            <LoginAlert>댓글을 작성하려면 로그인이 필요합니다.</LoginAlert>
+          </>
+        )}
+      </CommentConatiner>
     );
 }

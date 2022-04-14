@@ -120,7 +120,7 @@ function App() {
   
 
   return (
-    <div className="App">
+    <div className="App" >
       <BrowserRouter>
         <Header />
         <Box sx={{ position: "fixed", right: 0, bottom: "50%" ,display:{xs:"none",sm:"block"}}}>
