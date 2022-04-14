@@ -140,54 +140,62 @@ export default function MenuBar() {
               justifyContent: "flex-end",
             }}
           >
-            <Box
-              sx={{
-                display: { xs: "block", sm: "none" },
+            <Link
+              style={{
                 margin: "0 auto",
-                marginBottom: "7px",
+                marginLeft:"3px",
+                cursor: "pointer"
               }}
+              to="/"
             >
-              <Logo
-                component="span"
+              <Box
                 sx={{
-                  fontSize: "3.2vw",
-                  color: "white",
-                  borderBottom: "2px solid white",
+                  display: { xs: "block", sm: "none" },
+                  marginBottom: "5px",
                 }}
               >
-                UGO's {""}
-              </Logo>
-              <Typography
-                component="span"
-                sx={{
-                  fontSize: "3.2vw",
-                  color: "royalblue",
-                  borderBottom: "3px dashed royalblue",
-                  fontWeight: "bold",
-                  fontFamily: "'Righteous', cursive",
-                }}
-              >
-                DEV{" "}
-              </Typography>
-              <Logo
-                component="span"
-                sx={{
-                  fontSize: "3.2vw",
-                  borderBottom: "2px solid white",
-                  margin: "0",
-                  color: "white",
-                }}
-              >
-                BLOG
-              </Logo>
-            </Box>
+                <Logo
+                  component="span"
+                  sx={{
+                    fontSize: "3.2vw",
+                    color: "white",
+                    borderBottom: "2px solid white",
+                  }}
+                >
+                  UGO's {""}
+                </Logo>
+                <Typography
+                  component="span"
+                  sx={{
+                    fontSize: "3.2vw",
+                    color: "royalblue",
+                    borderBottom: "3px dashed royalblue",
+                    fontWeight: "bold",
+                    fontFamily: "'Righteous', cursive",
+                  }}
+                >
+                  DEV{" "}
+                </Typography>
+                <Logo
+                  component="span"
+                  sx={{
+                    fontSize: "3.2vw",
+                    borderBottom: "2px solid white",
+                    margin: "0",
+                    color: "white",
+                  }}
+                >
+                  BLOG
+                </Logo>
+              </Box>
+            </Link>
             <Box
               sx={{
                 display: { xs: "none", sm: "block" },
                 marginBottom: "6px",
                 position: "absolute",
                 left: 40,
-                top: 10
+                top: 10,
               }}
             >
               <Link to="/">
@@ -252,7 +260,9 @@ export default function MenuBar() {
                   "aria-label": "search",
                   style: { fontWeight: "bold" },
                   onKeyPress: handleSearch,
-                  onBlur:()=>{setIsselected(true)},
+                  onBlur: () => {
+                    setIsselected(true);
+                  },
                 }}
               />
               <Box

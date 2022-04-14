@@ -172,7 +172,6 @@ padding-left: 10px;
 
 const ReplyedSign = styled('span')`
   color:gray;
-  margin-right:4px;
   margin-left: 8px;
   font-weight: bold;
   font-size:17px;

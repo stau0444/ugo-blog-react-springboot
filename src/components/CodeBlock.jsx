@@ -17,8 +17,10 @@ export default function CodeBlock({value,isOpen}) {
           sx={{
             background: nightMode ? "#c9e0dfa4" : "bisque",
             display: isOpen ? "none" : "block",
+            fontSize:{xs:"12px",sm:"12px",md:"14px" }
           }}
-        ></Box>
+        >
+        </Box>
       </>
     );
 }

@@ -21,7 +21,7 @@ const ContentCreatedAt = styled(Typography)`
   margin:20px auto;
   display:block;
   font-size: 15px;
-  color: #c1f1d4;
+  color: lightgray;
   font-family: inherit;
  text-align: right;
 `
