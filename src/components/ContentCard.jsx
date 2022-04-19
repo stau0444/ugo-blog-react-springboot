@@ -17,22 +17,24 @@ const StyledCard = styled(Card)`
   min-width: 275;
   margin: 10px auto;
   padding: 0 10px;
-  box-shadow: 10px 10px 20px rgba(0 , 0,  0,  0.39);
+  box-shadow: 10px 10px 10px rgba(0 , 0,  0,  0.39);
+  /* box-shadow: 7px 7px 0 rgb(32 33 37 / 30%); */
   background:rgba(255,255,255,0.1);
   border-top: 1px solid rgba(255,255,255,0.5);
   border-left: 1px solid rgba(255,255,255,0.5);
-  transition: 'background 1s linear';
    /* "linear-gradient(to right bottom, #ff00d4, rgb(0, 89, 178) 120%);", */
   &:hover{
+    margin-top: 6px;
     background:
     ${props => props.theme.nightMode?
-    "linear-gradient(to right bottom, rgba(116, 196, 162, 0.952), whitesmoke 120%)"
+    "linear-gradient(to right bottom, rgba(154, 206, 183, 0.952), whitesmoke 120%)"
     :
-    "linear-gradient(to right bottom, rgba(0, 128, 255, 0.781), rgb(81, 87, 94) 120%)"
+    "linear-gradient(to right bottom, rgba(32, 93, 143, 0.966), rgba(74, 83, 99, 0.425) 120%)"
     };
-    transition: all 0.1s linear;
+    transition: box-shadow 0.1s linear;
+    transition: margin-top 0.25s ease;
     width: 90%;
-    box-shadow: 3px 3px 1px 0px rgba(5, 5, 20, 0.726);
+    box-shadow: 7px 7px 0px rgb(32 33 37 / 40%);
     color: ${props => props.theme.nightMode?"#020611fb":"bisque"};
   }
 `;
