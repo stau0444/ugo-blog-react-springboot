@@ -109,8 +109,8 @@ box-shadow: 1px 1px 1px rgba(0 , 0,  0,  0.39);
 border-radius: 15px;
 padding :10px;
 color: ${props => props.theme.nightMode?"#8e948e":"lightgray"};
-font-family:"IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-
+font-family:나눔스퀘어, 'NanumSquare', sans-serif;;
+font-weight: 700;
 `
 const CommentCreatedAt = styled('span')`
 width: 20%;

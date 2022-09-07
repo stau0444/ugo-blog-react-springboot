@@ -95,7 +95,7 @@ export default function LoginMenu() {
               ml: 2,
               marginTop:"3px",
               marginBottom: { xs: "5px", sm: "13px" },
-              transition: "all 0.5s ease-in-out",
+              //transition: "all 0.5s ease-in-out",
               "&:hover":{
                 cursor: "pointer",
                 background: {xs:"whitesmoke",sm:"inherit"},

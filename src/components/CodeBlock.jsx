@@ -1,3 +1,4 @@
+
 import Box  from "@mui/material/Box";
 import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
@@ -17,7 +18,7 @@ export default function CodeBlock({value,isOpen}) {
           sx={{
             background: nightMode ? "#c9e0dfa4" : "bisque",
             display: isOpen ? "none" : "block",
-            fontSize:{xs:"12px",sm:"12px",md:"14px" }
+            fontSize:{xs:"12px",sm:"12px",md:"14px" },
           }}
         >
         </Box>

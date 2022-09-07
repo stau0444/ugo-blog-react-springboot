@@ -63,7 +63,7 @@ export default function SearchList({keyword,searchList,page,handlePageChange,tot
                   color: "bisque",
                 }}
               >
-                {searchList.error}
+                {searchList.error.message}
               </Typography>
             </Grid>
           </Grid>

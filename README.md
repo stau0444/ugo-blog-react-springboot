@@ -9,7 +9,9 @@
 <br/>
 [3. 주요 기능](#3주요-기능)
 <br/>
-[4. 페이지별 설명](#4페이지별-설명)
+[4. 프로젝트 구조](#4프로젝트-구조)
+<br/>
+[5. 페이지별 설명](#5페이지별-설명)
 <br/>
 
 #
@@ -22,7 +24,7 @@
 
 <br/>
 
-> page URL
+> Page Domain
 
 <br/>
 
@@ -38,14 +40,14 @@
 
 Front-end Stack||
 --|--  
-라이브러리|React.js 17.0.2
-상태관리|Redux 4.1.1
-라우팅| React-router-dom 5.3.0
-HTTP client | Axios 
-Component Design | Marterial-Design , Styled Component , SCSS
-프로젝트 관리| ESLint , Prettier , Husky , Lint-staged
-이미지 저장 | AWS S3
-기타| Quill.js(텍스트 에디터) , Highlight.js(텍스트 하이라이팅) , Cropper.js(이미지 편집) , framer-motion(애니메이션)
+라이브러리|`React.js 17.0.2`
+상태관리|`Redux 4.1.1`
+라우팅| `React-router-dom 5.3.0`
+HTTP client | `Axios `
+Component Design | `Marterial-Design` , `Styled Component` ,` SCSS`
+프로젝트 관리| `ESLint` , `Prettier` ,` Husky` ,` Lint-staged`
+이미지 저장 | `AWS S3`
+기타| `Quill.js`(텍스트 에디터) , `Highlight.js`(텍스트 하이라이팅) , `Cropper.js`(이미지 편집) , `framer-motion`(애니메이션)
 
 
 
@@ -55,14 +57,23 @@ Component Design | Marterial-Design , Styled Component , SCSS
 ## 3.주요 기능
 #
 - 밝기 변경 (LightMode , DarkMode)기능
-- S3 연동 이미지 업로드 (이미지 파일은 S3 업로드되며 생성되는 객체 URL은 DB에 저장)
+- `S3` 연동 이미지 업로드 (이미지 파일은 `S3` 업로드되며 생성되는 객체 URL은 DB에 저장)
+- 댓글 , 답글 기능 
 - 이메일 인증을 통한 회원가입
-- JWT 토큰 방식을 이용한 로그인 인증 및 로그인 유지
-- Quill.js 이용한 텍스트 에디팅(이미지 , 폰트 스타일 , 코드블럭 입력)
+- `JWT` 토큰 방식을 이용한 로그인 인증 및 로그인 유지
+- `Quill.js` 이용한 텍스트 에디팅(이미지 , 폰트 스타일 , 코드블럭 입력)
 - 반응형 웹디자인
 
 #
-## 4.페이지별 설명 
+## 4.프로젝트 구조
+#
+
+<img width="541" alt="스크린샷 2022-09-07 오후 11 17 31" src="https://user-images.githubusercontent.com/51349774/188903227-5014a683-320a-405c-a73f-ff51d5c7a12f.png">
+
+
+
+#
+## 5.페이지별 설명 
 #
 
 > ###   홈 페이지 ( / )
@@ -103,7 +114,7 @@ Component Design | Marterial-Design , Styled Component , SCSS
 <br/>
 
 - 키워드를 통한 검색 (글 제목 , 글 설명중 키워드를 포함한 글이 검색됨)
-- Highlight.js를 통한 keyword Highlight 구현 
+- `Highlight.js`를 통한 keyword Highlight 구현 
 
 #
 
@@ -119,8 +130,8 @@ Component Design | Marterial-Design , Styled Component , SCSS
 > ### 회원가입 modal
 <br/>
 
-- cropper.js  프로필 이미지 편집 구현
-- AWS S3를 연동하여 이미지 파일은 S3 버킷에 저장되고 생성되는 객체 URL DB에 저장
+- `cropper.js`  프로필 이미지 편집 구현
+- `AWS S3`를 연동하여 이미지 파일은 S3 버킷에 저장되고 생성되는 객체 URL DB에 저장
 - 이메일 인증을 통한 본인인증 구현(하나의 이메일에 하나의 아이디만 가입 가능하도록 구현)
 
 #
@@ -152,13 +163,13 @@ Component Design | Marterial-Design , Styled Component , SCSS
 > ### 로그인 modal
 <br/>
 
-- JWT 토큰을 통한 로그인 인증 및 로그인 유지 
+- `JWT 토큰`을 통한 로그인 인증 및 로그인 유지 
 
-1. 로그인 성공시 Access token 과 Refresh token 을 받아옴<br/>
-2. Access token은 Axios default header로 지정되고 refresh token은 브라우저 쿠키에 저장됨. <br/>
-3. access 토큰의 유효시간은 10분 refresh token은 1시간으로 지정되어있으며 
-access 토큰이 만료될시 refresh token을 전달하여 access 토큰을 새로 발급 받음<br/>
-4. refresh 토큰이 만료되면 alert 를 띄워 다시 로그인하도록 함.
+1. 로그인 성공시 `Access token` 과 `Refresh token` 을 받아옴<br/>
+2. `Access token`은 `Axios default header`로 지정되고 `refresh token`은 브라우저 쿠키에 저장됨. <br/>
+3. `access token`의 유효시간은 10분 `refresh token`은 1시간으로 지정되어있으며 
+`access token`이 만료될시 `refresh token`을 전달하여 ₩을 새로 발급 받음<br/>
+4. `refresh token`이 만료되면 alert 를 띄워 다시 로그인하도록 구현.
 #
 
 <small>- 로그인 모달</small>
@@ -182,9 +193,9 @@ access 토큰이 만료될시 refresh token을 전달하여 access 토큰을 새
 > ### 글 작성 ,수정 , 삭제 
 <br/>
 
-- Quill.js 사용을 통해 텍스트,이미지 , 코드블럭 작성
+- `Quill.js` 사용을 통해 텍스트,이미지 , 코드블럭 작성
 - 본문 미리보기 기능 <br/>
-(현재는 "ROLE_ADMIN" 권한을 갖는 사용자만 글 작성 , 수정이 가능합니다.)
+(현재는 `"ROLE_ADMIN"` 권한을 갖는 사용자만 글 작성 , 수정이 가능합니다.)
 
 #
 

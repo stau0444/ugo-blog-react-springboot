@@ -46,6 +46,8 @@ const SearchIconWrapperList = styled('div')(({ theme }) => ({
   pointerEvents: 'none',
   display: 'flex',
 }));
+
+
 const WhiteList= styled("ul")`
   color:white;
   background-color: #26f0143c;
