@@ -83,13 +83,13 @@ Component Design | `Marterial-Design` , `Styled Component` ,` SCSS`
 - Marterial-Design `<Grid>`를 활용한 반응형 디자인 
 #
 
-<small> - DarkMode</small>
+`DarkMode`
 <br/>
 
 ![홈페이지 이미지](https://blog.kakaocdn.net/dn/ORuNs/btrniUcEtVb/KvL3dMr3KzQCi6T1Gkmebk/img.png)
 <br/>
 
-<small> - LightMode</small>
+`LightMode`
 <br/>
 
 ![홈페이지 이미지](https://blog.kakaocdn.net/dn/bycczD/btrnc9905FX/wvLTaMWCwGUfneZ2zqWkWk/img.png)
@@ -103,7 +103,7 @@ Component Design | `Marterial-Design` , `Styled Component` ,` SCSS`
 
 #
 
-<small> - 카테고리별 검색 결과</small>
+`카테고리별 검색 결과`
 <br/>
 
 ![홈페이지 이미지](https://blog.kakaocdn.net/dn/bDfsGI/btrnfBkrh2S/l7Q3fu2XEiiv4zE5J055p1/img.png)
@@ -119,7 +119,7 @@ Component Design | `Marterial-Design` , `Styled Component` ,` SCSS`
 #
 
 
-<small> - 키워드 검색 결과</small>
+`키워드 검색 결과`
 <br/>
 
 ![홈페이지 이미지](https://blog.kakaocdn.net/dn/zpD16/btrnfA6ZOQV/2jD5jAyztuMkD21THpVbFk/img.png)
@@ -137,22 +137,22 @@ Component Design | `Marterial-Design` , `Styled Component` ,` SCSS`
 #
 <br/>
 
-<small>- Sign Up Form</small>
+`Sign Up Form`
 <br/>
 
 ![회원 가입 모달](https://blog.kakaocdn.net/dn/n4X7Z/btrniT54sG0/87bvW4FHWuesJAKF75Afe0/img.png)
 
-<small>- 프로필 이미지 편집</small>
+`프로필 이미지 편집`
 <br/>
 
 ![회원 가입 모달](https://blog.kakaocdn.net/dn/8Bv5r/btrnhBLlMSq/yANuUkY5QJu7K9wOhzTWg1/img.png)
 
-<small>- 이메일 인증</small>
+`이메일 인증`
 <br/>
 
 ![이메일 인증](https://blog.kakaocdn.net/dn/wVB8u/btrniUYecvQ/80VsnB1j54oVuku2euG5U0/img.png)
 
-<small>- 인증 메일</small>
+`인증 메일`
 <br/>
 
 ![인증 메일](https://blog.kakaocdn.net/dn/HThpG/btrnkw3k2Hq/AZnnat9K6OP0Bid4DChtAK/img.png)
@@ -172,17 +172,17 @@ Component Design | `Marterial-Design` , `Styled Component` ,` SCSS`
 4. `refresh token`이 만료되면 alert 를 띄워 다시 로그인하도록 구현.
 #
 
-<small>- 로그인 모달</small>
+`로그인 모달`
 <br/>
 
 ![인증 메일](https://blog.kakaocdn.net/dn/q0LT6/btrnoBqviyh/tX06NKIns5XtzcP3bjJ3uk/img.png)
 
-<small>- 로그인 전 메뉴바</small>
+`로그인 전 메뉴바`
 <br/>
 
 ![인증 메일](https://blog.kakaocdn.net/dn/buGeFK/btrniUE4tFi/DxsvTBTWQ8sWkZFxkF4l3k/img.png)
 
-<small>- 로그인 후 메뉴바</small>
+`로그인 후 메뉴바`
 <br/>
 
 ![인증 메일](https://blog.kakaocdn.net/dn/m3JAG/btrno3AioxU/gI93XQfQmxJnnF9R0pvp6K/img.png)
@@ -199,16 +199,16 @@ Component Design | `Marterial-Design` , `Styled Component` ,` SCSS`
 
 #
 
-<small>- 글 작성 페이지</small>
+`글 작성 페이지`
 <br/>
 ![글 작성](https://blog.kakaocdn.net/dn/pUWud/btrnkwwF3q3/FrB7EsKPwf4BD7fW4rSKu1/img.png)
 
-<small>- 본문 미리보기</small>
+`본문 미리보기`
 <br/>
 ![본문 미리보기](https://blog.kakaocdn.net/dn/or2qm/btrnji6MatU/q7krDTbpntw5uemPmAU6n0/img.png)
 
 
-<small>- 추가된 컨텐츠</small>
+`추가된 컨텐츠`
 <br/>
 ![추가된 컨텐츠](https://blog.kakaocdn.net/dn/3KYgq/btrnjeQFkCp/PZSJUOdE3Sdkpe6h4YCPKK/img.png)
 
