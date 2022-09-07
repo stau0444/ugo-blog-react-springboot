@@ -83,16 +83,20 @@ Component Design | `Marterial-Design` , `Styled Component` ,` SCSS`
 - Marterial-Design `<Grid>`를 활용한 반응형 디자인 
 #
 
-`DarkMode`
+> `DarkMode`
+
 <br/>
 
-![홈페이지 이미지](https://blog.kakaocdn.net/dn/ORuNs/btrniUcEtVb/KvL3dMr3KzQCi6T1Gkmebk/img.png)
+<img width="541" alt="홈페이지 이미지" src="https://blog.kakaocdn.net/dn/ORuNs/btrniUcEtVb/KvL3dMr3KzQCi6T1Gkmebk/img.png">
+
+
 <br/>
 
-`LightMode`
+> `LightMode`
+
 <br/>
 
-![홈페이지 이미지](https://blog.kakaocdn.net/dn/bycczD/btrnc9905FX/wvLTaMWCwGUfneZ2zqWkWk/img.png)
+<img width="541" alt="홈페이지 이미지" src="https://blog.kakaocdn.net/dn/bycczD/btrnc9905FX/wvLTaMWCwGUfneZ2zqWkWk/img.png">
 
 #
 
@@ -103,14 +107,18 @@ Component Design | `Marterial-Design` , `Styled Component` ,` SCSS`
 
 #
 
-`카테고리별 검색 결과`
+> `카테고리별 검색 결과`
+
 <br/>
 
-![홈페이지 이미지](https://blog.kakaocdn.net/dn/bDfsGI/btrnfBkrh2S/l7Q3fu2XEiiv4zE5J055p1/img.png)
+<img width="541" alt="홈페이지 이미지" src="https://blog.kakaocdn.net/dn/bDfsGI/btrnfBkrh2S/l7Q3fu2XEiiv4zE5J055p1/img.png">
+
+
 
 
 #
 > ### 검색 페이지 ( /contents/search/{keyword} )
+
 <br/>
 
 - 키워드를 통한 검색 (글 제목 , 글 설명중 키워드를 포함한 글이 검색됨)
@@ -119,10 +127,12 @@ Component Design | `Marterial-Design` , `Styled Component` ,` SCSS`
 #
 
 
-`키워드 검색 결과`
+> `키워드 검색 결과`
 <br/>
 
-![홈페이지 이미지](https://blog.kakaocdn.net/dn/zpD16/btrnfA6ZOQV/2jD5jAyztuMkD21THpVbFk/img.png)
+
+<img width="541" alt="홈페이지 이미지" src="https://blog.kakaocdn.net/dn/zpD16/btrnfA6ZOQV/2jD5jAyztuMkD21THpVbFk/img.png">
+
 
 
 #
@@ -137,25 +147,31 @@ Component Design | `Marterial-Design` , `Styled Component` ,` SCSS`
 #
 <br/>
 
-`Sign Up Form`
+> `Sign Up Form`
+
 <br/>
 
-![회원 가입 모달](https://blog.kakaocdn.net/dn/n4X7Z/btrniT54sG0/87bvW4FHWuesJAKF75Afe0/img.png)
+<img width="541" alt="홈페이지 이미지" src="https://blog.kakaocdn.net/dn/n4X7Z/btrniT54sG0/87bvW4FHWuesJAKF75Afe0/img.png">
 
-`프로필 이미지 편집`
+> `프로필 이미지 편집`
+
 <br/>
 
-![회원 가입 모달](https://blog.kakaocdn.net/dn/8Bv5r/btrnhBLlMSq/yANuUkY5QJu7K9wOhzTWg1/img.png)
+<img width="541" alt="홈페이지 이미지" src="https://blog.kakaocdn.net/dn/8Bv5r/btrnhBLlMSq/yANuUkY5QJu7K9wOhzTWg1/img.png">
 
-`이메일 인증`
+> `이메일 인증`
+
 <br/>
 
-![이메일 인증](https://blog.kakaocdn.net/dn/wVB8u/btrniUYecvQ/80VsnB1j54oVuku2euG5U0/img.png)
+<img width="541" alt="홈페이지 이미지" src="https://blog.kakaocdn.net/dn/wVB8u/btrniUYecvQ/80VsnB1j54oVuku2euG5U0/img.png">
 
-`인증 메일`
+
+> `인증 메일`
+
 <br/>
 
-![인증 메일](https://blog.kakaocdn.net/dn/HThpG/btrnkw3k2Hq/AZnnat9K6OP0Bid4DChtAK/img.png)
+<img width="541" alt="홈페이지 이미지" src="https://blog.kakaocdn.net/dn/HThpG/btrnkw3k2Hq/AZnnat9K6OP0Bid4DChtAK/img.png">
+
 
 #
 
@@ -172,25 +188,32 @@ Component Design | `Marterial-Design` , `Styled Component` ,` SCSS`
 4. `refresh token`이 만료되면 alert 를 띄워 다시 로그인하도록 구현.
 #
 
-`로그인 모달`
+> `로그인 모달`
+
 <br/>
 
-![인증 메일](https://blog.kakaocdn.net/dn/q0LT6/btrnoBqviyh/tX06NKIns5XtzcP3bjJ3uk/img.png)
+<img width="541" alt="홈페이지 이미지" src="https://blog.kakaocdn.net/dn/q0LT6/btrnoBqviyh/tX06NKIns5XtzcP3bjJ3uk/img.png">
 
-`로그인 전 메뉴바`
+</br>
+
+> `로그인 전 메뉴바`
+
 <br/>
 
-![인증 메일](https://blog.kakaocdn.net/dn/buGeFK/btrniUE4tFi/DxsvTBTWQ8sWkZFxkF4l3k/img.png)
+<img width="541" alt="홈페이지 이미지" src="https://blog.kakaocdn.net/dn/buGeFK/btrniUE4tFi/DxsvTBTWQ8sWkZFxkF4l3k/img.png">
 
-`로그인 후 메뉴바`
+> `로그인 후 메뉴바`
+
 <br/>
 
-![인증 메일](https://blog.kakaocdn.net/dn/m3JAG/btrno3AioxU/gI93XQfQmxJnnF9R0pvp6K/img.png)
+
+<img width="541" alt="홈페이지 이미지" src="https://blog.kakaocdn.net/dn/m3JAG/btrno3AioxU/gI93XQfQmxJnnF9R0pvp6K/img.png">
 
 
 #
 
 > ### 글 작성 ,수정 , 삭제 
+
 <br/>
 
 - `Quill.js` 사용을 통해 텍스트,이미지 , 코드블럭 작성
@@ -199,18 +222,30 @@ Component Design | `Marterial-Design` , `Styled Component` ,` SCSS`
 
 #
 
-`글 작성 페이지`
-<br/>
-![글 작성](https://blog.kakaocdn.net/dn/pUWud/btrnkwwF3q3/FrB7EsKPwf4BD7fW4rSKu1/img.png)
+> `글 작성 페이지`
 
-`본문 미리보기`
 <br/>
-![본문 미리보기](https://blog.kakaocdn.net/dn/or2qm/btrnji6MatU/q7krDTbpntw5uemPmAU6n0/img.png)
 
 
-`추가된 컨텐츠`
+<img width="541" alt="홈페이지 이미지" src="https://blog.kakaocdn.net/dn/pUWud/btrnkwwF3q3/FrB7EsKPwf4BD7fW4rSKu1/img.png">
+
 <br/>
-![추가된 컨텐츠](https://blog.kakaocdn.net/dn/3KYgq/btrnjeQFkCp/PZSJUOdE3Sdkpe6h4YCPKK/img.png)
+
+> `본문 미리보기`
+
+<br/>
+
+<img width="541" alt="홈페이지 이미지" src="https://blog.kakaocdn.net/dn/or2qm/btrnji6MatU/q7krDTbpntw5uemPmAU6n0/img.png">
+
+<br/>
+
+> `추가된 컨텐츠`
+
+<br/>
+
+
+<img width="541" alt="홈페이지 이미지" src="https://blog.kakaocdn.net/dn/3KYgq/btrnjeQFkCp/PZSJUOdE3Sdkpe6h4YCPKK/img.png">
+
 
 
 #
