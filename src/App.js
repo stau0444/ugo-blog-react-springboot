@@ -8,7 +8,6 @@ import AddContent from './pages/AddContent';
 import Detail from './pages/Detail';
 import UpdateContent from './pages/UpdateContent';
 import Test from './pages/Test';
-import AWS from "aws-sdk"
 import hljs from 'highlight.js';
 import Search from './pages/Search';
 import { useEffect, } from 'react';
@@ -83,16 +82,6 @@ function App() {
       document.querySelector(".App").style.background ="rgb(32, 38, 45)"
     }
   },[isOn,dispatch])
-
-
-  const AWS_IDENTITY_POOL_ID = process.env.REACT_APP_AWS_IDENTITY_POOL_ID;
-  //AWS  config
-  AWS.config.update({
-    region:'ap-northeast-2',
-    credentials: new AWS.CognitoIdentityCredentials({
-        IdentityPoolId:AWS_IDENTITY_POOL_ID,
-    })
-  })
 
   const handleScrollTop = () => {
     window.scrollTo(

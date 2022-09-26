@@ -66,7 +66,7 @@ export default function LoginForm({setOpenLogin}) {
               if (error) {
                 alert("아이디 혹은 비밀번호가 잘못되었습니다 .");
               }
-              console.log("로그인에러", error);
+              console.log("로그인에러", error.toJSON());
             });
         }catch(error){
           dispatch(postLoginFail(error));

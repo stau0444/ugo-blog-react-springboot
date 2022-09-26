@@ -40,10 +40,13 @@ export const handleAuthRequest = (url,action,data) => {
       await axios({
         method: action,
         url : url,
-        data:data
+        data:data,
+        headers: {
+          "Content-Type": "multipart/form-data", // Content-Type을 반드시 이렇게 하여야 한다.
+        },
       })
       .then((resp) => {
-        console.log("success");
+        console.log("user data update success");
       })
       .catch((error)=>{
         if(error.response === undefined){
@@ -57,6 +60,9 @@ export const handleAuthRequest = (url,action,data) => {
         }else if(error.response.status === 500 && error.response.data.message === "인증토큰이 탈취 됨"){
           cookie.remove("refresh_token");
           alert("토큰이 유효하지 않습니다. 다시 로그인 해주세요");
+        }else if(error.response.status === 400){
+          alert(error.response.data.message);
+          return;
         }
       })
     }

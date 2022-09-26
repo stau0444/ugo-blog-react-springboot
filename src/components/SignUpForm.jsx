@@ -6,11 +6,11 @@ import { Box, Button, Chip, CircularProgress, Grid, styled, Typography } from "@
 import axios from "axios";
 import { useHistory } from "react-router";
 import UploadProfile from "./UploadProfile";
-import AWS from "aws-sdk"
 import { StyledInput } from "./ContentUpdateForm";
 import CheckIcon from '@mui/icons-material/Check';
 import { useDispatch, useSelector } from "react-redux";
 import { emailVerifyFail, emailVerifyStart, emailVerifySuccess } from "../redux/moduels/signUp";
+import { debounce } from 'lodash';
 
 export const UnverifedText = styled('p')`
   color:tomato;
@@ -24,33 +24,6 @@ export const VerifedText = styled('p')`
   margin:3px 10px;
 
 `
-const AWS_S3_BUCKET_NAME = process.env.REACT_APP_AWS_S3_BUCKET_NAME;
-export const uploadBase64ImgToS3Bucket = (image) => {
-  async function uploadBase64ImgToS3Bucket(){
-    
-    const buf = Buffer.from(image.imagePreviewUrl.replace(/^data:image\/\w+;base64,/, ""),'base64')
-    const upload = new AWS.S3.ManagedUpload({
-        params:{
-            Key: image.file.name+":profile", 
-            Body: buf,
-            Bucket : AWS_S3_BUCKET_NAME,
-            ContentEncoding: 'base64',
-            ContentType: 'image/jpeg'
-        },
-    })
-    const promise = upload.promise()
-    await promise.then(
-      
-      function (data) {
-        
-      },
-      function (error) {
-        console.log("S3 업로드 오류 발생 ", error.message);
-      })
-      console.log("s3 upload")
-  }
-  uploadBase64ImgToS3Bucket();
-} 
 
 export default function SignUpForm({setOpenSignUp}) {
     
@@ -133,15 +106,20 @@ export default function SignUpForm({setOpenSignUp}) {
           return;
         }
 
-        uploadBase64ImgToS3Bucket(image);
+        const frm = new FormData();
+        frm.append("userId",userIdRef.current.value,);
+        frm.append("password",pwdRef.current.value);
+        frm.append("email",emailRef.current.value);
+        frm.append("profile",image.file);
 
-        const userPostData = {
-          userId:userIdRef.current.value,
-          password:pwdRef.current.value,
-          email:emailRef.current.value,
-          profile:"https://ugo-blog-image-bucket.s3.ap-northeast-2.amazonaws.com/"+image.file.name+":profile"
-        }
-        axios.post("/api/user",userPostData)
+        axios({
+          method: "POST",
+          url:"/api/user",
+          headers: {
+            "Content-Type": "multipart/form-data", 
+          },
+          data: frm
+        })
         .then(()=>{
           setOpenSignUp(false);
           alert("회원가입에 성공했습니다 로그인을 해주세요")
@@ -242,7 +220,7 @@ export default function SignUpForm({setOpenSignUp}) {
                       color: "white",
                       display: isChecked && !isExistId ? "none" : "",
                     }}
-                    onClick={checkID}
+                    onClick={debounce(checkID,500)}
                   >
                     중복확인
                   </Button>

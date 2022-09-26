@@ -10,7 +10,6 @@ export default function ImageEditor ({handleClose,image,setImage}) {
   const handleImageChange = (e) => {
     let reader = new FileReader();
         let file = e.target.files[0];
-
         reader.onloadend = () => {
             setImage({
             file: file,
@@ -20,7 +19,6 @@ export default function ImageEditor ({handleClose,image,setImage}) {
     reader.readAsDataURL(file);
   };
 
-  
 
   const getCropData = () => {
     if (typeof cropper !== "undefined") {
@@ -28,9 +26,12 @@ export default function ImageEditor ({handleClose,image,setImage}) {
     }
   };
   const setCroppedImg = ()=>{
-    setImage({
-      file: image.file,
-      imagePreviewUrl: cropData
+    //const newFile = new File([cropData],image.file.name , {type:image.file.type})
+    cropper.getCroppedCanvas().toBlob(blob=>{
+      setImage({
+        file: blob,
+        imagePreviewUrl: cropData
+      })
     })
     handleClose();
   }

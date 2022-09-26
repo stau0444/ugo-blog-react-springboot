@@ -1,6 +1,7 @@
 import { Box, Button, Grid, Typography } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import axios from "axios";
+import { debounce } from "lodash";
 import { useEffect, useState } from "react";
 import ReactQuill  from 'react-quill';
 import { formats, modules } from "../QuillConfig";
@@ -171,7 +172,7 @@ export default function ContentForm({
           >
             본문 미리 보기
           </Button>
-          <Button onClick={handleSubmit} variant="outlined" color="success">
+          <Button onClick={debounce(handleSubmit,300)} variant="outlined" color="success">
             저장
           </Button>
         </Grid>

@@ -5,7 +5,6 @@ import { useCallback, useState } from "react";
 import {postContentFail, postContentStart, postContentSuccess } from "../redux/moduels/contents";
 import {resetContentTags } from "../redux/moduels/contentTags";
 import { useHistory } from "react-router";
-import AWS from "aws-sdk"
 import axios from "axios";
 
 
@@ -20,41 +19,6 @@ import axios from "axios";
     2. 이미지 선택시  FileReadr를 통해 이미지를 보여준다 . 전체폼 전송시 성공시에 이미지를 전송한다.
 */
 
-//s3 이미지 업로드 함수
-export const uploadToS3 = (image) =>{
-    const upload = new AWS.S3.ManagedUpload({
-        params:{
-            Bucket : 'ugo-blog-image-bucket',
-            Key : image.file.name,
-            Body: image.file,
-        },
-    })
-    const promise = upload.promise()
-    promise.then(
-        function (data) {
-             console.log("S3 업로드 성공");
-        },
-        function (error) {
-             console.log("S3 업로드 오류 발생 ", error.message);
-        }
-    )        
-}
-export const inputsNullCheck = (data) =>{
-    if(data.title === ''){
-      alert("제목을 입력해주세요");
-      return true;
-    }else if(data.imageUrl === ''){
-      alert("썸네일 이미지를 선택해주세요");
-      return true;
-    }else if(data.article === ''){
-      alert("글 내용을 입력해주세요");
-      return true;
-    }else if(data.tags.length === 0){
-      alert("관련 태그를 선택해 주세요");
-      return true;
-    }
-  }
-
 export default function ContentFormContainer({isOpen,setIsOpen}) {
     
     const [image , setImage] = useState({file:null,imagePreviewUrl:'/logo_transparent.png'})
@@ -65,12 +29,28 @@ export default function ContentFormContainer({isOpen,setIsOpen}) {
     const tags = useSelector(state => state.contentTags);
     const history = useHistory();
     const dispatch = useDispatch();
-    
+
+    const inputsNullCheck = () =>{
+        if(title === ''){
+        alert("제목을 입력해주세요");
+        return true;
+        }else if(image.file === ''){
+        alert("썸네일 이미지를 선택해주세요");
+        return true;
+        }else if(value === ''){
+        alert("글 내용을 입력해주세요");
+        return true;
+        }else if(tags.length === 0){
+        alert("관련 태그를 선택해 주세요");
+        return true;
+        }
+    }
+
     //이미지 관리 함수
     const handleImageChange = (e) => {
         let reader = new FileReader();
         let file = e.target.files[0];
-
+        
         reader.onloadend = () => {
             setImage({
             file: file,
@@ -106,26 +86,29 @@ export default function ContentFormContainer({isOpen,setIsOpen}) {
     const handleSubmit = (e) => {
         async function postContent(){
             //DB에 저장되는 데이터
-            const postData = {
-                    title: title,
-                    imageUrl: `https://ugo-blog-image-bucket.s3.ap-northeast-2.amazonaws.com/${image.file.name}`,
-                    article: value,
-                    tags: tags,
-                    description:description,
-                    userId:userId
-            };
+            const frm = new FormData();
+            frm.append("title",title);
+            frm.append("article",value);
+            frm.append("tags",tags);
+            frm.append("description",description);
+            frm.append("userId",userId);
+            frm.append("image",image.file);
 
             try{
-                const hasNull =inputsNullCheck(postData);
+                const hasNull =inputsNullCheck();
                 if(hasNull){
                     return;
                 }
                 dispatch(postContentStart())
-                //응답 데이터 
-                // const resp = postData;
-                const resp = await axios.post("/api/content",postData);
+                const resp = await axios({
+                    method: "POST",
+                    url:"/api/content",
+                    headers: {
+                      "Content-Type": "multipart/form-data", 
+                    },
+                    data: frm
+                })
                 dispatch(postContentSuccess(resp));
-                uploadToS3(image);
                 resetInputValues();
                 history.push('/')
             }catch(error){

@@ -3,11 +3,8 @@ import {useState } from "react";
 import { useDispatch } from "react-redux";
 import { handleAuthRequest } from "../Auth";
 import { updateUserProfile } from "../redux/moduels/login";
-import { uploadBase64ImgToS3Bucket } from "./SignUpForm";
 import UploadProfile from "./UploadProfile";
 import CancelIcon from '@mui/icons-material/Cancel';
-
-import AWS from "aws-sdk"
 
 
 export default function UserInfoUpdateForm({setOpenProfileUpdate,userInfo}) {
@@ -17,37 +14,18 @@ export default function UserInfoUpdateForm({setOpenProfileUpdate,userInfo}) {
     const [image , setImage] = useState({file:null,imagePreviewUrl:userInfo.profileUrl})
     
 
-    const deleteS3Image=()=>{
-      const s3 = new AWS.S3()
-      const params = {
-        Bucket: 'ugo-blog-image-bucket',
-        Key: `${imageUrlBeforeUpdate}`
-      };
-      s3.deleteObject(params, function(err, data) {
-        if (err) console.log("삭제실패",err, err.stack); 
-        else     console.log("삭제성공",data);           
-
-      });
-      
-    }
-
     const handleUpdate = () => {
         async function handleUpdate(){
-            const updateData = {
-                username:userInfo.username,
-                email:userInfo.email,
-                emailSubscribe:emailSubscribe,
-                profileUrl:image.file?"https://ugo-blog-image-bucket.s3.ap-northeast-2.amazonaws.com/"+image.file.name+":profile":image.imagePreviewUrl
-            }
+            const frm = new FormData();
+            frm.append("username",userInfo.username);
+            frm.append("email",userInfo.email);
+            frm.append("profile",image.file);
+            frm.append("emailSubscrib",emailSubscribe);
+            frm.append("imageUrlBeforeUpdate",imageUrlBeforeUpdate); 
             try{
-              handleAuthRequest("/api/user","put",updateData);
-                if(imageUrlBeforeUpdate !== undefined){
-                  deleteS3Image();
-                }
-                 uploadBase64ImgToS3Bucket(image);
+              handleAuthRequest("/api/user","put",frm);
                 alert("회원정보가 수정되었습니다.")
                 setOpenProfileUpdate(false);     
-                
             }catch(error){
                 alert("회원정보 수정에 실패했습니다");
                 console.log(error)

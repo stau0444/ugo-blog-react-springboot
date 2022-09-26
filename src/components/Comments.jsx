@@ -324,6 +324,7 @@ export default function Comments({commentList,contentId,login,userInfo,addCommen
                           replyRef.current.value,
                           comment.commentId
                         );
+                        console.log(comment.commentId);
                         setIsReplyOpen(false);
                       }}
                     >
