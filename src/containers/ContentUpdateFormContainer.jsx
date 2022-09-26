@@ -75,14 +75,6 @@ export default function ContentUpdateFormContainer({isOpen,isUpdate,setIsOpen}) 
               return true;
               }
             }
-            //DB에 저장되는 데이터
-            // const putData = {
-            //     title: title,
-            //     imageUrl: image.file?`https://ugo-blog-image-bucket.s3.ap-northeast-2.amazonaws.com/${image.file.name}`:content.imageUrl ,
-            //     description:description,
-            //     article: value,
-            //     tags: tags,
-            // };
             const frm = new FormData();
             frm.append("title",title);
             frm.append("article",value);
