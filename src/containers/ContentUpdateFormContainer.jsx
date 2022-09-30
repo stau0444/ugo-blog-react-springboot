@@ -42,7 +42,11 @@ export default function ContentUpdateFormContainer({isOpen,isUpdate,setIsOpen}) 
     const handleImageChange =  (e)=>{
         let reader = new FileReader();
         let file = e.target.files[0];
-
+        console.log(file.size)
+        if(file.size > 100000){
+          alert("이미지는 10Mb이하로 업로드 가능합니다.")
+          return;
+        }
         reader.onloadend = () => {
             setImage({
             file: file,
