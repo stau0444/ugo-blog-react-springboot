@@ -82,7 +82,7 @@ export default function ContentUpdateFormContainer({isOpen,isUpdate,setIsOpen}) 
             frm.append("description",description);
             frm.append("image",image.file);
             frm.append("imageBefore",content.imageUrl)
-            console.log("content.imageUrl",content.imageUrl);
+            
             try{
                 const hasNull = inputsNullCheck();
                 if(hasNull){

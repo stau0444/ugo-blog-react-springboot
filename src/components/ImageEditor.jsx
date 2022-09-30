@@ -26,10 +26,11 @@ export default function ImageEditor ({handleClose,image,setImage}) {
     }
   };
   const setCroppedImg = ()=>{
-    //const newFile = new File([cropData],image.file.name , {type:image.file.type})
+    
     cropper.getCroppedCanvas().toBlob(blob=>{
+      const croppedImg = new File([blob],image.file.name , {type:image.file.type})
       setImage({
-        file: blob,
+        file: croppedImg,
         imagePreviewUrl: cropData
       })
     })

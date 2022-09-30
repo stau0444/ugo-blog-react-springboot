@@ -1,18 +1,17 @@
 import {   Box,  Button,  Checkbox,  Table, Typography } from "@mui/material";
 import {useState } from "react";
 import { useDispatch } from "react-redux";
-import { handleAuthRequest } from "../Auth";
 import { updateUserProfile } from "../redux/moduels/login";
 import UploadProfile from "./UploadProfile";
 import CancelIcon from '@mui/icons-material/Cancel';
+import axios from "axios";
 
 
 export default function UserInfoUpdateForm({setOpenProfileUpdate,userInfo}) {
     const dispatch = useDispatch();
-    const imageUrlBeforeUpdate = userInfo.profileUrl
-    const [emailSubscribe , setEmailSubscribe] = useState(userInfo.emailSubscribe)
-    const [image , setImage] = useState({file:null,imagePreviewUrl:userInfo.profileUrl})
-    
+    const imageUrlBeforeUpdate = userInfo.profileUrl;
+    const [emailSubscribe , setEmailSubscribe] = useState(userInfo.emailSubscribe);
+    const [image , setImage] = useState({file:null,imagePreviewUrl:userInfo.profileUrl});
 
     const handleUpdate = () => {
         async function handleUpdate(){
@@ -22,14 +21,21 @@ export default function UserInfoUpdateForm({setOpenProfileUpdate,userInfo}) {
             frm.append("profile",image.file);
             frm.append("emailSubscrib",emailSubscribe);
             frm.append("imageUrlBeforeUpdate",imageUrlBeforeUpdate); 
-            try{
-              handleAuthRequest("/api/user","put",frm);
-                alert("회원정보가 수정되었습니다.")
-                setOpenProfileUpdate(false);     
-            }catch(error){
-                alert("회원정보 수정에 실패했습니다");
-                console.log(error)
-            } 
+            console.log("imageUrlBeforeUpdate",imageUrlBeforeUpdate)
+            await axios({
+              method: "put",
+              url : "/api/user",
+              data:frm,
+              headers: {
+                "Content-Type": "multipart/form-data", // Content-Type을 반드시 이렇게 하여야 한다.
+              },
+            })
+            .then((resp) => {
+              console.log("user data update success");
+              console.log(resp.data);
+              dispatch(updateUserProfile(resp.data))
+              setOpenProfileUpdate(false);
+            }) 
         }
         handleUpdate();   
     }
@@ -113,7 +119,6 @@ export default function UserInfoUpdateForm({setOpenProfileUpdate,userInfo}) {
           }}
           onClick={() => {
             handleUpdate(image);
-            dispatch(updateUserProfile(image.imagePreviewUrl));
           }}
         >
           변경
