@@ -68,9 +68,7 @@ Component Design | `Marterial-Design` , `Styled Component` ,` SCSS`
 ## 4.프로젝트 구조
 #
 
-<img width="541" alt="스크린샷 2022-09-07 오후 11 17 31" src="https://user-images.githubusercontent.com/51349774/188903227-5014a683-320a-405c-a73f-ff51d5c7a12f.png">
-
-
+<img width="541" alt="프로젝트동작도" src="https://user-images.githubusercontent.com/51349774/193404346-a772a87f-30a1-4711-9431-eedc3351aa44.png">
 
 #
 ## 5.페이지별 설명 
@@ -184,7 +182,7 @@ Component Design | `Marterial-Design` , `Styled Component` ,` SCSS`
 1. 로그인 성공시 `Access token` 과 `Refresh token` 을 받아옴<br/>
 2. `Access token`은 `Axios default header`로 지정되고 `refresh token`은 브라우저 쿠키에 저장됨. <br/>
 3. `access token`의 유효시간은 10분 `refresh token`은 1시간으로 지정되어있으며 
-`access token`이 만료될시 `refresh token`을 전달하여 ₩을 새로 발급 받음<br/>
+`access token`이 만료될시 `refresh token`을 전달하여 을 새로 발급 받음<br/>
 4. `refresh token`이 만료되면 alert 를 띄워 다시 로그인하도록 구현.
 #
 
