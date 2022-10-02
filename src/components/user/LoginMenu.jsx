@@ -15,8 +15,8 @@ import LoginForm from './LoginForm';
 import { Button, Chip, Modal } from '@mui/material';
 import SignUpForm from './SignUpForm';
 import { useDispatch, useSelector } from 'react-redux';
-import { logOut } from '../Auth';
-import { postLogOut } from '../redux/moduels/login';
+import { logOut } from '../../Auth';
+import { postLogOut } from '../../redux/moduels/login';
 import UserInfoUpdateForm from './UserInfoUpdateForm';
 import UserInfoTable from './UserInfoTable';
 
@@ -111,6 +111,7 @@ export default function LoginMenu() {
                     boxShadow: "2px 2px 2px  rgba(0, 0, 0, 0.658)",
                     width: 36,
                     height: 36,
+                    transition: "none",
                   }}
                 />
                 <Chip

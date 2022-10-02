@@ -19,17 +19,17 @@ const StyledCard = styled(Card)`
   padding: 0 10px;
   box-shadow: 10px 10px 10px rgba(0 , 0,  0,  0.39);
   /* box-shadow: 7px 7px 0 rgb(32 33 37 / 30%); */
-  background:rgba(255,255,255,0.1);
-  border-top: 1px solid rgba(255,255,255,0.5);
-  border-left: 1px solid rgba(255,255,255,0.5);
+  background:#ffffff19;
+  border-top: 1px solid #ffffff7f;
+  border-left: 1px solid #ffffff7f;
    /* "linear-gradient(to right bottom, #ff00d4, rgb(0, 89, 178) 120%);", */
   &:hover{
     margin-top: 6px;
     background:
     ${props => props.theme.nightMode?
-    "linear-gradient(to right bottom, rgba(154, 206, 183, 0.952), whitesmoke 120%)"
+    "linear-gradient(to right bottom, #9aceb7f2, whitesmoke 120%)"
     :
-    "linear-gradient(to right bottom, rgba(32, 93, 143, 0.966), rgba(74, 83, 99, 0.425) 120%)"
+    "linear-gradient(to right bottom, #205d8ff6, #4a53636c 120%)"
     };
     transition: box-shadow 0.1s linear;
     transition: margin-top 0.25s ease;
@@ -40,10 +40,11 @@ const StyledCard = styled(Card)`
 `;
 
 const ContentDescription = styled(Typography)`
-  color:${props => props.theme.nightMode?"#70633f":"#dfdff1"};
+  color:${props => props.theme.nightMode?"#70633f":"#cfcfe3"};
   font-size:14px ;
-  font-family:"IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family:'NanumSquare', sans-serif;
   overflow: hidden;
+  text-align:left;
   font-weight: 400;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -59,7 +60,7 @@ const ContentTitle = styled(Typography)`
   font-weight: 700;
   font-size:25px;
   box-shadow: inset 0px 1px 3px 0px gray;
-  background-color: rgba(97, 140, 190, 0.226);
+  background-color: #618cbe39;
   padding:10px;
   border-radius: 10px;
   color: ${props => props.theme.nightMode?"#22ad96":"bisque"};
@@ -83,9 +84,9 @@ const ContentDivider = styled(Divider)`
 `
 export const CreatedDate = styled("p")`
   margin:-3px 5px 12px 0;
-  color:${props => props.theme.nightMode?"gray":"rgb(38, 93, 151)"};
+  color:${props => props.theme.nightMode?"gray":"#265d97"};
   float:right;  
-  background-color: rgba(170, 236, 215, 0.87);
+  background-color: #aaecd7dd;
   font-size: 12px;
   border:1px solid gray;
   padding:3px 8px;

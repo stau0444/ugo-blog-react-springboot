@@ -1,8 +1,7 @@
 import { useDispatch } from "react-redux";
-import Footer from "../components/Footer";
-// import PageTransition from "../components/PageTransition";
 import SearchListContainer from "../containers/SearchListContainer";
 import { handlePageNum } from "../redux/moduels/searchList";
+import Footer from '../components/common/Footer';
 
 export default function Search({match,location}) {
     const dispatch = useDispatch();

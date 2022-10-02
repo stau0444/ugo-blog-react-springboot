@@ -2,7 +2,7 @@ import Cropper from 'react-cropper';
 import { useState } from 'react';
 import 'cropperjs/dist/cropper.css'
 import { Box, Button, Typography } from '@mui/material';
-import { StyledInput, StyledInputLabel } from './ContentUpdateForm';
+import { StyledInput, StyledInputLabel } from '../content/ContentUpdateForm';
 
 export default function ImageEditor ({handleClose,image,setImage}) {
   const [cropData, setCropData] = useState();

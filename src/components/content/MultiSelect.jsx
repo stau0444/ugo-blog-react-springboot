@@ -5,7 +5,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { StyledInputLabel } from './ContentForm';
 import { useDispatch, useSelector,  } from 'react-redux';
-import { addTag } from '../redux/moduels/contentTags';
+import { addTag } from '../../redux/moduels/contentTags';
 import { Box, Chip, Typography } from '@mui/material';
 
 const ITEM_HEIGHT = 20;

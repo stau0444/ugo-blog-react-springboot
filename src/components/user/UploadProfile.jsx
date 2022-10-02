@@ -1,6 +1,6 @@
 import { Grid, Modal } from "@mui/material";
 import { useState } from "react";
-import ImageEditor from "./ImageEditor";
+import ImageEditor from "../common/ImageEditor";
 const modalStyle = {
     margin: "80px auto",
     width: '40%',

@@ -2,9 +2,9 @@ import { Button, CircularProgress, Grid, Modal, styled, Typography } from "@mui/
 import axios from "axios";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { emailVerifyFail, emailVerifyStart, emailVerifySuccess } from "../redux/moduels/signUp";
+import { emailVerifyFail, emailVerifyStart, emailVerifySuccess } from "../../redux/moduels/signUp";
 import ChagePwdForm from "./ChangePwdForm";
-import { StyledInput } from "./ContentUpdateForm";
+import { StyledInput } from "../content/ContentUpdateForm";
 
 export const ChangePwdModal = styled("div")`
   position: absolute;

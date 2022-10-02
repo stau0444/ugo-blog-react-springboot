@@ -1,4 +1,4 @@
-import Footer from '../components/Footer';
+import Footer from '../components/common/Footer';
 import ContentListContainer from '../containers/ContentListContainer';
 
 export default function Home({match,location}) {

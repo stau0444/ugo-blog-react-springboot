@@ -1,15 +1,15 @@
-import "../Form.scss";
+import "../../Form.scss";
 import LoginIcon from '@mui/icons-material/Login';
-import { CloseBtn, Container, CustomModal, FormBtn, FormInput, FormLogo, ImgContainer, InputLabel, ModalContent } from "../FormComponents";
+import { CloseBtn, Container, CustomModal, FormBtn, FormInput, FormLogo, ImgContainer, InputLabel, ModalContent } from "../../FormComponents";
 import { useRef, useState } from "react";
 import { Box, Button, Chip, CircularProgress, Grid, styled, Typography } from "@mui/material";
 import axios from "axios";
 import { useHistory } from "react-router";
 import UploadProfile from "./UploadProfile";
-import { StyledInput } from "./ContentUpdateForm";
+import { StyledInput } from "../content/ContentUpdateForm";
 import CheckIcon from '@mui/icons-material/Check';
 import { useDispatch, useSelector } from "react-redux";
-import { emailVerifyFail, emailVerifyStart, emailVerifySuccess } from "../redux/moduels/signUp";
+import { emailVerifyFail, emailVerifyStart, emailVerifySuccess } from "../../redux/moduels/signUp";
 import { debounce } from 'lodash';
 
 export const UnverifedText = styled('p')`

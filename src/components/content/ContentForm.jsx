@@ -1,49 +1,62 @@
-import { Box, Button, Grid,styled, Typography, } from "@mui/material";
-import { useState } from "react";
-import ReactQuill from "react-quill";
-import { formats, modules } from "../QuillConfig";
-import { tagList } from "../sampleData";
-import { StyledTextarea } from "./ContentForm";
+import 'react-quill/dist/quill.snow.css';
+import { Box, Button, Grid, Typography } from "@mui/material";
+import { styled } from '@mui/material/styles';
+import axios from "axios";
+import { debounce } from "lodash";
+import { useEffect, useState } from "react";
+import ReactQuill  from 'react-quill';
+import { formats, modules } from "../../QuillConfig";
 import ContentPreviewModal from "./ContentPreviewModal";
+import { StyledInput } from "./ContentUpdateForm";
 import MultiSelect from "./MultiSelect";
 
-
-export const StyledInput = styled('input')`
-width: 90%;
-text-align: center;
-color:bisque;
-border-top: 0;
-border-left: 0;
-border-right: 0;
-border-bottom:1px solid bisque;
-background-color: transparent;
-  &:focus{
-    outline: none !important;
+export const StyledInputLabel = styled('label')`
+  width: 30%;
+  color:bisque;
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  margin: 20px auto;
+  padding: 3px;
+  border-radius:5px;
+  position: "absolute";
+  color: "#1976d2";
+  cursor: pointer;
+   &:hover{
+    background:#82829495;
   }
 `
-export const StyledInputLabel = styled('label')`
-
-color:bisque;
-display: block;
-font-size: 12px;
-font-weight: 400;
-margin: 15px;
-padding: 3px;
-border-radius:5px;
+export const StyledTextarea = styled('textarea')`
+  display: block;
+  background-color: bisque;
+  font-family: sans-serif;
+  padding: 3px;
+  margin:0 auto;
+  width: 60%;
+  height: 150px;
+  border-radius:5px;
 `
 
-export default function ContentUpdateForm({
-  title,
-  hadleContentValue,
-  handleSubmit,
-  handleImageChange,
-  hadleTitleValue,
-  image,
-  value,
-  hadleDescriptionValue,
-  description,
+export default function ContentForm({
+    hadleTitleValue,
+    title,
+    hadleContentValue,
+    handleSubmit,
+    handleImageChange,
+    hadleDescriptionValue,
+    description,
+    image,
+    value,
 }) {
     const [open, setOpen] = useState(false);
+    const [tagList,setTagList] = useState([])
+    useEffect(()=>{
+        const getTags = async() =>{
+            const resp = await axios.get("/api/tags");
+            setTagList([...resp.data]);
+        }
+        getTags();
+    },[])
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     return (
@@ -104,7 +117,7 @@ export default function ContentUpdateForm({
                 sx={{ display: "none" }}
                 onChange={handleImageChange}
               />
-              <small style={{color:"lightgray"}}>사진 사이즈는 10Mb 이하로 업로드 가능합니다.</small>
+
               <Box
                 sx={{
                   borderRadius: "15px",
@@ -117,7 +130,7 @@ export default function ContentUpdateForm({
                   border: "1px solid royalblue",
                 }}
               >
-                
+              <small style={{color:"lightgray"}}>사진 사이즈는 10Mb 이하로 업로드 가능합니다.</small>
                 이미지를 클릭하여 변경할 이미지를 선택해주세요
               </Box>
             </Grid>
@@ -125,7 +138,7 @@ export default function ContentUpdateForm({
               <MultiSelect tags={tagList} />
             </Grid>
             <hr className="content-form-divider"/>
-            <StyledInputLabel sx={{margin:"40px",fontSize: "20px"}}>컨텐츠 설명</StyledInputLabel>
+            <StyledInputLabel sx={{margin:"40px auto",fontSize: "20px"}}>컨텐츠 설명</StyledInputLabel>
             <StyledTextarea
               value={description}
               onChange={hadleDescriptionValue}
@@ -161,8 +174,8 @@ export default function ContentUpdateForm({
           >
             본문 미리 보기
           </Button>
-          <Button onClick={handleSubmit} variant="outlined" color="success">
-            수정
+          <Button onClick={debounce(handleSubmit,300)} variant="outlined" color="success">
+            저장
           </Button>
         </Grid>
         <ContentPreviewModal

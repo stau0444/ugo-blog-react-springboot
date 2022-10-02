@@ -2,8 +2,8 @@ import { Button, CircularProgress, Grid, InputLabel, Typography } from "@mui/mat
 import axios from "axios";
 import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FormInput } from "../FormComponents";
-import { emailVerifyFail, emailVerifyStart, emailVerifySuccess } from "../redux/moduels/signUp";
+import { FormInput } from "../../FormComponents";
+import { emailVerifyFail, emailVerifyStart, emailVerifySuccess } from "../../redux/moduels/signUp";
 import { UnverifedText, VerifedText } from "./SignUpForm";
 
 export default function ChagePwdForm({userId,setOpenFindPwd}) {

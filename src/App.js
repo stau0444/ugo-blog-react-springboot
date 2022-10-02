@@ -1,23 +1,21 @@
-import 'react-quill/dist/quill.snow.css';
-import 'react-quill/dist/quill.core.css';
 import './App.scss';
 import { Route, BrowserRouter } from 'react-router-dom';
-import Header from './components/Header';
+import Header from './components/common/Header';
 import Home from './pages/Home';
 import AddContent from './pages/AddContent';
 import Detail from './pages/Detail';
 import UpdateContent from './pages/UpdateContent';
 import Test from './pages/Test';
-import hljs from 'highlight.js';
 import Search from './pages/Search';
 import { useEffect, } from 'react';
 import {  useDispatch, useSelector } from 'react-redux';
 import { cookie, logOut, setTokenToBrowser, } from './Auth';
 import { postLoginFail, postLoginStart, postLoginSuccess,  } from './redux/moduels/login';
 import axios from 'axios';
-import { Box, Button, Tooltip } from '@mui/material';
+import { Box, Button, Tooltip,  } from '@mui/material';
 import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
 import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown';
+import MenuBar from './components/common/MenuBar';
 export const testBtnStyle ={
   width:"100%",
   color:"black",
@@ -35,10 +33,6 @@ export const ScorllBtnStyle ={
 
 }
 
-
-hljs.configure({   // optionally configure hljs
-  languages: ['javascript' ,'java','python','html']
-});
 
 function App() {
   const dispatch = useDispatch();
@@ -104,13 +98,14 @@ function App() {
   //운영시 baseUrl
   axios.defaults.baseURL = 'https://www.ugosdevblog.com'; 
   //개발시 baseUrl
-  // axios.defaults.baseURL = 'http://localhost:8080'; 
+  //axios.defaults.baseURL = 'http://localhost:8080'; 
 
   
 
   return (
     <div className="App" >
       <BrowserRouter>
+        <MenuBar/>
         <Header />
         <Box sx={{ position: "fixed", right: 0, bottom: "50%" ,display:{xs:"none",sm:"block"}}}>
           <Button

@@ -1,11 +1,11 @@
-import "../Form.scss";
+import "../../Form.scss";
 import LoginIcon from '@mui/icons-material/Login';
-import { CloseBtn, Container, CustomModal,  FormBtn,  FormInput, FormLogo, ImgContainer, InputLabel, ModalContent } from "../FormComponents";
+import { CloseBtn, Container, CustomModal,  FormBtn,  FormInput, FormLogo, ImgContainer, InputLabel, ModalContent } from "../../FormComponents";
 import { Box,Modal, styled, Typography,  } from "@mui/material";
 import { useRef, useState } from "react";
-import { postLoginFail, postLoginStart, postLoginSuccess } from "../redux/moduels/login";
+import { postLoginFail, postLoginStart, postLoginSuccess } from "../../redux/moduels/login";
 import axios from "axios";
-import {  setTokenToBrowser } from "../Auth";
+import {  setTokenToBrowser } from "../../Auth";
 import { useDispatch } from "react-redux";
 import FindIdForm from "./FindIdForm";
 import FindPwdForm from "./FindPwdForm";
@@ -111,7 +111,7 @@ export default function LoginForm({setOpenLogin}) {
                 ref={pwdRef}
                 required
               />
-              <Box sx={{ margin: "50px 0px" }}>
+              <Box sx={{ width:"70%",margin: "50px auto" }}>
                 <FormBtn color="royalblue" onClick={handleLogin}>
                   로그인
                 </FormBtn>

@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useCallback, useEffect, useState } from "react";
 import {putContentFail, putContentStart, putContentSuccess } from "../redux/moduels/contents";
 import { useHistory } from "react-router";
-import ContentUpdateForm from '../components/ContentUpdateForm';
+import ContentUpdateForm from '../components/content/ContentUpdateForm';
 import axios from 'axios';
 
 

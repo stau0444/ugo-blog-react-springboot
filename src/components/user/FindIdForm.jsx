@@ -2,8 +2,8 @@ import { Button, CircularProgress, Grid, Typography } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { emailVerifyFail, emailVerifyStart, emailVerifySuccess } from "../redux/moduels/signUp";
-import { StyledInput } from "./ContentUpdateForm";
+import { emailVerifyFail, emailVerifyStart, emailVerifySuccess } from "../../redux/moduels/signUp";
+import { StyledInput } from "../content/ContentUpdateForm";
 
 export default function FindIdForm({setOpenFindId}) {
     const [userMail,setUserMail] = useState();

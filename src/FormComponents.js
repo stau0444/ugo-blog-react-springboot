@@ -12,13 +12,15 @@ export const CustomModal = styled("div")`
   background-color: rgb(0,0,0); 
   background-color: rgba(0,0,0,0.4);
   padding-top: 60px;
+  
 `
 
 export const FormBtn = styled('button')`
   background-color: ${props => props.color?props.color:'#04AA6D'};
   border-radius: 20px;
   font-weight: bold;
-  color: white;
+  font-size:15px;
+  color: whitesmoke;
   padding: 14px 20px;
   margin: ${props => props.margin?props.margin:'8px 0'};
   border: none;
@@ -81,7 +83,7 @@ export const FindPwd = styled('span')`
 
 export const ModalContent = styled('div')`
   border-radius: 20px;
-  background-color: #fefefe;
+  background-color: whitesmoke;
   margin: 5% auto 15% auto;
   border: 1px solid #888;
   width: 60%; 

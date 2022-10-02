@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch, useSelector} from "react-redux";
-import SearchList from "../components/SearchList";
+import SearchList from "../components/content/SearchList";
 import { getSearchListFail, getSearchListStart, getSearchListSuccess, handlePageNum } from "../redux/moduels/searchList";
 
 

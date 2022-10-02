@@ -1,4 +1,4 @@
-import ContentForm from "../components/ContentForm";
+import ContentForm from '../components/content/ContentForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleContentValue, resetContentValue } from '../redux/moduels/contentValue';
 import { useCallback, useState } from "react";

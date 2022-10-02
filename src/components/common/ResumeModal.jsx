@@ -13,7 +13,6 @@ const introduceStyle={
 }
 const modalStyle = {
     margin: "20px auto",
-    width: '80%',
     height:'95%',
     bgcolor: 'background.paper',
     borderRadius:"12px",
@@ -98,6 +97,9 @@ export default function ResumeModal() {
             onScroll={handleScroll}
             sx={{
               ...modalStyle,
+              fontSize:"18px",
+              width:"70%",
+              fontFamily:"'NanumSquare', sans-serif",
               background: "whitesmoke",
               "&:focus":{
                 outline: "none"
@@ -139,16 +141,17 @@ export default function ResumeModal() {
             <Grid
               item
               xs={12}
-              sx={{ margin: "70px 0 20px 0" }}
+              sx={{ margin: "40px 0 40px 0" }}
               className="resume-header"
             ></Grid>
-            <Grid item xs={12} sm={6} sx={{ textAlign: "center" }}>
+            <Grid item xs={12} sm={6} sx={{ margin: "25px 0",textAlign: "center" }}>
               <ResumeImg src="/IMG_1708.JPG" alt="" />
             </Grid>
             <Grid
               item
               xs={12}
               sx={{
+                margin: "25px 0px"
                }}
               sm={6}
               className="resume-info"

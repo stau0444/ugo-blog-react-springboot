@@ -5,7 +5,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
-import LoginMenu from './LoginMenu';
+import LoginMenu from '../user/LoginMenu';
 import { useRef, useState } from 'react';
 import { useHistory } from 'react-router';
 import GitHubIcon from '@mui/icons-material/GitHub';
@@ -120,14 +120,15 @@ export default function MenuBar() {
     setKeyword(ql);
   }
 
-
+  
   return (
     <>
-      <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ flexGrow: 1}}>
         <AppBar
           sx={{
+            marginTop:"3px",
             zIndex: 1,
-            background: "#23ca98ef",
+            background: "#1af1b0cc",
             height: "55px",
             width: "94%",
             borderRadius: "20px",
@@ -135,6 +136,9 @@ export default function MenuBar() {
             top: 5,
             left: "3%",
             right: "3%",
+            border:"0 solid black",
+            boxShadow: "3px 3px 3px rgb(32 33 37 / 40%)"
+            // boxShadow: "3px 3px 3px rgb(32 33 37 / 40%)"
           }}
         >
           <Toolbar
@@ -154,12 +158,13 @@ export default function MenuBar() {
                 sx={{
                   display: { xs: "block", sm: "none" },
                   marginBottom: "5px",
+                  paddingLeft:"12px"
                 }}
               >
                 <Logo
                   component="span"
                   sx={{
-                    fontSize: "3.2vw",
+                    fontSize: "3.4vw",
                     color: "white",
                     borderBottom: "2px solid white",
                   }}
@@ -244,8 +249,9 @@ export default function MenuBar() {
             </Box>
             <Search
               sx={{
-                width: { xs: "65%", sm: "45%" },
-                marginBottom: { xs: "4px", sm: "10px" },
+                width: { xs: "60%", sm: "40%" },
+                marginBottom: { xs: "1px", sm: "10px" },
+                borderRadius:"13px"
               }}
             >
               <SearchIconWrapper>
@@ -292,8 +298,8 @@ export default function MenuBar() {
               </Box>
               <Button
                 sx={{
-                  padding: "3px 0",
-                  background: "#1fe689f8",
+                  padding: "3px 3px",
+                  // background: "#1fe689f8",
                   borderRadius: "30px",
                   position: "absolute",
                   right: "7px",
@@ -302,9 +308,10 @@ export default function MenuBar() {
                   fontWeight: "bold",
                   color: "white",
                   fontFamily: "'Righteous', cursive",
-                  fontSize: "1vw",
+                  fontSize: "0.8vw",
+                  background: "linear-gradient(to right, #0ea6e2, #c4ced9)",
                   "&:hover": {
-                    backgroundColor: "#17171736",
+                    background: "#17171736",
                   },
                 }}
                 onClick={handleSearch}

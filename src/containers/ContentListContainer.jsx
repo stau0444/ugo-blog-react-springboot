@@ -1,7 +1,7 @@
 import axios from "axios";
 import {useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ContentList from "../components/ContentList";
+import ContentList from "../components/content/ContentList";
 import { getContentListStart, getContentListSuccess, getContentListFail, handlePageNum } from '../redux/moduels/contentList';
 
 export default function ContentListContainer({category}) {
@@ -20,8 +20,15 @@ export default function ContentListContainer({category}) {
             async function getContentList(){
                 try{
                     dispatch(getContentListStart())
+                    if(category){
+                        console.log("카테고리 있음 리스트 가져온다")
+                    }else{
+                        console.log("카테고리 없음 리스트 가져온다")
+                    }
+
                     await axios.get(`/api/contents?category=${category?category:""}&page=${page-1}&size=6`)
                     .then(resp => {
+                        console.log(resp.data);
                         dispatch(getContentListSuccess(resp.data.content,category,page,resp.data.totalElements))
                     });
                 }catch(error){

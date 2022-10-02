@@ -1,4 +1,4 @@
-import ContentDetail from "../components/ContentDetail";
+import ContentDetail from "../components/content/ContentDetail";
 import { useCallback, useEffect, useState } from 'react';
 import { getContentDetailFail, getContentDetailSuccess, getContentDetailStart, deleteContentStart, deleteContentSuccess, deleteContentFail } from '../redux/moduels/contents';
 import { useDispatch, useSelector } from 'react-redux';

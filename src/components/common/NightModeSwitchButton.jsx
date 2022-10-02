@@ -3,7 +3,7 @@ import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import NightsStayIcon from '@mui/icons-material/NightsStay';
 import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
-import { handleTheme } from "../redux/moduels/nightMode";
+import { handleTheme } from "../../redux/moduels/nightMode";
 
 export const spring = {
     type: "spring",

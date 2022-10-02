@@ -1,7 +1,7 @@
 import {   Box,  Button,  Checkbox,  Table, Typography } from "@mui/material";
 import {useState } from "react";
 import { useDispatch } from "react-redux";
-import { updateUserProfile } from "../redux/moduels/login";
+import { updateUserProfile } from "../../redux/moduels/login";
 import UploadProfile from "./UploadProfile";
 import CancelIcon from '@mui/icons-material/Cancel';
 import axios from "axios";

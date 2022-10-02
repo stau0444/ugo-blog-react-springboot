@@ -1,5 +1,8 @@
 import hljs from "highlight.js"
 
+hljs.configure({   // optionally configure hljs
+    languages: ['javascript' ,'java','python','html']
+});
 export const modules = {
     'history': {          // Enable with custom configurations
     'delay': 2500,

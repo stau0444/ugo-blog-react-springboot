@@ -41,6 +41,7 @@ const WhiteList = styled("div")`
     border-top: 0;
     text-align: left;
     padding: 5px ;
+    font-family:Monaco, Courier New, monospace;
     padding-left: 20px;
     /* border-radius: 0px 0px 20px 20px; */
     &:hover{

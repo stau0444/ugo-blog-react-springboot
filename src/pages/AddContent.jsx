@@ -1,4 +1,4 @@
-import TextEditor from "../components/TextEditor";
+import TextEditor from "../components/content/TextEditor";
 
 export default function AddContent() {
      return(

@@ -1,4 +1,3 @@
-import MenuBar from './MenuBar';
 import Links from './Links';
 import { Box, Grid, styled, SvgIcon, Tooltip, Typography } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
@@ -49,9 +48,6 @@ export default function Header() {
 
     return (
       <Grid container>
-        <Grid item xs={12}>
-          <MenuBar />
-        </Grid>
         <Grid item xs={12}>
           <Box className="logo">
             <Logo

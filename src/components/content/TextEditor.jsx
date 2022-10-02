@@ -1,8 +1,8 @@
 import 'highlight.js/styles/base16/google-dark.css';
 import { useState } from "react";
 import {Grid} from "@mui/material";
-import ContentFormContainer from '../containers/ContentFormContainer';
-import ContentUpdateFormContainer from '../containers/ContentUpdateFormContainer';
+import ContentFormContainer from '../../containers/ContentFormContainer';
+import ContentUpdateFormContainer from '../../containers/ContentUpdateFormContainer';
 
 export default function TextEditor({isUpdate}) {
   const [isOpen, setIsOpen] = useState(false);
