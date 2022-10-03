@@ -65,6 +65,7 @@ const ContentTitle = styled(Typography)`
   border-radius: 10px;
   color: ${props => props.theme.nightMode?"#22ad96":"bisque"};
   font-family: Gowun Batang;
+  /* font-family:'NanumSquare' , san-serif; */
   overflow:hidden;
   text-overflow:ellipsis;
   white-space:nowrap;
