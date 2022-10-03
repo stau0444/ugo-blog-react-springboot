@@ -149,16 +149,16 @@ export default function MenuBar() {
             <Link
               style={{
                 margin: "0 auto",
-                marginLeft:"3px",
-                cursor: "pointer"
+                cursor: "pointer",
+                lineHeight: "100%" 
               }}
               to="/"
             >
               <Box
                 sx={{
                   display: { xs: "block", sm: "none" },
-                  marginBottom: "5px",
-                  paddingLeft:"12px"
+                  // marginBottom: "5px",
+                  // paddingLeft:"12px"
                 }}
               >
                 <Logo
@@ -299,16 +299,15 @@ export default function MenuBar() {
               <Button
                 sx={{
                   padding: "3px 3px",
-                  // background: "#1fe689f8",
                   borderRadius: "30px",
                   position: "absolute",
                   right: "7px",
-                  top: "15%",
-                  bottom: "15%",
+                  top: "13%",
+                  bottom: "13%",
                   fontWeight: "bold",
                   color: "white",
                   fontFamily: "'Righteous', cursive",
-                  fontSize: "0.8vw",
+                  fontSize: { xs: "10px", sm: "0.8vw" },
                   background: "linear-gradient(to right, #0ea6e2, #c4ced9)",
                   "&:hover": {
                     background: "#17171736",
