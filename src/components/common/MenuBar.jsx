@@ -150,7 +150,8 @@ export default function MenuBar() {
               style={{
                 margin: "0 auto",
                 cursor: "pointer",
-                lineHeight: "100%" 
+                lineHeight: "100%" ,
+                padding: "0 10px 3px 0"
               }}
               to="/"
             >
