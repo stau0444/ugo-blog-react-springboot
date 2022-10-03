@@ -17,8 +17,11 @@ export default function CodeBlock({value,isOpen}) {
           className="code-block"
           sx={{
             background: nightMode ? "#c9e0dfa4" : "bisque",
+            padding:"50px 0",
             display: isOpen ? "none" : "block",
             fontSize:{xs:"12px",sm:"12px",md:"14px" },
+            fontFamily:"'NanumSquare' , san-serif",
+            lineHeight:"25px",
           }}
         >
         </Box>
