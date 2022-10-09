@@ -42,12 +42,11 @@ const StyledCard = styled(Card)`
 const ContentDescription = styled(Typography)`
   color:${props => props.theme.nightMode?"#70633f":"#cfcfe3"};
   font-size:14px ;
+  text-align:  left;
+  border-radius: 10px;
   font-family:'NanumSquare', sans-serif;
-  overflow: hidden;
-  text-align:left;
   font-weight: 400;
   text-overflow: ellipsis;
-  display: -webkit-box;
   -webkit-line-clamp: 13; /* 라인수 */
   -webkit-box-orient: vertical;
   word-wrap:break-word; 

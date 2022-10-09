@@ -137,7 +137,7 @@ ul ,h2,h1,h3,h4,h5,p,a,div{
     max-height: 224px;
     min-height: 224px;
     border-radius: 20px;
-    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.664);
+    box-shadow: 0 0 8px 0 rgba(29, 22, 22, 0.664);
   }
 }
 
@@ -361,4 +361,9 @@ div.MuiModal-root{
 }
 div.MuiPaper-root{
   padding-right: -17px !important;
+}
+
+
+.css-8je8zh-MuiTouchRipple-root{
+  display: none;
 }

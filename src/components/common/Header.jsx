@@ -1,13 +1,13 @@
 import Links from './Links';
 import { Box, Grid, styled, SvgIcon, Tooltip, Typography } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
-import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
 import HomeIcon from '@mui/icons-material/Home';
 import { Link } from 'react-router-dom';
 import {  useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import NightModeSwitchButton from './NightModeSwitchButton';
 import SubtitlesTwoToneIcon from '@mui/icons-material/SubtitlesTwoTone';
+import ResumeModal from './ResumeModal';
 
 export const Logo = styled(Typography)`
     font-family: 'Righteous', cursive;
@@ -100,8 +100,10 @@ export default function Header() {
           <Grid
             item
             sx={{
+              cursor: "pointer",
               textAlign: "center",
               opacity: { xs: 1, sm: 0 },
+              display: {xs:"block",sm:"none"},
               transition: {
                 xs: "opacity 0.7s linear",
                 sm: "opacity 0s linear",
@@ -129,18 +131,11 @@ export default function Header() {
                 />
               </Tooltip>
             </a>
-            <a
-              href="https://github.com/stau0444"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <Box component={"span"} sx={{color:"white"}}>
               <Tooltip title="이력서 열기">
-                <PermContactCalendarIcon
-                  fontSize="large"
-                  sx={{ ...iconStlye, color: iconColor }}
-                />
+              <ResumeModal />
               </Tooltip>
-            </a>
+            </Box>
             <Tooltip title="티스토리 블로그 이동">
               <a
                 href="https://ugo04.tistory.com/"

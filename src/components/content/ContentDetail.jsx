@@ -27,7 +27,6 @@ const ContentCreatedAt = styled(Typography)`
 `
 const ContentTitle = styled("h2")`
     width:85%;
-    font-size:40px;
     margin:10px auto;
     font-weight:300;
     color:#2d93f8;
@@ -97,10 +96,14 @@ export default function ContentDetail({commentList,login,userInfo,content,loadin
               exit={{ opacity: 0 }}
             >
               <>
-                <ContentTitle>
+                <ContentTitle sx={{fontSize:{xs:"20px",sm:"35px"},}}>
                   <MenuBookRoundedIcon
                     fontSize="large"
-                    sx={{ color: "#3ef1bcee;", margin: "0 20px" }}
+                    sx={{ 
+                      fontSize:{xs:"20px",sm:"35px"},
+                      color: "#3ef1bcee;",
+                       margin: "0 20px" 
+                      }}
                   />
                   {content.title}
                 </ContentTitle>

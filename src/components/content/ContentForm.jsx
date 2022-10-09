@@ -117,7 +117,7 @@ export default function ContentForm({
                 sx={{ display: "none" }}
                 onChange={handleImageChange}
               />
-
+              <small style={{color:"lightgray"}}>사진 사이즈는 10Mb 이하로 업로드 가능합니다.</small>
               <Box
                 sx={{
                   borderRadius: "15px",
@@ -130,7 +130,6 @@ export default function ContentForm({
                   border: "1px solid royalblue",
                 }}
               >
-              <small style={{color:"lightgray"}}>사진 사이즈는 10Mb 이하로 업로드 가능합니다.</small>
                 이미지를 클릭하여 변경할 이미지를 선택해주세요
               </Box>
             </Grid>

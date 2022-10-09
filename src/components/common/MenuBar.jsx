@@ -1,4 +1,4 @@
-import { styled, alpha } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -20,16 +20,8 @@ import axios from 'axios';
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
   marginLeft: 0,
   width: '100%',
-  [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(1),
-    width: 'auto',
-  },
 }));
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
@@ -50,19 +42,21 @@ const SearchIconWrapperList = styled('div')(({ theme }) => ({
 
 const WhiteList= styled("ul")`
   color:white;
-  background-color: #26f0143c;
-  visibility: ${props => props.isselected==="true"?"hidden":"visible"};
+  background-color: #FFFFFF20;
+  visibility: ${props => props.isselected==="true"?"visible":"hidden"};
   list-style:none;
-  padding:0;
+  padding:0 ;
   border-radius: 0 0 10px 10px;
+  font-family:'NanumSquare' , san-serif;
   & > li{
+    border-top:1px  solid whitesmoke ;
     padding:5px 10px;
     cursor: pointer;
     font-weight: bold;
-    transition: 0.2s all linear;
     :hover{
+      transition: 0.2s all linear;
       box-shadow: 0px 2px gray;
-      background-color: #96919192;
+      background-color: #FFFFFF40;
     }
   }
   & > li:last-child{
@@ -77,12 +71,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: '12ch',
-      '&:focus': {
-        width: '20ch',
-      },
-    },
   },
 }));
 
@@ -101,14 +89,19 @@ export default function MenuBar() {
     if(e.type === "click"){
       history.push("/contents/search/"+keyword);
     }
-    setIsselected(true);
+    setIsselected(false);
+    searchKeywordRef.current.value = "";
   }
   const searchKeywordRef = useRef();
   const handleWhitelist= (value) =>{
     async function handleWhitelist(){
        await axios.get("/api/whitelist?keyword="+value).then((resp)=>{
+        if(resp.data.length === 0){
+          setWhitelist([`${value + "\n 로 검색된 결과가 없습니다."}`])
+        }else{
           setWhitelist([...resp.data]);
-          setIsselected(false);
+        }
+        setIsselected(true)          
        })
     }
     handleWhitelist();
@@ -116,7 +109,7 @@ export default function MenuBar() {
 
   const handleSearchKeyword = (ql) =>{
     searchKeywordRef.current.value = ql ;
-    setIsselected(true);
+    setIsselected(false);
     setKeyword(ql);
   }
 
@@ -137,8 +130,7 @@ export default function MenuBar() {
             left: "3%",
             right: "3%",
             border:"0 solid black",
-            boxShadow: "3px 3px 3px rgb(32 33 37 / 40%)"
-            // boxShadow: "3px 3px 3px rgb(32 33 37 / 40%)"
+            boxShadow: "3px 3px 3px #0b0f0ecc"
           }}
         >
           <Toolbar
@@ -252,8 +244,13 @@ export default function MenuBar() {
               sx={{
                 width: { xs: "60%", sm: "40%" },
                 marginBottom: { xs: "1px", sm: "10px" },
-                borderRadius:"13px"
+                borderRadius:isselected?"13px 13px 0 0":"13px",
+                backgroundColor: isselected?'#FFFFFF40':'#ffffff20',
+                '&:hover': {
+                  backgroundColor: '#FFFFFF40'
+                },
               }}
+              className="Test-search"
             >
               <SearchIconWrapper>
                 <SearchIcon />
@@ -267,10 +264,8 @@ export default function MenuBar() {
                   },
                   ref: searchKeywordRef,
                   "aria-label": "search",
-                  style: { fontWeight: "bold" },
-                  onKeyPress: handleSearch,
                   onBlur: () => {
-                    setIsselected(true);
+                    setIsselected(false);
                   },
                 }}
               />
@@ -290,7 +285,7 @@ export default function MenuBar() {
                       }}
                     >
                       <SearchIconWrapperList>
-                        <SearchIcon />
+                        <SearchIcon sx={{marginRight:"5px",marginLeft:"5px"}}/>
                         {wl}
                       </SearchIconWrapperList>
                     </li>
