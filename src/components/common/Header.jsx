@@ -131,7 +131,7 @@ export default function Header() {
                 />
               </Tooltip>
             </a>
-            <Box component={"span"} sx={{color:"white"}}>
+            <Box component={"span"} sx={{color:iconColor}}>
               <Tooltip title="이력서 열기">
               <ResumeModal />
               </Tooltip>

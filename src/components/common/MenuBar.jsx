@@ -54,7 +54,7 @@ const WhiteList= styled("ul")`
     cursor: pointer;
     font-weight: bold;
     :hover{
-      transition: 0.2s all linear;
+      transition: all 0.2s  linear;
       box-shadow: 0px 2px gray;
       background-color: #FFFFFF40;
     }
@@ -83,6 +83,7 @@ export default function MenuBar() {
   const [isselected , setIsselected] = useState(false);
 
   const handleSearch = (e) => {
+    
     if(e.key === "Enter"){
       history.push("/contents/search/"+e.target.value);
     }
@@ -267,6 +268,9 @@ export default function MenuBar() {
                   onBlur: () => {
                     setIsselected(false);
                   },
+                  onKeyDown:(e)=>{
+                    if(e.key === "Enter")handleSearch(e);
+                  }
                 }}
               />
               <Box
